@@ -1,0 +1,12 @@
+body{
+    padding: 15px;
+}
+
+.nav{
+    float: left;
+}
+
+.tab-content{
+    float: right;
+    width: 500px;
+}
