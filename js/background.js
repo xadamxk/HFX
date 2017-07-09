@@ -1,4 +1,4 @@
-console.log("HELLO WORLD");
+console.log("HFX: HELLO WORLD");
 // This event is fired each time the user updates the text in the omnibox,
 // as long as the extension's keyword mode is still active.
 chrome.omnibox.onInputChanged.addListener(

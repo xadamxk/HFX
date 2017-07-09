@@ -36,9 +36,9 @@
   "content_scripts": [
     {
       "run_at": "document_end",
-      "matches": [ "*://hackforums.net/usercp.php" ],
+      "matches": [ "*://hackforums.net/showthread.php?tid=*" ],
       //"css": [ "mystyles.css" ],
-      "js": [ "js/jquery-3.2.1.js", "js/usercptest.js" ]
+      "js": [ "js/jquery-3.2.1.js", "js/PostbitHide.js" ]
     }
   ],
   //"commands": { "..." },
