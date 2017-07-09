@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!--Check for other extensions: https://stackoverflow.com/a/36194645-->
         <title>HFX Settings</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../css/bootstrap.css">
@@ -10,52 +11,150 @@
         <script src="../js/bootstrap.min.js"></script>
         <!-- Options CSS -->
         <link rel="stylesheet" href="../css/options.css">
+        <!-- Options JS -->
+        <script src="../js/options.js"></script>
+        <!-- TitaToggle -->
+        <link rel="stylesheet" href="../css/titatoggle-dist-min.css">
     </head>
 
     <body>
-        <ul class="nav nav-pills nav-stacked">
+        <ul class="nav nav-pills">
             <li class="active"><a data-toggle="tab" href="#general">General</a></li>
-            <li><a data-toggle="tab" href="#menuHeader" id="generalShowHeader">Header</a></li>
-            <li><a data-toggle="tab" href="#menuDescription" id="generalShowDescription">Description</a></li>
-            <li><a data-toggle="tab" href="#menuFeatures" id="generalShowFeatures">Features</a></li>
-            <li><a data-toggle="tab" href="#menuProducts" id="generalShowProducts">Products</a></li>
-            <li><a data-toggle="tab" href="#menuContact" id="generalShowContact">Contact</a></li>
-            <li><a data-toggle="tab" href="#menuFAQ" id="generalShowFAQ">FAQ</a></li>
-            <li><a data-toggle="tab" href="#menuVouches" id="generalShowVouches">Vouches</a></li>
-            <li><a data-toggle="tab" href="#menuTOS" id="generalShowTOS">TOS</a></li>
-            <li><a data-toggle="tab" href="#menuOutput">Output</a></li>
+            <li><a data-toggle="tab" href="#menuGlobal" id="generalShowGlobal">Global</a></li>
+            <li><a data-toggle="tab" href="#menuThread" id="generalShowThread">Thread</a></li>
+            <li><a data-toggle="tab" href="#menuForum" id="generalShowForum">Forum</a></li>
+            <li><a data-toggle="tab" href="#menuPM" id="generalShowPM">PM</a></li>
         </ul>
         <div class="tab-content">
             <!-- General -->
             <div id="general" class="tab-pane fade in active">
                 <h3>General</h3>
                 <p></p>
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">@</span>
-                    <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-                </div>
-            </div>
-            <!-- Header -->
-            <div id="menuHeader" class="tab-pane fade">
-                <h3>Header</h3>
-                <!-- Main Header -->
-                <div id="headerSticky">
-                    <h4>Preview</h4>
-                    <div class="panel panel-default">
-                        <div class="panel-body preview" id="headerPreview">
+                <!-- Postbit Hide -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">Hide Postbit Attributes</div>
+                    <div class="panel-body">
+                        <!-- Avatar Toggle -->
+                        <div class="col-sm-3">
+                            <div class="checkbox-slider--b col-sm-2">
+                                <label>
+                                    <input type="checkbox" id="PostbitHideAvatar" class="PostbitHide">
+                                    <span class="toggleLabel">Hide Avatar</span>
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <h4>Output</h4>
-                    <div class="panel panel-default" id="headerOutputDiv">
-                        <div class="panel-body">
-                            <div class="form-group text-center">
-                                <textarea class="form-control" rows="10" id="headerOutput"></textarea><button type="button" class="btn btn-primary updateButton" id="headerUpdateOutput">Update</button>
+                        <!-- UserTitle Toggle -->
+                        <div class="col-sm-3">
+                            <div class="checkbox-slider--b col-sm-2">
+                                <label>
+                                    <input type="checkbox" id="PostbitHideUsertitle" class="PostbitHide">
+                                    <span class="toggleLabel">Hide UserTitle</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Prestige Toggle -->
+                        <div class="col-sm-3">
+                            <div class="checkbox-slider--b col-sm-2">
+                                <label>
+                                    <input type="checkbox" id="PostbitHidePrestige" class="PostbitHide">
+                                    <span class="toggleLabel">Hide Prestige</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Post Count Toggle -->
+                        <div class="col-sm-3">
+                            <div class="checkbox-slider--b col-sm-2">
+                                <label>
+                                    <input type="checkbox" id="PostbitHidePostCount" class="PostbitHide">
+                                    <span class="toggleLabel">Hide Post Count</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Join Date Toggle -->
+                        <div class="col-sm-3">
+                            <div class="checkbox-slider--b col-sm-2">
+                                <label>
+                                    <input type="checkbox" id="PostbitHideJoinDate" class="PostbitHide">
+                                    <span class="toggleLabel">Hide Join Date</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Reputation Toggle -->
+                        <div class="col-sm-3">
+                            <div class="checkbox-slider--b col-sm-2">
+                                <label>
+                                    <input type="checkbox" id="PostbitHideReputation" class="PostbitHide">
+                                    <span class="toggleLabel">Hide Reputation</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Warning Level Toggle -->
+                        <div class="col-sm-3">
+                            <div class="checkbox-slider--b col-sm-2">
+                                <label>
+                                    <input type="checkbox" id="PostbitHideWarningLevel" class="PostbitHide">
+                                    <span class="toggleLabel">Hide Warning Level</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Awards Toggle -->
+                        <div class="col-sm-3">
+                            <div class="checkbox-slider--b col-sm-2">
+                                <label>
+                                    <input type="checkbox" id="PostbitHideAwards" class="PostbitHide">
+                                    <span class="toggleLabel">Hide Awards</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Signature Toggle -->
+                        <div class="col-sm-3">
+                            <div class="checkbox-slider--b col-sm-2">
+                                <label>
+                                    <input type="checkbox" id="PostbitHideSignature" class="PostbitHide">
+                                    <span class="toggleLabel">Hide Signature</span>
+                                </label>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <!-- End General -->
+            <!-- Global -->
+            <div id="menuGlobal" class="tab-pane fade">
+                <h3>Global Changes</h3>
+                <!-- 1st Item -->
+                <div id="headerSticky">
+                    
                 </div>             
             </div>
-            <!-- End Header -->
+            <!-- End Global -->
+            <!-- Thread -->
+            <div id="menuThread" class="tab-pane fade">
+                <h3>Thread Changes</h3>
+                <!-- 1st Item -->
+                <div id="">
+                    
+                </div>
+            </div>
+            <!-- Thread End -->
+            <!-- Forum -->
+            <div id="menuForum" class="tab-pane fade">
+                <h3>Forum Changes</h3>
+                <!-- 1st Item -->
+                <div id="">
+                    
+                </div>
+            </div>
+            <!-- End Forum -->
+            <!-- PM -->
+            <div id="menuPM" class="tab-pane fade">
+                <h3>PM Changes</h3>
+                <!-- 1st Item -->
+                <div id="">
+                    
+                </div>
+            </div>
+            <!-- PM End -->
         </div>
     </body>
 </html>

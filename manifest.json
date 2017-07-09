@@ -65,12 +65,12 @@
     "chrome_style": true,
     "page": "pages/options.html"
   },
-  "permissions": [ "tabs" ],
+  "permissions": [ "tabs", "storage" ]
   //"signature": "...",
   //"spellcheck": "...",
   //"storage": {
   //  "managed_schema": "schema.json"
   //},
   //"system_indicator": "...",
-  "update_url": "http://path/to/updateInfo.xml"
+  //"update_url": "http://path/to/updateInfo.xml"
 }
