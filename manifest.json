@@ -34,7 +34,7 @@
   "author": "xadamxk",
   //"automation": ...,
   "content_scripts": [
-    // Postbit Hide Attributes
+    // Postbit Hide Attributes, UserTag
     {
       "run_at": "document_end",
       "matches": [
@@ -43,7 +43,8 @@
       //"css": [ "mystyles.css" ],
       "js": [
         "js/dependencies/jquery-3.2.1.js",
-        "js/modules/PostbitHide.js"
+        "js/modules/PostbitHide.js",
+        "js/modules/UserTag.js"
       ]
     },
     // Rep Charts
@@ -71,6 +72,17 @@
         "js/modules/OnlineSorting.js"
       ]
     }
+    // User Tagging - preview post
+    //,{
+    //  "run_at": "document_end",
+    //  "matches": [
+    //    "*://hackforums.net/newreply.php?tid=*"
+    //  ],
+    //  "js": [
+    //    "js/dependencies/jquery-3.2.1.js",
+    //    ""
+    //  ]
+    //}
   ],
   //"commands": { "..." },
   //"content_security_policy": "policyString",

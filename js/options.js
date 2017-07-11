@@ -1,3 +1,13 @@
+/* To Add Toggle(s) to settings:
+    0. Create group toggle in options.html
+    1. Make event listener for toggle group class (doc.ready)
+        - Remember to change saveFunc to save function created in #2
+    2. Make Save function for new toggle group
+    3. Make Load function for new toggle group
+    4. Add new Load function to loadSettings()
+    5. Make changes to manifest for new JS module
+*/
+
 $(document).ready(function () {
     // Load Default/Saved Settings
     loadSettings();
@@ -16,12 +26,44 @@ $(document).ready(function () {
         saveOnlineSorting();
         console.log("OnlineSorting Settings Changed!");
     });
+
+    $(".UserTag").change(function () {
+        saveUserTag();
+        console.log("UserTag Settings Changed!");
+    });
 });
 
 function loadSettings() {
     loadPostbitHide();
     loadRepCharts();
     loadOnlineSorting();
+    loadUserTag();
+}
+
+function saveUserTag() {
+    chrome.storage.sync.set({
+        UserTag:
+            [{ 'UserTagEnable': $("#UserTagEnable").is(':checked') }]
+    }, function () {
+        // Save Confirmation
+    });
+}
+
+function loadUserTag() {
+    chrome.storage.sync.get("UserTag", function (data) {
+        $.each(data, function (index, data) {
+            $.each(data, function (index, data) {
+                $.each(data, function (key, value) {
+                    switch (key) {
+                        case "UserTagEnable": $("#UserTagEnable").prop('checked', value);
+                            break;
+                        default: console.log("ERROR: Key not found.");
+                    }
+                })
+            })
+
+        });
+    });
 }
 
 function loadOnlineSorting() {
