@@ -34,11 +34,42 @@
   "author": "xadamxk",
   //"automation": ...,
   "content_scripts": [
+    // Postbit Hide Attributes
     {
       "run_at": "document_end",
-      "matches": [ "*://hackforums.net/showthread.php?tid=*" ],
+      "matches": [
+        "*://hackforums.net/showthread.php?tid=*"
+      ],
       //"css": [ "mystyles.css" ],
-      "js": [ "js/jquery-3.2.1.js", "js/PostbitHide.js" ]
+      "js": [
+        "js/dependencies/jquery-3.2.1.js",
+        "js/modules/PostbitHide.js"
+      ]
+    },
+    // Rep Charts
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://hackforums.net/reputation.php?uid=*",
+        "*://hackforums.net/repsgiven.php?uid=*"
+      ],
+      "js": [
+        "js/dependencies/jquery-3.2.1.js",
+        "js/dependencies/Chart.bundle.min.js",
+        "js/modules/RepCharts.js"
+      ]
+    },
+    // Online Sorting
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://hackforums.net/",
+        "*://hackforums.net/index.php"
+      ],
+      "js": [
+        "js/dependencies/jquery-3.2.1.js",
+        "js/modules/OnlineSorting.js"
+      ]
     }
   ],
   //"commands": { "..." },

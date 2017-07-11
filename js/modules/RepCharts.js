@@ -3,14 +3,29 @@ var debug = false;
 var posRepColor = "#32CD32"; // Default: ##32CD32
 var neuRepColor = "#666666"; // Default: #666666
 var negRepColor = "#CC3333"; // Default: #CC3333
-var enableRepCharts = false;
+var enableRepChart = false;
 enableRepCharts();
 
 // Set vars equal to saved settings
 function enableRepCharts(){
-    chrome.storage.sync.get("", function (data) {
+    chrome.storage.sync.get("RepCharts", function (data) {
         if (!chrome.runtime.error) {
-            injectRepCharts();
+            $.each(data, function (index, data1) {
+                $.each(data1, function (index1, data2) {
+                    $.each(data2, function (key, value) {
+                        switch (key) {
+                            case "RepChartsEnable": if (value) { enableRepChart = value }
+                                break;
+                            default: //console.log("ERROR: Key not found.");
+                                break;
+                        }
+                    })
+                })
+
+            });
+            // Run function
+            if (enableRepChart)
+                injectRepCharts();
         }
     });
 }
