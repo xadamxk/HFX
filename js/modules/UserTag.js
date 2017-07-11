@@ -63,7 +63,7 @@ function injectUserTag() {
                 quotedNameList = removeDuplicateNames(quotedNameList); 
                 // Get post body?
                 var threadTitle = $(".navigation").find(".active").text();
-                // Store locally - Stackoverflow: 
+                // Store locally
                 chrome.storage.local.set({ "UserTagNameList": quotedNameList, "UserTagThreadTitle": threadTitle }, function () {
                     // Call original method to make post
                     $("#quick_reply_submit").click();
@@ -97,7 +97,7 @@ function scanUserTag() {
             postLink = postLink.replace("showthread.php?tid=", "");
         });
         // PM users
-        var myPostKey = "8af57cb7f39a9a906a444eedd50d96d9";
+        var myPostKey = "";
         var recipientString = "";
         var tempThreadTitle = result.UserTagThreadTitle;
         var threadTitleCharLimit = 29;
