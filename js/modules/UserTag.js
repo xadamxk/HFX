@@ -97,7 +97,7 @@ function scanUserTag() {
             postLink = postLink.replace("showthread.php?tid=", "");
         });
         // PM users
-        var myPostKey = "";
+        var myPostKey = document.getElementsByTagName('head')[0].innerHTML.split('my_post_key = "')[1].split('";')[0];
         var recipientString = "";
         var tempThreadTitle = result.UserTagThreadTitle;
         var threadTitleCharLimit = 29;
