@@ -11,17 +11,19 @@
   "description": "Enhance your HF experience!",
   // icon: 128x128 AND 48x48.PNG
   "icons": {
-    //"16": "images/icon16.png", // optional
-    //"24": "images/icon24.png", // optional
-    "32": "images/icon32.png" // optional
+    "16": "images/icon-16.png", // optional
+    "32": "images/icon-32.png", // optional
+    "48": "images/icon-48.png", // optional
+    "128": "images/icon-128.png" // optional
   },
 
   // Pick one (or none)
   "browser_action": {
     "default_icon": { // optional
-      //"16": "images/icon16.png", // optional
-      //"24": "images/icon24.png", // optional
-      "32": "images/icon32.png" // optional
+      "16": "images/icon-16.png", // optional
+      "32": "images/icon-32.png", // optional
+      "48": "images/icon-48.png", // optional
+      "128": "images/icon-128.png" // optional
     },
     "default_title": "HFX Settings", // optional; shown in tooltip
     "default_popup": "pages/popup.html" // optional
@@ -34,17 +36,18 @@
   "author": "xadamxk",
   //"automation": ...,
   "content_scripts": [
-    // Postbit Hide Attributes, UserTag
+    // Postbit Hide Attributes, UserTag, SmartQuotes, PostOptions
     {
       "run_at": "document_end",
       "matches": [
         "*://hackforums.net/showthread.php?tid=*"
       ],
-      //"css": [ "mystyles.css" ],
       "js": [
         "js/dependencies/jquery-3.2.1.js",
         "js/modules/PostbitHide.js",
-        "js/modules/UserTag.js"
+        "js/modules/UserTag.js",
+        "js/modules/SmartQuotes.js",
+        "js/modules/PostOptions.js"
       ]
     },
     // Rep Charts

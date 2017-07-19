@@ -31,6 +31,11 @@ $(document).ready(function () {
         saveUserTag();
         console.log("UserTag Settings Changed!");
     });
+
+    $(".PostOptions").change(function () {
+        savePostOptions();
+        console.log("PostOptions Settings Changed!");
+    });
 });
 
 function loadSettings() {
@@ -38,6 +43,39 @@ function loadSettings() {
     loadRepCharts();
     loadOnlineSorting();
     loadUserTag();
+    loadPostOptions();
+}
+
+function savePostOptions() {
+    chrome.storage.sync.set({
+        PostOptions:
+            [{ 'PostOptionsPoTEnable': $("#PostOptionsPoT").is(':checked') },
+            { 'PostOptionsThreadsEnable': $("#PostOptionsThreads").is(':checked') },
+            { 'PostOptionsPostsEnable': $("#PostOptionsPosts").is(':checked') }]
+    }, function () {
+        // Save Confirmation
+    });
+}
+
+function loadPostOptions() {
+    chrome.storage.sync.get("PostOptions", function (data) {
+        $.each(data, function (index, data) {
+            $.each(data, function (index, data) {
+                $.each(data, function (key, value) {
+                    switch (key) {
+                        case "PostOptionsPoTEnable": $("#PostOptionsPoT").prop('checked', value);
+                            break;
+                        case "PostOptionsThreadsEnable": $("#PostOptionsThreads").prop('checked', value);
+                            break;
+                        case "PostOptionsPostsEnable": $("#PostOptionsPosts").prop('checked', value);
+                            break;
+                        default: console.log("ERROR: Key not found.");
+                    }
+                })
+            })
+
+        });
+    });
 }
 
 function saveUserTag() {
