@@ -36,6 +36,11 @@ $(document).ready(function () {
         savePostOptions();
         console.log("PostOptions Settings Changed!");
     });
+
+    $(".ImageChanges").change(function () {
+        saveImageChanges();
+        console.log("ImageChanges Settings Changed!");
+    });
 });
 
 function loadSettings() {
@@ -44,6 +49,39 @@ function loadSettings() {
     loadOnlineSorting();
     loadUserTag();
     loadPostOptions();
+    loadImageChanges();
+}
+
+function saveImageChanges() {
+    chrome.storage.sync.set({
+        ImageChanges:
+            [{ 'ImageChangesMaxSizeEnable': $("#ImageChangesMaxSize").is(':checked') },
+            { 'ImageChangesReplaceBrokenEnable': $("#ImageChangesReplaceBroken").is(':checked') },
+            { 'ImageChangesForceHTTPSEnable': $("#ImageChangesForceHTTPS").is(':checked') }]
+    }, function () {
+        // Save Confirmation
+    });
+}
+
+function loadImageChanges() {
+    chrome.storage.sync.get("ImageChanges", function (data) {
+        $.each(data, function (index, data) {
+            $.each(data, function (index, data) {
+                $.each(data, function (key, value) {
+                    switch (key) {
+                        case "ImageChangesMaxSizeEnable": $("#ImageChangesMaxSize").prop('checked', value);
+                            break;
+                        case "ImageChangesReplaceBrokenEnable": $("#ImageChangesReplaceBroken").prop('checked', value);
+                            break;
+                        case "ImageChangesForceHTTPSEnable": $("#ImageChangesForceHTTPS").prop('checked', value);
+                            break;
+                        default: console.log("ERROR: Key not found.");
+                    }
+                })
+            })
+
+        });
+    });
 }
 
 function savePostOptions() {

@@ -47,7 +47,8 @@
         "js/modules/PostbitHide.js",
         "js/modules/UserTag.js",
         "js/modules/SmartQuotes.js",
-        "js/modules/PostOptions.js"
+        "js/modules/PostOptions.js",
+        "js/modules/ImageChanges.js"
       ]
     },
     // Rep Charts
