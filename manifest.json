@@ -8,7 +8,7 @@
 
   // Recommended
   //"default_locale": "en",
-  "description": "Enhance your HF experience!",
+  "description": "Enhance your HF Experience!",
   // icon: 128x128 AND 48x48.PNG
   "icons": {
     "16": "images/icon-16.png", // optional

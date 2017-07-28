@@ -41,6 +41,11 @@ $(document).ready(function () {
         saveImageChanges();
         console.log("ImageChanges Settings Changed!");
     });
+
+    $(".ImageChanges").change(function () {
+        saveImageChanges();
+        console.log("ImageChanges Settings Changed!");
+    });
 });
 
 function loadSettings() {
@@ -89,7 +94,8 @@ function savePostOptions() {
         PostOptions:
             [{ 'PostOptionsPoTEnable': $("#PostOptionsPoT").is(':checked') },
             { 'PostOptionsThreadsEnable': $("#PostOptionsThreads").is(':checked') },
-            { 'PostOptionsPostsEnable': $("#PostOptionsPosts").is(':checked') }]
+            { 'PostOptionsPostsEnable': $("#PostOptionsPosts").is(':checked') },
+            { 'PMChangesPMFromPostEnable': $("#PMChangesPMFromPost").is(':checked') }]
     }, function () {
         // Save Confirmation
     });
@@ -106,6 +112,8 @@ function loadPostOptions() {
                         case "PostOptionsThreadsEnable": $("#PostOptionsThreads").prop('checked', value);
                             break;
                         case "PostOptionsPostsEnable": $("#PostOptionsPosts").prop('checked', value);
+                            break;
+                        case "PMChangesPMFromPostEnable": $("#PMChangesPMFromPost").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }
