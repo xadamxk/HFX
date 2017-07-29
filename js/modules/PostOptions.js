@@ -81,7 +81,11 @@ function enablePostOptions() {
             var myPostKey = document.getElementsByTagName('head')[0].innerHTML.split('my_post_key = "')[1].split('";')[0];
             var threadTitle = $(".navigation").find(".active").text();
 
-            // TODO: Grab part of post text to include in PM body?
+            // Grab text of post (exclude quotes)
+            var postBody = $(this).find(".post_body").clone();
+            if ($(this).find("blockquote")) {
+                postBody.find("blockquote").remove();
+            }
 
             if (threadTitle.length > 50) {
                 threadTitle = threadTitle.substring(0, 50);
@@ -120,7 +124,7 @@ function enablePostOptions() {
                 '<input type="submit" class="button" name="preview" value="Preview" tabindex="11" />';
             var formmessage = '<textarea name="message" rows="7" cols="90" tabindex="3">' +
                 '[size=x-small]Sent from [url=https://www.hackforums.net/' + postLink + ']your post[/url]. [/size]\n\n ' +
-                ''+
+                '[quote="' + usernameName + '"]' + postBody.text().replace(/\t+/g, "") + '[/quote]' +
                 '</textarea><br />';
             var formchecks = '<div align="center"><input type="checkbox" class="checkbox" name="options[signature]" value="1" tabindex="5" checked="checked" />' +
                 'Signature - <input type="checkbox" class="checkbox" name="options[savecopy]" value="1" tabindex="7" checked="checked" />' +
