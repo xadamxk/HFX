@@ -11,22 +11,22 @@
   "description": "Enhance your HF Experience!",
   // icon: 128x128 AND 48x48.PNG
   "icons": {
-    "16": "images/icon-16.png", // optional
-    "32": "images/icon-32.png", // optional
-    "48": "images/icon-48.png", // optional
-    "128": "images/icon-128.png" // optional
+    "16": "images/icon-16.png", 
+    "32": "images/icon-32.png",
+    "48": "images/icon-48.png", 
+    "128": "images/icon-128.png" 
   },
 
   // Pick one (or none)
   "browser_action": {
-    "default_icon": { // optional
-      "16": "images/icon-16.png", // optional
-      "32": "images/icon-32.png", // optional
-      "48": "images/icon-48.png", // optional
-      "128": "images/icon-128.png" // optional
+    "default_icon": {
+      "16": "images/icon-16.png", 
+      "32": "images/icon-32.png", 
+      "48": "images/icon-48.png", 
+      "128": "images/icon-128.png"
     },
-    "default_title": "HFX Settings", // optional; shown in tooltip
-    "default_popup": "pages/popup.html" // optional
+    "default_title": "HFX Settings", // shown in tooltip
+    "default_popup": "pages/popup.html"
   },
   //"page_action": {...},
   "background": {
@@ -36,7 +36,7 @@
   "author": "xadamxk",
   //"automation": ...,
   "content_scripts": [
-    // Postbit Hide Attributes, UserTag, SmartQuotes, PostOptions
+    // Postbit Hide Attributes, UserTag, SmartQuotes, PostOptions, ImageChanges
     {
       "run_at": "document_end",
       "matches": [
@@ -44,11 +44,11 @@
       ],
       "js": [
         "js/dependencies/jquery-3.2.1.js",
-        "js/modules/PostbitHide.js",
-        "js/modules/UserTag.js",
-        "js/modules/SmartQuotes.js",
-        "js/modules/PostOptions.js",
-        "js/modules/ImageChanges.js"
+        "js/modules/ShowThread - PostbitHide.js",
+        "js/modules/ShowThread - UserTag.js",
+        "js/modules/ShowThread - SmartQuotes.js",
+        "js/modules/ShowThread - PostOptions.js",
+        "js/modules/ShowThread - ImageChanges.js"
       ]
     },
     // Rep Charts
@@ -61,7 +61,7 @@
       "js": [
         "js/dependencies/jquery-3.2.1.js",
         "js/dependencies/Chart.bundle.min.js",
-        "js/modules/RepCharts.js"
+        "js/modules/Reputation - RepCharts.js"
       ]
     },
     // Online Sorting
@@ -73,7 +73,18 @@
       ],
       "js": [
         "js/dependencies/jquery-3.2.1.js",
-        "js/modules/OnlineSorting.js"
+        "js/modules/Index - OnlineSorting.js"
+      ]
+    },
+    // PM Changes
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://hackforums.net/private.php?action=send&pmid=*"
+      ],
+      "js": [
+        "js/dependencies/jquery-3.2.1.js",
+        "js/modules/Private Reply - PMChanges.js"
       ]
     }
     // User Tagging - preview post

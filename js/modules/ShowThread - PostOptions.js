@@ -3,6 +3,7 @@ var postOptionsPoTEnable = false;
 var postOptionsPostsEnable = false;
 var postOptionsThreadsEnable = false;
 var pmChangesPMFromPostEnable = false;
+var annoyanceFixerFullScreenYoutubeEnable = false;
 getPostOptions();
 
 // Set vars equal to saved settings
@@ -20,6 +21,8 @@ function getPostOptions() {
                             case "PostOptionsPostsEnable": if (value) { postOptionsPostsEnable = value }
                                 break;
                             case "PMChangesPMFromPostEnable": if (value) { pmChangesPMFromPostEnable = value }
+                                break;
+                            case "AnnoyanceFixerFullscreenYoutubeEnable": if (value) { annoyanceFixerFullScreenYoutubeEnable = value }
                                 break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
@@ -140,6 +143,12 @@ function enablePostOptions() {
             // Append PostFromPM Popup
             $(this).find(".HFXPMFromPost").before(finalform);
 
+        }
+        // Fullscreen Youtube
+        if (annoyanceFixerFullScreenYoutubeEnable) {
+            $("iframe[src*=youtube]").each(function (index) {
+                $(this).attr("allowfullscreen", "allowfullscreen");
+            });
         }
     });
 }

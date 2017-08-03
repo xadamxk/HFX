@@ -42,9 +42,9 @@ $(document).ready(function () {
         console.log("ImageChanges Settings Changed!");
     });
 
-    $(".ImageChanges").change(function () {
-        saveImageChanges();
-        console.log("ImageChanges Settings Changed!");
+    $(".PMChanges").change(function () {
+        savePMChanges();
+        console.log("PMChanges Settings Changed!");
     });
 });
 
@@ -55,6 +55,46 @@ function loadSettings() {
     loadUserTag();
     loadPostOptions();
     loadImageChanges();
+    loadPMChanges();
+}
+
+function savePMChanges() {
+    chrome.storage.sync.set({
+        PMChanges:
+            [{ 'PMChangesQuoteStripping': $("#PMChangesQuoteStripping").is(':checked') },
+            { 'PMChangesSalutationEnable': $("#PMChangesSalutation").is(':checked') },
+            { 'PMChangesSalutationText': $("#PMChangesSalutationText").val() },
+            { 'PMChangesSignatureEnable': $("#PMChangesSignature").is(':checked') },
+            { 'PMChangesSignatureText': $("#PMChangesSignatureText").val() }]
+    }, function () {
+        // Save Confirmation
+    });
+}
+
+function loadPMChanges() {
+    chrome.storage.sync.get("PMChanges", function (data) {
+        console.log(data);
+        $.each(data, function (index, data) {
+            $.each(data, function (index, data) {
+                $.each(data, function (key, value) {
+                    switch (key) {
+                        case "PMChangesQuoteStripping": $("#PMChangesQuoteStripping").prop('checked', value);
+                            break;
+                        case "PMChangesSalutationEnable": $("#PMChangesSalutation").prop('checked', value);
+                            break;
+                        case "PMChangesSalutationText": $("#PMChangesSalutationText").val(value);
+                            break;
+                        case "PMChangesSignatureEnable": $("#PMChangesSignature").prop('checked', value);
+                            break;
+                        case "PMChangesSignatureText": $("#PMChangesSignatureText").val(value);
+                            break;
+                        default: console.log("ERROR: Key not found.");
+                    }
+                })
+            })
+
+        });
+    });
 }
 
 function saveImageChanges() {
@@ -95,7 +135,8 @@ function savePostOptions() {
             [{ 'PostOptionsPoTEnable': $("#PostOptionsPoT").is(':checked') },
             { 'PostOptionsThreadsEnable': $("#PostOptionsThreads").is(':checked') },
             { 'PostOptionsPostsEnable': $("#PostOptionsPosts").is(':checked') },
-            { 'PMChangesPMFromPostEnable': $("#PMChangesPMFromPost").is(':checked') }]
+            { 'PMChangesPMFromPostEnable': $("#PMChangesPMFromPost").is(':checked') },
+            { 'AnnoyanceFixerFullscreenYoutubeEnable': $("#AnnoyanceFixerFullscreenYoutubeEnable").is(':checked') }]
     }, function () {
         // Save Confirmation
     });
@@ -114,6 +155,8 @@ function loadPostOptions() {
                         case "PostOptionsPostsEnable": $("#PostOptionsPosts").prop('checked', value);
                             break;
                         case "PMChangesPMFromPostEnable": $("#PMChangesPMFromPost").prop('checked', value);
+                            break;
+                        case "AnnoyanceFixerFullscreenYoutubeEnable": $("#AnnoyanceFixerFullscreenYoutubeEnable").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }

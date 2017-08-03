@@ -28,6 +28,7 @@
             <li><a data-toggle="tab" href="#menuForum" id="generalShowForum">Forum</a></li>
             <li><a data-toggle="tab" href="#menuPM" id="generalShowPM">PM</a></li>
         </ul>
+        
         <div class="tab-content">
             <!-- General -->
             <div id="general" class="tab-pane fade in active">
@@ -242,6 +243,15 @@
                                 </label>
                             </div>
                         </div>
+                        <!-- YoutubeFullScreen Toggle -->
+                        <div class="col-sm-3">
+                            <div class="checkbox-slider--b col-sm-2">
+                                <label>
+                                    <input type="checkbox" id="AnnoyanceFixerFullscreenYoutubeEnable" class="PostOptions">
+                                    <span class="toggleLabel">Allow YouTube Fullscreen</span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div> <!-- Annoyance Fixers End -->
             </div>
@@ -282,6 +292,40 @@
                                 </label>
                             </div>
                         </div>
+                        <!-- Quote Stripping -->
+                        <div class="col-sm-3">
+                            <div class="checkbox-slider--b col-sm-2">
+                                <label>
+                                    <input type="checkbox" id="PMChangesQuoteStripping" class="PMChanges">
+                                    <span class="toggleLabel">Enable Quote Stripping</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Salutation Enable -->
+                        <div class="col-sm-3">
+                            <div class="checkbox-slider--b col-sm-2">
+                                <label>
+                                    <input type="checkbox" id="PMChangesSalutation" class="PMChanges">
+                                    <span class="toggleLabel">Enable PM Salutation</span>
+                                </label>
+                            </div>
+                            <!-- Salutation Text -->
+                            <input class="form-control PMChanges" id="PMChangesSalutationText" type="text">
+                            <br />
+                        </div>
+                        <!-- Signature Enable -->
+                        <div class="col-sm-3">
+                            <div class="checkbox-slider--b col-sm-2">
+                                <label>
+                                    <input type="checkbox" id="PMChangesSignature" class="PMChanges">
+                                    <span class="toggleLabel">Enable PM Signature</span>
+                                </label>
+                            </div>
+                            <input class="form-control PMChanges" id="PMChangesSignatureText" type="text">
+                            <br />
+                        </div>
+
+
                     </div>
                 </div> <!-- PM Changes End -->
             </div>
