@@ -80,7 +80,8 @@
     {
       "run_at": "document_end",
       "matches": [
-        "*://hackforums.net/private.php?action=send&pmid=*"
+        "*://hackforums.net/private.php?action=send&pmid=*",
+        "*://hackforums.net/private.php?action=send&uid=*"
       ],
       "js": [
         "js/dependencies/jquery-3.2.1.js",
