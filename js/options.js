@@ -46,6 +46,11 @@ $(document).ready(function () {
         savePMChanges();
         console.log("PMChanges Settings Changed!");
     });
+
+    $(".ForumChanges").change(function () {
+        saveForumChanges();
+        console.log("ForumChanges Settings Changed!");
+    });
 });
 
 function loadSettings() {
@@ -56,6 +61,43 @@ function loadSettings() {
     loadPostOptions();
     loadImageChanges();
     loadPMChanges();
+    loadForumChanges();
+}
+
+function saveForumChanges() {
+    chrome.storage.sync.set({
+        ForumChanges:
+            [{ 'ForumChangesForumRatingEnabled': $("#ForumChangesForumRating").is(':checked') },
+            { 'ForumChangesEnhancedSYTEnabled': $("#ForumChangesEnhancedSYT").is(':checked') },
+            { 'ForumChangesHideClosedEnabled': $("#ForumChangesHideClosed").is(':checked') },
+            { 'ForumChangesHideForumRatingsEnabled': $("#ForumChangesHideForumRatings").is(':checked') }]
+    }, function () {
+        // Save Confirmation
+    });
+}
+
+function loadForumChanges() {
+    chrome.storage.sync.get("ForumChanges", function (data) {
+        console.log(data);
+        $.each(data, function (index, data) {
+            $.each(data, function (index, data) {
+                $.each(data, function (key, value) {
+                    switch (key) {
+                        case "ForumChangesForumRatingEnabled": $("#ForumChangesForumRating").prop('checked', value);
+                            break;
+                        case "ForumChangesEnhancedSYTEnabled": $("#ForumChangesEnhancedSYT").prop('checked', value);
+                            break;
+                        case "ForumChangesHideClosedEnabled": $("#ForumChangesHideClosed").prop('checked', value);
+                            break;
+                        case "ForumChangesHideForumRatingsEnabled": $("#ForumChangesHideForumRatings").prop('checked', value);
+                            break;
+                        default: console.log("ERROR: Key not found.");
+                    }
+                })
+            })
+
+        });
+    });
 }
 
 function savePMChanges() {

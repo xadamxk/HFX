@@ -87,6 +87,17 @@
         "js/dependencies/jquery-3.2.1.js",
         "js/modules/Private Reply - PMChanges.js"
       ]
+    },
+    // Forum Changes
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://hackforums.net/forumdisplay.php?fid=*"
+      ],
+      "js": [
+        "js/dependencies/jquery-3.2.1.js",
+        "js/modules/ForumDisplay .js"
+      ]
     }
     // User Tagging - preview post
     //,{
