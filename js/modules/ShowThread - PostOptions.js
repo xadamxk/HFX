@@ -4,6 +4,8 @@ var postOptionsPostsEnable = false;
 var postOptionsThreadsEnable = false;
 var pmChangesPMFromPostEnable = false;
 var annoyanceFixerFullScreenYoutubeEnable = false;
+var annoyanceFixerShowBlockedPostsEnabled = false;
+var annoyanceFixerHideBlockedPostsEnabled = false;
 getPostOptions();
 
 // Set vars equal to saved settings
@@ -23,6 +25,10 @@ function getPostOptions() {
                             case "PMChangesPMFromPostEnable": if (value) { pmChangesPMFromPostEnable = value }
                                 break;
                             case "AnnoyanceFixerFullscreenYoutubeEnable": if (value) { annoyanceFixerFullScreenYoutubeEnable = value }
+                                break;
+                            case "AnnoyanceFixerShowBlockedPostsEnable": if (value) { annoyanceFixerShowBlockedPostsEnabled = value }
+                                break;
+                            case "AnnoyanceFixerHideBlockedPostsEnable": if (value) { annoyanceFixerHideBlockedPostsEnabled = value }
                                 break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
@@ -44,8 +50,33 @@ function enablePostOptions() {
             threadID = $(this).attr("value");
         }
     });
+    // Hide Blocked Posts
+    if (annoyanceFixerHideBlockedPostsEnabled) {
+        if ($("a[onclick*='showIgnoredPost']").length >= 1) {
+            $("a[onclick*='showIgnoredPost']").each(function () {
+                // Remove Ignore Table
+                $(this).parent().closest('table').remove();
+            });
+        }
+    }
+    // Show Blocked Posts
+    if (annoyanceFixerShowBlockedPostsEnabled) {
+        if ($("a[onclick*='showIgnoredPost']").length >= 1) {
+            $("a[onclick*='showIgnoredPost']").each(function () {
+                // Hide Post
+                this.click();
+                // 'Ignored User' Alert
+                $("a[onclick*='showIgnoredPost']").closest('table').next().next().find(".float_left.smalltext")
+                    .append($('<span>').text("(IGNORED USER)"));
+                $("a[onclick*='showIgnoredPost']").closest('table').next().next().find(".tcat").css("background-color","red");
+            });
+        }
+    }
     // Loop through each post
     $("#posts > table").each(function (index) {
+        // If post collapsed
+        if (!$(this).find(".post_author > strong > span > a").attr('href') > 0)
+            return true;
         var usernameUID = $(this).find(".post_author > strong > span > a").attr('href').replace(/\D/g, '');
         var usernameName = $(this).find(".post_author > strong > span > a").text();
         // Posts on Thread

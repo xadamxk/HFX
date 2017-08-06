@@ -178,7 +178,9 @@ function savePostOptions() {
             { 'PostOptionsThreadsEnable': $("#PostOptionsThreads").is(':checked') },
             { 'PostOptionsPostsEnable': $("#PostOptionsPosts").is(':checked') },
             { 'PMChangesPMFromPostEnable': $("#PMChangesPMFromPost").is(':checked') },
-            { 'AnnoyanceFixerFullscreenYoutubeEnable': $("#AnnoyanceFixerFullscreenYoutubeEnable").is(':checked') }]
+            { 'AnnoyanceFixerFullscreenYoutubeEnable': $("#AnnoyanceFixerFullscreenYoutube").is(':checked') },
+            { 'AnnoyanceFixerShowBlockedPostsEnable': $("#AnnoyanceFixerShowBlockedPosts").is(':checked') },
+            { 'AnnoyanceFixerHideBlockedPostsEnable': $("#AnnoyanceFixerHideBlockedPosts").is(':checked') }]
     }, function () {
         // Save Confirmation
     });
@@ -198,7 +200,11 @@ function loadPostOptions() {
                             break;
                         case "PMChangesPMFromPostEnable": $("#PMChangesPMFromPost").prop('checked', value);
                             break;
-                        case "AnnoyanceFixerFullscreenYoutubeEnable": $("#AnnoyanceFixerFullscreenYoutubeEnable").prop('checked', value);
+                        case "AnnoyanceFixerFullscreenYoutubeEnable": $("#AnnoyanceFixerFullscreenYoutube").prop('checked', value);
+                            break;
+                        case "AnnoyanceFixerShowBlockedPostsEnable": $("#AnnoyanceFixerShowBlockedPosts").prop('checked', value);
+                            break;
+                        case "AnnoyanceFixerHideBlockedPostsEnable": $("#AnnoyanceFixerHideBlockedPosts").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }
