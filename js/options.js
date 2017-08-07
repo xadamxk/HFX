@@ -56,6 +56,11 @@ $(document).ready(function () {
         saveQuickRepChanges();
         console.log("QuickRepChanges Settings Changed!");
     });
+
+    $(".GlobalChanges").change(function () {
+        saveGlobalChanges();
+        console.log("GlobalChanges Settings Changed!");
+    });
 });
 
 function loadSettings() {
@@ -68,6 +73,39 @@ function loadSettings() {
     loadPMChanges();
     loadForumChanges();
     loadQuickRepChanges();
+    loadGlobalChanges();
+}
+
+function saveGlobalChanges() {
+    chrome.storage.sync.set({
+        GlobalChanges:
+            [{ 'GlobalChangesHideLocationEnabled': $("#HideLocation").is(':checked') },
+            { 'GlobalChangesDenyPMReceiptEnabled': $("#PMChangesDenyPMReceipt").is(':checked') },
+            { 'GlobalChangesEasyCiteEnabled': $("#GlobalChangesEasyCite").is(':checked') }]
+    }, function () {
+        // Save Confirmation
+    });
+}
+
+function loadGlobalChanges() {
+    chrome.storage.sync.get("GlobalChanges", function (data) {
+        $.each(data, function (index, data) {
+            $.each(data, function (index, data) {
+                $.each(data, function (key, value) {
+                    switch (key) {
+                        case "GlobalChangesHideLocationEnabled": $("#HideLocation").prop('checked', value);
+                            break;
+                        case "GlobalChangesDenyPMReceiptEnabled": $("#PMChangesDenyPMReceipt").prop('checked', value);
+                            break;
+                        case "GlobalChangesEasyCiteEnabled": $("#GlobalChangesEasyCite").prop('checked', value);
+                            break;
+                        default: console.log("ERROR: Key not found.");
+                    }
+                })
+            })
+
+        });
+    });
 }
 
 function saveQuickRepChanges() {
@@ -81,7 +119,6 @@ function saveQuickRepChanges() {
 
 function loadQuickRepChanges() {
     chrome.storage.sync.get("QuickRepChanges", function (data) {
-        console.log(data);
         $.each(data, function (index, data) {
             $.each(data, function (index, data) {
                 $.each(data, function (key, value) {
@@ -111,7 +148,6 @@ function saveForumChanges() {
 
 function loadForumChanges() {
     chrome.storage.sync.get("ForumChanges", function (data) {
-        console.log(data);
         $.each(data, function (index, data) {
             $.each(data, function (index, data) {
                 $.each(data, function (key, value) {
@@ -148,7 +184,6 @@ function savePMChanges() {
 
 function loadPMChanges() {
     chrome.storage.sync.get("PMChanges", function (data) {
-        console.log(data);
         $.each(data, function (index, data) {
             $.each(data, function (index, data) {
                 $.each(data, function (key, value) {

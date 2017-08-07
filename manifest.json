@@ -99,7 +99,7 @@
         "js/modules/ForumDisplay .js"
       ]
     },
-    // QuickRep Changes 
+    // QuickRep Changes
     {
       "run_at": "document_end",
       "matches": [
@@ -110,7 +110,19 @@
         "js/dependencies/jquery-3.2.1.js",
         "js/modules/ShowThread - QuickRep.js"
       ]
+    },
+    // Global Changes
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://hackforums.net/*"
+      ],
+      "js": [
+        "js/dependencies/jquery-3.2.1.js",
+        "js/modules/Global.js"
+      ]
     }
+
     // User Tagging - preview post
     //,{
     //  "run_at": "document_end",
