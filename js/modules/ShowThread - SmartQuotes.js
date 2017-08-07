@@ -9,21 +9,25 @@ var smartQuoteNotificationColor = "#FF3B30"; // (Default: #FF3B30)
 var smartQuoteHeaderMatchBackgroundColor = "#bc3232"; // (Default: #bc3232)
 var smartQuoteHeaderMatchTextColor = "#000000"; // (Default: #000000)
 
-// Notification Text - Username Quoted (Mention text at top of page)
-var showsmartQuoteNotification = true; // (Default: true)
+
 // Debug
 var debug = false;
 var enableSmartQuote = false;
+// Notification Text - Username Quoted (Mention text at top of page)
+var enabmeSmartQuoteMentionCount = false;
 enableSmartQuotes();
 
+// Set vars equal to saved settings
 function enableSmartQuotes() {
-    chrome.storage.sync.get("SmartQuotes", function (data) {
+    chrome.storage.sync.get("SmartQuoteChanges", function (data) {
         if (!chrome.runtime.error) {
             $.each(data, function (index, data1) {
                 $.each(data1, function (index1, data2) {
                     $.each(data2, function (key, value) {
                         switch (key) {
-                            case "SmartQuotesEnable": if (value) { enableSmartQuotes = value }
+                            case "SmartQuotesEnabled": if (value) { enableSmartQuote = value;}
+                                break;
+                            case "SmartQuotesMentionCount": if (value) { enabmeSmartQuoteMentionCount = value;}
                                 break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
@@ -32,14 +36,20 @@ function enableSmartQuotes() {
                 })
 
             });
-            // Run function
-            if (enableSmartQuotes)
-                injectSmartQuotes();
+            injectSmartQuoteChanges();
         }
     });
 }
 
+function injectSmartQuoteChanges() {
+    console.log("Enable SQ: " + enableSmartQuote);
+    if (enableSmartQuote) {
+        injectSmartQuotes();
+    }
+}
+
 function injectSmartQuotes() {
+    console.log("smartquotes is running...");
     var username = $("#panel strong a:eq(0)").text();
     var usernameCount = 0;
     if (debug) { console.log("Number of Quotes: " + $("*").find("blockquote").length); }
@@ -75,7 +85,7 @@ function injectSmartQuotes() {
             }
         });
     }
-    if (showsmartQuoteNotification) {
+    if (enabmeSmartQuoteMentionCount) {
         var mentionString = ") Mention";
         var thead = $("strong:contains(Thread Options)").parent().parent().parent();
         // Strong that contains thread title

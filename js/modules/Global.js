@@ -23,14 +23,14 @@ function getGlobalSettings() {
                         }
                     })
                 })
-                injectChanges();
+                injectGlobalChanges();
             });
             
         }
     });
 }
 
-function injectChanges() {
+function injectGlobalChanges() {
     if (enableHideLocation) {
         injectHideLocation();
     }

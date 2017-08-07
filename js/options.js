@@ -61,6 +61,11 @@ $(document).ready(function () {
         saveGlobalChanges();
         console.log("GlobalChanges Settings Changed!");
     });
+
+    $(".SmartQuotes").change(function () {
+        saveSmartQuotes();
+        console.log("SmartQuotes Settings Changed!");
+    });
 });
 
 function loadSettings() {
@@ -74,6 +79,36 @@ function loadSettings() {
     loadForumChanges();
     loadQuickRepChanges();
     loadGlobalChanges();
+    loadSmartQuotes();
+}
+
+function saveSmartQuotes() {
+    chrome.storage.sync.set({
+        SmartQuoteChanges:
+            [{ 'SmartQuotesEnabled': $("#SmartQuotesEnable").is(':checked') },
+            { 'SmartQuotesMentionCount': $("#SmartQuotesMentionCount").is(':checked') }]
+    }, function () {
+        // Save Confirmation
+    });
+}
+
+function loadSmartQuotes() {
+    chrome.storage.sync.get("SmartQuoteChanges", function (data) {
+        $.each(data, function (index, data) {
+            $.each(data, function (index, data) {
+                $.each(data, function (key, value) {
+                    switch (key) {
+                        case "SmartQuotesEnabled": $("#SmartQuotesEnable").prop('checked', value);
+                            break;
+                        case "SmartQuotesMentionCount": $("#SmartQuotesMentionCount").prop('checked', value);
+                            break;
+                        default: console.log("ERROR: Key not found.");
+                    }
+                })
+            })
+
+        });
+    });
 }
 
 function saveGlobalChanges() {

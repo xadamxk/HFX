@@ -1,5 +1,5 @@
 var debug = false;
-var enableQuickRep = false;
+var enableQuickReps = false;
 enableQuickRep();
 
 function enableQuickRep() {
@@ -9,7 +9,7 @@ function enableQuickRep() {
                 $.each(data1, function (index1, data2) {
                     $.each(data2, function (key, value) {
                         switch (key) {
-                            case "QuickRepEnabled": if (value) { enableQuickRep = value }
+                            case "QuickRepEnabled": if (value) { enableQuickReps = value }
                                 break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
@@ -19,7 +19,7 @@ function enableQuickRep() {
 
             });
             // Run function
-            if (enableQuickRep)
+            if (enableQuickReps)
                 injectQuickRep();
         }
     });
