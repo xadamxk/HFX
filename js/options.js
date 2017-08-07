@@ -51,6 +51,11 @@ $(document).ready(function () {
         saveForumChanges();
         console.log("ForumChanges Settings Changed!");
     });
+
+    $(".QuickRepChanges").change(function () {
+        saveQuickRepChanges();
+        console.log("QuickRepChanges Settings Changed!");
+    });
 });
 
 function loadSettings() {
@@ -62,6 +67,34 @@ function loadSettings() {
     loadImageChanges();
     loadPMChanges();
     loadForumChanges();
+    loadQuickRepChanges();
+}
+
+function saveQuickRepChanges() {
+    chrome.storage.sync.set({
+        ForumChanges:
+            [{ 'QuickRepEnabled': $("#QuickRep").is(':checked') }]
+    }, function () {
+        // Save Confirmation
+    });
+}
+
+function loadQuickRepChanges() {
+    chrome.storage.sync.get("QuickRepChanges", function (data) {
+        console.log(data);
+        $.each(data, function (index, data) {
+            $.each(data, function (index, data) {
+                $.each(data, function (key, value) {
+                    switch (key) {
+                        case "QuickRepEnabled": $("#QuickRep").prop('checked', value);
+                            break;
+                        default: console.log("ERROR: Key not found.");
+                    }
+                })
+            })
+
+        });
+    });
 }
 
 function saveForumChanges() {

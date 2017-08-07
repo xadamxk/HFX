@@ -84,6 +84,7 @@ function injectHideClosed() {
 }
 
 function injectHideForumRatings() {
+    $("select[name='datecut']").closest('table').find("tr:eq(1) td:eq(2)").empty();
     // star_rating
     $("table").find(".star_rating").each(function (index) {
         $(this).parent().empty();

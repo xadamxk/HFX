@@ -98,6 +98,18 @@
         "js/dependencies/jquery-3.2.1.js",
         "js/modules/ForumDisplay .js"
       ]
+    },
+    // QuickRep Changes 
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://hackforums.net/showthread.php?tid=*",
+        "*://hackforums.net/private.php?action=read&pmid=*"
+      ],
+      "js": [
+        "js/dependencies/jquery-3.2.1.js",
+        "js/modules/ShowThread - QuickRep.js"
+      ]
     }
     // User Tagging - preview post
     //,{
