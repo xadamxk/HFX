@@ -95,9 +95,12 @@ function hideElements() {
             $(this).find(".post_author_info")[0].childNodes[16].nodeValue = '';
             $(this).find(".post_author_info > a:eq(1)").remove();
         }
-        if (hideAwards)
+        if (hideAwards) {
             $(this).find(".post_author_info > span").remove();
-        if (hideSignature)
-            $(this).find(".post_content div:eq(1)").remove();
+        }
+        if (hideSignature) {
+            $(this).find(".post_content > div:eq(1)").remove();
+            $(this).find(".post_content > hr:eq(0)").remove();
+        }
     });
 }
