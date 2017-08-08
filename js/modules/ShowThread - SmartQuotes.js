@@ -42,14 +42,12 @@ function enableSmartQuotes() {
 }
 
 function injectSmartQuoteChanges() {
-    console.log("Enable SQ: " + enableSmartQuote);
     if (enableSmartQuote) {
         injectSmartQuotes();
     }
 }
 
 function injectSmartQuotes() {
-    console.log("smartquotes is running...");
     var username = $("#panel strong a:eq(0)").text();
     var usernameCount = 0;
     if (debug) { console.log("Number of Quotes: " + $("*").find("blockquote").length); }
@@ -110,7 +108,7 @@ function injectSmartQuotes() {
             // Post Link
             var postLink = postBlock.find("strong a").attr("href").split("&pid=");
             if (postLink[1].includes("#pid")) { postLink[1] = postLink[1].substring(0, postLink[1].indexOf("#pid")); }
-            console.log("Post ID: " + postLink[1]);
+            //console.log("Post ID: " + postLink[1]);
             // Username
             var postUsername = postBlock.children().next().children().eq(0).find(".post_author").find("strong span a span").text();
             //console.log("Username: "+postUsername);

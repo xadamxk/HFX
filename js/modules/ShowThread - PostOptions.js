@@ -72,6 +72,12 @@ function enablePostOptions() {
             });
         }
     }
+    // Remove default posts button
+    $("#posts").find(".bitButton").each(function (index) {
+        if ($(this).text() == "Find") {
+            $(this).remove();
+        }
+    });
     // Loop through each post
     $("#posts > table").each(function (index) {
         // If post collapsed

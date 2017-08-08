@@ -10,6 +10,7 @@ var hideReputation = false;
 var hideWarningLevel = false;
 var hideAwards = false;
 var hideSignature = false;
+var classPostStyle = isPostStyleClass();
 getPostbitHide();
 
 // Set vars equal to saved settings
@@ -71,20 +72,35 @@ function debugTest() {
 }
 function hideElements() {
     $("#posts > table").each(function (index) {
-        if (hideAvatar)
-            $(this).find(".post_avatar").hide();
-        if (hideUserTitle)
-            $(this).find(".post_author").find(".smalltext")[0].childNodes[0].nodeValue = '';
-        if (hideUserStar)
+        if (hideAvatar) {
+            if (classPostStyle) {
+                $(this).find(".smalltext:eq(0) > a:eq(0)").hide();
+            } else {
+                $(this).find(".post_avatar").hide();
+            }
+        }
+        if (hideUserTitle) {
+            if (classPostStyle) {
+                
+            } else {
+                $(this).find(".post_author").find(".smalltext")[0].childNodes[0].nodeValue = '';
+            }
+        }
+        if (hideUserStar) {
             $(this).find(".post_author").find(".userstars").remove();
-        if (hideUserBar)
+        }
+        if (hideUserBar) {
             $(this).find(".post_author").find(".smalltext > img").remove();
-        if (hidePrestige)
+        }
+        if (hidePrestige) {
             $(this).find(".post_author_info")[0].childNodes[0].nodeValue = '';
-        if (hidePostCount)
+        }
+        if (hidePostCount) {
             $(this).find(".post_author_info")[0].childNodes[3].nodeValue = '';
-        if (hideJoinDate)
+        }
+        if (hideJoinDate) {
             $(this).find(".post_author_info")[0].childNodes[5].nodeValue = '';
+        }
         if (hideReputation) {
             $(this).find(".post_author_info")[0].childNodes[9].nodeValue = '';
             $(this).find(".post_author_info").find(".reputation_positive").remove();
@@ -103,4 +119,12 @@ function hideElements() {
             $(this).find(".post_content > hr:eq(0)").remove();
         }
     });
+}
+
+function isPostStyleClass() {
+    if ($("html").html().includes("<!-- start: showthread_classic_header -->")) {
+        return true;
+    } else {
+        return false;
+    }
 }
