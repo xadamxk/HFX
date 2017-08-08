@@ -66,6 +66,11 @@ $(document).ready(function () {
         saveSmartQuotes();
         console.log("SmartQuotes Settings Changed!");
     });
+
+    $(".LivePreview").change(function () {
+        saveLivePreview();
+        console.log("LivePreview Settings Changed!");
+    });
 });
 
 function loadSettings() {
@@ -80,6 +85,33 @@ function loadSettings() {
     loadQuickRepChanges();
     loadGlobalChanges();
     loadSmartQuotes();
+    loadLivePreview();
+}
+
+function saveLivePreview() {
+    chrome.storage.sync.set({
+        LivePreviewChanges:
+            [{ 'LivePreviewChangesEnabled': $("#LivePreviewChangesEnable").is(':checked') }]
+    }, function () {
+        // Save Confirmation
+    });
+}
+
+function loadLivePreview() {
+    chrome.storage.sync.get("LivePreviewChanges", function (data) {
+        $.each(data, function (index, data) {
+            $.each(data, function (index, data) {
+                $.each(data, function (key, value) {
+                    switch (key) {
+                        case "LivePreviewChangesEnabled": $("#LivePreviewChangesEnable").prop('checked', value);
+                            break;
+                        default: console.log("ERROR: Key not found.");
+                    }
+                })
+            })
+
+        });
+    });
 }
 
 function saveSmartQuotes() {

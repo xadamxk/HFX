@@ -121,6 +121,22 @@
         "js/dependencies/jquery-3.2.1.js",
         "js/modules/Global.js"
       ]
+    },
+    // Live Preview
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://hackforums.net/showthread.php?tid=*",
+        "*://hackforums.net/newreply.php?tid=*",
+        "*://hackforums.net/newthread.php?fid=*",
+        "*://hackforums.net/editpost.php?pid=*",
+        "*://hackforums.net/private.php?action=send*"
+      ],
+      "js": [
+        "js/dependencies/jquery-3.2.1.js",
+        "js/dependencies/xbbcode.js",
+        "js/modules/LivePreview.js"
+      ]
     }
 
     // User Tagging - preview post
