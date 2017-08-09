@@ -91,7 +91,8 @@ function loadSettings() {
 function saveLivePreview() {
     chrome.storage.sync.set({
         LivePreviewChanges:
-            [{ 'LivePreviewChangesEnabled': $("#LivePreviewChangesEnable").is(':checked') }]
+            [{ 'LivePreviewChangesEnabled': $("#LivePreviewChangesEnable").is(':checked') },
+            { 'LivePreviewChangesCollapsed': $("#LivePreviewChangesCollapse").is(':checked') }]
     }, function () {
         // Save Confirmation
     });
@@ -104,6 +105,8 @@ function loadLivePreview() {
                 $.each(data, function (key, value) {
                     switch (key) {
                         case "LivePreviewChangesEnabled": $("#LivePreviewChangesEnable").prop('checked', value);
+                            break;
+                        case "LivePreviewChangesCollapsed": $("#LivePreviewChangesCollapse").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }

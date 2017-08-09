@@ -1,5 +1,6 @@
 var debug = false;
 var enableLivePreview = false;
+var collapseLivePreviewByDefault = false;
 getLivePreview();
 
 // Set vars equal to saved settings
@@ -11,6 +12,8 @@ function getLivePreview() {
                     $.each(data2, function (key, value) {
                         switch (key) {
                             case "LivePreviewChangesEnabled": if (value) { enableLivePreview = value; }
+                                break;
+                            case "LivePreviewChangesCollapsed": if (value) { collapseLivePreviewByDefault = value; }
                                 break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
@@ -53,16 +56,25 @@ function injectLivePreview() {
                                               .append($("<td>").attr("colspan", "2").css("background-color", prevBackColor)
                                                       //.append("<hr>")
                                                       .append($("<div>").attr("id", "livePreview"))));
-            // Event Listeners
+            // Event Listener - LivePreview 
             $("#message").on("input click", function () {
                 updatePreview($("#message").val(), false, "#livePreview");
             });
+            // Setting to auto collapse - trigger click event here
+            if (collapseLivePreviewByDefault) {
+                $("#livePreview").toggle();
+                toggleCollapseAttr();
+            }
+            // Event Listener - Show/Hide
             $("#livePreviewCollapse").on("click", function () {
                 $("#livePreview").toggle();
                 toggleCollapseAttr();
             });
-            $("#quick_reply_submit").on("click", function () {
-                updatePreview($("#message").val(), false, "#livePreview");
+            // Does this even work?
+            $("#quick_reply_submit, #newPostButton").on("click", function () {
+                //updatePreview($("#message").val(), false, "#livePreview");
+                $("#livePreview").toggle();
+                toggleCollapseAttr();
             });
         }
     }
@@ -75,7 +87,24 @@ function injectLivePreview() {
                                                                     .append($("<td>").addClass("trow1").css("width", "20%")
                                                                             .append($("<strong>").text("Live Preview:")).append("<br>").append($("<span>").attr("id", "livePreviewErrors")))
                                                                     .append($("<td>").addClass("trow1").append($("<div>").attr("id", "livePreview"))));
-        // Event Listeners
+        // Collapse Box
+        $("strong:contains(Live Preview:)").append($("<div>").addClass("expcolimage")
+            .append("<img id='livePreviewCollapse' alt='[-]' title='[-]' style='cursor: pointer;' src='https://hackforums.net/images/modern_bl/collapse.gif' />"));
+
+        // Setting to auto collapse - trigger click event here
+        if (collapseLivePreviewByDefault) {
+            $("#livePreview").toggle();
+            $("#livePreviewErrors").toggle();
+            toggleCollapseAttr();
+        }
+        // Event Listener - Show/Hide
+        $("#livePreviewCollapse").on("click", function () {
+            $("#livePreview").toggle();
+            $("#livePreviewErrors").toggle();
+            toggleCollapseAttr();
+        });
+
+        // Event Listener - LivePreview 
         $(".messageEditor, .smilie").on("click input onpropertychange", function () {
             updatePreview($("#message_new").val(), false, "#livePreview");
         });
@@ -95,7 +124,7 @@ function updatePreview(input, removeTag, outContainer) {
     // Errors
     if (preview.error) {
         $("#livePreviewErrors").text("ERROR: " + preview.errorQueue).css("color", "red");
-        if ($("#livePreviewErrors").parent().has("a").length < 1) {
+        if ($("#livePreviewErrors").parent().has("a").length < 1 && true == false) {
             $("#livePreviewErrors").after($("<a>").attr("class", "fixLivePreviewErrors").attr("href", "#fix").text("(Attempt to fix)"))
                 .after($("<br>").attr("class", "fixLivePreviewErrors"));
             // Event for error fix
