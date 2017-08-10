@@ -312,7 +312,8 @@ function loadImageChanges() {
 function savePostOptions() {
     chrome.storage.sync.set({
         PostOptions:
-            [{ 'PostOptionsPoTEnable': $("#PostOptionsPoT").is(':checked') },
+            [{ 'PostOptionsThreadRatingEnable': $("#PostOptionsThreadRating").is(':checked') },
+            { 'PostOptionsPoTEnable': $("#PostOptionsPoT").is(':checked') },
             { 'PostOptionsThreadsEnable': $("#PostOptionsThreads").is(':checked') },
             { 'PostOptionsPostsEnable': $("#PostOptionsPosts").is(':checked') },
             { 'PMChangesPMFromPostEnable': $("#PMChangesPMFromPost").is(':checked') },
@@ -330,6 +331,8 @@ function loadPostOptions() {
             $.each(data, function (index, data) {
                 $.each(data, function (key, value) {
                     switch (key) {
+                        case "PostOptionsThreadRatingEnable": $("#PostOptionsThreadRating").prop('checked', value);
+                            break;
                         case "PostOptionsPoTEnable": $("#PostOptionsPoT").prop('checked', value);
                             break;
                         case "PostOptionsThreadsEnable": $("#PostOptionsThreads").prop('checked', value);

@@ -1,4 +1,5 @@
 var debug = false;
+var postOptionsThreadRatingEnable = false;
 var postOptionsPoTEnable = false;
 var postOptionsPostsEnable = false;
 var postOptionsThreadsEnable = false;
@@ -16,6 +17,8 @@ function getPostOptions() {
                 $.each(data1, function (index1, data2) {
                     $.each(data2, function (key, value) {
                         switch (key) {
+                            case "PostOptionsThreadRatingEnable": if (value) { postOptionsThreadRatingEnable = value }
+                                break;
                             case "PostOptionsPoTEnable": if (value) { postOptionsPoTEnable = value }
                                 break;
                             case "PostOptionsThreadsEnable": if (value) { postOptionsThreadsEnable = value }
@@ -50,6 +53,22 @@ function enablePostOptions() {
             threadID = $(this).attr("value");
         }
     });
+    // Show Thread Rating
+    if (postOptionsThreadRatingEnable) {
+        var docSplit, tempString, tempScore, i;
+        if ($('.inline_rating').length > 0) {
+            docSplit = document.getElementsByClassName("inline_rating")[0].innerHTML.split('\n');
+            tempString = docSplit[2].split('>')[1].split('<')[0];
+            tempScore = tempString.split(' - ')[1].split(' ')[0] + " Avg";
+            tempString = tempString.split(' - ')[0];
+            if (tempString.indexOf("1 Votes") == 0) {
+                tempString = "1 Vote";
+            }
+
+            tempString = '<span style="font-size: x-small;">' + tempString + " - " + tempScore + '</span>';
+            $(".inline_rating").append(tempString);
+        }
+    }
     // Hide Blocked Posts
     if (annoyanceFixerHideBlockedPostsEnabled) {
         if ($("a[onclick*='showIgnoredPost']").length >= 1) {
@@ -163,8 +182,8 @@ function enablePostOptions() {
                 '<input type="submit" class="button" name="saveasdraft" value="Save as Draft" tabindex="10" />' +
                 '<input type="submit" class="button" name="preview" value="Preview" tabindex="11" />';
             var formmessage = '<textarea name="message" rows="7" cols="90" tabindex="3">' +
-                '[size=x-small]Sent from [url=https://www.hackforums.net/' + postLink + ']your post[/url]. [/size]\n\n ' +
-                '[quote="' + usernameName + '"]' + postBody.text().replace(/\t+/g, "") + '[/quote]' +
+                '[size=x-small]Sent from [url=https://www.hackforums.net/' + postLink + ']your post[/url]. [/size]' +
+                '[quote="' + usernameName + '"]' + postBody.text().replace(/\t+/g, "").replace(/\n\s*\n/g, '\n') + '[/quote]' +
                 '</textarea><br />';
             var formchecks = '<div align="center"><input type="checkbox" class="checkbox" name="options[signature]" value="1" tabindex="5" checked="checked" />' +
                 'Signature - <input type="checkbox" class="checkbox" name="options[savecopy]" value="1" tabindex="7" checked="checked" />' +

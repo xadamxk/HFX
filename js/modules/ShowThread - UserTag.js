@@ -86,7 +86,7 @@ function scanUserTag() {
     // Check memory for queued tag
     chrome.storage.local.get(["UserTagNameList", "UserTagThreadTitle"], function (result) {
         // Exit if keys not found
-        if (result.UserTagNameList === undefined || result.UserTagThreadTitle === undefined) {
+        if ((result.UserTagNameList === undefined || result.UserTagThreadTitle === undefined) & debug) {
             console.log("UserTagging: No previous data.");
             return;
         }
@@ -148,11 +148,13 @@ function scanUserTag() {
                 // Clear from memory
                 chrome.storage.local.remove(["UserTagNameList", "UserTagThreadTitle"], function (result) {
                     // Key was removed
-                    console.log("Previous info was removed.");
+                    if (debug)
+                        console.log("Previous info was removed.");
                 })
             })
             .fail(function (msg) {
-                console.log("Failed to remove previous queue.");
+                if (debug)
+                    console.log("Failed to remove previous queue.");
             });
     });
 }

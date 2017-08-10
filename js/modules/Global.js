@@ -194,7 +194,6 @@ function injectEasyCite() {
         });
     }
     $("#citeButton").click(function (event) {
-        console.log("cite button clicked");
         var target = $(event.target);
         if (target.is("button")) {
             prompt("Citation: " + citationDescripion, "[url=" + citationLink + "][b]" + citationText + "[/b][/url]");
