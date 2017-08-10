@@ -246,7 +246,8 @@ function savePMChanges() {
             { 'PMChangesSalutationEnable': $("#PMChangesSalutation").is(':checked') },
             { 'PMChangesSalutationText': $("#PMChangesSalutationText").val() },
             { 'PMChangesSignatureEnable': $("#PMChangesSignature").is(':checked') },
-            { 'PMChangesSignatureText': $("#PMChangesSignatureText").val() }]
+            { 'PMChangesSignatureText': $("#PMChangesSignatureText").val() },
+            { 'PMChangesTrackingLinksEnable': $("#PMChangesTrackingLinks").is(':checked') }]
     }, function () {
         // Save Confirmation
     });
@@ -267,6 +268,8 @@ function loadPMChanges() {
                         case "PMChangesSignatureEnable": $("#PMChangesSignature").prop('checked', value);
                             break;
                         case "PMChangesSignatureText": $("#PMChangesSignatureText").val(value);
+                            break;
+                        case "PMChangesTrackingLinksEnable": $("#PMChangesTrackingLinks").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }

@@ -1,10 +1,10 @@
 var debug = false;
 var quoteStripping = false;
-var pMTracking = false;
 var signatureEnable = false;
 var signatureText = false;
 var salutationEnable = false;
 var salutationText = false;
+var trackingLinks = false;
 getPMChanges();
 
 // Set vars equal to saved settings
@@ -17,8 +17,6 @@ function getPMChanges() {
                         switch (key) {
                             case "PMChangesQuoteStripping": if (value) { quoteStripping = value }
                                 break;
-                            //case "PMChangesPMTracking": if (value) { pMTracking = value }
-                                //    break;
                             case "PMChangesSalutationEnable": if (value) { salutationEnable = value }
                                 break;
                             case "PMChangesSalutationText": if (salutationEnable) { salutationText = value }
@@ -26,6 +24,8 @@ function getPMChanges() {
                             case "PMChangesSignatureEnable": if (value) { signatureEnable = value }
                                 break;
                             case "PMChangesSignatureText": if (signatureEnable) { signatureText = value }
+                                break;
+                            case "PMChangesTrackingLinksEnable": if (value) { trackingLinks = value }
                                 break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
@@ -39,9 +39,15 @@ function getPMChanges() {
     });
 }
 function injectPMChanges() {
-    if (quoteStripping) { stripQuotes() }
-    if (signatureEnable) { pmSignature() }
-    if (salutationEnable) { pmSalutation() }
+    if (location.href.includes("/private.php?action=send")) {
+        if (quoteStripping) { stripQuotes() }
+        if (signatureEnable) { pmSignature() }
+        if (salutationEnable) { pmSalutation() }
+    }
+    else if (location.href.includes("/private.php?action=tracking")) {
+        console.log(trackingLinks);
+        if (trackingLinks) { messageTracking() }
+    }
 }
 
 function stripQuotes() {
@@ -107,6 +113,30 @@ function pmSignature() {
 
 function pmSalutation() {
     //
+}
+
+function messageTracking() {
+    // Read tbody
+    var readTable = getTrackingTableBody('Read Messages');
+    trackingTableLinks(readTable);
+    // Unread tbody
+    var unreadTable = getTrackingTableBody('Unread Messages');
+    trackingTableLinks(unreadTable);
+}
+
+function trackingTableLinks(table) {
+    table.find("tr").each(function (index) {
+        var messageID;
+        if ($(this).find(".checkbox").attr("name") !== undefined) {
+            $(this).find("td:eq(1)").html('<a href="https://hackforums.net/private.php?action=read&pmid=' +
+                                          (parseInt($(this).find(".checkbox").attr("name").replace(/\D/g, '')) + 1) + '">' +
+                                          $(this).find("td:eq(1)").text() + '</a>');
+        }
+    });
+}
+
+function getTrackingTableBody(string) {
+    return $(".quick_keys").find("strong:contains('" + string + "')").parent().parent().parent();
 }
 
 // ------------------------------ Functions ------------------------------
