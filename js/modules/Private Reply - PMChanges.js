@@ -1,9 +1,9 @@
 var debug = false;
 var quoteStripping = false;
 var signatureEnable = false;
-var signatureText = false;
+var signatureText = "";
 var salutationEnable = false;
-var salutationText = false;
+var salutationText = "";
 var trackingLinks = false;
 getPMChanges();
 
@@ -40,9 +40,9 @@ function getPMChanges() {
 }
 function injectPMChanges() {
     if (location.href.includes("/private.php?action=send")) {
-        if (quoteStripping) { stripQuotes() }
-        if (signatureEnable) { pmSignature() }
         if (salutationEnable) { pmSalutation() }
+        if (signatureEnable) { pmSignature() }
+        if (quoteStripping) { stripQuotes() }
     }
     else if (location.href.includes("/private.php?action=tracking")) {
         console.log(trackingLinks);
@@ -112,7 +112,30 @@ function pmSignature() {
 }
 
 function pmSalutation() {
-    //
+    var salText = salutationText + "\n\n";
+    // Append option for salutation
+    $(".tborder tr:last td:last span")
+        .append($('<input>').attr({ type: 'checkbox', name: 'options[enableSalutation]', id: 'showSalutation' })
+            .addClass("checkbox enableSalutation").prop('checked', true))
+        .append($("<strong>").text("PM Salutation: "))
+        .append($('<label>').text("add predefined text to the beginning of your PMs.")
+        .append("<br>"));
+    // Add Salutation
+    $("#message_new").val(salutationText + "\n\n" + $("#message_new").val());
+    // Onclick Event
+    $('.enableSalutation').on("click", function () {
+        if ($(this).is(':checked')) {
+            // get value & add it to message body
+            $("#message_new").val(salutationText + "\n\n" + $("#message_new").val());
+        }
+        else {
+            // Remove if it exists
+            var tempSal = $("#message_new").val();
+            if (tempSal.includes(salutationText)) {
+                $("#message_new").val(tempSal.replace(salText, ""));
+            }
+        }
+    });
 }
 
 function messageTracking() {

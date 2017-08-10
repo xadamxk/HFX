@@ -82,6 +82,7 @@
       "matches": [
         "*://hackforums.net/private.php?action=send&pmid=*",
         "*://hackforums.net/private.php?action=send&uid=*",
+        "*://hackforums.net/private.php?action=send",
         "*://hackforums.net/private.php?action=tracking"
       ],
       "js": [
