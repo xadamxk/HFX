@@ -180,7 +180,7 @@ function loadGlobalChanges() {
 
 function saveQuickRepChanges() {
     chrome.storage.sync.set({
-        ForumChanges:
+        QuickRepChanges:
             [{ 'QuickRepEnabled': $("#QuickRep").is(':checked') }]
     }, function () {
         // Save Confirmation

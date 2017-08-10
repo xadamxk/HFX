@@ -53,7 +53,9 @@ function injectQuickRep() {
         var postMessage = tsButton.parents("table.tborder");
         // Grab UID & create button
         uidArray[index] = parseInt(tsButton.attr("href").split("uid=")[1]);
-        tsButton.parent().append($("<a>").text(repButtonLabel).attr("id", "repButton" + index).attr("href", "#").addClass("bitButton"));
+        tsButton.parent().append($("<a>").text(repButtonLabel).attr("id", "repButton" + index).css("margin-right","5px").attr("href", "#").addClass("bitButton"));
+
+
         // Standard Quick Rep
         if (basicQuickRep)
             $("body").on("click", "#repButton" + index, function () { MyBB.reputation(uidArray[index]); });
@@ -61,6 +63,11 @@ function injectQuickRep() {
         else {
             $("body").on("click", "#repButton" + index, function (e) {
                 e.preventDefault();
+                // Rep Row Exists
+                if (!$("#repContainerRow").length < 1) {
+                    $("#repContainerRow").remove();
+                    return;
+                }
                 // ajax call on button click
                 $.ajax({
                     url: "https://hackforums.net/reputation.php?action=add&uid=" + uidArray[index],
@@ -119,7 +126,7 @@ function injectQuickRep() {
                             my_repOptions = $(response).find('[name=reputation]').children();
                             // Comments
                             my_comments = $(response).find('[name=comments]').val();
-                            if (debug) {
+                            if (true) {
                                 console.log("my_key: " + my_key);
                                 console.log("my_uid: " + my_uid);
                                 console.log("my_pid: " + my_pid);
@@ -132,10 +139,13 @@ function injectQuickRep() {
                         }
                         // Shouldn't run if error, but just incase...
                         if (!errorFound) {
-                            // Textbox doesn't exist yet
-                            if ($(postMessage).find('[id=repComment' + index + ']').length === 0) {
+                            // Rep Row Doesn't Exist
+                            if ($("#repContainerRow").length < 1) {
+                                // Append Rep Container
+                                $(postMessage).find("#repButton" + index).parent().parent().parent().after($("<tr>").attr("id", "repContainerRow"));
+                                $("#repContainerRow").append("<td>");
                                 // Append rep reasoning textbox
-                                $(postMessage).find("#repButton" + index).after($("<input type='text'>").attr("id", "repComment" + index).val(my_comments)
+                                $("#repContainerRow > td").append($("<input type='text'>").attr("id", "repComment" + index).val(my_comments)
                                                                               .css("padding", "3px 6px")
                                                                               .css("text-shadow", "1px 1px 0px #000;")
                                                                               .css("background-color", "#072948")
@@ -149,15 +159,9 @@ function injectQuickRep() {
                                                                               .css("margin", "5px")
                                                                               .css("color", "black")
                                                                              ); //.css("", "")
-                            }
-                                // Textbox already exists
-                            else
-                                $(postMessage).find("#repComment" + index).remove();
-
-                            // Selectbox doesn't exist
-                            if ($(postMessage).find('[id=repSelect' + index + ']').length === 0) {
+                                // Selectbox
                                 // Append Rep selection
-                                $(postMessage).find("#repComment" + index).after($("<select>").attr("id", "repSelect" + index).css("margin-right", "5px").addClass("button"));
+                                $("#repContainerRow > td").append($("<select>").attr("id", "repSelect" + index).css("margin-right", "5px").addClass("button"));
                                 // Out of reps - rep queue
                                 if (queueRep) {
                                     // Append rep options based on primary usergroup
@@ -203,18 +207,12 @@ function injectQuickRep() {
                                     // Set selected index
                                     $("#repSelect" + index)[0].selectedIndex = repIndex;
                                 }
-                            }
-                                // Selectbox already exists
-                            else
-                                $(postMessage).find("#repSelect" + index).remove();
-
-                            // Post button doesn't exist
-                            if ($(postMessage).find('[id=repPost' + index + ']').length === 0) {
+                                // Rep Button
                                 // Append Rep User button
                                 var repUserStr = "Rep User";
                                 if (queueRep)
                                     repUserStr = "Queue Rep";
-                                $(postMessage).find("#repSelect" + index).after($("<button>").text(repUserStr).attr("id", "repPost" + index).addClass("button"));
+                                $("#repContainerRow > td").append($("<button>").text(repUserStr).attr("id", "repPost" + index).addClass("button"));
                                 // Click event for button
                                 $("body").on("click", "#repPost" + index, function () {
                                     // Check if PM or thread
@@ -268,7 +266,8 @@ function injectQuickRep() {
                                         // Input over 10 chars
                                     else {
                                         // Queue Rep - Custom
-                                        if (queueRep) {
+                                        // TODO: Change statement to this to implement queueRep
+                                        if (false) {
                                             var newComment = $("#repComment" + index).val();
                                             // If rep reasoning contains '|' seperator, remove all
                                             newComment = $("#repComment" + index).val();
@@ -289,16 +288,15 @@ function injectQuickRep() {
                                         }
                                         else {
                                             // Make $.Post Request
-                                            giveRep(index, next_loc, $("#repSelect" + index + " option:selected").text(), $("#repSelect" + index + " option:selected").val(), $("#repComment" + index).val());
+                                            giveRep(index, next_loc, $("#repSelect" + index + " option:selected").text(),
+                                                $("#repSelect" + index + " option:selected").val(), $("#repComment" + index).val(),
+                                                my_key, my_uid, my_pid, my_rid);
                                         }
                                         // Remove rep elements
                                         hideRepElements(postMessage, index);
                                     }
                                 });
                             }
-                                // Post button already exists
-                            else
-                                $(postMessage).find("#repPost" + index).remove();
                         } // no errors
                     }// success
                 }); // ajax
@@ -307,7 +305,7 @@ function injectQuickRep() {
     }); // each post
 }
 // $.Post Reputation call
-function giveRep(index, loc, selectTxt, selectVal, reason) {
+function giveRep(index, loc, selectTxt, selectVal, reason, my_key, my_uid, my_pid, my_rid) {
     //window.alert(loc +','+selectTxt+','+selectVal+','+reason);
     $.post("/reputation.php",
            {

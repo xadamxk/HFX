@@ -6,3 +6,18 @@ body{
 .panel{
     width: 400px;
 }
+
+.label-hallow-green{
+    background-color: #ffffff;
+    border-color: #b2d8b9;
+    color: #14892c;
+}
+
+.label-hallow-gray{
+    background-color: #ffffff;
+    border-color: #e4e8ed;
+    color: #4a6785;
+}
+.label-hallow-red{
+
+}
