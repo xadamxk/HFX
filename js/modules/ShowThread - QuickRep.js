@@ -143,7 +143,7 @@ function injectQuickRep() {
                             if ($("#repContainerRow").length < 1) {
                                 // Append Rep Container
                                 $(postMessage).find("#repButton" + index).parent().parent().parent().after($("<tr>").attr("id", "repContainerRow"));
-                                $("#repContainerRow").append("<td>");
+                                $("#repContainerRow").append("<td>").addClass("trow1");
                                 // Append rep reasoning textbox
                                 $("#repContainerRow > td").append($("<input type='text'>").attr("id", "repComment" + index).val(my_comments)
                                                                               .css("padding", "3px 6px")
@@ -257,7 +257,8 @@ function injectQuickRep() {
                                             giveRep(index, next_loc, $("#repSelect" + index + " option:selected").text(), $("#repSelect" + index + " option:selected").val(), default_comment);
                                         }
                                         // Remove rep elements
-                                        hideRepElements(postMessage, index);
+                                        //hideRepElements(postMessage, index);
+                                        $("#repContainerRow").remove();
                                     }
                                         // Custom comment but too short
                                     else if ($("#repComment" + index).val().length < 11 && $("#repComment" + index).val().length > 0)
@@ -293,7 +294,8 @@ function injectQuickRep() {
                                                 my_key, my_uid, my_pid, my_rid);
                                         }
                                         // Remove rep elements
-                                        hideRepElements(postMessage, index);
+                                        //hideRepElements(postMessage, index);
+                                        $("#repContainerRow").remove();
                                     }
                                 });
                             }
