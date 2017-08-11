@@ -244,7 +244,7 @@ function savePMChanges() {
         PMChanges:
             [{ 'PMChangesQuoteStripping': $("#PMChangesQuoteStripping").is(':checked') },
             { 'PMChangesSalutationEnable': $("#PMChangesSalutation").is(':checked') },
-            { 'PMChangesSalutationText': $("#PMChangesSalutationText").val() },
+            { 'PMChangesSalutationText': $("#PMChangesSalutationText").val()+"\n\n" },
             { 'PMChangesSignatureEnable': $("#PMChangesSignature").is(':checked') },
             { 'PMChangesSignatureText': $("#PMChangesSignatureText").val() },
             { 'PMChangesTrackingLinksEnable': $("#PMChangesTrackingLinks").is(':checked') }]

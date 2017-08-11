@@ -167,37 +167,44 @@ function enablePostOptions() {
                 postLink = $(this).attr("href");
             });
             // HTML for PM Popup
-            var formaction = '<div id="HFXPMFromPost' + index + '" style="display:none;"><form action="private.php" ' +
+            var formaction = '<div id="HFXPMFromPost' + index + '" class="HFXPMFromPostDiv" style="display:none;"><form action="private.php" ' +
                 'method="post" name="input" target="_blank"><input type="hidden" name="action" value="do_send" />';
             var formpmid = '<input type="hidden" name="pmid" value="" />';
             var formdo = '<input type="hidden" name="do" value="" />';
             var formicon = '<input type="hidden" name="icon" value="" />';
             var formmy_post_key = '<input type="hidden" name="my_post_key" value="' + myPostKey + '" />';
             var formuid = '<input type="hidden" name="uid" value="' + usernameName + '" />';
-            var formto = '<strong>Recipients: </strong><input type="text" class="textbox" name="to" id="to" ' +
+            var formto = '<div align="center"><strong>Recipients: </strong><input type="text" class="textbox" name="to" id="to" ' +
                 ' tabindex="3" value="' + usernameName + '" readonly />';
-            var formsubject = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Subject:</strong><input type="text" class="textbox" ' +
+            var formsubject = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Subject: </strong><input type="text" class="textbox" ' +
                 ' name="subject" size="40" maxlength="85" tabindex="3" value="Regarding Your Post: ' + threadTitle + '"/><br />';
             var formsend = '<input type="submit" class="button" name="submit" value="Send Message" tabindex="9" accesskey="s" />' +
                 '<input type="submit" class="button" name="saveasdraft" value="Save as Draft" tabindex="10" />' +
                 '<input type="submit" class="button" name="preview" value="Preview" tabindex="11" />';
-            var formmessage = '<textarea name="message" rows="7" cols="90" tabindex="3">' +
+            var formmessage = '<textarea name="message" rows="7" cols="90" tabindex="3" style="resize:vertical">' +
                 '[size=x-small]Sent from [url=https://www.hackforums.net/' + postLink + ']your post[/url]. [/size]' +
                 '[quote="' + usernameName + '"]' + postBody.text().replace(/\t+/g, "").replace(/\n\s*\n/g, '\n') + '[/quote]' +
-                '</textarea><br />';
+                '</textarea></div><br />';
             var formchecks = '<div align="center"><input type="checkbox" class="checkbox" name="options[signature]" value="1" tabindex="5" checked="checked" />' +
                 'Signature - <input type="checkbox" class="checkbox" name="options[savecopy]" value="1" tabindex="7" checked="checked" />' +
                 'Save a Copy - <input type="checkbox" class="checkbox" name="options[readreceipt]" value="1" tabindex="8" checked="checked" />Request Read Receipt</div><br />';
             var formsend = '<div align="center"><input type="submit" class="button PMFromPostButton" name="submit" value="Send Message" tabindex="9" accesskey="s" />' +
                 '<input type="submit" class="button PMFromPostButton" name="saveasdraft" value="Save as Draft" tabindex="10" />' +
                 '<input type="submit" class="button PMFromPostButton" name="preview" value="Preview" tabindex="11" /></div><br />';
-            var spacing ='<br /><br />';
-            var finalform = formaction + formpmid + formdo + formicon + formmy_post_key + formuid + formto + formsubject +
-                formmessage + formchecks + formsend + spacing + '</form></div>';
+            var spacing ='<br />';
+            var finalform = formaction + formpmid + formdo + formicon + formmy_post_key + formuid +
+                spacing + formto + formsubject + spacing +
+                formmessage + formchecks + formsend + '</form></div>';
             // CSS for PostFromPM Buttons
-            //$(".PMFromPostButton").css({ "margin-right": "5px" });
-            // Append PostFromPM Popup
-            $(this).find(".HFXPMFromPost").before(finalform);
+            $(".PMFromPostButton").css({ "margin-right": "5px" });
+            // Append PostFromPM Popup - used to append under signature
+            //$(this).find(".HFXPMFromPost").before(finalform);
+            // CSS to highlight message popup
+            $(".HFXPMFromPostDiv").css({ "background-color": "#3f3e3e" }); // 737272
+            // Append to new row
+            $(this).find("tbody:eq(0)").append($("<tr>").attr("id", "pmContainerRow" + index));
+            $("#pmContainerRow" + index).append("<td>").addClass("trow1");
+            $("#pmContainerRow" + index + " > td").append(finalform);
 
         }
         // Fullscreen Youtube

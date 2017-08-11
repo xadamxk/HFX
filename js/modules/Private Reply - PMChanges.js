@@ -40,12 +40,11 @@ function getPMChanges() {
 }
 function injectPMChanges() {
     if (location.href.includes("/private.php?action=send")) {
+        if (quoteStripping) { stripQuotes() }
         if (salutationEnable) { pmSalutation() }
         if (signatureEnable) { pmSignature() }
-        if (quoteStripping) { stripQuotes() }
     }
     else if (location.href.includes("/private.php?action=tracking")) {
-        console.log(trackingLinks);
         if (trackingLinks) { messageTracking() }
     }
 }
@@ -59,11 +58,11 @@ function stripQuotes() {
     replace = textarea.val().replace(/^(\[quote=(?:(?!\[quote=)[\s\S]*?))\[quote=[\s\S]+\[\/quote\]\s*([\s\S]+?\[\/quote\]\s*)$/g, "$1$2\n\n");
     textarea.val(replace);
     $(".tborder tr:last td:last span")
-        .append($('<input>').attr({ type: 'checkbox', name: 'options[loadMessage]' }).addClass("checkbox loadMessage").prop('checked', true))
+        .append($('<input>').attr({ type: 'checkbox', name: 'options[loadMessage]', id: 'quoteStrip' }).addClass("checkbox loadMessage pmTextChange").prop('checked', true))
         .append($("<strong>").text("Strip Quotes: "))
         .append($('<label>').text("remove all quotes but the last.")
         .append("<br>"));
-    $('.loadMessage').on("click", function () {
+    $('#quoteStrip').on("click", function () {
         if ($(this).is(':checked')) {
             textarea.val(replace);
         }
@@ -84,7 +83,7 @@ function pmSignature() {
     //console.log(sigStr);
     // Append option for signature
     $(".tborder tr:last td:last span")
-        .append($('<input>').attr({ type: 'checkbox', name: 'options[enableSignature]', id: 'showSignature' }).addClass("checkbox enableSignature").prop('checked', true))
+        .append($('<input>').attr({ type: 'checkbox', name: 'options[enableSignature]', id: 'showSignature' }).addClass("checkbox enableSignature pmTextChange").prop('checked', true))
         .append($("<strong>").text("PM Signature: "))
         .append($('<label>').text("add predefined text to the end of your PMs.")
         .append("<br>"));
@@ -93,8 +92,8 @@ function pmSignature() {
     // Add Signature by default
     $("#message_new").val($("#message_new").val() + "\n" + sigStr);
     // Onclick Event
-    $('.enableSignature').on("click", function () {
-        if ($(this).is(':checked')) {
+    $('#showSignature').on("click", function () {
+        if ($("#showSignature").is(':checked')) {
             // get value & add it to message body
             $("#message_new").val($("#message_new").val() + "\n" + sigStr);
         }
@@ -109,22 +108,25 @@ function pmSignature() {
             }
         }
     });
+    // Update to fix bugs
+    $('.pmTextChange').on("click", function () {
+        console.log($(this).attr("id"));
+    });
 }
 
 function pmSalutation() {
-    var salText = salutationText + "\n\n";
     // Append option for salutation
     $(".tborder tr:last td:last span")
         .append($('<input>').attr({ type: 'checkbox', name: 'options[enableSalutation]', id: 'showSalutation' })
-            .addClass("checkbox enableSalutation").prop('checked', true))
+            .addClass("checkbox enableSalutation pmTextChange").prop('checked', true))
         .append($("<strong>").text("PM Salutation: "))
         .append($('<label>').text("add predefined text to the beginning of your PMs.")
         .append("<br>"));
     // Add Salutation
     $("#message_new").val(salutationText + "\n\n" + $("#message_new").val());
     // Onclick Event
-    $('.enableSalutation').on("click", function () {
-        if ($(this).is(':checked')) {
+    $('#showSalutation').on("click", function () {
+        if ($("#showSalutation").is(':checked')) {
             // get value & add it to message body
             $("#message_new").val(salutationText + "\n\n" + $("#message_new").val());
         }
@@ -132,7 +134,7 @@ function pmSalutation() {
             // Remove if it exists
             var tempSal = $("#message_new").val();
             if (tempSal.includes(salutationText)) {
-                $("#message_new").val(tempSal.replace(salText, ""));
+                $("#message_new").val(tempSal.replace(salutationText, ""));
             }
         }
     });
@@ -167,3 +169,16 @@ String.prototype.replaceAll = function (search, replacement) {
     var target = this;
     return target.split(search).join(replacement);
 };
+
+function updatePMText(elementID) {
+    switch (elementID) {
+        case "quoteStrip": {
+            // TODO: Use global variables for strings
+        }
+            break;
+        case "showSalutation": "";
+            break;
+        case "showSignature": "";
+            break;
+    }
+}

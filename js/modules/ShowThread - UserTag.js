@@ -86,8 +86,8 @@ function scanUserTag() {
     // Check memory for queued tag
     chrome.storage.local.get(["UserTagNameList", "UserTagThreadTitle"], function (result) {
         // Exit if keys not found
-        if ((result.UserTagNameList === undefined || result.UserTagThreadTitle === undefined) & debug) {
-            console.log("UserTagging: No previous data.");
+        if (result.UserTagNameList === undefined || result.UserTagThreadTitle === undefined) {
+            if (debug) { console.log("UserTagging: No previous data.") }
             return;
         }
         // Get most recent post link

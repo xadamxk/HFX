@@ -126,7 +126,7 @@ function injectQuickRep() {
                             my_repOptions = $(response).find('[name=reputation]').children();
                             // Comments
                             my_comments = $(response).find('[name=comments]').val();
-                            if (true) {
+                            if (debug) {
                                 console.log("my_key: " + my_key);
                                 console.log("my_uid: " + my_uid);
                                 console.log("my_pid: " + my_pid);
