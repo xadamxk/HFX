@@ -151,7 +151,26 @@ function saveGlobalChanges() {
         GlobalChanges:
             [{ 'GlobalChangesHideLocationEnabled': $("#HideLocation").is(':checked') },
             { 'GlobalChangesDenyPMReceiptEnabled': $("#PMChangesDenyPMReceipt").is(':checked') },
-            { 'GlobalChangesEasyCiteEnabled': $("#GlobalChangesEasyCite").is(':checked') }]
+            { 'GlobalChangesEasyCiteEnabled': $("#GlobalChangesEasyCite").is(':checked') },
+            { 'GlobalChangesHFTBEnabled': $("#GlobalChangesHFTBEnabled").is(':checked') },
+            { 'GlobalChangesHFTBStickyEnabled': $("#GlobalChangesHFTBStickyEnabled").is(':checked') },
+            // Fav Text/Links
+            { 'GlobalChangesHFTBFav1Text': $("#GlobalChangesHFTBFav1Text").val() },
+            { 'GlobalChangesHFTBFav1Link': $("#GlobalChangesHFTBFav1Link").val() },
+            { 'GlobalChangesHFTBFav2Text': $("#GlobalChangesHFTBFav2Text").val() },
+            { 'GlobalChangesHFTBFav2Link': $("#GlobalChangesHFTBFav2Link").val() },
+            { 'GlobalChangesHFTBFav3Text': $("#GlobalChangesHFTBFav3Text").val() },
+            { 'GlobalChangesHFTBFav3Link': $("#GlobalChangesHFTBFav3Link").val() },
+            { 'GlobalChangesHFTBFav4Text': $("#GlobalChangesHFTBFav4Text").val() },
+            { 'GlobalChangesHFTBFav4Link': $("#GlobalChangesHFTBFav4Link").val() },
+            { 'GlobalChangesHFTBFav5Text': $("#GlobalChangesHFTBFav5Text").val() },
+            { 'GlobalChangesHFTBFav5Link': $("#GlobalChangesHFTBFav5Link").val() },
+            { 'GlobalChangesHFTBFav6Text': $("#GlobalChangesHFTBFav6Text").val() },
+            { 'GlobalChangesHFTBFav6Link': $("#GlobalChangesHFTBFav6Link").val() },
+            { 'GlobalChangesHFTBFav7Text': $("#GlobalChangesHFTBFav7Text").val() },
+            { 'GlobalChangesHFTBFav7Link': $("#GlobalChangesHFTBFav7Link").val() },
+            ]
+        // { '': $("#").val() }
     }, function () {
         // Save Confirmation
     });
@@ -169,7 +188,43 @@ function loadGlobalChanges() {
                             break;
                         case "GlobalChangesEasyCiteEnabled": $("#GlobalChangesEasyCite").prop('checked', value);
                             break;
+                        case "GlobalChangesHFTBEnabled": $("#GlobalChangesHFTBEnabled").prop('checked', value);
+                            break;
+                        case "GlobalChangesHFTBStickyEnabled": $("#GlobalChangesHFTBStickyEnabled").prop('checked', value);
+                            break;
+                        case "GlobalChangesHFTBFav1Text": $("#GlobalChangesHFTBFav1Text").val(value);
+                            break;
+                        case "GlobalChangesHFTBFav1Link": $("#GlobalChangesHFTBFav1Link").val(value);
+                            break;
+                        case "GlobalChangesHFTBFav2Text": $("#GlobalChangesHFTBFav2Text").val(value);
+                            break;
+                        case "GlobalChangesHFTBFav2Link": $("#GlobalChangesHFTBFav2Link").val(value);
+                            break;
+                        case "GlobalChangesHFTBFav3Text": $("#GlobalChangesHFTBFav3Text").val(value);
+                            break;
+                        case "GlobalChangesHFTBFav3Link": $("#GlobalChangesHFTBFav3Link").val(value);
+                            break;
+                        case "GlobalChangesHFTBFav4Text": $("#GlobalChangesHFTBFav4Text").val(value);
+                            break;
+                        case "GlobalChangesHFTBFav4Link": $("#GlobalChangesHFTBFav4Link").val(value);
+                            break;
+                        case "GlobalChangesHFTBFav5Text": $("#GlobalChangesHFTBFav5Text").val(value);
+                            break;
+                        case "GlobalChangesHFTBFav5Link": $("#GlobalChangesHFTBFav5Link").val(value);
+                            break;
+                        case "GlobalChangesHFTBFav6Text": $("#GlobalChangesHFTBFav6Text").val(value);
+                            break;
+                        case "GlobalChangesHFTBFav6Link": $("#GlobalChangesHFTBFav6Link").val(value);
+                            break;
+                        case "GlobalChangesHFTBFav7Text": $("#GlobalChangesHFTBFav7Text").val(value);
+                            break;
+                        case "GlobalChangesHFTBFav7Link": $("#GlobalChangesHFTBFav7Link").val(value);
+                            break;
                         default: console.log("ERROR: Key not found.");
+                            /*
+                            case "": $("#").val(value);
+                            break;
+                            */
                     }
                 })
             })
