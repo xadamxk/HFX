@@ -94,7 +94,7 @@ function injectEasyCite() {
             citationText = +citationDescripion;
     }
         // Threads
-    else if (location.href.includes("/showthread.php?tid=")) {
+    else if (location.href.includes("/showthread.php?tid=") | location.href.includes("/showthread.php?pid=")) {
         // Thread - not first post
         if (location.href.includes("&pid=")) {
             citationLink = location.href.substring(0, location.href.indexOf("&pid="));

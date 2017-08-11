@@ -40,7 +40,8 @@
     {
       "run_at": "document_end",
       "matches": [
-        "*://hackforums.net/showthread.php?tid=*"
+        "*://hackforums.net/showthread.php?tid=*",
+        "*://hackforums.net/showthread.php?pid=*"
       ],
       "js": [
         "js/dependencies/jquery-3.2.1.js",
@@ -106,6 +107,7 @@
       "run_at": "document_end",
       "matches": [
         "*://hackforums.net/showthread.php?tid=*",
+        "*://hackforums.net/showthread.php?pid=*",
         "*://hackforums.net/private.php?action=read&pmid=*"
       ],
       "js": [
