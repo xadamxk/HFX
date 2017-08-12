@@ -1,4 +1,4 @@
-var debug = false;
+﻿var debug = false;
 var enableHideLocation = false;
 var enableDenyPMReceipt = false;
 var enableEasyCite = false;
@@ -31,6 +31,7 @@ var noteBubbleCSS = {
     "font-weight": "bold",
     "cursor": "pointer"
 };
+var addNewPosts = false;
 getGlobalSettings();
 
 // Set vars equal to saved settings
@@ -81,6 +82,8 @@ function getGlobalSettings() {
                                 break;
                             case "GlobalChangesUserNotes": if (value) { enableUserNote = value; }
                                 break;
+                            case "GlobalChangesNewPostLinks": if (value) { addNewPosts = value; }
+                                break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
                         }
@@ -110,7 +113,31 @@ function injectGlobalChanges() {
         injectUserNote();
         //setUserNote("");
     }
+    if (addNewPosts) {
+        injectNewPosts();
+    }
 
+}
+
+function injectNewPosts() {
+    // Search
+    if (location.href.includes("/search.php")) {
+        if ($("td span strong a:contains('Post')").html().length == 4) {
+            // Add New Post Links
+            $("img[src*='folder'][src*='new']").each(function (i) {
+                var $current = $(this).parent().next().next().children().first();
+                $current.prepend('<a href="showthread.php?tid=' + $current.html().match(/tid\=(\d*)/)[1] +
+                    '&amp;action=newpost" title="Go to first unread post" class="quick_jump">&#9658;</a>');
+            });
+        }
+    }
+    // Main Page
+    else if (location.href.includes("/index.php") || document.title == "Hack Forums") {
+        $("a[href*='action=lastpost']").each(function (i) {
+            $(this).before('<a href="showthread.php?tid=' + $(this).attr('href').match(/tid\=(\d*)/)[1] +
+                '&amp;action=newpost" title="Go to first unread post" class="quick_jump">&#9658;</a>&nbsp;');
+        });
+    }
 }
 
 function injectUserNote() {
