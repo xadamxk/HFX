@@ -329,10 +329,7 @@ function injectHFTB() {
     // Stick toolbar
     stickStickyHeader();
     // Buddy event listener 
-    $("#leftSticky a:eq(1)").click(function () {
-        // Method
-        showBuddyContainer();
-    });
+    //$("#leftSticky a:eq(1)").click(function () {showBuddyContainer();});
     // Settings event listener
     $("#leftSticky a:eq(4)").click(function () {
         $("#settingsleftSticky").css("color", "#1EF1EA");
@@ -361,11 +358,17 @@ function createStickyHeader() {
     $("#leftSticky").append($("<a>").attr("href", hftbHomeLink).attr("onClick", "").attr("title", "Home")
                             .append($("<i>").attr("id", "homeLeftSticky").addClass("fa fa-home fa-lg")));
     // Buddies
-    $("#leftSticky").append($("<a>").attr("href", "#Buddies").attr("onclick", "")
-                            .append($("<i>").attr("id", "buddiesLeftSticky").addClass("fa fa-users")));
+    //$("#leftSticky").append($("<a>").attr("href", "#Buddies").attr("onclick", "").append($("<i>").attr("id", "buddiesLeftSticky").addClass("fa fa-users")));
     // Note
-    $("#leftSticky").append($("<a>").attr("href", "#QuickNote").attr("onClick", "")
-                            .append($("<i>").attr("id", "savedLeftSticky").addClass("fa fa-sticky-note")));
+    //$("#leftSticky").append($("<a>").attr("href", "#QuickNote").attr("onClick", "").append($("<i>").attr("id", "savedLeftSticky").addClass("fa fa-sticky-note")));
+    // Top
+    $("#leftSticky").append($("<a>")
+        .append($($("<i>").addClass("fa fa-arrow-up")))
+        .attr("href", "#top").attr("onClick", ""));
+    // Bottom
+    $("#leftSticky").append($("<a>")
+        .append($($("<i>").addClass("fa fa-arrow-down")))
+        .attr("href", "#copyright").attr("onClick", ""));
     // New PM
     var shortcut4NewPM = false;
     var shortcut4Text = "PM Inbox";
