@@ -83,6 +83,9 @@ function onlineSorting() {
                 if (members[i].className == "group7") {
                     groupName = "Banned";
                 }
+                if (members[i].className == "group36") {
+                    groupName = "Custom Groups";
+                }
                 groupBox[groupName].appendChild(name);
                 groupBox[groupName].appendChild(sep);
             }
