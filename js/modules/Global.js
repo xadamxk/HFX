@@ -36,7 +36,7 @@ getGlobalSettings();
 // Set vars equal to saved settings
 function getGlobalSettings() {
     chrome.storage.sync.get("GlobalChanges", function (data) {
-        if (!chrome.runtime.error){
+        if (!chrome.runtime.error) {
             $.each(data, function (index, data1) {
                 $.each(data1, function (index1, data2) {
                     $.each(data2, function (key, value) {
@@ -88,7 +88,7 @@ function getGlobalSettings() {
                 })
                 injectGlobalChanges();
             });
-            
+
         }
     });
 }
@@ -103,14 +103,14 @@ function injectGlobalChanges() {
     if (enableEasyCite) {
         injectEasyCite();
     }
-    if (enableHFTB){
+    if (enableHFTB) {
         injectHFTB();
     }
     if (enableUserNote) {
         injectUserNote();
         //setUserNote("");
     }
-    
+
 }
 
 function injectUserNote() {
@@ -156,7 +156,7 @@ function threadTagger() {
                     if (userNoteInfo[index][0] == uid && userNoteInfo[index][1] != '') {
                         tag = userNoteInfo[index][1];
                         matchFound = true;
-                    } 
+                    }
                 });
                 if (!matchFound) {
                     tag = "+";
@@ -170,7 +170,7 @@ function threadTagger() {
                 $("#profileTag" + indexPost).click(function () {
                     tagEditorThread(indexPost);
                 });
-                
+
             });
         }
     });
@@ -192,7 +192,7 @@ function tagEditorThread(indexPost) {
     newTag = prompt('Enter tag for user: ', newTag);
     // If null, reset label, cancel method
     if (newTag == null) {
-        $("#profileTag" + indexPost).text("+");
+        //$("#profileTag" + indexPost).text("+");
         return;
     }
     $("#posts > table").each(function (indexPost) {
@@ -216,7 +216,7 @@ function tagEditorThread(indexPost) {
     } else {
         $("#profileTag" + indexPost).text(newTag);
     }
-    
+
 }
 
 function profileTagger() {
@@ -238,8 +238,7 @@ function profileTagger() {
                 })
 
             });
-            //console.log(userNoteInfo);
-            if (userNoteInfo == null) {
+            if (userNoteInfo == null || userNoteInfo == "") {
                 var userNoteArray = [];
                 userNoteInfo = [["1306528", "HFX Developer"]];
             }
@@ -272,18 +271,21 @@ function tagEditorProfile() {
         }
     });
     newTag = prompt('Enter tag for user: ', newTag);
+    // If null, reset label, cancel method
+    if (newTag == null) {
+        //$("#profileTag").text("Click to Add Note");
+        return;
+    }
     // Save User Note - Loop through again
     $(userNoteInfo).each(function (index) {
         // Updates Exisiting
         if (userNoteInfo[index][0] == uid) {
             userNoteInfo[index][1] = newTag;
-            //setUserNote(userNoteInfo);
-            //$("#profileTag").text(newTag);
             newNameFound = false;
         }
     });
     if (newNameFound) {
-        userNoteInfo.push([ uid, newTag ]);
+        userNoteInfo.push([uid, newTag]);
     }
     setUserNote(userNoteInfo);
     if (newTag == '' || newTag == null) {
@@ -318,7 +320,7 @@ function setUserNote(userNoteInfo) {
     });
 }
 
-function injectHFTB(){
+function injectHFTB() {
     // Inject font-awesome.css (Thank you: http://www.freeformatter.com/javascript-escape.html)
     $("head").append('<link ' + "href='https:\/\/cdnjs.cloudflare.com\/ajax\/libs\/font-awesome\/4.7.0\/css\/font-awesome.css'" + 'rel="stylesheet" type="text/css">');
     $("head").append('<link ' + "href='https:\/\/cdn.rawgit.com\/xadamxk\/HF-Userscripts\/9bf86deb\/JS%20Libraries\/tinybox.css'" + 'rel="stylesheet" type="text/css">');
@@ -333,7 +335,7 @@ function injectHFTB(){
     });
     // Settings event listener
     $("#leftSticky a:eq(4)").click(function () {
-            $("#settingsleftSticky").css("color", "#1EF1EA");
+        $("#settingsleftSticky").css("color", "#1EF1EA");
         // Open Settings
     });
     // Append quick links to toolbar
