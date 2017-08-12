@@ -267,7 +267,7 @@ function profileTagger() {
             });
             if (userNoteInfo == null || userNoteInfo == "") {
                 var userNoteArray = [];
-                userNoteInfo = [["1306528", "HFX Developer"]];
+                userNoteInfo = [["1306528", "HFX Developer"], ["1", "Mr. BossMan"]];
             }
             // Loop each saved user note
             $(userNoteInfo).each(function (index) {
