@@ -177,7 +177,7 @@ function threadTagger() {
 }
 
 function tagEditorThread(indexPost) {
-    var newTag, tagNameHolder, uid, newNameFound = true;
+    var newTag = "", tagNameHolder, uid, newNameFound = true;
     $("#posts > table").each(function (matchingIndex) {
         if (indexPost == matchingIndex) {
             uid = $(this).find(".post_author > strong > span > a").attr('href').match(/\d+/)[0];
@@ -190,6 +190,11 @@ function tagEditorThread(indexPost) {
         }
     });
     newTag = prompt('Enter tag for user: ', newTag);
+    // If null, reset label, cancel method
+    if (newTag == null) {
+        $("#profileTag" + indexPost).text("+");
+        return;
+    }
     $("#posts > table").each(function (indexPost) {
         // Loop each saved user note
         $(userNoteInfo).each(function (index) {
