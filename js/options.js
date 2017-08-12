@@ -477,6 +477,8 @@ function loadRepCharts() {
                     switch (key) {
                         case "RepChartsEnable": $("#RepChartsEnable").prop('checked', value);
                             break;
+                        case "RepChartsLinksEnable": $("#RepChartsLinksEnable").prop('checked', value);
+                            break;
                         default: console.log("ERROR: Key not found.");
                     }
                 })
@@ -488,7 +490,8 @@ function loadRepCharts() {
 
 function saveRepCharts() {
     chrome.storage.sync.set({RepCharts:
-            [{ 'RepChartsEnable': $("#RepChartsEnable").is(':checked') }]
+            [{ 'RepChartsEnable': $("#RepChartsEnable").is(':checked') },
+            { 'RepChartsLinksEnable': $("#RepChartsLinksEnable").is(':checked') }]
     }, function () {
         // Save Confirmation
     });

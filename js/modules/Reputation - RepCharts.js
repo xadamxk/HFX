@@ -4,6 +4,7 @@ var posRepColor = "#32CD32"; // Default: ##32CD32
 var neuRepColor = "#666666"; // Default: #666666
 var negRepColor = "#CC3333"; // Default: #CC3333
 var enableRepChart = false;
+var enableRepLinks = false;
 enableRepCharts();
 
 // Set vars equal to saved settings
@@ -16,6 +17,8 @@ function enableRepCharts(){
                         switch (key) {
                             case "RepChartsEnable": if (value) { enableRepChart = value }
                                 break;
+                            case "RepChartsLinksEnable": if (value) { enableRepLinks = value }
+                                break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
                         }
@@ -24,9 +27,28 @@ function enableRepCharts(){
 
             });
             // Run function
-            if (enableRepChart)
-                injectRepCharts();
+            injectRepChanges();
         }
+    });
+}
+
+function injectRepChanges() {
+    if (enableRepChart) {
+        injectRepCharts();
+    }
+    if (enableRepLinks) {
+        injectRepLinks();
+    }
+}
+
+function injectRepLinks() {
+    // Credit: http://jsfiddle.net/laelitenetwork/RH8f6/
+    $('.repvotemid').each(function () {
+        var regex = /(https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.]*(\?\S+)?)?)?)/ig
+        // Replace plain text links by hyperlinks
+        var replaced_text = $(this).find("span:eq(1)").html().replace(regex, "<a href='$1' target='_blank'>$1</a>");
+        $(this).find("span:eq(1)").html(replaced_text);
+        
     });
 }
 
