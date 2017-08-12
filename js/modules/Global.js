@@ -171,7 +171,7 @@ function threadTagger() {
             });
             if (userNoteInfo == null || userNoteInfo == "") {
                 var userNoteArray = [];
-                userNoteInfo = [["1306528", "HFX Developer"]];
+                userNoteInfo = [["1306528", "HFX Developer"], ["1", "Mr. BossMan"]];
             }
             // Append Tag - Loop Through Posts
             $("#posts > table").each(function (indexPost) {
