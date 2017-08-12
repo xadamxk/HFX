@@ -169,6 +169,7 @@ function saveGlobalChanges() {
             { 'GlobalChangesHFTBFav6Link': $("#GlobalChangesHFTBFav6Link").val() },
             { 'GlobalChangesHFTBFav7Text': $("#GlobalChangesHFTBFav7Text").val() },
             { 'GlobalChangesHFTBFav7Link': $("#GlobalChangesHFTBFav7Link").val() },
+            { 'GlobalChangesUserNotes': $("#GlobalChangesUserNotes").is(':checked') }
             ]
         // { '': $("#").val() }
     }, function () {
@@ -219,6 +220,8 @@ function loadGlobalChanges() {
                         case "GlobalChangesHFTBFav7Text": $("#GlobalChangesHFTBFav7Text").val(value);
                             break;
                         case "GlobalChangesHFTBFav7Link": $("#GlobalChangesHFTBFav7Link").val(value);
+                            break;
+                        case "GlobalChangesUserNotes": $("#GlobalChangesUserNotes").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                             /*

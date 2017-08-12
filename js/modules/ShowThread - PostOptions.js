@@ -188,7 +188,7 @@ function enablePostOptions() {
             var formchecks = '<div align="center"><input type="checkbox" class="checkbox" name="options[signature]" value="1" tabindex="5" checked="checked" />' +
                 'Signature - <input type="checkbox" class="checkbox" name="options[savecopy]" value="1" tabindex="7" checked="checked" />' +
                 'Save a Copy - <input type="checkbox" class="checkbox" name="options[readreceipt]" value="1" tabindex="8" checked="checked" />Request Read Receipt</div><br />';
-            var formsend = '<div align="center"><input type="submit" class="button PMFromPostButton" name="submit" value="Send Message" tabindex="9" accesskey="s" />' +
+            var formsend = '<div align="center"><input type="submit" class="button PMFromPostButton sendQuickPM" name="submit" value="Send Message" tabindex="9" accesskey="s" />' +
                 '<input type="submit" class="button PMFromPostButton" name="saveasdraft" value="Save as Draft" tabindex="10" />' +
                 '<input type="submit" class="button PMFromPostButton" name="preview" value="Preview" tabindex="11" /></div><br />';
             var spacing ='<br />';
@@ -205,6 +205,10 @@ function enablePostOptions() {
             $(this).find("tbody:eq(0)").append($("<tr>").attr("id", "pmContainerRow" + index));
             $("#pmContainerRow" + index).append("<td>").addClass("trow1");
             $("#pmContainerRow" + index + " > td").append(finalform);
+            // Event Listener on send
+            $(".sendQuickPM").click(function () {
+                $("#pmContainerRow" + index).hide();
+            });
 
         }
         // Fullscreen Youtube

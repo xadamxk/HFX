@@ -2,6 +2,7 @@ var debug = false;
 var enableHideLocation = false;
 var enableDenyPMReceipt = false;
 var enableEasyCite = false;
+var enableUserNote = false;
 var enableHFTB = false;
 var stickToolbar = false;
 var hftbHomeLink = "https://hackforums.net/usercp.php";
@@ -19,6 +20,17 @@ var hftbFav6Text = "";
 var hftbFav6Link = "";
 var hftbFav7Text = "";
 var hftbFav7Link = "";
+var userNoteInfo;
+var noteBubbleCSS = {
+    "border-radius": "5px",
+    "border": "1px solid 888",
+    "padding": "1px 4px 2px 4px",
+    "background-color": "#ddd", // FA909E (Darker Pink) FDCBC7 (Light Pink) B6E5CB (Green) DDD (Light Gray)
+    "color": "#000000",
+    "font-size": "12px",
+    "font-weight": "bold",
+    "cursor": "pointer"
+};
 getGlobalSettings();
 
 // Set vars equal to saved settings
@@ -67,6 +79,8 @@ function getGlobalSettings() {
                                 break;
                             case "GlobalChangesHFTBFav7Link": hftbFav7Link = value;
                                 break;
+                            case "GlobalChangesUserNotes": if (value) { enableUserNote = value; }
+                                break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
                         }
@@ -92,7 +106,211 @@ function injectGlobalChanges() {
     if (enableHFTB){
         injectHFTB();
     }
+    if (enableUserNote) {
+        injectUserNote();
+        //setUserNote("");
+    }
     
+}
+
+function injectUserNote() {
+    if (location.href.includes("/member.php?action=profile&uid=")) {
+        //
+        profileTagger();
+    } else if (location.href.includes("/showthread.php?tid=") | location.href.includes("/showthread.php?pid=")) {
+        //
+        threadTagger();
+    }
+}
+
+function threadTagger() {
+    var i, authorPosts, apHolder, tagNameHolder, tagNameKeys, uid;
+    authorPosts = document.getElementsByClassName('post_author');
+    // Get List of Keys/Values
+    chrome.storage.sync.get("UserNoteStorage", function (data) {
+        if (!chrome.runtime.error) {
+            $.each(data, function (index, data1) {
+                $.each(data1, function (index1, data2) {
+                    $.each(data2, function (key, value) {
+                        switch (key) {
+                            case "UserNote": userNoteInfo = value;
+                                break;
+                            default: //console.log("ERROR: Key not found.");
+                                break;
+                        }
+                    })
+                })
+
+            });
+            if (userNoteInfo == null || userNoteInfo == "") {
+                var userNoteArray = [];
+                userNoteInfo = [["1306528", "HFX Developer"]];
+            }
+            // Append Tag - Loop Through Posts
+            $("#posts > table").each(function (indexPost) {
+                matchFound = false;
+                uid = $(this).find(".post_author > strong > span > a").attr('href').match(/\d+/)[0];
+                // Loop each saved user note
+                $(userNoteInfo).each(function (index) {
+                    //console.log(userNoteInfo[index][0] == uid && userNoteInfo[index][1] != '');
+                    if (userNoteInfo[index][0] == uid && userNoteInfo[index][1] != '') {
+                        tag = userNoteInfo[index][1];
+                        matchFound = true;
+                    } 
+                });
+                if (!matchFound) {
+                    tag = "+";
+                }
+                // Append Tag
+                $(".post_author:eq(" + indexPost + ")").find("br:eq(0)")
+                    .before("&nbsp;")
+                    .before($("<span>").text(tag).attr("id", "profileTag" + indexPost)
+                    .css(noteBubbleCSS)
+                    .addClass("tagBubbles"));
+                $("#profileTag" + indexPost).click(function () {
+                    tagEditorThread(indexPost);
+                });
+                
+            });
+        }
+    });
+}
+
+function tagEditorThread(indexPost) {
+    var newTag, tagNameHolder, uid, newNameFound = true;
+    $("#posts > table").each(function (matchingIndex) {
+        if (indexPost == matchingIndex) {
+            uid = $(this).find(".post_author > strong > span > a").attr('href').match(/\d+/)[0];
+        }
+    });
+    // Get List of Keys/Values - Loop each saved user note
+    $(userNoteInfo).each(function (index) {
+        if (userNoteInfo[index][0] == uid) {
+            newTag = userNoteInfo[index][1];
+        }
+    });
+    newTag = prompt('Enter tag for user: ', newTag);
+    $("#posts > table").each(function (indexPost) {
+        // Loop each saved user note
+        $(userNoteInfo).each(function (index) {
+            if (userNoteInfo[index][0] == uid) {
+                userNoteInfo[index][1] = newTag;
+                //setUserNote(userNoteInfo);
+                $("#profileTag:eq(" + indexPost + ")").text(newTag);
+                newNameFound = false;
+            }
+        });
+    });
+    // Save Changes
+    if (newNameFound) {
+        userNoteInfo.push([uid, newTag]);
+    }
+    setUserNote(userNoteInfo);
+    if (newTag == '' || newTag == null) {
+        $("#profileTag" + indexPost).text("+");
+    } else {
+        $("#profileTag" + indexPost).text(newTag);
+    }
+    
+}
+
+function profileTagger() {
+    var tag = 'Click to Add Note', uid, tagNameHolder;
+    uid = document.URL.split('uid=')[1];
+    // Get List of Keys/Values
+    chrome.storage.sync.get("UserNoteStorage", function (data) {
+        if (!chrome.runtime.error) {
+            $.each(data, function (index, data1) {
+                $.each(data1, function (index1, data2) {
+                    $.each(data2, function (key, value) {
+                        switch (key) {
+                            case "UserNote": userNoteInfo = value;
+                                break;
+                            default: //console.log("ERROR: Key not found.");
+                                break;
+                        }
+                    })
+                })
+
+            });
+            //console.log(userNoteInfo);
+            if (userNoteInfo == null) {
+                var userNoteArray = [];
+                userNoteInfo = [["1306528", "HFX Developer"]];
+            }
+            // Loop each saved user note
+            $(userNoteInfo).each(function (index) {
+                if (userNoteInfo[index][0] == uid && userNoteInfo[index][1] != '') {
+                    tag = userNoteInfo[index][1];
+                }
+            });
+            // Append Tag
+            $('.largetext strong span')
+                .append("&nbsp;")
+                .append($("<span>").text(tag).attr("id", "profileTag")
+                .css(noteBubbleCSS)
+                .addClass("tagBubbles"));
+            $("#profileTag").click(function () {
+                tagEditorProfile();
+            });
+        }
+    });
+}
+
+function tagEditorProfile() {
+    var newTag, tagNameHolder, uid, newNameFound = true;
+    uid = document.URL.split('uid=')[1];
+    // Get List of Keys/Values - Loop each saved user note
+    $(userNoteInfo).each(function (index) {
+        if (userNoteInfo[index][0] == uid) {
+            newTag = userNoteInfo[index][1];
+        }
+    });
+    newTag = prompt('Enter tag for user: ', newTag);
+    // Save User Note - Loop through again
+    $(userNoteInfo).each(function (index) {
+        // Updates Exisiting
+        if (userNoteInfo[index][0] == uid) {
+            userNoteInfo[index][1] = newTag;
+            //setUserNote(userNoteInfo);
+            //$("#profileTag").text(newTag);
+            newNameFound = false;
+        }
+    });
+    if (newNameFound) {
+        userNoteInfo.push([ uid, newTag ]);
+    }
+    setUserNote(userNoteInfo);
+    if (newTag == '' || newTag == null) {
+        $("#profileTag").text("Click to Add Note");
+    } else {
+        $("#profileTag").text(newTag);
+    }
+}
+
+function setUserNote(userNoteInfo) {
+    var indexesToRemove = [];
+    count = 0;
+    if (debug) { console.log(userNoteInfo) }
+    // Remove empty notes - find indexes
+    $(userNoteInfo).each(function (index) {
+        if (userNoteInfo[index][1] == "") {
+            indexesToRemove[count] = index;
+            count++;
+        }
+    });
+    // Remove empty notes - remove indexes
+    for (var i = indexesToRemove.length - 1; i >= 0; i--) {
+        userNoteInfo.splice(indexesToRemove[i], 1);
+    }
+    // Save changes
+    chrome.storage.sync.set({
+        UserNoteStorage:
+            [{ 'UserNote': userNoteInfo }]
+    }, function () {
+        // Save Confirmation
+        //console.log(userNoteInfo);
+    });
 }
 
 function injectHFTB(){
