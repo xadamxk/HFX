@@ -49,6 +49,7 @@ function injectQuickRep() {
     const repSelfResp = "You can't rep yourself dumb dumb :P";
 
     $(".bitButton[title='Trust Scan']").each(function (index, element) {
+        //errorFound = false;
         var tsButton = $(element);
         var postMessage = tsButton.parents("table.tborder");
         // Grab UID & create button
@@ -398,6 +399,7 @@ function submitRepQuest(index) {
             }
                 // Self rep
             else if (errorBlock.includes(repSelf)) {
+                errorFound = true;
                 window.alert(permError + repSelfResp);
             }
                 // Require Upgrade, Rep Disabled, Other?

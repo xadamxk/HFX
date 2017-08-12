@@ -14,7 +14,7 @@ var smartQuoteHeaderMatchTextColor = "#000000"; // (Default: #000000)
 var debug = false;
 var enableSmartQuote = false;
 // Notification Text - Username Quoted (Mention text at top of page)
-var enabmeSmartQuoteMentionCount = false;
+var enableSmartQuoteMentionCount = false;
 enableSmartQuotes();
 
 // Set vars equal to saved settings
@@ -27,7 +27,7 @@ function enableSmartQuotes() {
                         switch (key) {
                             case "SmartQuotesEnabled": if (value) { enableSmartQuote = value;}
                                 break;
-                            case "SmartQuotesMentionCount": if (value) { enabmeSmartQuoteMentionCount = value;}
+                            case "SmartQuotesMentionCount": if (value) { enableSmartQuoteMentionCount = value;}
                                 break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
@@ -83,19 +83,48 @@ function injectSmartQuotes() {
             }
         });
     }
-    if (enabmeSmartQuoteMentionCount) {
-        var mentionString = ") Mention";
+    if (enableSmartQuoteMentionCount) {
+        var mentionBubbleCSS = {
+            "display": "inline-block",
+            "padding": "3px 4px",
+            "font-size": "12px",
+            "font-weight": "600",
+            "line-height": "1",
+            "border-radius": "2px",
+            "border": "1px solid 888",
+            "color": "#000",
+            "background-color": "#FA909E"
+            // www.sessions.edu/color-calculator/
+            // FA909E (Dark Pink) 
+            // FDCBC7 (Light Pink) 
+            // B6E5CB (Green)
+            // FABE90 (Peach) 
+        };
+        var mentionString = " Mention";
         var thead = $("strong:contains(Thread Options)").parent().parent().parent();
         // Strong that contains thread title
         if (usernameCount < 1)
-            $(thead.find("strong:contains(" + thead.find("div strong").text().replace("Thread Options", "") + ")")).after($("<a>").text(" No Mentions").attr("id", "smartQuoteMentions"));
+            $(thead.find("strong:contains(" + thead.find("div strong").text().replace("Thread Options", "") + ")"))
+                .after($("<span>")
+                    .text("No Mentions")
+                    .addClass("mentionBubbles")
+                    .css(mentionBubbleCSS)
+                    .attr("id", "smartQuoteMentions"))
+                .after("&nbsp;");
         else {
             if (usernameCount > 1)
                 mentionString += "s";
-            $(thead.find("strong:contains(" + thead.find("div strong").text().replace("Thread Options", "") + ")")).after($("<a>").text(" (" + usernameCount + mentionString).attr("id", "smartQuoteMentions"));
+            $(thead.find("strong:contains(" + thead.find("div strong").text().replace("Thread Options", "") + ")"))
+                .after($("<span>")
+                    .addClass("mentionBubbles")
+                    .css(mentionBubbleCSS)
+                    .text(usernameCount + mentionString) // "(" + 
+                    .attr("id", "smartQuoteMentions"))
+                .after("&nbsp;");
         }
-        $("#smartQuoteMentions").css("color", smartQuoteNotificationColor);
+        //$("#smartQuoteMentions").css("color", smartQuoteNotificationColor);
     }
+    // Always Quote
     if ($(".quick_keys").find($("a[title='Thread Closed']")).length > 0) {
         // Append quote buttons
         $(".quick_keys").find($("a[title='Report this post to a moderator']")).each(function (index) {
