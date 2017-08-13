@@ -29,7 +29,8 @@ var noteBubbleCSS = {
     "color": "#000000",
     "font-size": "12px",
     "font-weight": "bold",
-    "cursor": "pointer"
+    "cursor": "pointer",
+    "text-shadow": "none"
 };
 var addNewPosts = false;
 getGlobalSettings();
