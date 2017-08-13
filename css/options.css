@@ -1,10 +1,33 @@
 body{
     padding: 15px;
-    width: 400px;
+    width: 1000px;
+    height: 1000px;
 }
 
 .panel{
-    width: 400px;
+    width: 650px;
+}
+
+.nav-pills{
+    width: 125px;
+    float: left;
+    padding-right: 20px;
+}
+
+.tab-content{
+    float: left;
+}
+
+.lineBreak{
+    width: 550px;
+}
+
+#bodyTag::-webkit-scrollbar {
+    width: 5px;
+    background-color: #F5F5F5;
+} 
+#bodyTag::-webkit-scrollbar-thumb {
+    background-color: #000000;
 }
 
 .label-hallow-green{
@@ -21,3 +44,4 @@ body{
 .label-hallow-red{
 
 }
+/* */

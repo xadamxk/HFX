@@ -20,8 +20,8 @@
     - 
     
      -->
-    <body>
-        <ul class="nav nav-pills">
+    <body id="bodyTag">
+        <ul class="nav nav-pills nav-stacked tabs-left" id="navigation">
             <li class="active"><a data-toggle="tab" href="#general">General</a></li>
             <li><a data-toggle="tab" href="#menuGlobal" id="generalShowGlobal">Global</a></li>
             <li><a data-toggle="tab" href="#menuThread" id="generalShowThread">Thread</a></li>
@@ -32,15 +32,27 @@
         <div class="tab-content">
             <!-- General -->
             <div id="general" class="tab-pane fade in active">
-                <h3>General</h3>
+                <h3>General Changes</h3>
                 <p></p>
                 <!-- Postbit Hide -->
                 <div class="panel panel-default">
                     <div class="panel-heading">Hide Postbit Attributes</div>
                     <div class="panel-body">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
+                                <label>
+                                    <span class="toggleLabel">Hide Postbit Attributes</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">(Author: Emylbus)</span>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
                         <!-- Avatar Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PostbitHideAvatar" class="PostbitHide">
                                     <span class="toggleLabel">Hide Avatar</span>
@@ -48,8 +60,8 @@
                             </div>
                         </div>
                         <!-- UserTitle Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PostbitHideUsertitle" class="PostbitHide">
                                     <span class="toggleLabel">Hide UserTitle</span>
@@ -57,8 +69,8 @@
                             </div>
                         </div>
                         <!-- UserStar Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PostbitHideUserStar" class="PostbitHide">
                                     <span class="toggleLabel">Hide UserStar</span>
@@ -66,8 +78,8 @@
                             </div>
                         </div>
                         <!-- UserBar Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PostbitHideUserBar" class="PostbitHide">
                                     <span class="toggleLabel">Hide UserBar</span>
@@ -75,8 +87,8 @@
                             </div>
                         </div>
                         <!-- Prestige Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PostbitHidePrestige" class="PostbitHide">
                                     <span class="toggleLabel">Hide Prestige</span>
@@ -84,8 +96,8 @@
                             </div>
                         </div>
                         <!-- Post Count Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PostbitHidePostCount" class="PostbitHide">
                                     <span class="toggleLabel">Hide Post Count</span>
@@ -93,8 +105,8 @@
                             </div>
                         </div>
                         <!-- Join Date Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PostbitHideJoinDate" class="PostbitHide">
                                     <span class="toggleLabel">Hide Join Date</span>
@@ -102,8 +114,8 @@
                             </div>
                         </div>
                         <!-- Reputation Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PostbitHideReputation" class="PostbitHide">
                                     <span class="toggleLabel">Hide Reputation</span>
@@ -111,8 +123,8 @@
                             </div>
                         </div>
                         <!-- Warning Level Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PostbitHideWarningLevel" class="PostbitHide">
                                     <span class="toggleLabel">Hide Warning Level</span>
@@ -120,8 +132,8 @@
                             </div>
                         </div>
                         <!-- Awards Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PostbitHideAwards" class="PostbitHide">
                                     <span class="toggleLabel">Hide Awards</span>
@@ -129,8 +141,8 @@
                             </div>
                         </div>
                         <!-- Signature Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PostbitHideSignature" class="PostbitHide">
                                     <span class="toggleLabel">Hide Signature</span>
@@ -144,12 +156,15 @@
                     <div class="panel-heading">UserTag</div>
                     <div class="panel-body">
                         <!-- Enable User Tag -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="UserTagEnable" class="UserTag">
                                     <span class="toggleLabel">User Tagging</span>
                                 </label>
+                            </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
                             </div>
                         </div>
                     </div>
@@ -164,30 +179,43 @@
                     <div class="panel-heading">Global Changes</div>
                     <div class="panel-body">
                         <!-- Enable Hide Location -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="HideLocation" class="GlobalChanges">
-                                    <span class="toggleLabel">Hide Location (Author: Emylbus)</span>
+                                    <span class="toggleLabel">Hide Location</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                    <span class="toggleLabel">(Author: Emylbus)</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Enable EasyCite -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="GlobalChangesEasyCite" class="GlobalChanges">
-                                    <span class="toggleLabel">Enable EasyCite</span>
+                                    <span class="toggleLabel">EasyCite</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Enable User Notes -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="GlobalChangesUserNotes" class="GlobalChanges">
-                                    <span class="toggleLabel">Enable User Notes</span>
+                                    <span class="toggleLabel">User Notes</span>
                                 </label>
+                            </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
                             </div>
                         </div>
                     </div>
@@ -197,33 +225,51 @@
                     <div class="panel-heading">HF ToolBar</div>
                     <div class="panel-body">
                         <!-- Enable HFTB -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="GlobalChangesHFTBEnabled" class="GlobalChanges">
-                                    <span class="toggleLabel">Enable HFTB</span>
+                                    <span class="toggleLabel">HF ToolBar</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Enable StickHFTB -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="GlobalChangesHFTBStickyEnabled" class="GlobalChanges">
-                                    <span class="toggleLabel">Enable Sticky Bar</span>
+                                    <span class="toggleLabel">Stick HF ToolBar</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Quick Links/ Favorites -->
-                        <div class="col-sm-3">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
+                                <label>
+                                    <span class="toggleLabel">Quick Links</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Allows you to add shortcuts to the top
+                                of HFTB for quick access across the forum.</span>
+                            </div>
                             <!-- table -->
-                            <table style="width:100%">
-                                <tr>
-                                    <td colspan="2" align="center"><b>Quick Links</b></td>
+                            <table class="col-sm-12">
+                                <tr class="col-sm-12">
                                 </tr>
-                                <tr align="center">
-                                    <td align="center">Name</td>
-                                    <td align="center">Link</td>
+                                <tr>
+                                    <td class="col-sm-6" align="center">Name</td>
+                                    <td class="col-sm-6" align="center">Link</td>
                                 </tr>
                                 <tr>
                                     <th><input type="text" class="form-control input-sm GlobalChanges" id="GlobalChangesHFTBFav1Text"/></th>
@@ -262,30 +308,43 @@
                     <div class="panel-heading">Rep Changes</div>
                     <div class="panel-body">
                         <!-- Enable Rep Charts -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="RepChartsEnable" class="RepCharts">
                                     <span class="toggleLabel">Rep Charts</span>
                                 </label>
                             </div>
-                        </div>
-                        <!-- Enable QuickRep -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
-                                <label>
-                                    <input type="checkbox" id="QuickRep" class="QuickRepChanges">
-                                    <span class="toggleLabel">Enable QuickRep</span>
-                                </label>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
                             </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
+                        <!-- Enable QuickRep -->
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
+                                <label>
+                                    <input type="checkbox" id="QuickRep" class="QuickRepChanges">
+                                    <span class="toggleLabel">QuickRep</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
+                            </div>
+                        </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Enable Clickable Links in Rep -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="RepChartsLinksEnable" class="RepCharts">
-                                    <span class="toggleLabel">Enable Clickable Links in Rep</span>
+                                    <span class="toggleLabel">Clickable Rep Links</span>
                                 </label>
+                            </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
                             </div>
                         </div>
                     </div>
@@ -295,21 +354,29 @@
                     <div class="panel-heading">Live Preview</div>
                     <div class="panel-body">
                         <!-- Enable Live Preview -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="LivePreviewChangesEnable" class="LivePreview">
                                     <span class="toggleLabel">Live Preview</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Collapse Live Preview by Default -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="LivePreviewChangesCollapse" class="LivePreview">
-                                    <span class="toggleLabel">Collapse Live Preview by Default</span>
+                                    <span class="toggleLabel">Collapse by Default</span>
                                 </label>
+                            </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
                             </div>
                         </div>
                     </div>
@@ -324,39 +391,57 @@
                     <div class="panel-heading">Post Options</div>
                     <div class="panel-body">
                         <!-- Thread Rating Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PostOptionsThreadRating" class="PostOptions">
-                                    <span class="toggleLabel">Thread Ratings on Thread (Author: Emylbus)</span>
+                                    <span class="toggleLabel">Adv Ratings (Thread)</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- PoT Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PostOptionsPoT" class="PostOptions">
-                                    <span class="toggleLabel">Posts on Thread Button</span>
+                                    <span class="toggleLabel">Posts on Thread Btn.</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Threads Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PostOptionsThreads" class="PostOptions">
-                                    <span class="toggleLabel">User's Threads Button</span>
+                                    <span class="toggleLabel">User's Threads Btn.</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Posts Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PostOptionsPosts" class="PostOptions">
-                                    <span class="toggleLabel">User's Posts Button</span>
+                                    <span class="toggleLabel">User's Posts Btn.</span>
                                 </label>
+                            </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
                             </div>
                         </div>
                     </div>
@@ -366,21 +451,29 @@
                     <div class="panel-heading">SmartQuotes</div>
                     <div class="panel-body">
                         <!-- Enable SmartQuote Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="SmartQuotesEnable" class="SmartQuotes">
-                                    <span class="toggleLabel">Enable SmartQuotes</span>
+                                    <span class="toggleLabel">SmartQuotes</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Enable SmartQuote Mention Count Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="SmartQuotesMentionCount" class="SmartQuotes">
-                                    <span class="toggleLabel">Enable SmartQuote Mention Count</span>
+                                    <span class="toggleLabel">Mention Count Label</span>
                                 </label>
+                            </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
                             </div>
                         </div>
                     </div>
@@ -390,57 +483,85 @@
                     <div class="panel-heading">Annoyance Fixers</div>
                     <div class="panel-body">
                         <!-- MaxSize Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="ImageChangesMaxSize" class="ImageChanges">
-                                    <span class="toggleLabel">Limit Image Size in Posts</span>
+                                    <span class="toggleLabel">Limit Img Sizes (Posts)</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- ReplaceBroken Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="ImageChangesReplaceBroken" class="ImageChanges">
-                                    <span class="toggleLabel">Replace Broken Images with Placeholder</span>
+                                    <span class="toggleLabel">Replace Broken Imgs</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- ForceHTTPS Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="ImageChangesForceHTTPS" class="ImageChanges">
-                                    <span class="toggleLabel">Force HTTPS on HTTP Images</span>
+                                    <span class="toggleLabel">HTTPS on HTTP Imgs</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- YoutubeFullScreen Toggle -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="AnnoyanceFixerFullscreenYoutube" class="PostOptions">
-                                    <span class="toggleLabel">Allow YouTube Fullscreen</span>
+                                    <span class="toggleLabel">YouTube Fullscreen</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Show Blocked User's Posts -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="AnnoyanceFixerShowBlockedPosts" class="PostOptions">
-                                    <span class="toggleLabel">Show Blocked User's Posts</span>
+                                    <span class="toggleLabel">Show Blocked Posts</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Hide Blocked User's Posts -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="AnnoyanceFixerHideBlockedPosts" class="PostOptions">
-                                    <span class="toggleLabel">Hide Blocked User's Posts</span>
+                                    <span class="toggleLabel">Hide Blocked Posts</span>
                                 </label>
+                            </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
                             </div>
                         </div>
                     </div>
@@ -455,58 +576,86 @@
                     <div class="panel-heading">Forum Changes</div>
                     <div class="panel-body">
                         <!-- Enable Online Sorting -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="OnlineSortingEnable" class="OnlineSorting">
-                                    <span class="toggleLabel">Online Sorting (Author: Aveling)</span>
+                                    <span class="toggleLabel">Online Sorting</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">(Author: Aveling)</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Enable Forum Rating -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="ForumChangesForumRating" class="ForumChanges">
-                                    <span class="toggleLabel">Thread Ratings in Forum (Author: Emylbus)</span>
+                                    <span class="toggleLabel">Adv Ratings (Forum)</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Enable Enhanced SYT -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="ForumChangesEnhancedSYT" class="ForumChanges">
-                                    <span class="toggleLabel">Enhanced SYT (Author: Xerotix)</span>
+                                    <span class="toggleLabel">Enhanced SYT</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">(Author: Xerotix)</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Enable New Post Links -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="GlobalChangesNewPostLinks" class="GlobalChanges">
                                     <span class="toggleLabel">New Post Links</span>
                                     <!-- Adds link to 'latest unread post' to threads -->
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Enable Hide Closed Threads -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="ForumChangesHideClosed" class="ForumChanges">
                                     <span class="toggleLabel">Hide Closed Threads</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Enable Hide Forum Ratings -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="ForumChangesHideForumRatings" class="ForumChanges">
-                                    <span class="toggleLabel">Hide Thread Ratings in Forums</span>
+                                    <span class="toggleLabel">Hide Thread Ratings</span>
                                 </label>
+                            </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
                             </div>
                         </div>
                     </div>
@@ -521,62 +670,95 @@
                     <div class="panel-heading">PM Changes</div>
                     <div class="panel-body">
                         <!-- PM From Post -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PMChangesPMFromPost" class="PostOptions">
-                                    <span class="toggleLabel">PM From Post (Co-Author: Xerotic)</span>
+                                    <span class="toggleLabel">PM From Post</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">(Co-Author: Xerotic)</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Quote Stripping -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PMChangesQuoteStripping" class="PMChanges">
-                                    <span class="toggleLabel">Quote Stripping (Author: Snorlax)</span>
+                                    <span class="toggleLabel">Quote Stripping</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">(Author: Snorlax)</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Salutation Enable -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PMChangesSalutation" class="PMChanges">
                                     <span class="toggleLabel">PM Salutation</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
+                            </div>
+                            <br />
+                            <br />
                             <!-- Salutation Text -->
                             <input class="form-control PMChanges" id="PMChangesSalutationText" type="text">
                             <br />
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Signature Enable -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PMChangesSignature" class="PMChanges">
                                     <span class="toggleLabel">PM Signature</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
+                            </div>
+                            <br />
+                            <br />
+                            <!-- Signature Text -->
                             <input class="form-control PMChanges" id="PMChangesSignatureText" type="text">
                             <br />
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- Deny PM Receipt Enable -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PMChangesDenyPMReceipt" class="GlobalChanges">
-                                    <span class="toggleLabel">Deny PM Receipt in Alert Notice</span>
+                                    <span class="toggleLabel">Deny PM Receipt</span>
                                 </label>
                             </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Deny PM Receipt in Alert Notice</span>
+                            </div>
                         </div>
+                        <br />
+                        <hr class="lineBreak" />
                         <!-- PM Tracking Links Enable -->
-                        <div class="col-sm-3">
-                            <div class="checkbox-slider--b col-sm-2">
+                        <div class="col-sm-12">
+                            <div class="checkbox-slider--b col-sm-4">
                                 <label>
                                     <input type="checkbox" id="PMChangesTrackingLinks" class="PMChanges">
                                     <span class="toggleLabel">PM Tracking Links</span>
                                 </label>
+                            </div>
+                            <div class="checkbox-slider--b col-sm-8">
+                                <span class="toggleLabel">Description................</span>
                             </div>
                         </div>
 
