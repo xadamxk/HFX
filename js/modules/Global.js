@@ -192,6 +192,8 @@ function threadTagger() {
                 // Append Tag
                 $(".post_author:eq(" + indexPost + ")").find("br:eq(0)")
                     .before("&nbsp;")
+                    .before("&nbsp;")
+                    .before("&nbsp;")
                     .before($("<span>").text(tag).attr("id", "profileTag" + indexPost)
                     .css(noteBubbleCSS)
                     .addClass("tagBubbles"));
