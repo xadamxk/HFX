@@ -1,24 +1,29 @@
-{
+﻿{
   "manifest_version": 2,
   "name": "HF Xtension",
   "short_name": "HFX",
-  "version": "0.0.0.1",
+  "version": "0.0.0.22",
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
   "version_name": "beta1",
   "description": "Enhance your HF Experience!",
-  "icons": [
-    {
-      "16": "images/icon-16.png",
-      "32": "images/icon-32.png",
-      "48": "images/icon-48.png",
-      "128": "images/icon-128.png"
-    }
-  ],
+  "options_ui": {
+    "chrome_style": true,
+    "page": "pages/options.html"
+  },
+  "incognito": "spanning",
+  "author": "xadamxk",
+  "offline_enabled": false,
   "browser_action": {
     "default_icon": {
-      "16": "images/icon-16.png",
-      "32": "images/icon-32.png",
-      "48": "images/icon-48.png",
-      "128": "images/icon-128.png"
+      "16": "images/icon16.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
     },
     "default_title": "HFX Settings",
     "default_popup": "pages/popup.html"
@@ -26,7 +31,6 @@
   "background": {
     "scripts": [ "js/background.js" ]
   },
-  "author": "xadamxk",
   "content_scripts": [
     {
       "run_at": "document_end",
@@ -86,7 +90,7 @@
       ],
       "js": [
         "js/dependencies/jquery-3.2.1.js",
-        "js/modules/ForumDisplay .js"
+        "js/modules/ForumDisplay.js"
       ]
     },
     {
@@ -129,18 +133,5 @@
       ]
     }
   ],
-  "homepage_url": "https://github.com/xadamxk/HFX",
-  "incognito": "spanning",
-  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjQ/WCpquP1ksrLDJANSF2HasuxciVrKy2eFQDr90shiKIhDOHOlO/RTd/2bTxtFm1A3QGBo9G9tXHvaJMV4HHuuk5c6rhZMogRpfh45njH+bevF7fz1eRZmpky8qeg4xA//Qu5Pi2NPZVZZS01kkaNRV2BU3KBOu/PkUKEYAkoMHNFcY9TrfgcVfwlw6SE3IZGLPLQmJb+nQtO3ezgB8I+RxrxTUUopDv19nqBNt3jSKu2ph+4AQM4cpttlE2HjdJxYL6a5DJZd9GCGnXa0i1XXWO4VOVODCaj1ZQVdEn+X+EhLwunAjzGhzoXdqen4OEP7e4EVgQVLRkSkb1v21UQIDAQAB",
-  "offline_enabled": false,
-  "omnibox": {
-    "keyword": "HF"
-  },
-  "optional_permissions": [ "tabs" ],
-  "options_page": "pages/options.html",
-  "options_ui": {
-    "chrome_style": true,
-    "page": "pages/options.html"
-  },
-  "permissions": [ "tabs", "storage" ]
+  "permissions": [ "storage" ]
 }
