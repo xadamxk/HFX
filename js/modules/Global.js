@@ -192,8 +192,6 @@ function threadTagger() {
                 // Append Tag
                 $(".post_author:eq(" + indexPost + ")").find("br:eq(0)")
                     .before("&nbsp;")
-                    .before("&nbsp;")
-                    .before("&nbsp;")
                     .before($("<span>").text(tag).attr("id", "profileTag" + indexPost)
                     .css(noteBubbleCSS)
                     .addClass("tagBubbles"));
@@ -363,6 +361,7 @@ function injectHFTB() {
     // Settings event listener
     $("#leftSticky a:eq(4)").click(function () {
         $("#settingsleftSticky").css("color", "#1EF1EA");
+        console.log(chrome.extension.getURL("pages/options.html"));
         // Open Settings
     });
     // Append quick links to toolbar
