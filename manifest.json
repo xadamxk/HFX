@@ -1,23 +1,18 @@
 {
-  // Required
   "manifest_version": 2,
   "name": "HF Xtension",
   "short_name": "HFX",
-  "version": "1.0.0",
-  "version_name": "1.0 beta",
-
-  // Recommended
-  //"default_locale": "en",
+  "version": "0.0.0.1",
+  "version_name": "beta1",
   "description": "Enhance your HF Experience!",
-  // icon: 128x128 AND 48x48.PNG
-  "icons": {
-    "16": "images/icon-16.png",
-    "32": "images/icon-32.png",
-    "48": "images/icon-48.png",
-    "128": "images/icon-128.png"
-  },
-
-  // Pick one (or none)
+  "icons": [
+    {
+      "16": "images/icon-16.png",
+      "32": "images/icon-32.png",
+      "48": "images/icon-48.png",
+      "128": "images/icon-128.png"
+    }
+  ],
   "browser_action": {
     "default_icon": {
       "16": "images/icon-16.png",
@@ -25,18 +20,14 @@
       "48": "images/icon-48.png",
       "128": "images/icon-128.png"
     },
-    "default_title": "HFX Settings", // shown in tooltip
+    "default_title": "HFX Settings",
     "default_popup": "pages/popup.html"
   },
-  //"page_action": {...},
   "background": {
     "scripts": [ "js/background.js" ]
   },
-  // Optional
   "author": "xadamxk",
-  //"automation": ...,
   "content_scripts": [
-    // Postbit Hide Attributes, UserTag, SmartQuotes, PostOptions, ImageChanges
     {
       "run_at": "document_end",
       "matches": [
@@ -52,7 +43,6 @@
         "js/modules/ShowThread - ImageChanges.js"
       ]
     },
-    // Rep Charts
     {
       "run_at": "document_end",
       "matches": [
@@ -65,7 +55,6 @@
         "js/modules/Reputation - RepCharts.js"
       ]
     },
-    // Online Sorting
     {
       "run_at": "document_end",
       "matches": [
@@ -77,7 +66,6 @@
         "js/modules/Index - OnlineSorting.js"
       ]
     },
-    // PM Changes
     {
       "run_at": "document_end",
       "matches": [
@@ -91,7 +79,6 @@
         "js/modules/Private Reply - PMChanges.js"
       ]
     },
-    // Forum Changes
     {
       "run_at": "document_end",
       "matches": [
@@ -102,7 +89,6 @@
         "js/modules/ForumDisplay .js"
       ]
     },
-    // QuickRep Changes
     {
       "run_at": "document_end",
       "matches": [
@@ -115,7 +101,6 @@
         "js/modules/ShowThread - QuickRep.js"
       ]
     },
-    // Global Changes
     {
       "run_at": "document_end",
       "matches": [
@@ -128,7 +113,6 @@
         "js/modules/Global.js"
       ]
     },
-    // Live Preview
     {
       "run_at": "document_end",
       "matches": [
@@ -144,33 +128,10 @@
         "js/modules/LivePreview.js"
       ]
     }
-
-    // User Tagging - preview post
-    //,{
-    //  "run_at": "document_end",
-    //  "matches": [
-    //    "*://hackforums.net/newreply.php?tid=*"
-    //  ],
-    //  "js": [
-    //    "js/dependencies/jquery-3.2.1.js",
-    //    ""
-    //  ]
-    //}
   ],
-  //"commands": { "..." },
-  //"content_security_policy": "policyString",
-  //"current_locale": "...",
-  //"devtools_page": "devtools.html",
-  //"externally_connectable": {
-  //  "matches": [ "*://*.example.com/*" ]
-  //},
   "homepage_url": "https://github.com/xadamxk/HFX",
   "incognito": "spanning",
-  //"input_components": ...,
-  //"key": "publicKey",
-  // Find out min version
-  //"minimum_chrome_version": "versionString",
-  //"nacl_modules": [ "..." ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjQ/WCpquP1ksrLDJANSF2HasuxciVrKy2eFQDr90shiKIhDOHOlO/RTd/2bTxtFm1A3QGBo9G9tXHvaJMV4HHuuk5c6rhZMogRpfh45njH+bevF7fz1eRZmpky8qeg4xA//Qu5Pi2NPZVZZS01kkaNRV2BU3KBOu/PkUKEYAkoMHNFcY9TrfgcVfwlw6SE3IZGLPLQmJb+nQtO3ezgB8I+RxrxTUUopDv19nqBNt3jSKu2ph+4AQM4cpttlE2HjdJxYL6a5DJZd9GCGnXa0i1XXWO4VOVODCaj1ZQVdEn+X+EhLwunAjzGhzoXdqen4OEP7e4EVgQVLRkSkb1v21UQIDAQAB",
   "offline_enabled": false,
   "omnibox": {
     "keyword": "HF"
@@ -182,11 +143,4 @@
     "page": "pages/options.html"
   },
   "permissions": [ "tabs", "storage" ]
-  //"signature": "...",
-  //"spellcheck": "...",
-  //"storage": {
-  //  "managed_schema": "schema.json"
-  //},
-  //"system_indicator": "...",
-  //"update_url": "http://path/to/updateInfo.xml"
 }
