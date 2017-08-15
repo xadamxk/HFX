@@ -81,13 +81,13 @@ function enablePostOptions() {
     // Show Blocked Posts
     if (annoyanceFixerShowBlockedPostsEnabled) {
         if ($("a[onclick*='showIgnoredPost']").length >= 1) {
-            $("a[onclick*='showIgnoredPost']").each(function () {
+            $("a[onclick*='showIgnoredPost']").each(function (index) {
                 // Hide Post
                 this.click();
                 // 'Ignored User' Alert
-                $("a[onclick*='showIgnoredPost']").closest('table').next().next().find(".float_left.smalltext")
+                $("a[onclick*='showIgnoredPost']:eq(" + index+")").closest('table').next().next().find(".float_left.smalltext")
                     .append($('<span>').text("(IGNORED USER)"));
-                $("a[onclick*='showIgnoredPost']").closest('table').next().next().find(".tcat").css("background-color","red");
+                $("a[onclick*='showIgnoredPost']:eq(" + index + ")").closest('table').next().next().find(".tcat").css("background-color", "#c40d23");
             });
         }
     }

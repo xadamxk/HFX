@@ -29,19 +29,55 @@ body{
 #bodyTag::-webkit-scrollbar-thumb {
     background-color: #000000;
 }
+/*
+.minLimitStyle{
+    color: #891a14;
+}
 
-.label-hallow-green{
-    background-color: #ffffff;
-    border-color: #b2d8b9;
+.limitStyle{
     color: #14892c;
 }
 
-.label-hallow-gray{
-    background-color: #ffffff;
-    border-color: #e4e8ed;
-    color: #4a6785;
+.minLuckyStyle{
+    color: #201489;
 }
-.label-hallow-red{
 
+.maxLimitStyleL33t{
+    color: #395211;
 }
-/* */
+
+.maxLimitStyleUb3r{
+    color: #113a4f;
+}
+
+.maxLimitStyleEp1c{
+    color: #805b16;
+}
+    */
+.minLimitStyle{
+    color: #891a14;
+}
+
+.limitStyle{
+    color: #14892c;
+}
+
+.minLuckyStyle{
+    color: #201489;
+}
+
+.tooHighStyle{
+    color: red;
+}
+
+.maxLimitStyleL33t{
+    color: #99FF00;
+}
+
+.maxLimitStyleUb3r{
+    color: #00AAFF;
+}
+
+.maxLimitStyleEp1c{
+    color: #FFA500;
+}

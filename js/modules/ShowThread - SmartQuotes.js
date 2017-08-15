@@ -36,54 +36,55 @@ function enableSmartQuotes() {
                 })
 
             });
-            injectSmartQuoteChanges();
+            injectSmartQuotes();
         }
     });
-}
-
-function injectSmartQuoteChanges() {
-    if (enableSmartQuote) {
-        injectSmartQuotes();
-    }
 }
 
 function injectSmartQuotes() {
     var username = $("#panel strong a:eq(0)").text();
     var usernameCount = 0;
     if (debug) { console.log("Number of Quotes: " + $("*").find("blockquote").length); }
-    if ($("*").find("blockquote").length > 0) {
-        // Each Block Quote
-        $("*").find("blockquote").each(function () {
-            $(this)
-                .css("border-radius", "5px")
-                .css("border", "1px solid black")
-                .css("padding", "1px 4px 1px 4px")
-                .css("background-color", smartQuoteBackgroundColor)
-                .css("color", smartQuoteTextColor);
-        });
-        // Each Block Quote Header
+    if (enableSmartQuote) {
+        if ($("*").find("blockquote").length > 0) {
+            // Each Block Quote
+            $("*").find("blockquote").each(function () {
+                $(this)
+                    .css("border-radius", "5px")
+                    .css("border", "1px solid black")
+                    .css("padding", "1px 4px 1px 4px")
+                    .css("background-color", smartQuoteBackgroundColor)
+                    .css("color", smartQuoteTextColor);
+            });
+            // Each Block Quote Header
+            $("*").find("blockquote cite").each(function () {
+                // Standard QuoteCite Settings
+                $(this)
+                    .css("border-bottom", "1px solid #999")
+                    .css("padding", "2px 8px 2px 8px");
+                // Username Quoted
+                if ($(this).text().includes(username)) {
+                    if (debug) { console.log("Username found."); }
+                    $(this)
+                        .css("background-color", smartQuoteHeaderMatchBackgroundColor)
+                        .css("color", smartQuoteHeaderMatchTextColor);
+                }
+                    // No username match
+                else {
+                    $(this)
+                        .css("background-color", smartQuoteHeaderBackgroundColor)
+                        .css("color", smartQuoteHeaderTextColor);
+                }
+            });
+        }
+    }
+    if (enableSmartQuoteMentionCount) {
         $("*").find("blockquote cite").each(function () {
-            // Standard QuoteCite Settings
-            $(this)
-                .css("border-bottom", "1px solid #999")
-                .css("padding", "2px 8px 2px 8px");
-            // Username Quoted
             if ($(this).text().includes(username)) {
                 usernameCount++;
                 if (debug) { console.log("Username found."); }
-                $(this)
-                    .css("background-color", smartQuoteHeaderMatchBackgroundColor)
-                    .css("color", smartQuoteHeaderMatchTextColor);
-            }
-                // No username match
-            else {
-                $(this)
-                    .css("background-color", smartQuoteHeaderBackgroundColor)
-                    .css("color", smartQuoteHeaderTextColor);
             }
         });
-    }
-    if (enableSmartQuoteMentionCount) {
         var mentionBubbleCSS = {
             "display": "inline-block",
             "padding": "3px 4px",

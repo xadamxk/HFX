@@ -1,6 +1,7 @@
 var debug = false;
 var enableLivePreview = false;
 var collapseLivePreviewByDefault = false;
+var characterCounterEnabled = false;
 getLivePreview();
 
 // Set vars equal to saved settings
@@ -14,6 +15,8 @@ function getLivePreview() {
                             case "LivePreviewChangesEnabled": if (value) { enableLivePreview = value; }
                                 break;
                             case "LivePreviewChangesCollapsed": if (value) { collapseLivePreviewByDefault = value; }
+                                break;
+                            case "GlobalChangesCharacterCounterEnabled": if (value) { characterCounterEnabled = value; }
                                 break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
@@ -31,6 +34,150 @@ function injectLivePreviewChanges() {
     if (enableLivePreview) {
         injectLivePreview();
     }
+    if (characterCounterEnabled) {
+        injectCharacterCounterChanges();
+    }
+}
+
+function injectCharacterCounterChanges() {
+    var appendCharCountToMe;
+    if (window.location.href.includes("hackforums.net/showthread.php?tid=")) {
+        //
+        appendCharCountToMe = $("#quickreply_e").find("tr:eq(0) > td:eq(0) > span:eq(0)");
+        appendCharCountToMe.after($("<span>").attr("id", "charLabel").text(""));
+        appendCharCountToMe.after($("<br />"));
+        appendCharCountToMe.after($("<br />"));
+        $('#message').bind('input propertychange', function () {
+            doCount();
+        });
+    }
+    else if (window.location.href.includes("hackforums.net/newreply.php?tid=") ||
+             window.location.href.includes("hackforums.net/newthread.php?fid=") ||
+             window.location.href.includes("hackforums.net/editpost.php?pid=") ||
+             window.location.href.includes("hackforums.net/private.php?action=send")) {
+        // 
+        appendCharCountToMe = $("strong:contains(Post Options:)");
+        appendCharCountToMe.after($("<br />"));
+        appendCharCountToMe.after($("<br />"));
+        appendCharCountToMe.after($("<span>").attr("id", "charLabel").text(""));
+        appendCharCountToMe.after($("<br />"));
+        appendCharCountToMe.after($("<br />"));
+        $('#message_new').bind('input propertychange', function () {
+            doCount();
+        });
+    }
+    
+    
+}
+
+function doCount() {
+    const baseStyle = {
+        "padding": "3px",
+        "padding-left": "10px",
+        "padding-right": "10px",
+        "border-radius": "5px"
+    }
+    const minLimit = 35;
+    const minLimitTxt = "Too Low: ";
+    const minLimitStyle = {
+        "background-color": "#d8b4b2",
+        "border-color": "#d8b4b2",
+        "color": "#891a14",
+        
+    };
+    const limitText = "Good: ";
+    const limitStyle = {
+        "background-color": "#b2d8b9",
+        "border-color": "#b2d8b9",
+        "color": "#14892c",
+    };
+
+    const minLucky = 100;
+    const minLuckyTxt = "Clover: ";
+    const minLuckyStyle = {
+        "background-color": "#b6b2d8",
+        "border-color": "#b6b2d8",
+        "color": "#201489",
+    };
+
+    // L33t: 12,000
+    const maxLimitL33t = 12000;
+    const maxLimitTxt = "Too High: ";
+    const maxLimitStyleL33t = {
+        "background-color": "#99FF00",
+        "border-color": "#99FF00",
+        "color": "#395211",
+    };
+    // Ub3r: 18,000
+    const maxLimitUb3r = 18000;
+    const maxLimitStyleUb3r = {
+        "background-color": "#00AAFF",
+        "border-color": "#00AAFF",
+        "color": "#113a4f",
+    };
+    // Ep1c: 24,000
+    const maxLimitEp1c = 24000;
+    const maxLimitStyleEp1c = {
+        "background-color": "#FFA500",
+        "border-color": "#FFA500",
+        "color": "#805b16",
+    };
+
+    var charReason = "";
+    var charStyle;
+    
+    var charLength = 0;
+    var textInput = "";
+    if (window.location.href.includes("hackforums.net/showthread.php?tid=")) {
+        textInput = $("#message").val();
+    } else {
+        textInput = $("#message_new").val();
+    }
+    // Quotes
+    textInput = textInput.replace(/\[\/?quote.*[^\]]*\]/g, '');
+    // Images
+    textInput = textInput.replace(/\[img\].*\[\/img\]/g, '');
+    // Emojis
+    textInput = textInput.replace(/:([^:][^:]*:)?/g, '');
+    // Spaces
+    textInput = textInput.replace(/ /g, '');
+    // New Lines
+    textInput = textInput.replace(/(\r\n|\n|\r)/gm, "");
+    // Reply Length
+    charLength = textInput.length;
+    // Too Small
+    if (charLength < minLimit) {
+        charReason = minLimitTxt;
+        charStyle = minLimitStyle;
+    }
+    // Good
+    else if (charLength >= minLimit && charLength < minLucky) {
+        charReason = limitText;
+        charStyle = limitStyle;
+    }
+    // Lucky
+    else if (charLength >= minLucky && charLength < maxLimitL33t) {
+        charReason = minLuckyTxt;
+        charStyle = minLuckyStyle;
+    }
+    // Too Big - L33t
+    else if (charLength >= maxLimitL33t && charLength < maxLimitUb3r) {
+        charReason = maxLimitTxt;
+        charStyle = maxLimitStyleL33t;
+    }
+    // Too Big - Ub3r
+    else if (charLength >= maxLimitL33t && charLength < maxLimitEp1c) {
+        charReason = maxLimitTxt;
+        charStyle = maxLimitStyleUb3r;
+    }
+    // Too Big - Ep1c
+    else if (charLength >= maxLimitEp1c) {
+        charReason = maxLimitTxt;
+        charStyle = maxLimitStyleEp1c;
+    }
+    $("#charLabel").text(charReason + charLength);
+    $("#charLabel").css(charStyle);
+    $("#charLabel").css(baseStyle);
 }
 
 function injectLivePreview() {

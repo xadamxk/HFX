@@ -89,6 +89,11 @@ function injectRepCharts() {
         console.log("Neutral Rep Totoal: " + neuRepTotal);
         console.log("Negative Rep Total: " + negRepTotal);
     }
+
+    if (posRepTotal == 0 && neuRepTotal == 0 && negRepTotal == 0) {
+        return;
+    }
+
     // Table D
     var tableDTotal = document.createElement('td');
     tableDTotal.id = "insertedTableD";

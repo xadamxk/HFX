@@ -92,14 +92,15 @@ function saveLivePreview() {
     chrome.storage.sync.set({
         LivePreviewChanges:
             [{ 'LivePreviewChangesEnabled': $("#LivePreviewChangesEnable").is(':checked') },
-            { 'LivePreviewChangesCollapsed': $("#LivePreviewChangesCollapse").is(':checked') }]
+            { 'LivePreviewChangesCollapsed': $("#LivePreviewChangesCollapse").is(':checked') },
+            { 'GlobalChangesCharacterCounterEnabled': $("#GlobalChangesCharacterCounter").is(':checked') }]
     }, function () {
         // Save Confirmation
     });
 }
 
 function loadLivePreview() {
-    var LivePreviewChangesEnabled, LivePreviewChangesCollapsed;
+    var LivePreviewChangesEnabled, LivePreviewChangesCollapsed, GlobalChangesCharacterCounterEnabled;
     chrome.storage.sync.get("LivePreviewChanges", function (data) {
         $.each(data, function (index, data) {
             $.each(data, function (index, data) {
@@ -108,6 +109,8 @@ function loadLivePreview() {
                         case "LivePreviewChangesEnabled": LivePreviewChangesEnabled = value;
                             break;
                         case "LivePreviewChangesCollapsed": LivePreviewChangesCollapsed = value;
+                            break;
+                        case "GlobalChangesCharacterCounterEnabled": GlobalChangesCharacterCounterEnabled = value;
                             break;
                         default: console.log("ERROR: Key not found.");
                     }
@@ -119,6 +122,9 @@ function loadLivePreview() {
             }
             if (LivePreviewChangesCollapsed !== false) {
                 $("#LivePreviewChangesCollapse").prop('checked', true);
+            }
+            if (GlobalChangesCharacterCounterEnabled !== false) {
+                $("#GlobalChangesCharacterCounter").prop('checked', true);
             }
         });
     });

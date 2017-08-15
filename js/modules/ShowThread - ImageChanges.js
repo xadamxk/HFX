@@ -35,25 +35,18 @@ function injectImageChanges() {
     $(".post_body").find("img").each(function (index) {
         // Max Size
         if (maxSizeEnable) {
-            $(this).css({ /*"max-height": "100%",*/ "max-width": "100%" });
+            $(this).css({ "max-height": "100%", "max-width": "100%" });
         }
         // Force HTTPS
         if (forceHTTPSEnable) {
             var thisImageSRC = $(this).attr("src");
-            // HTTPS
-            if (thisImageSRC.includes("https")) {/* do nothing */ }
-            // HTTP
-            else if (thisImageSRC.includes("http"))
-                $(this).attr("src", thisImageSRC.replace("http", "https"));
-            // No Protocol
-            else
-                $(this).attr("src", "https://" + thisImageSRC);
+            // Grab text from posts, look for image tag?
         }
         // Replace Broken
         if (replaceBrokenEnable) {
-            $(this).one('error', function () {
+            if($(this).complete && $(this).naturalNeight !== 0){
                 this.src = brokenImageURL;
-            });
+            }
         }
     });
     
