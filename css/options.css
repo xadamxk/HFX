@@ -1,17 +1,17 @@
 body{
     padding: 15px;
-    width: 850px;
-    height: 1000px;
+    width: 790px;
+    
 }
 
-.tab-content{
+#optionBodyTag{
     width: 650px;
 }
 
 .nav-pills{
-    width: 125px;
+    width: 110px;
     float: left;
-    padding-right: 20px;
+    padding-right: 10px;
 }
 
 .tab-content{
@@ -29,31 +29,7 @@ body{
 #bodyTag::-webkit-scrollbar-thumb {
     background-color: #000000;
 }
-/*
-.minLimitStyle{
-    color: #891a14;
-}
 
-.limitStyle{
-    color: #14892c;
-}
-
-.minLuckyStyle{
-    color: #201489;
-}
-
-.maxLimitStyleL33t{
-    color: #395211;
-}
-
-.maxLimitStyleUb3r{
-    color: #113a4f;
-}
-
-.maxLimitStyleEp1c{
-    color: #805b16;
-}
-    */
 .minLimitStyle{
     color: #891a14;
 }
@@ -80,4 +56,28 @@ body{
 
 .maxLimitStyleEp1c{
     color: #FFA500;
+}
+
+#headerImage{
+    width: 330px;
+    height: 210px;
+}
+
+#aboutPanel{
+    padding: 10px;
+}
+
+#githubLogoImage{
+    width: 75px;
+    height: 75px;
+}
+
+#hfAvatarImage{
+    width: 90px;
+    height: 90px;
+}
+
+.logoImage{
+    margin-left: 15px;
+    margin-right: 15px;
 }

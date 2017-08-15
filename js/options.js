@@ -100,32 +100,26 @@ function saveLivePreview() {
 }
 
 function loadLivePreview() {
-    var LivePreviewChangesEnabled, LivePreviewChangesCollapsed, GlobalChangesCharacterCounterEnabled;
+    $("#LivePreviewChangesEnable").prop('checked', true);
+    $("#LivePreviewChangesCollapse").prop('checked', true);
+    $("#GlobalChangesCharacterCounter").prop('checked', true);
+    //saveLivePreview();
     chrome.storage.sync.get("LivePreviewChanges", function (data) {
         $.each(data, function (index, data) {
             $.each(data, function (index, data) {
                 $.each(data, function (key, value) {
                     switch (key) {
-                        case "LivePreviewChangesEnabled": LivePreviewChangesEnabled = value;
+                        case "LivePreviewChangesEnabled": $("#LivePreviewChangesEnable").prop('checked', value);
                             break;
-                        case "LivePreviewChangesCollapsed": LivePreviewChangesCollapsed = value;
+                        case "LivePreviewChangesCollapsed": $("#LivePreviewChangesCollapse").prop('checked', value);
                             break;
-                        case "GlobalChangesCharacterCounterEnabled": GlobalChangesCharacterCounterEnabled = value;
+                        case "GlobalChangesCharacterCounterEnabled": $("#GlobalChangesCharacterCounter").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }
                 })
             })
-            // Check with defaults
-            if (LivePreviewChangesEnabled !== false) {
-                $("#LivePreviewChangesEnable").prop('checked', true);
-            }
-            if (LivePreviewChangesCollapsed !== false) {
-                $("#LivePreviewChangesCollapse").prop('checked', true);
-            }
-            if (GlobalChangesCharacterCounterEnabled !== false) {
-                $("#GlobalChangesCharacterCounter").prop('checked', true);
-            }
+
         });
     });
 }
@@ -141,27 +135,22 @@ function saveSmartQuotes() {
 }
 
 function loadSmartQuotes() {
-    var SmartQuotesEnabled, SmartQuotesMentionCount;
+    $("#SmartQuotesEnable").prop('checked', true);
+    $("#SmartQuotesMentionCount").prop('checked', true);
+    //saveSmartQuotes();
     chrome.storage.sync.get("SmartQuoteChanges", function (data) {
         $.each(data, function (index, data) {
             $.each(data, function (index, data) {
                 $.each(data, function (key, value) {
                     switch (key) {
-                        case "SmartQuotesEnabled": SmartQuotesEnabled = value;
+                        case "SmartQuotesEnabled": $("#SmartQuotesEnable").prop('checked', value);
                             break;
-                        case "SmartQuotesMentionCount": SmartQuotesMentionCount = value;
+                        case "SmartQuotesMentionCount": $("#SmartQuotesMentionCount").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }
                 })
             })
-            // Check with defaults
-            if (SmartQuotesEnabled !== false) {
-                $("#SmartQuotesEnable").prop('checked', true);
-            }
-            if (SmartQuotesMentionCount !== false) {
-                $("#SmartQuotesMentionCount").prop('checked', true);
-            }
         });
     });
 }
@@ -199,22 +188,26 @@ function saveGlobalChanges() {
 }
 
 function loadGlobalChanges() {
-    var GlobalChangesHideLocationEnabled, GlobalChangesEasyCiteEnabled
-    GlobalChangesHFTBEnabled, GlobalChangesHFTBStickyEnabled, GlobalChangesNewPostLinks;
+    $("#HideLocation").prop('checked', true);
+    $("#GlobalChangesEasyCite").prop('checked', true);
+    $("#GlobalChangesHFTBEnabled").prop('checked', true);
+    $("#GlobalChangesHFTBStickyEnabled").prop('checked', true);
+    $("#GlobalChangesNewPostLinks").prop('checked', true);
+    //saveGlobalChanges();
     chrome.storage.sync.get("GlobalChanges", function (data) {
         $.each(data, function (index, data) {
             $.each(data, function (index, data) {
                 $.each(data, function (key, value) {
                     switch (key) {
-                        case "GlobalChangesHideLocationEnabled": GlobalChangesHideLocationEnabled = value; 
+                        case "GlobalChangesHideLocationEnabled": $("#HideLocation").prop('checked', value);
                             break;
                         case "GlobalChangesDenyPMReceiptEnabled": $("#PMChangesDenyPMReceipt").prop('checked', value);
                             break;
-                        case "GlobalChangesEasyCiteEnabled": GlobalChangesEasyCiteEnabled = value;
+                        case "GlobalChangesEasyCiteEnabled": $("#GlobalChangesEasyCite").prop('checked', value);
                             break;
-                        case "GlobalChangesHFTBEnabled": GlobalChangesHFTBEnabled = value;
+                        case "GlobalChangesHFTBEnabled": $("#GlobalChangesHFTBEnabled").prop('checked', value);
                             break;
-                        case "GlobalChangesHFTBStickyEnabled": GlobalChangesHFTBStickyEnabled = value;
+                        case "GlobalChangesHFTBStickyEnabled": $("#GlobalChangesHFTBStickyEnabled").prop('checked', value);
                             break;
                         case "GlobalChangesHFTBFav1Text": $("#GlobalChangesHFTBFav1Text").val(value);
                             break;
@@ -246,31 +239,13 @@ function loadGlobalChanges() {
                             break;
                         case "GlobalChangesUserNotes": $("#GlobalChangesUserNotes").prop('checked', value);
                             break;
-                        case "GlobalChangesNewPostLinks": GlobalChangesNewPostLinks = value;
+                        case "GlobalChangesNewPostLinks": $("#GlobalChangesNewPostLinks").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
-                            /*
-                            case "": $("#").val(value);
-                            break;
-                            */
                     }
                 })
             })
-            if (GlobalChangesHideLocationEnabled !== false) {
-                $("#HideLocation").prop('checked', true);
-            }
-            if (GlobalChangesEasyCiteEnabled !== false) {
-                $("#GlobalChangesEasyCite").prop('checked', true);
-            }
-            if (GlobalChangesHFTBEnabled !== false) {
-                $("#GlobalChangesHFTBEnabled").prop('checked', true);
-            }
-            if (GlobalChangesHFTBStickyEnabled !== false) {
-                $("#GlobalChangesHFTBStickyEnabled").prop('checked', true);
-            }
-            if (GlobalChangesNewPostLinks !== false) {
-                $("#GlobalChangesNewPostLinks").prop('checked', true);
-            }
+
         });
     });
 }
@@ -285,21 +260,20 @@ function saveQuickRepChanges() {
 }
 
 function loadQuickRepChanges() {
-    var QuickRepEnabled;
+    $("#QuickRep").prop('checked', true);
+    //saveQuickRepChanges();
     chrome.storage.sync.get("QuickRepChanges", function (data) {
         $.each(data, function (index, data) {
             $.each(data, function (index, data) {
                 $.each(data, function (key, value) {
                     switch (key) {
-                        case "QuickRepEnabled": QuickRepEnabled = value;
+                        case "QuickRepEnabled": $("#QuickRep").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }
                 })
             })
-            if (QuickRepEnabled !== false) {
-                $("#QuickRep").prop('checked', true);
-            }
+
         });
     });
 }
@@ -317,15 +291,17 @@ function saveForumChanges() {
 }
 
 function loadForumChanges() {
-    var ForumChangesForumRatingEnabled, ForumChangesEnhancedSYTEnabled;
+    $("#ForumChangesForumRating").prop('checked', true);
+    $("#ForumChangesEnhancedSYT").prop('checked', true);
+    //saveForumChanges();
     chrome.storage.sync.get("ForumChanges", function (data) {
         $.each(data, function (index, data) {
             $.each(data, function (index, data) {
                 $.each(data, function (key, value) {
                     switch (key) {
-                        case "ForumChangesForumRatingEnabled": ForumChangesForumRatingEnabled = value;
+                        case "ForumChangesForumRatingEnabled": $("#ForumChangesForumRating").prop('checked', value);
                             break;
-                        case "ForumChangesEnhancedSYTEnabled": ForumChangesEnhancedSYTEnabled = value;
+                        case "ForumChangesEnhancedSYTEnabled": $("#ForumChangesEnhancedSYT").prop('checked', value);
                             break;
                         case "ForumChangesHideClosedEnabled": $("#ForumChangesHideClosed").prop('checked', value);
                             break;
@@ -335,12 +311,7 @@ function loadForumChanges() {
                     }
                 })
             })
-            if (ForumChangesForumRatingEnabled !== false) {
-                $("#ForumChangesForumRating").prop('checked', true);
-            }
-            if (ForumChangesEnhancedSYTEnabled !== false) {
-                $("#ForumChangesEnhancedSYT").prop('checked', true);
-            }
+
         });
     });
 }
@@ -360,13 +331,15 @@ function savePMChanges() {
 }
 
 function loadPMChanges() {
-    var PMChangesQuoteStripping, ForumChangesEnhancedSYTEnable;
+    $("#PMChangesQuoteStripping").prop('checked', true);
+    $("#PMChangesTrackingLinks").prop('checked', true);
+    //savePMChanges();
     chrome.storage.sync.get("PMChanges", function (data) {
         $.each(data, function (index, data) {
             $.each(data, function (index, data) {
                 $.each(data, function (key, value) {
                     switch (key) {
-                        case "PMChangesQuoteStripping": PMChangesQuoteStripping = value;
+                        case "PMChangesQuoteStripping": $("#PMChangesQuoteStripping").prop('checked', value);
                             break;
                         case "PMChangesSalutationEnable": $("#PMChangesSalutation").prop('checked', value);
                             break;
@@ -376,18 +349,13 @@ function loadPMChanges() {
                             break;
                         case "PMChangesSignatureText": $("#PMChangesSignatureText").val(value);
                             break;
-                        case "PMChangesTrackingLinksEnable": ForumChangesEnhancedSYTEnable = value;
+                        case "PMChangesTrackingLinksEnable": $("#PMChangesTrackingLinks").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }
                 })
             })
-            if (PMChangesQuoteStripping !== false) {
-                $("#PMChangesQuoteStripping").prop('checked', true);
-            }
-            if (ForumChangesEnhancedSYTEnable !== false) {
-                $("#PMChangesTrackingLinks").prop('checked', true);
-            }
+            
         });
     });
 }
@@ -404,13 +372,14 @@ function saveImageChanges() {
 }
 
 function loadImageChanges() {
-    var ImageChangesMaxSizeEnable;
+    $("#ImageChangesMaxSize").prop('checked', true);
+    //saveImageChanges();
     chrome.storage.sync.get("ImageChanges", function (data) {
         $.each(data, function (index, data) {
             $.each(data, function (index, data) {
                 $.each(data, function (key, value) {
                     switch (key) {
-                        case "ImageChangesMaxSizeEnable": ImageChangesMaxSizeEnable = value;
+                        case "ImageChangesMaxSizeEnable": $("#ImageChangesMaxSize").prop('checked', value);
                             break;
                         case "ImageChangesReplaceBrokenEnable": $("#ImageChangesReplaceBroken").prop('checked', value);
                             break;
@@ -420,9 +389,7 @@ function loadImageChanges() {
                     }
                 })
             })
-            if (ImageChangesMaxSizeEnable !== false) {
-                $("#ImageChangesMaxSize").prop('checked', true);
-            }
+            
         });
     });
 }
@@ -443,27 +410,32 @@ function savePostOptions() {
 }
 
 function loadPostOptions() {
-    var PostOptionsThreadRatingEnable, PostOptionsPoTEnable, PostOptionsThreadsEnable,
-        PostOptionsPostsEnable, PMChangesPMFromPostEnable, AnnoyanceFixerFullscreenYoutubeEnable,
-        AnnoyanceFixerShowBlockedPostsEnable;
+    $("#PostOptionsThreadRating").prop('checked', true);
+    $("#PostOptionsPoT").prop('checked', true);
+    $("#PostOptionsThreads").prop('checked', true);
+    $("#PostOptionsPosts").prop('checked', true);
+    $("#PMChangesPMFromPost").prop('checked', true);
+    $("#AnnoyanceFixerFullscreenYoutube").prop('checked', true);
+    $("#AnnoyanceFixerShowBlockedPosts").prop('checked', true);
+    //savePostOptions();
     chrome.storage.sync.get("PostOptions", function (data) {
         $.each(data, function (index, data) {
             $.each(data, function (index, data) {
                 $.each(data, function (key, value) {
                     switch (key) {
-                        case "PostOptionsThreadRatingEnable": PostOptionsThreadRatingEnable = value;
+                        case "PostOptionsThreadRatingEnable": $("#PostOptionsThreadRating").prop('checked', value);
                             break;
-                        case "PostOptionsPoTEnable": PostOptionsPoTEnable = value;
+                        case "PostOptionsPoTEnable": $("#PostOptionsPoT").prop('checked', value);
                             break;
-                        case "PostOptionsThreadsEnable": PostOptionsThreadsEnable = value;
+                        case "PostOptionsThreadsEnable": $("#PostOptionsThreads").prop('checked', value);
                             break;
-                        case "PostOptionsPostsEnable": PostOptionsPostsEnable = value;
+                        case "PostOptionsPostsEnable": $("#PostOptionsPosts").prop('checked', value);
                             break;
-                        case "PMChangesPMFromPostEnable": PMChangesPMFromPostEnable = value;
+                        case "PMChangesPMFromPostEnable": $("#PMChangesPMFromPost").prop('checked', value);
                             break;
-                        case "AnnoyanceFixerFullscreenYoutubeEnable": AnnoyanceFixerFullscreenYoutubeEnable = value;
+                        case "AnnoyanceFixerFullscreenYoutubeEnable": $("#AnnoyanceFixerFullscreenYoutube").prop('checked', value);
                             break;
-                        case "AnnoyanceFixerShowBlockedPostsEnable": AnnoyanceFixerShowBlockedPostsEnable = value;
+                        case "AnnoyanceFixerShowBlockedPostsEnable": $("#AnnoyanceFixerShowBlockedPosts").prop('checked', value);
                             break;
                         case "AnnoyanceFixerHideBlockedPostsEnable": $("#AnnoyanceFixerHideBlockedPosts").prop('checked', value);
                             break;
@@ -471,27 +443,7 @@ function loadPostOptions() {
                     }
                 })
             })
-            if (PostOptionsThreadRatingEnable !== false) {
-                $("#PostOptionsThreadRating").prop('checked', true);
-            }
-            if (PostOptionsPoTEnable !== false) {
-                $("#PostOptionsPoT").prop('checked', true);
-            }
-            if (PostOptionsThreadsEnable !== false) {
-                $("#PostOptionsThreads").prop('checked', true);
-            }
-            if (PostOptionsPostsEnable !== false) {
-                $("#PostOptionsPosts").prop('checked', true);
-            }
-            if (PMChangesPMFromPostEnable !== false) {
-                $("#PMChangesPMFromPost").prop('checked', true);
-            }
-            if (AnnoyanceFixerFullscreenYoutubeEnable !== false) {
-                $("#AnnoyanceFixerFullscreenYoutube").prop('checked', true);
-            }
-            if (AnnoyanceFixerShowBlockedPostsEnable !== false) {
-                $("#AnnoyanceFixerShowBlockedPosts").prop('checked', true);
-            }
+            
         });
     });
 }
@@ -523,21 +475,20 @@ function loadUserTag() {
 }
 
 function loadOnlineSorting() {
-    var OnlineSortingEnable;
+    $("#OnlineSortingEnable").prop('checked', true);
+    //saveOnlineSorting();
     chrome.storage.sync.get("OnlineSorting", function (data) {
         $.each(data, function (index, data) {
             $.each(data, function (index, data) {
                 $.each(data, function (key, value) {
                     switch (key) {
-                        case "OnlineSortingEnable": OnlineSortingEnable = value;
+                        case "OnlineSortingEnable": $("#OnlineSortingEnable").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }
                 })
             })
-            if (OnlineSortingEnable !== false) {
-                $("#OnlineSortingEnable").prop('checked', true);
-            }
+            
         });
     });
 }
@@ -552,26 +503,23 @@ function saveOnlineSorting(){
 }
 
 function loadRepCharts() {
-    var RepChartsEnable, RepChartsLinksEnable;
+    $("#RepChartsEnable").prop('checked', true);
+    $("#RepChartsLinksEnable").prop('checked', true);
+    //saveRepCharts();
     chrome.storage.sync.get("RepCharts", function (data) {
         $.each(data, function (index, data) {
             $.each(data, function (index, data) {
                 $.each(data, function (key, value) {
                     switch (key) {
-                        case "RepChartsEnable": RepChartsEnable = value;
+                        case "RepChartsEnable": $("#RepChartsEnable").prop('checked', value);
                             break;
-                        case "RepChartsLinksEnable": RepChartsLinksEnable = value;
+                        case "RepChartsLinksEnable": $("#RepChartsLinksEnable").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }
                 })
             })
-            if (RepChartsEnable !== false) {
-                $("#RepChartsEnable").prop('checked', true);
-            }
-            if (RepChartsLinksEnable !== false) {
-                $("#RepChartsLinksEnable").prop('checked', true);
-            }
+            
         });
     });
 }

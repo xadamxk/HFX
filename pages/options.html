@@ -22,16 +22,30 @@
      -->
     <body id="bodyTag">
         <ul class="nav nav-pills nav-stacked tabs-left" id="navigation">
-            <li class="active"><a data-toggle="tab" href="#general">General</a></li>
+            <li class="active"><a data-toggle="tab" href="#aboutHFX">About HFX</a></li>
+            <li><a data-toggle="tab" href="#general">General</a></li>
             <li><a data-toggle="tab" href="#menuGlobal" id="generalShowGlobal">Global</a></li>
             <li><a data-toggle="tab" href="#menuThread" id="generalShowThread">Thread</a></li>
             <li><a data-toggle="tab" href="#menuForum" id="generalShowForum">Forum</a></li>
             <li><a data-toggle="tab" href="#menuPM" id="generalShowPM">PM</a></li>
         </ul>
         
-        <div class="tab-content">
+        <div class="tab-content" id="optionBodyTag">
+            <!-- About -->
+            <div id="aboutHFX" class="tab-pane fade in active">
+                <h3>About HFX</h3>
+                <!-- Container -->
+                <div class="panel panel-default" id="aboutPanel" align="center">
+                    <img src="../images/banner-small.png" id="headerImage" alt="HFX Header">
+                    <h3>Enhance your HF Experience!</h3>
+                    <h4>Written By: <a href="https://hackforums.net/member.php?action=profile&uid=1306528">xadamxk</a></h4>
+                    <!--<img src="../images/avatar_hf_gradcap.png_transparent.png" class="logoImage" id="hfAvatarImage" alt="HF Avatar Logo">-->
+                    <a href="https://chrome.google.com/webstore/detail/hf-xtension/hcfofmfmidhgbblcnnipcphhegcmdeeb"><img src="../images/ChromeWebStore01.png" id="chromeStoreImage" class="logoImage" alt="Chrome Web Store Logo"></a>
+                    <!--<img src="../images/GitHub-Mark-120px-plus.png" class="logoImage" id="githubLogoImage" alt="Github Logo">-->
+                </div>
+            </div>
             <!-- General -->
-            <div id="general" class="tab-pane fade in active">
+            <div id="general" class="tab-pane fade in">
                 <h3>General Changes</h3>
                 <p></p>
                 <!-- Postbit Hide -->
