@@ -74,6 +74,9 @@ $(document).ready(function () {
 });
 
 function loadSettings() {
+    // Defaults
+    loadDefaults();
+    // Grab from memory
     loadPostbitHide();
     loadRepCharts();
     loadOnlineSorting();
@@ -88,6 +91,20 @@ function loadSettings() {
     loadLivePreview();
 }
 
+function loadDefaults() {
+    loadSmartQuotesDefault();
+    loadLivePreviewDefault();
+    loadGlobalChangesDefault();
+    loadQuickRepChangesDefault();
+    loadForumChangesDefault();
+    loadPMChangesDefault();
+    loadImageChangesDefault();
+    loadPostOptionsDefault();
+    loadOnlineSortingDefault();
+    loadRepChartsDefault();
+    loadPostbitHideDefault();
+}
+
 function saveLivePreview() {
     chrome.storage.sync.set({
         LivePreviewChanges:
@@ -99,10 +116,13 @@ function saveLivePreview() {
     });
 }
 
-function loadLivePreview() {
+function loadLivePreviewDefault() {
     $("#LivePreviewChangesEnable").prop('checked', true);
     $("#LivePreviewChangesCollapse").prop('checked', true);
     $("#GlobalChangesCharacterCounter").prop('checked', true);
+}
+
+function loadLivePreview() {
     //saveLivePreview();
     chrome.storage.sync.get("LivePreviewChanges", function (data) {
         $.each(data, function (index, data) {
@@ -121,6 +141,7 @@ function loadLivePreview() {
             })
 
         });
+        saveLivePreview();
     });
 }
 
@@ -134,9 +155,12 @@ function saveSmartQuotes() {
     });
 }
 
-function loadSmartQuotes() {
+function loadSmartQuotesDefault() {
     $("#SmartQuotesEnable").prop('checked', true);
     $("#SmartQuotesMentionCount").prop('checked', true);
+}
+
+function loadSmartQuotes() {
     //saveSmartQuotes();
     chrome.storage.sync.get("SmartQuoteChanges", function (data) {
         $.each(data, function (index, data) {
@@ -152,6 +176,7 @@ function loadSmartQuotes() {
                 })
             })
         });
+        saveSmartQuotes();
     });
 }
 
@@ -187,12 +212,24 @@ function saveGlobalChanges() {
     });
 }
 
-function loadGlobalChanges() {
+function loadGlobalChangesDefault() {
     $("#HideLocation").prop('checked', true);
     $("#GlobalChangesEasyCite").prop('checked', true);
     $("#GlobalChangesHFTBEnabled").prop('checked', true);
     $("#GlobalChangesHFTBStickyEnabled").prop('checked', true);
+    $("#GlobalChangesUserNotes").prop('checked', true);
     $("#GlobalChangesNewPostLinks").prop('checked', true);
+    $("#GlobalChangesHFTBFav1Text").val("Lounge");
+    $("#GlobalChangesHFTBFav1Link").val("https://hackforums.net/forumdisplay.php?fid=25");
+    $("#GlobalChangesHFTBFav2Text").val("RANF");
+    $("#GlobalChangesHFTBFav2Link").val("https://hackforums.net/forumdisplay.php?fid=2");
+    $("#GlobalChangesHFTBFav3Text").val("Groups");
+    $("#GlobalChangesHFTBFav3Link").val("https://hackforums.net/forumdisplay.php?fid=53");
+    $("#GlobalChangesHFTBFav4Text").val("PM Tracking");
+    $("#GlobalChangesHFTBFav4Link").val("https://hackforums.net/private.php?action=tracking");
+}
+
+function loadGlobalChanges() {
     //saveGlobalChanges();
     chrome.storage.sync.get("GlobalChanges", function (data) {
         $.each(data, function (index, data) {
@@ -247,6 +284,7 @@ function loadGlobalChanges() {
             })
 
         });
+        saveGlobalChanges();
     });
 }
 
@@ -259,8 +297,11 @@ function saveQuickRepChanges() {
     });
 }
 
-function loadQuickRepChanges() {
+function loadQuickRepChangesDefault() {
     $("#QuickRep").prop('checked', true);
+}
+
+function loadQuickRepChanges() {
     //saveQuickRepChanges();
     chrome.storage.sync.get("QuickRepChanges", function (data) {
         $.each(data, function (index, data) {
@@ -275,6 +316,7 @@ function loadQuickRepChanges() {
             })
 
         });
+        saveQuickRepChanges();
     });
 }
 
@@ -290,9 +332,12 @@ function saveForumChanges() {
     });
 }
 
-function loadForumChanges() {
+function loadForumChangesDefault() {
     $("#ForumChangesForumRating").prop('checked', true);
     $("#ForumChangesEnhancedSYT").prop('checked', true);
+}
+
+function loadForumChanges() {
     //saveForumChanges();
     chrome.storage.sync.get("ForumChanges", function (data) {
         $.each(data, function (index, data) {
@@ -313,6 +358,7 @@ function loadForumChanges() {
             })
 
         });
+        saveForumChanges();
     });
 }
 
@@ -330,9 +376,12 @@ function savePMChanges() {
     });
 }
 
-function loadPMChanges() {
+function loadPMChangesDefault() {
     $("#PMChangesQuoteStripping").prop('checked', true);
     $("#PMChangesTrackingLinks").prop('checked', true);
+}
+
+function loadPMChanges() {
     //savePMChanges();
     chrome.storage.sync.get("PMChanges", function (data) {
         $.each(data, function (index, data) {
@@ -357,6 +406,7 @@ function loadPMChanges() {
             })
             
         });
+        savePMChanges();
     });
 }
 
@@ -371,8 +421,11 @@ function saveImageChanges() {
     });
 }
 
-function loadImageChanges() {
+function loadImageChangesDefault() {
     $("#ImageChangesMaxSize").prop('checked', true);
+}
+
+function loadImageChanges() {
     //saveImageChanges();
     chrome.storage.sync.get("ImageChanges", function (data) {
         $.each(data, function (index, data) {
@@ -391,6 +444,7 @@ function loadImageChanges() {
             })
             
         });
+        saveImageChanges();
     });
 }
 
@@ -409,7 +463,7 @@ function savePostOptions() {
     });
 }
 
-function loadPostOptions() {
+function loadPostOptionsDefault() {
     $("#PostOptionsThreadRating").prop('checked', true);
     $("#PostOptionsPoT").prop('checked', true);
     $("#PostOptionsThreads").prop('checked', true);
@@ -417,6 +471,9 @@ function loadPostOptions() {
     $("#PMChangesPMFromPost").prop('checked', true);
     $("#AnnoyanceFixerFullscreenYoutube").prop('checked', true);
     $("#AnnoyanceFixerShowBlockedPosts").prop('checked', true);
+}
+
+function loadPostOptions() {
     //savePostOptions();
     chrome.storage.sync.get("PostOptions", function (data) {
         $.each(data, function (index, data) {
@@ -445,6 +502,7 @@ function loadPostOptions() {
             })
             
         });
+        savePostOptions();
     });
 }
 
@@ -471,11 +529,15 @@ function loadUserTag() {
             })
 
         });
+        saveUserTag();
     });
 }
 
-function loadOnlineSorting() {
+function loadOnlineSortingDefault() {
     $("#OnlineSortingEnable").prop('checked', true);
+}
+
+function loadOnlineSorting() {
     //saveOnlineSorting();
     chrome.storage.sync.get("OnlineSorting", function (data) {
         $.each(data, function (index, data) {
@@ -488,8 +550,8 @@ function loadOnlineSorting() {
                     }
                 })
             })
-            
         });
+        saveOnlineSorting();
     });
 }
 
@@ -502,9 +564,12 @@ function saveOnlineSorting(){
     });
 }
 
-function loadRepCharts() {
+function loadRepChartsDefault() {
     $("#RepChartsEnable").prop('checked', true);
     $("#RepChartsLinksEnable").prop('checked', true);
+}
+
+function loadRepCharts() {
     //saveRepCharts();
     chrome.storage.sync.get("RepCharts", function (data) {
         $.each(data, function (index, data) {
@@ -519,8 +584,8 @@ function loadRepCharts() {
                     }
                 })
             })
-            
         });
+        saveRepCharts();
     });
 }
 
@@ -549,6 +614,10 @@ function savePostbitHide() {
     }, function () {
         // Save Confirmation
     });
+}
+
+function loadPostbitHideDefault() {
+    //
 }
 
 function loadPostbitHide() {
@@ -587,5 +656,6 @@ function loadPostbitHide() {
             })
             
         });
+        savePostbitHide();
     });
 }

@@ -68,8 +68,10 @@ body{
 }
 
 #githubLogoImage{
-    width: 75px;
-    height: 75px;
+    width: 250px;
+    height: 102px;
+    border: 1px solid black;
+    border-radius: 10px;
 }
 
 #hfAvatarImage{
