@@ -33,6 +33,7 @@ var noteBubbleCSS = {
     "text-shadow": "none"
 };
 var addNewPosts = false;
+var injectHFXBadge = true;
 getGlobalSettings();
 
 // Set vars equal to saved settings
@@ -117,7 +118,43 @@ function injectGlobalChanges() {
     if (addNewPosts) {
         injectNewPosts();
     }
+    if (injectHFXBadge) {
+        injectHFXBadges();
+    }
+}
 
+function injectHFXBadges() {
+    if (location.href.includes("/member.php?action=profile&uid=")) {
+        //
+        injectBadgesProfile();
+    } else if (location.href.includes("/showthread.php?tid=") | location.href.includes("/showthread.php?pid=")) {
+        //
+        injectBadgesThread();
+    }
+}
+
+function injectBadgesProfile() {
+    //
+}
+
+function injectBadgesThread() {
+    // will be a string - find out
+    var badgeList = readBadgeList();
+    var uid;
+    $("#posts > table").each(function (indexPost) {
+        uid = $(this).find(".post_author > strong > span > a").attr('href').match(/\d+/)[0];
+        // Loop through badgeList for matches
+
+        // If found, append them
+        $(this).find($(".post_author:eq(" + indexPost + ") > .smalltext").after("sddgsdagff").after($("<br>")));
+    });
+}
+
+function readBadgeList() {
+    //
+    var badgeList = "";
+
+    return badgeList;
 }
 
 function injectNewPosts() {
