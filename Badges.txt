@@ -1,2 +1,5 @@
 {
+	"testers": [1306528],
+	"supporters": [561239],
+	"donators": [1]
 }
