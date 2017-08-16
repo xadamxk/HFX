@@ -160,7 +160,7 @@ function enablePostOptions() {
                 .css({ "cursor": "pointer"})
                 .addClass("bitButton");
             // Replace PM button
-            $(this).find(".bitButton:eq(0)").replaceWith(newPMButton);
+            $(this).find(".bitButton[title='Send this user a private message']").replaceWith(newPMButton);
 
             // Get Post Link
             $(this).find(".smalltext > strong > a:eq(0)").each(function (index) {

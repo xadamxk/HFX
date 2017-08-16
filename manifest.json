@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "HF Xtension",
   "short_name": "HFX",
-  "version": "0.0.0.24",
+  "version": "0.0.0.25",
   "icons": {
     "16": "images/icon16.png",
     "32": "images/icon32.png",

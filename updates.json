@@ -1,0 +1,13 @@
+{
+  "addons": {
+    "addon@example.com": {
+      "updates": [
+        {
+          "version": "0.0.0.25",
+          "update_link": "https://github.com/xadamxk/HFX/releases/download/0.0.0.25/HFX_FireFox.xpi"
+        }
+        }
+      ]
+    }
+  }
+}
