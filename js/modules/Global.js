@@ -145,6 +145,7 @@ function injectBadgesProfile(badgeList) {
 
 function injectBadgesThread(badgeList) {
     var uid;
+    console.log("inject badge on thread");
     $("#posts > table").each(function (indexPost) {
         uid = $(this).find(".post_author > strong > span > a").attr('href').match(/\d+/)[0];
         $(this).find($(".post_author:eq(" + indexPost + ") > .smalltext")
@@ -158,18 +159,28 @@ function injectBadgesThread(badgeList) {
 }
 
 function searchBadgeList(badgeList, selectingElement, uid) {
+    var testersLink, supportersLink, donatorsLink;
     // Loop through badgeList for matches
     $.each(badgeList, function (key1, value1) {
         $.each(value1, function (key2, value2) {
             switch (key1) {
+                case "testersLink":
+                    testersLink = value2;
+                    break;
+                case "testersLink":
+                    supportersLink = value2;
+                    break;
+                case "testersLink":
+                    donatorsLink = value2;
+                    break;
                 case "testers":
                     if (uid == value2) {
                         selectingElement
                             .append($("<img>").attr(
                             {
-                                "src": "https://hackforums.net/uploads/awards/blue_diamond.png",
+                                "src": "https://raw.githubusercontent.com/xadamxk/HFX/master/images/trophy_testers.png",
                                 "title": "HFX Alpha Tester"
-                            }));
+                            }).css({ "padding-right": "5px" }));
                     }
                     break;
                 case "supporters":
@@ -177,9 +188,9 @@ function searchBadgeList(badgeList, selectingElement, uid) {
                         selectingElement
                             .append($("<img>").attr(
                             {
-                                "src": "https://hackforums.net/uploads/awards/donator.png",
+                                "src": "https://raw.githubusercontent.com/xadamxk/HFX/master/images/trophy_supporters.png",
                                 "title": "HFX Supporter"
-                            }));
+                            }).css({ "padding-right": "5px" }));
                     }
                     break;
                 case "donators":
@@ -187,9 +198,9 @@ function searchBadgeList(badgeList, selectingElement, uid) {
                         selectingElement
                             .append($("<img>").attr(
                             {
-                                "src": "https://hackforums.net/uploads/awards/symbol-dollar_24.png",
+                                "src": "https://raw.githubusercontent.com/xadamxk/HFX/master/images/trophy_donators.png",
                                 "title": "HFX Donator"
-                            }));
+                            }).css({ "padding-right": "5px" }));
                     }
                     break;
 
@@ -200,21 +211,17 @@ function searchBadgeList(badgeList, selectingElement, uid) {
 
 function readBadgeList() {
     //
-    console.log("readBadgeList");
     var badgeList;
-    $.get('https://raw.githubusercontent.com/xadamxk/HFX/master/Badges.json',  function (responseText) {
+    // Credit to Emylbus for no cache method
+    $.get('https://raw.githubusercontent.com/xadamxk/HFX/master/Badges.json'+ "?nc=" + Math.random(), function (responseText) {
         if (location.href.includes("/member.php?action=profile&uid=")) {
-            //
-            console.log("profile");
-            var badgeList = $.parseJSON(responseText);
-            injectBadgesProfile(badgeList);
+            //var badgeList = $.parseJSON(responseText);
+            injectBadgesProfile(responseText);
         } else if (location.href.includes("/showthread.php?tid=") | location.href.includes("/showthread.php?pid=")) {
-            //
-            console.log("thread/post");
-            var badgeList = $.parseJSON(responseText);
-            injectBadgesThread(badgeList);
+            //var badgeList = $.parseJSON(responseText);
+            injectBadgesThread(responseText);
         }
-    });
+    }, "json");
 }
 
 function injectNewPosts() {
