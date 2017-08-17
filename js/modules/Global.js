@@ -139,14 +139,33 @@ function injectBadgesProfile(badgeList) {
             .append($("<td>").addClass("trow2")
                 .append($("<strong>").text("HFX Badges:")))
             .append($("<td>").addClass("trow2").attr("id", "hfxBadgeContainer")));
+    var selectingElement = $("#hfxBadgeContainer");
+    searchBadgeList(badgeList, selectingElement,uid);
+}
+
+function injectBadgesThread(badgeList) {
+    var uid;
+    $("#posts > table").each(function (indexPost) {
+        uid = $(this).find(".post_author > strong > span > a").attr('href').match(/\d+/)[0];
+        $(this).find($(".post_author:eq(" + indexPost + ") > .smalltext")
+            .after($("<div>").addClass("hfxBadgeContainer")));
+        var selectingElement = $(".hfxBadgeContainer:eq(" + indexPost + ")");
+        searchBadgeList(badgeList, selectingElement, uid);
+        // If found, append them
+        $(this).find($(".post_author:eq(" + indexPost + ") > .smalltext").after($("<br>")));
+        
+    });
+}
+
+function searchBadgeList(badgeList, selectingElement, uid) {
     // Loop through badgeList for matches
     $.each(badgeList, function (key1, value1) {
         $.each(value1, function (key2, value2) {
             switch (key1) {
                 case "testers":
-                    if (uid == value1) {
-                        console.log("weiner");
-                        $("#hfxBadgeContainer").append($("<img>").attr(
+                    if (uid == value2) {
+                        selectingElement
+                            .append($("<img>").attr(
                             {
                                 "src": "https://hackforums.net/uploads/awards/blue_diamond.png",
                                 "title": "HFX Alpha Tester"
@@ -154,8 +173,9 @@ function injectBadgesProfile(badgeList) {
                     }
                     break;
                 case "supporters":
-                    if (uid == value1) {
-                        $("#hfxBadgeContainer").append($("<img>").attr(
+                    if (uid == value2) {
+                        selectingElement
+                            .append($("<img>").attr(
                             {
                                 "src": "https://hackforums.net/uploads/awards/donator.png",
                                 "title": "HFX Supporter"
@@ -163,8 +183,9 @@ function injectBadgesProfile(badgeList) {
                     }
                     break;
                 case "donators":
-                    if (uid == value1) {
-                        $("#hfxBadgeContainer").append($("<img>").attr(
+                    if (uid == value2) {
+                        selectingElement
+                            .append($("<img>").attr(
                             {
                                 "src": "https://hackforums.net/uploads/awards/symbol-dollar_24.png",
                                 "title": "HFX Donator"
@@ -174,54 +195,6 @@ function injectBadgesProfile(badgeList) {
 
             }
         });
-    });
-}
-
-function injectBadgesThread(badgeList) {
-    var uid;
-    $("#posts > table").each(function (indexPost) {
-        uid = $(this).find(".post_author > strong > span > a").attr('href').match(/\d+/)[0];
-        // Loop through badgeList for matches
-        $.each(badgeList, function (key1, value1) {
-            $.each(value1, function (key2, value2) {
-                switch (key1) {
-                    case "testers":
-                        if (uid == value1) {
-                            $(this).find($(".post_author:eq(" + indexPost + ") > .smalltext")
-                                .after($("<img>").attr(
-                                {
-                                    "src": "https://hackforums.net/uploads/awards/blue_diamond.png",
-                                    "title": "HFX Alpha Tester"
-                                })));
-                        }
-                        break;
-                    case "supporters":
-                        if (uid == value1) {
-                            $(this).find($(".post_author:eq(" + indexPost + ") > .smalltext")
-                                .after($("<img>").attr(
-                                {
-                                    "src": "https://hackforums.net/uploads/awards/donator.png",
-                                    "title": "HFX Supporter"
-                                })));
-                        }
-                        break;
-                    case "donators":
-                        if (uid == value1) {
-                            $(this).find($(".post_author:eq(" + indexPost + ") > .smalltext")
-                                .after($("<img>").attr(
-                                {
-                                    "src": "https://hackforums.net/uploads/awards/symbol-dollar_24.png",
-                                    "title": "HFX Donator"
-                                })));
-                        }
-                        break;
-
-                }
-            });
-        });
-        // If found, append them
-        $(this).find($(".post_author:eq(" + indexPost + ") > .smalltext").after($("<br>")));
-        
     });
 }
 
