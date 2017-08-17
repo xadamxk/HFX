@@ -99,6 +99,9 @@ function getGlobalSettings() {
 }
 
 function injectGlobalChanges() {
+    if (injectHFXBadge) {
+        injectHFXBadges();
+    }
     if (enableHideLocation) {
         injectHideLocation();
     }
@@ -118,9 +121,6 @@ function injectGlobalChanges() {
     if (addNewPosts) {
         injectNewPosts();
     }
-    if (injectHFXBadge) {
-        injectHFXBadges();
-    }
 }
 
 function injectHFXBadges() {
@@ -137,7 +137,7 @@ function injectBadgesProfile(badgeList) {
     $("strong:contains(Awards:)").parent().parent()
         .after($("<tr>")
             .append($("<td>").addClass("trow2")
-                .append($("<strong>").text("HFX Badges:")))
+                .append($("<strong>").text("HFX Trophies:")))
             .append($("<td>").addClass("trow2").attr("id", "hfxBadgeContainer")));
     var selectingElement = $("#hfxBadgeContainer");
     searchBadgeList(badgeList, selectingElement,uid);

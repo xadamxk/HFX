@@ -110,7 +110,8 @@ function saveLivePreview() {
         LivePreviewChanges:
             [{ 'LivePreviewChangesEnabled': $("#LivePreviewChangesEnable").is(':checked') },
             { 'LivePreviewChangesCollapsed': $("#LivePreviewChangesCollapse").is(':checked') },
-            { 'GlobalChangesCharacterCounterEnabled': $("#GlobalChangesCharacterCounter").is(':checked') }]
+            { 'GlobalChangesCharacterCounterEnabled': $("#GlobalChangesCharacterCounter").is(':checked') },
+            { 'GlobalChangesLeaveWarning': $("#GlobalChangesLeaveWarning").is(':checked') }]
     }, function () {
         // Save Confirmation
     });
@@ -120,6 +121,7 @@ function loadLivePreviewDefault() {
     $("#LivePreviewChangesEnable").prop('checked', true);
     $("#LivePreviewChangesCollapse").prop('checked', true);
     $("#GlobalChangesCharacterCounter").prop('checked', true);
+    $("#GlobalChangesLeaveWarning").prop('checked', true);
 }
 
 function loadLivePreview() {
@@ -134,6 +136,8 @@ function loadLivePreview() {
                         case "LivePreviewChangesCollapsed": $("#LivePreviewChangesCollapse").prop('checked', value);
                             break;
                         case "GlobalChangesCharacterCounterEnabled": $("#GlobalChangesCharacterCounter").prop('checked', value);
+                            break;
+                        case "GlobalChangesLeaveWarning": $("#GlobalChangesLeaveWarning").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }

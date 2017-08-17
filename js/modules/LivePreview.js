@@ -2,6 +2,7 @@ var debug = false;
 var enableLivePreview = false;
 var collapseLivePreviewByDefault = false;
 var characterCounterEnabled = false;
+var enableLeaveWarning = false;
 getLivePreview();
 
 // Set vars equal to saved settings
@@ -17,6 +18,8 @@ function getLivePreview() {
                             case "LivePreviewChangesCollapsed": if (value) { collapseLivePreviewByDefault = value; }
                                 break;
                             case "GlobalChangesCharacterCounterEnabled": if (value) { characterCounterEnabled = value; }
+                                break;
+                            case "GlobalChangesLeaveWarning": if (value) { enableLeaveWarning = value; }
                                 break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
@@ -36,6 +39,47 @@ function injectLivePreviewChanges() {
     }
     if (characterCounterEnabled) {
         injectCharacterCounterChanges();
+    }
+}
+
+function injectLeaveWarning() {
+    hasText = false;
+
+    $(document.body).click(function (e) {
+        if (!$(e.target).is("form input")) {
+            console.log("not submit button");
+            return;
+        } 
+    });
+
+    $('textarea#message_new').keyup('change', function () {
+        console.log("message new change");
+        if ($('textarea#message_new').val() != '') {
+            hasText = true;
+        } else {
+            hasText = false;
+        }
+        warnUserOnUnload(hasText);
+
+    });
+
+    $('textarea#message').keyup('change', function () {
+        console.log("message change");
+        if ($('textarea#message').val() != '') {
+            hasText = true;
+        } else {
+            hasText = false;
+        }
+        warnUserOnUnload(hasText);
+    });
+
+}
+
+function warnUserOnUnload(hasText) {
+    if(hasText){
+        $(window).bind('beforeunload', function (event) {
+            window.event.returnValue = "teeeest";
+        });
     }
 }
 
