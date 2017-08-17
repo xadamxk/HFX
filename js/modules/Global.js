@@ -145,7 +145,6 @@ function injectBadgesProfile(badgeList) {
 
 function injectBadgesThread(badgeList) {
     var uid;
-    console.log("inject badge on thread");
     $("#posts > table").each(function (indexPost) {
         uid = $(this).find(".post_author > strong > span > a").attr('href').match(/\d+/)[0];
         $(this).find($(".post_author:eq(" + indexPost + ") > .smalltext")
@@ -167,18 +166,26 @@ function searchBadgeList(badgeList, selectingElement, uid) {
                 case "testersLink":
                     testersLink = value2;
                     break;
-                case "testersLink":
+                case "supportersLink":
                     supportersLink = value2;
                     break;
-                case "testersLink":
+                case "donatorsLink":
                     donatorsLink = value2;
                     break;
+            }
+        });
+    });
+
+    console.log();
+    $.each(badgeList, function (key1, value1) {
+        $.each(value1, function (key2, value2) {
+            switch (key1) {
                 case "testers":
                     if (uid == value2) {
                         selectingElement
                             .append($("<img>").attr(
                             {
-                                "src": "https://raw.githubusercontent.com/xadamxk/HFX/master/images/trophy_testers.png",
+                                "src": testersLink,
                                 "title": "HFX Alpha Tester"
                             }).css({ "padding-right": "5px" }));
                     }
@@ -188,7 +195,7 @@ function searchBadgeList(badgeList, selectingElement, uid) {
                         selectingElement
                             .append($("<img>").attr(
                             {
-                                "src": "https://raw.githubusercontent.com/xadamxk/HFX/master/images/trophy_supporters.png",
+                                "src": supportersLink,
                                 "title": "HFX Supporter"
                             }).css({ "padding-right": "5px" }));
                     }
@@ -198,7 +205,7 @@ function searchBadgeList(badgeList, selectingElement, uid) {
                         selectingElement
                             .append($("<img>").attr(
                             {
-                                "src": "https://raw.githubusercontent.com/xadamxk/HFX/master/images/trophy_donators.png",
+                                "src": donatorsLink,
                                 "title": "HFX Donator"
                             }).css({ "padding-right": "5px" }));
                     }
