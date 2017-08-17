@@ -200,14 +200,17 @@ function searchBadgeList(badgeList, selectingElement, uid) {
 
 function readBadgeList() {
     //
+    console.log("readBadgeList");
     var badgeList;
     $.get('https://raw.githubusercontent.com/xadamxk/HFX/master/Badges.json',  function (responseText) {
         if (location.href.includes("/member.php?action=profile&uid=")) {
             //
+            console.log("profile");
             var badgeList = $.parseJSON(responseText);
             injectBadgesProfile(badgeList);
         } else if (location.href.includes("/showthread.php?tid=") | location.href.includes("/showthread.php?pid=")) {
             //
+            console.log("thread/post");
             var badgeList = $.parseJSON(responseText);
             injectBadgesThread(badgeList);
         }

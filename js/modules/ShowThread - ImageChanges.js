@@ -35,7 +35,7 @@ function injectImageChanges() {
     $(".post_body").find("img").each(function (index) {
         // Max Size
         if (maxSizeEnable) {
-            $(this).css({ "max-height": "100%", "max-width": "100%" });
+            $(this).css({ /*"max-height": "100%",*/ "max-width": "100%" });
         }
         // Force HTTPS
         if (forceHTTPSEnable) {
