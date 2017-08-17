@@ -175,8 +175,6 @@ function searchBadgeList(badgeList, selectingElement, uid) {
             }
         });
     });
-
-    console.log();
     $.each(badgeList, function (key1, value1) {
         $.each(value1, function (key2, value2) {
             switch (key1) {
