@@ -124,37 +124,121 @@ function injectGlobalChanges() {
 }
 
 function injectHFXBadges() {
-    if (location.href.includes("/member.php?action=profile&uid=")) {
-        //
-        injectBadgesProfile();
-    } else if (location.href.includes("/showthread.php?tid=") | location.href.includes("/showthread.php?pid=")) {
-        //
-        injectBadgesThread();
-    }
+    if (location.href.includes("/member.php?action=profile&uid=") ||
+        location.href.includes("/showthread.php?tid=") | 
+        location.href.includes("/showthread.php?pid=")) {
+            readBadgeList();
+        }
 }
 
-function injectBadgesProfile() {
-    //
+function injectBadgesProfile(badgeList) {
+    var uid = document.URL.split('uid=')[1];
+    // Append HFX Badges row
+    $("strong:contains(Awards:)").parent().parent()
+        .after($("<tr>")
+            .append($("<td>").addClass("trow2")
+                .append($("<strong>").text("HFX Badges:")))
+            .append($("<td>").addClass("trow2").attr("id", "hfxBadgeContainer")));
+    // Loop through badgeList for matches
+    $.each(badgeList, function (key1, value1) {
+        $.each(value1, function (key2, value2) {
+            switch (key1) {
+                case "testers":
+                    if (uid == value1) {
+                        console.log("weiner");
+                        $("#hfxBadgeContainer").append($("<img>").attr(
+                            {
+                                "src": "https://hackforums.net/uploads/awards/blue_diamond.png",
+                                "title": "HFX Alpha Tester"
+                            }));
+                    }
+                    break;
+                case "supporters":
+                    if (uid == value1) {
+                        $("#hfxBadgeContainer").append($("<img>").attr(
+                            {
+                                "src": "https://hackforums.net/uploads/awards/donator.png",
+                                "title": "HFX Supporter"
+                            }));
+                    }
+                    break;
+                case "donators":
+                    if (uid == value1) {
+                        $("#hfxBadgeContainer").append($("<img>").attr(
+                            {
+                                "src": "https://hackforums.net/uploads/awards/symbol-dollar_24.png",
+                                "title": "HFX Donator"
+                            }));
+                    }
+                    break;
+
+            }
+        });
+    });
 }
 
-function injectBadgesThread() {
-    // will be a string - find out
-    var badgeList = readBadgeList();
+function injectBadgesThread(badgeList) {
     var uid;
     $("#posts > table").each(function (indexPost) {
         uid = $(this).find(".post_author > strong > span > a").attr('href').match(/\d+/)[0];
         // Loop through badgeList for matches
+        $.each(badgeList, function (key1, value1) {
+            $.each(value1, function (key2, value2) {
+                switch (key1) {
+                    case "testers":
+                        if (uid == value1) {
+                            $(this).find($(".post_author:eq(" + indexPost + ") > .smalltext")
+                                .after($("<img>").attr(
+                                {
+                                    "src": "https://hackforums.net/uploads/awards/blue_diamond.png",
+                                    "title": "HFX Alpha Tester"
+                                })));
+                        }
+                        break;
+                    case "supporters":
+                        if (uid == value1) {
+                            $(this).find($(".post_author:eq(" + indexPost + ") > .smalltext")
+                                .after($("<img>").attr(
+                                {
+                                    "src": "https://hackforums.net/uploads/awards/donator.png",
+                                    "title": "HFX Supporter"
+                                })));
+                        }
+                        break;
+                    case "donators":
+                        if (uid == value1) {
+                            $(this).find($(".post_author:eq(" + indexPost + ") > .smalltext")
+                                .after($("<img>").attr(
+                                {
+                                    "src": "https://hackforums.net/uploads/awards/symbol-dollar_24.png",
+                                    "title": "HFX Donator"
+                                })));
+                        }
+                        break;
 
+                }
+            });
+        });
         // If found, append them
-        $(this).find($(".post_author:eq(" + indexPost + ") > .smalltext").after("sddgsdagff").after($("<br>")));
+        $(this).find($(".post_author:eq(" + indexPost + ") > .smalltext").after($("<br>")));
+        
     });
 }
 
 function readBadgeList() {
     //
-    var badgeList = "";
-
-    return badgeList;
+    var badgeList;
+    $.get('https://raw.githubusercontent.com/xadamxk/HFX/master/Badges.json',  function (responseText) {
+        if (location.href.includes("/member.php?action=profile&uid=")) {
+            //
+            var badgeList = $.parseJSON(responseText);
+            injectBadgesProfile(badgeList);
+        } else if (location.href.includes("/showthread.php?tid=") | location.href.includes("/showthread.php?pid=")) {
+            //
+            var badgeList = $.parseJSON(responseText);
+            injectBadgesThread(badgeList);
+        }
+    });
 }
 
 function injectNewPosts() {
@@ -763,4 +847,11 @@ function rgb2hex(rgb) {
         ("0" + parseInt(rgb[1], 10).toString(16)).slice(-2) +
         ("0" + parseInt(rgb[2], 10).toString(16)).slice(-2) +
         ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
+}
+
+function getType(p) {
+    if (Array.isArray(p)) return 'array';
+    else if (typeof p == 'string') return 'string';
+    else if (p != null && typeof p == 'object') return 'object';
+    else return 'other';
 }
