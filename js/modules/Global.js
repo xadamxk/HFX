@@ -587,7 +587,7 @@ function injectEasyCite() {
     var citationDescripion = $(".navigation").find(".active").text();
     var citationText = citationDescripion;
     // Append Cite Button
-    $(".navigation").append($("<button>").text("Cite").addClass("bitButton")).attr("id", "citeButton"); //.css("background","#333333")
+    $(".navigation").append($("<a>").text("Cite").addClass("bitButton").css("cursor", "pointer").attr("id", "citeButton")); //.css("background","#333333")
     // Profile Awards
     if (location.href.includes("/myawards.php?uid=")) {
         citationDescripion = $(".quick_keys").find("strong:contains('My Awards : ') a").text() + "'s " + $(".navigation").find(".active").text();
@@ -623,7 +623,7 @@ function injectEasyCite() {
             var tsButton = $(element);
             var postMessage = tsButton.parents("table.tborder");
             // Grab UID & create button
-            tsButton.parent().append($("<button>").text("Cite").attr("id", "citeButton" + index).addClass("bitButton").css("margin-right", "5px"));
+            tsButton.parent().append($("<a>").text("Cite").attr("id", "citeButton" + index).css("cursor", "pointer").addClass("bitButton").css("margin-right", "5px"));
             // temp vars
             var tempcitationDescripion;
             var tempcitationLink;
@@ -708,7 +708,7 @@ function injectEasyCite() {
     }
     $("#citeButton").click(function (event) {
         var target = $(event.target);
-        if (target.is("button")) {
+        if (target.is("a")) {
             prompt("Citation: " + citationDescripion, "[url=" + citationLink + "][b]" + citationText + "[/b][/url]");
         }
     });

@@ -370,6 +370,7 @@ function savePMChanges() {
     chrome.storage.sync.set({
         PMChanges:
             [{ 'PMChangesQuoteStripping': $("#PMChangesQuoteStripping").is(':checked') },
+            { 'PMChangesPrettyPMs': $("#PMChangesPrettyPMs").is(':checked') },
             { 'PMChangesSalutationEnable': $("#PMChangesSalutation").is(':checked') },
             { 'PMChangesSalutationText': $("#PMChangesSalutationText").val()+"\n\n" },
             { 'PMChangesSignatureEnable': $("#PMChangesSignature").is(':checked') },
@@ -393,6 +394,8 @@ function loadPMChanges() {
                 $.each(data, function (key, value) {
                     switch (key) {
                         case "PMChangesQuoteStripping": $("#PMChangesQuoteStripping").prop('checked', value);
+                            break;
+                        case "PMChangesPrettyPMs": $("#PMChangesPrettyPMs").prop('checked', value);
                             break;
                         case "PMChangesSalutationEnable": $("#PMChangesSalutation").prop('checked', value);
                             break;

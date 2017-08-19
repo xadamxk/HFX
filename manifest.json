@@ -76,7 +76,8 @@
         "*://hackforums.net/private.php?action=send&pmid=*",
         "*://hackforums.net/private.php?action=send&uid=*",
         "*://hackforums.net/private.php?action=send",
-        "*://hackforums.net/private.php?action=tracking"
+        "*://hackforums.net/private.php?action=read&pmid=*",
+        "*://hackforums.net/private.php?action=tracking*"
       ],
       "js": [
         "js/dependencies/jquery-3.2.1.js",
