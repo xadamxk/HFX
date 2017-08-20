@@ -216,9 +216,16 @@ function parsePMPretty() {
 function stripQuotes() {
     // PM Quote Remover - updated by myself
     // Credit to Snorlax (http://userscripts-mirror.org/scripts/source/185414.user.js)
-    textarea = $("#message_new");
+
+    // Determine proper selector
+    if ($('#message_new').length) {
+        textarea = $("#message_new");
+    } else {
+        textarea = $("#message");
+    }
+    
     var origMessage = textarea.val();
-    // 
+    // some crazy regex
     replace = textarea.val().replace(/^(\[quote=(?:(?!\[quote=)[\s\S]*?))\[quote=[\s\S]+\[\/quote\]\s*([\s\S]+?\[\/quote\]\s*)$/g, "$1$2\n\n");
     textarea.val(replace);
     $(".tborder tr:last td:last span")
@@ -251,30 +258,37 @@ function pmSignature() {
         .append($("<strong>").text("PM Signature: "))
         .append($('<label>').text("add predefined text to the end of your PMs.")
         .append("<br>"));
+    // Determine proper selector
+    var textarea;
+    if ($('#message_new').length) {
+        textarea = $("#message_new");
+    } else {
+        textarea = $("#message");
+    }
     // Add new line on page load
-    $("#message_new").val($("#message_new").val() + "\n");
+    textarea.val(textarea.val() + "\n");
     // Add Signature by default
-    $("#message_new").val($("#message_new").val() + "\n" + sigStr);
+    textarea.val(textarea.val() + "\n" + sigStr);
     // Onclick Event
     $('#showSignature').on("click", function () {
         if ($("#showSignature").is(':checked')) {
             // get value & add it to message body
-            $("#message_new").val($("#message_new").val() + "\n" + sigStr);
+            textarea.val(textarea.val() + "\n" + sigStr);
         }
         else {
             // Remove if it exists
-            var tempSig = $("#message_new").val();
+            var tempSig = textarea.val();
             if (tempSig.includes(sigStr)) {
-                $("#message_new").val(tempSig.replace(sigStr, ""));
+                textarea.val(tempSig.replace(sigStr, ""));
                 // All Hail StackOverflow (http://stackoverflow.com/a/5497333)
-                var pos = $("#message_new").val().lastIndexOf('\n');
-                $("#message_new").val($("#message_new").val().substring(0, pos) + $("#message_new").val().substring(pos + 1));
+                var pos = textarea.val().lastIndexOf('\n');
+                textarea.val(textarea.val().substring(0, pos) + textarea.val().substring(pos + 1));
             }
         }
     });
     // Update to fix bugs
     $('.pmTextChange').on("click", function () {
-        console.log($(this).attr("id"));
+        //console.log($(this).attr("id"));
     });
 }
 
@@ -286,19 +300,26 @@ function pmSalutation() {
         .append($("<strong>").text("PM Salutation: "))
         .append($('<label>').text("add predefined text to the beginning of your PMs.")
         .append("<br>"));
+    // Determine proper selector
+    var textarea;
+    if ($('#message_new').length) {
+        textarea = $("#message_new");
+    } else {
+        textarea = $("#message");
+    }
     // Add Salutation
-    $("#message_new").val(salutationText + "\n\n" + $("#message_new").val());
+    textarea.val(salutationText + "\n\n" + textarea.val());
     // Onclick Event
     $('#showSalutation').on("click", function () {
         if ($("#showSalutation").is(':checked')) {
             // get value & add it to message body
-            $("#message_new").val(salutationText + "\n\n" + $("#message_new").val());
+            textarea.val(salutationText + "\n\n" + textarea.val());
         }
         else {
             // Remove if it exists
-            var tempSal = $("#message_new").val();
+            var tempSal = textarea.val();
             if (tempSal.includes(salutationText)) {
-                $("#message_new").val(tempSal.replace(salutationText, ""));
+                textarea.val(tempSal.replace(salutationText, ""));
             }
         }
     });

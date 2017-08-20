@@ -121,7 +121,7 @@ function doCount() {
         "padding-right": "10px",
         "border-radius": "5px"
     }
-    const minLimit = 35;
+    const minLimit = 26;
     const minLimitTxt = "Too Low: ";
     const minLimitStyle = {
         "background-color": "#d8b4b2",
@@ -377,7 +377,7 @@ function filterKeywords(htmlInput) {
         [':thumbsup:', '<img src="images/smilies/thumbsup.gif" style="vertical-align: middle;" border="0" alt="Thumbsup" title="Thumbsup">'],
         [':wacko:', '<img src="images/smilies/wacko.gif" style="vertical-align: middle;" border="0" alt="Wacko" title="Wacko">'],
         [':pirate:', '<img src="images/smilies/pirate.gif" style="vertical-align: middle;" border="0" alt="Pirate" title="Pirate">'],
-        ['[hr]', '<hr>'],
+        ['&#91;hr&#93;', '<hr>'],
         ['[help]', 'We recommend you take the time to read the <a href="misc.php?action=help">HF Help Documents</a> section. The answer to your questions should be contained in there.']
     ];
     for (var i = 0; i < filters.length; i++) {
@@ -391,5 +391,5 @@ function filterKeywords(htmlInput) {
 // Replace All (Credit: http://stackoverflow.com/a/17606289)
 String.prototype.replaceAll = function (search, replacement) {
     var target = this;
-    return target.split(search).join(replacement);
+    return target.replace(new RegExp(search, 'g'), replacement);
 };

@@ -748,15 +748,16 @@ var XBBCODE = (function() {
         }
 
         if (config.removeMisalignedTags) {
-            ret.html = ret.html.replace(/\[.*?\]/g,"");
+            ret.html = ret.html.replaceAll(/\[.*?\]/g, "");
         }
         if (config.addInLineBreaks) {
             ret.html = '<div style="white-space:pre-wrap;">' + ret.html + '</div>';
         }
 
 		if (!config.escapeHtml) {
-			ret.html = ret.html.replace("&#91;", "["); // put ['s back in
-        	ret.html = ret.html.replace("&#93;", "]"); // put ['s back in
+		    //ret.html = ret.html.replaceAllx("&#91;", "["); // put ['s back in
+		    //ret.html = ret.html.replaceAllx("&#93;", "]"); // put ]'s back in
+		    //console.log(ret.html);
 		}
 
         ret.error = errQueue.length !== 0;
