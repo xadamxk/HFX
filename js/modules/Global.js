@@ -468,11 +468,11 @@ function injectHFTB() {
     // Buddy event listener 
     //$("#leftSticky a:eq(1)").click(function () {showBuddyContainer();});
     // Settings event listener
-    $("#leftSticky a:eq(4)").click(function () {
-        $("#settingsleftSticky").css("color", "#1EF1EA");
-        console.log(chrome.extension.getURL("pages/options.html"));
+    //$("#leftSticky a:eq(4)").click(function () {
+    //    $("#settingsleftSticky").css("color", "#1EF1EA");
+    //    console.log(chrome.extension.getURL("pages/options.html"));
         // Open Settings
-    });
+    //});
     // Append quick links to toolbar
     appendQuickLinks();
     // Add spacers to toolbar
@@ -525,8 +525,8 @@ function createStickyHeader() {
         $("#pmLeftSticky").css("color", "#ff3b30");
     }
     // Settings (left)
-    $("#leftSticky").append($("<a>").attr("href", "#Settings").attr("onClick", "").attr("title", "Settings")
-                            .append($("<i>").attr("id", "settingsleftSticky").addClass("fa fa-cog fa-lg")));
+    //$("#leftSticky").append($("<a>").attr("href", "#Settings").attr("onClick", "").attr("title", "Settings")
+    //                        .append($("<i>").attr("id", "settingsleftSticky").addClass("fa fa-cog fa-lg")));
     // Right
     $("#Sticky").append($("<div>").attr("id", "rightSticky").css("float", "right").css("height", headerHeight));
     // ----------------------------------------- RIGHT -----------------------------------------
@@ -791,7 +791,7 @@ function addSpacersToHeader() {
     // Left
     var numLeftElements = $("#leftSticky a").length;
     $("#leftSticky a").each(function (index) {
-        if ((index) == 4) {
+        if ((index) == 3) {
             $(this).after($("<span>").text(" | ").removeAttr('href'));
         }
         else if ((index + 1) == numLeftElements) {

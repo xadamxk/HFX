@@ -14,7 +14,7 @@ var enableSmartQuote = false;
 // Notification Text - Username Quoted (Mention text at top of page)
 var enableSmartQuoteMentionCount = false;
 var smartQuoteHeaderBackgroundColor = "b1d8bf"; // (Default: #b1d8bf)
-var smartQuoteHeaderMatchBackgroundColor = "bc3232"; // (Default: #bc3232)
+var smartQuoteHeaderMatchBackgroundColor = "CC3636"; // (Default: #CC3636)
 enableSmartQuotes();
 
 // Set vars equal to saved settings
@@ -68,6 +68,7 @@ function injectSmartQuotes() {
                     .css("padding", "2px 8px 2px 8px");
                 // Username Quoted
                 if ($(this).text().includes(username)) {
+                    smartQuoteHeaderMatchTextColor = getColorByBgColor("#" + smartQuoteHeaderMatchBackgroundColor);
                     if (debug) { console.log("Username found."); }
                     $(this)
                         .css("background-color", "#" + smartQuoteHeaderMatchBackgroundColor)
@@ -78,6 +79,7 @@ function injectSmartQuotes() {
                 }
                     // No username match
                 else {
+                    smartQuoteHeaderTextColor = getColorByBgColor("#" + smartQuoteHeaderBackgroundColor);
                     $(this)
                         .css("background-color", "#"+smartQuoteHeaderBackgroundColor)
                         .css("color", smartQuoteHeaderTextColor)
@@ -187,3 +189,8 @@ String.prototype.replaceAll = function (search, replacement) {
     var target = this;
     return target.split(search).join(replacement);
 };
+
+function getColorByBgColor(bgColor) {
+    if (!bgColor) { return '000000'; }
+    return (parseInt(bgColor.replace('#', ''), 16) > 0xffffff / 2) ? '#000' : '#fff';
+}

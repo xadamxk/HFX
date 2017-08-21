@@ -171,9 +171,11 @@ function saveSmartQuotes() {
 function loadSmartQuotesDefault() {
     $("#SmartQuotesEnable").prop('checked', true);
     $("#SmartQuotesMentionCount").prop('checked', true);
+    // Standard Quote
     $("#SmartQuoteColorQuote").val("B1D8BF");
     update($("#SmartQuoteColorQuote"));
-    $("#SmartQuoteColorMention").val("FF3B30");
+    // Mention Quote
+    $("#SmartQuoteColorMention").val("CC3636");
     update($("#SmartQuoteColorMention"));
 }
 
