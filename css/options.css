@@ -83,3 +83,10 @@ body{
     margin-left: 15px;
     margin-right: 15px;
 }
+
+.jscolor {
+  border: 2px black;
+  width: 60px;
+  text-align: center;
+  display: inline-block;
+}

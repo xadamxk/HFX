@@ -71,6 +71,13 @@ $(document).ready(function () {
         saveLivePreview();
         console.log("LivePreview Settings Changed!");
     });
+
+    // Color Pickers
+    $(".jscolor").change(function () {
+        update($(this));
+        saveSmartQuotes()
+    });
+    
 });
 
 function loadSettings() {
@@ -153,7 +160,9 @@ function saveSmartQuotes() {
     chrome.storage.sync.set({
         SmartQuoteChanges:
             [{ 'SmartQuotesEnabled': $("#SmartQuotesEnable").is(':checked') },
-            { 'SmartQuotesMentionCount': $("#SmartQuotesMentionCount").is(':checked') }]
+            { 'SmartQuotesMentionCount': $("#SmartQuotesMentionCount").is(':checked') },
+            { 'SmartQuoteColorQuote': $("#SmartQuoteColorQuote").val() },
+            { 'SmartQuoteColorMention': $("#SmartQuoteColorMention").val() }]
     }, function () {
         // Save Confirmation
     });
@@ -162,6 +171,10 @@ function saveSmartQuotes() {
 function loadSmartQuotesDefault() {
     $("#SmartQuotesEnable").prop('checked', true);
     $("#SmartQuotesMentionCount").prop('checked', true);
+    $("#SmartQuoteColorQuote").val("B1D8BF");
+    update($("#SmartQuoteColorQuote"));
+    $("#SmartQuoteColorMention").val("FF3B30");
+    update($("#SmartQuoteColorMention"));
 }
 
 function loadSmartQuotes() {
@@ -174,6 +187,10 @@ function loadSmartQuotes() {
                         case "SmartQuotesEnabled": $("#SmartQuotesEnable").prop('checked', value);
                             break;
                         case "SmartQuotesMentionCount": $("#SmartQuotesMentionCount").prop('checked', value);
+                            break;
+                        case "SmartQuoteColorQuote": $("#SmartQuoteColorQuote").val(value); update($("#SmartQuoteColorQuote"));;
+                            break;
+                        case "SmartQuoteColorMention": $("#SmartQuoteColorMention").val(value); update($("#SmartQuoteColorMention"));
                             break;
                         default: console.log("ERROR: Key not found.");
                     }
@@ -665,4 +682,9 @@ function loadPostbitHide() {
         });
         savePostbitHide();
     });
+}
+
+function update(element) {
+    // 'jscolor' instance can be used as a string
+    $(element).css("background-color", "#" + $(element).val());
 }

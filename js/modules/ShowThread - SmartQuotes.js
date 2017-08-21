@@ -3,10 +3,8 @@ var smartQuoteBackgroundColor = "#adb1a1"; // (Default: #adb1a1)
 var smartQuoteTextColor = "#111111"; // (Default: #111111)
 // Quote Header Colors (Header of Quote Block)
 var smartQuoteHeaderTextColor = "#000000"; // (Default: #000000)
-var smartQuoteHeaderBackgroundColor = "#b1d8bf"; // (Default: #b1d8bf)
 var smartQuoteNotificationColor = "#FF3B30"; // (Default: #FF3B30)
 // Quote Header Colors - Username Quoted
-var smartQuoteHeaderMatchBackgroundColor = "#bc3232"; // (Default: #bc3232)
 var smartQuoteHeaderMatchTextColor = "#000000"; // (Default: #000000)
 
 
@@ -15,6 +13,8 @@ var debug = false;
 var enableSmartQuote = false;
 // Notification Text - Username Quoted (Mention text at top of page)
 var enableSmartQuoteMentionCount = false;
+var smartQuoteHeaderBackgroundColor = "b1d8bf"; // (Default: #b1d8bf)
+var smartQuoteHeaderMatchBackgroundColor = "bc3232"; // (Default: #bc3232)
 enableSmartQuotes();
 
 // Set vars equal to saved settings
@@ -28,6 +28,10 @@ function enableSmartQuotes() {
                             case "SmartQuotesEnabled": if (value) { enableSmartQuote = value;}
                                 break;
                             case "SmartQuotesMentionCount": if (value) { enableSmartQuoteMentionCount = value;}
+                                break;
+                            case "SmartQuoteColorQuote": smartQuoteHeaderBackgroundColor = value;
+                                break;
+                            case "SmartQuoteColorMention": smartQuoteHeaderMatchBackgroundColor = value;
                                 break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
@@ -66,14 +70,20 @@ function injectSmartQuotes() {
                 if ($(this).text().includes(username)) {
                     if (debug) { console.log("Username found."); }
                     $(this)
-                        .css("background-color", smartQuoteHeaderMatchBackgroundColor)
-                        .css("color", smartQuoteHeaderMatchTextColor);
+                        .css("background-color", "#" + smartQuoteHeaderMatchBackgroundColor)
+                        .css("color", smartQuoteHeaderMatchTextColor)
+                        .css("border-radius", "5px")
+                        .css("border", "1px solid black")
+                        .addClass("SmartQuoteStandardTitle");
                 }
                     // No username match
                 else {
                     $(this)
-                        .css("background-color", smartQuoteHeaderBackgroundColor)
-                        .css("color", smartQuoteHeaderTextColor);
+                        .css("background-color", "#"+smartQuoteHeaderBackgroundColor)
+                        .css("color", smartQuoteHeaderTextColor)
+                        .css("border-radius", "5px")
+                        .css("border", "1px solid black")
+                        .addClass("SmartQuoteMentionTitle");
                 }
             });
         }
