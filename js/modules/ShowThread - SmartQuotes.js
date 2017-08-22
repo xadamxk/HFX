@@ -75,7 +75,7 @@ function injectSmartQuotes() {
                         .css("color", smartQuoteHeaderMatchTextColor)
                         .css("border-radius", "5px")
                         .css("border", "1px solid black")
-                        .addClass("SmartQuoteStandardTitle");
+                        .addClass("SmartQuoteMentionTitle");
                 }
                     // No username match
                 else {
@@ -85,7 +85,7 @@ function injectSmartQuotes() {
                         .css("color", smartQuoteHeaderTextColor)
                         .css("border-radius", "5px")
                         .css("border", "1px solid black")
-                        .addClass("SmartQuoteMentionTitle");
+                        .addClass("SmartQuoteStandardTitle");
                 }
             });
         }
@@ -113,7 +113,6 @@ function injectSmartQuotes() {
             // B6E5CB (Green)
             // FABE90 (Peach) 
         };
-        var mentionString = " Mention";
         var thead = $("strong:contains(Thread Options)").parent().parent().parent();
         // Strong that contains thread title
         if (usernameCount < 1)
@@ -125,15 +124,36 @@ function injectSmartQuotes() {
                     .attr("id", "smartQuoteMentions"))
                 .after("&nbsp;");
         else {
+            var mentionString = " Mention";
             if (usernameCount > 1)
                 mentionString += "s";
             $(thead.find("strong:contains(" + thead.find("div strong").text().replace("Thread Options", "") + ")"))
-                .after($("<span>")
+                .after($("<span>").append($("<a>")
                     .addClass("mentionBubbles")
                     .css(mentionBubbleCSS)
+                    .css({ "cursor": "pointer" })
                     .text(usernameCount + mentionString) // "(" + 
-                    .attr("id", "smartQuoteMentions"))
+                    .attr("id", "smartQuoteMentions")))
                 .after("&nbsp;");
+            // Group quotes
+            groupQuotedPosts();
+            // Hover event
+            $('#smartQuoteMentions').hover(
+                // https://stackoverflow.com/a/3741171/2694643
+              function () {
+                  var $this = $(this);
+                  $this.data('smartQuoteTextColor', $this.css('color')).css('color', 'white');
+              },
+              function () {
+                  var $this = $(this);
+                  $this.css('color', $this.data('smartQuoteTextColor'));
+              }
+            );
+            // On-Click Event
+            $("#smartQuoteMentions").click(function () {
+                // Toggle state:
+                $(".smartQuoteNoMentions").toggle();
+            });
         }
         //$("#smartQuoteMentions").css("color", smartQuoteNotificationColor);
     }
@@ -182,6 +202,19 @@ function injectSmartQuotes() {
             prompt(postUsername + "'s Quote: ", postContent);
         });
     }
+}
+
+function groupQuotedPosts() {
+    var username = $("#panel strong a:eq(0)").text();
+    // Loop posts
+    $("#posts > table").each(function (index) {
+        // Check for quotes
+        if ($(this).find("cite.SmartQuoteMentionTitle").length > 0) {
+            $(this).addClass("smartQuoteMentions");
+        } else {
+            $(this).addClass("smartQuoteNoMentions");
+        }
+    });
 }
 
 // ------------------------------ Functions ------------------------------
