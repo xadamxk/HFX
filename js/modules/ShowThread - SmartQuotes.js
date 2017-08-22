@@ -91,12 +91,21 @@ function injectSmartQuotes() {
         }
     }
     if (enableSmartQuoteMentionCount) {
-        $("*").find("blockquote cite").each(function () {
-            if ($(this).text().includes(username)) {
-                usernameCount++;
-                if (debug) { console.log("Username found."); }
-            }
-        });
+        var username = $("#panel strong a:eq(0)").text();
+        if ($("*").find("blockquote").length > 0) {
+            $("*").find("blockquote cite").each(function () {
+                // Username Quoted
+                if ($(this).text().includes(username)) {
+                    $(this).addClass("SmartQuoteMentionTitle");
+                    usernameCount++;
+                    if (debug) { console.log("Username found."); }
+                }
+                    // No username match
+                else {
+                    $(this).addClass("SmartQuoteStandardTitle");
+                }
+            });
+        }
         var mentionBubbleCSS = {
             "display": "inline-block",
             "padding": "3px 4px",
