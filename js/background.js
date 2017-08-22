@@ -6,6 +6,8 @@ chrome.runtime.onInstalled.addListener(function (details) {
     } else if (details.reason == "update") {
         var thisVersion = chrome.runtime.getManifest().version;
         console.log("Updated from " + details.previousVersion + " to " + thisVersion + "!");
+        var newURL = "https://github.com/xadamxk/HFX/wiki/Recent-Changes";
+        chrome.tabs.create({ url: newURL });
     }
 });
 
@@ -25,17 +27,110 @@ chrome.omnibox.onInputEntered.addListener(
      uppcaseText = text.toUpperCase();
      console.log('Omnibox: ' + uppcaseText);
      switch (uppcaseText) {
-        case 'SEARCH':
-            navigate("www.hackforums.net/search.php");
-            //
+            // Awards
+         case 'A':
+         case 'AWARDS':
+             chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
+                 chrome.tabs.update(tab.id, { url: "https://hackforums.net/myawards.php" });
+             });
+             break;
+            // Bans
+         case 'B':
+         case 'BANS':
+             chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
+                 chrome.tabs.update(tab.id, { url: "https://hackforums.net/bans.php" });
+             });
+             break;
+             // Groups
+         case 'G':
+         case 'GROUPS':
+             chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
+                 chrome.tabs.update(tab.id, { url: "https://hackforums.net/showgroups.php" });
+             });
+             break;
+            // Help Docs
+         case 'H':
+         case 'HELP':
+             chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
+                 chrome.tabs.update(tab.id, { url: "https://hackforums.net/misc.php?action=help" });
+             });
+             break;
+            // Lounge
+         case 'L':
+         case 'LOUNGE':
+             chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
+                 chrome.tabs.update(tab.id, { url: "https://hackforums.net/forumdisplay.php?fid=25" });
+             });
+             break;
+             // Mods
+         case 'M':
+         case 'MODS':
+             chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
+                 chrome.tabs.update(tab.id, { url: "https://hackforums.net/showmods.php" });
+             });
+             break;
+            // News
+         case 'N':
+         case 'NEWS':
+            chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
+                chrome.tabs.update(tab.id, { url: "https://hackforums.net/forumdisplay.php?fid=162" });
+            });
             break;
-        case 'NEWS':
-            console.log("news");
-            //
-            break;
+             // Neg Rep Log
+         case 'NEG':
+             chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
+                 chrome.tabs.update(tab.id, { url: "https://hackforums.net/negreplog.php" });
+             });
+             break;
+         // New Posts
+         case 'NEW':
+             chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
+                 chrome.tabs.update(tab.id, { url: "https://hackforums.net/search.php?action=getnew" });
+             });
+             break;
+             // Search
+         case 'S':
+         case 'SEARCH':
+             chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
+                 chrome.tabs.update(tab.id, { url: "https://hackforums.net/search.php" });
+             });
+             break;
+             // Staff
+         case 'STAFF':
+             chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
+                 chrome.tabs.update(tab.id, { url: "https://hackforums.net/showstaff.php" });
+             });
+             break;
+         // Stats
+         case 'STATS':
+             chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
+                 chrome.tabs.update(tab.id, { url: "https://hackforums.net/stats.php" });
+             });
+             break;
+             // Tracking
+         case 'T':
+         case 'TRACK':
+             chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
+                 chrome.tabs.update(tab.id, { url: "https://hackforums.net/search.php" });
+             });
+             break;
+             // Warning Logs
+         case 'W':
+         case 'WARNING':
+             chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
+                 chrome.tabs.update(tab.id, { url: "https://hackforums.net/warnlog.php" });
+             });
+             break;
+             // HFX Thread
+         case 'X':
+         case 'HFX':
+             chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
+                 chrome.tabs.update(tab.id, { url: "https://hackforums.net/showthread.php?tid=5696924" });
+             });
+             break;
         default:
             //
-            window.alert("sometext");
+            window.alert("Command Not Found...");
             break;
     }
   });
