@@ -20,6 +20,7 @@ body{
 
 .lineBreak{
     width: 550px;
+    float: left;
 }
 
 #bodyTag::-webkit-scrollbar {
