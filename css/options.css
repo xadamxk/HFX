@@ -1,7 +1,7 @@
 body{
     padding: 15px;
     width: 790px;
-    
+    display: table;
 }
 
 #optionBodyTag{
