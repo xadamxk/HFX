@@ -79,6 +79,10 @@ $(document).ready(function () {
         update($(this));
         saveSmartQuotes()
     });
+
+    $("#SFWMode").change(function() {
+        saveSFWMode();
+    });
     
 });
 
@@ -112,6 +116,7 @@ function loadDefaults() {
     loadOnlineSortingDefault();
     loadRepChartsDefault();
     loadPostbitHideDefault();
+    
 }
 
 function saveLivePreview() {
@@ -229,7 +234,8 @@ function saveGlobalChanges() {
             { 'GlobalChangesHFTBFav7Text': $("#GlobalChangesHFTBFav7Text").val() },
             { 'GlobalChangesHFTBFav7Link': $("#GlobalChangesHFTBFav7Link").val() },
             { 'GlobalChangesUserNotes': $("#GlobalChangesUserNotes").is(':checked') },
-            { 'GlobalChangesNewPostLinks': $("#GlobalChangesNewPostLinks").is(':checked') }
+            { 'GlobalChangesNewPostLinks': $("#GlobalChangesNewPostLinks").is(':checked') },
+            { 'GlobalChangesSFWMode': $("#GlobalChangesSFWMode").is(':checked') }
             ]
         // { '': $("#").val() }
     }, function () {
@@ -302,6 +308,8 @@ function loadGlobalChanges() {
                         case "GlobalChangesUserNotes": $("#GlobalChangesUserNotes").prop('checked', value);
                             break;
                         case "GlobalChangesNewPostLinks": $("#GlobalChangesNewPostLinks").prop('checked', value);
+                            break;
+                        case "GlobalChangesSFWMode": $("#GlobalChangesSFWMode").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }

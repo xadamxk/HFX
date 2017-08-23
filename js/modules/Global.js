@@ -33,6 +33,7 @@ var noteBubbleCSS = {
     "text-shadow": "none"
 };
 var addNewPosts = false;
+var SFWMode = false;
 var injectHFXBadge = true;
 getGlobalSettings();
 
@@ -86,6 +87,8 @@ function getGlobalSettings() {
                                 break;
                             case "GlobalChangesNewPostLinks": if (value) { addNewPosts = value; }
                                 break;
+                            case "GlobalChangesSFWMode": if (value) { SFWMode = value; }
+                                break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
                         }
@@ -120,6 +123,9 @@ function injectGlobalChanges() {
     }
     if (addNewPosts) {
         injectNewPosts();
+    }
+    if (SFWMode) {
+        injectSFWMode();
     }
 }
 
@@ -311,6 +317,11 @@ function threadTagger() {
             });
         }
     });
+}
+
+function injectSFWMode()
+{
+    $("img").hide();
 }
 
 function tagEditorThread(indexPost) {
