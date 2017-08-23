@@ -1,7 +1,7 @@
 body{
     padding: 15px;
     width: 790px;
-    
+    display: table;
 }
 
 #optionBodyTag{
@@ -12,14 +12,16 @@ body{
     width: 110px;
     float: left;
     padding-right: 10px;
+    position: fixed;
 }
 
 .tab-content{
-    float: left;
+    float: right;
 }
 
 .lineBreak{
     width: 550px;
+    float: left;
 }
 
 #bodyTag::-webkit-scrollbar {

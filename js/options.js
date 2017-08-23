@@ -80,6 +80,9 @@ $(document).ready(function () {
         saveSmartQuotes()
     });
     
+    $(".nav li").click(function() {
+        $("body").scrollTop(0);
+    });
 });
 
 function loadSettings() {
