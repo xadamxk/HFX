@@ -9,6 +9,8 @@
 */
 
 $(document).ready(function () {
+    // Load version string
+    $("#HFXVersion").text(chrome.runtime.getManifest().version);
     // Load Default/Saved Settings
     loadSettings();
     
@@ -403,6 +405,7 @@ function savePMChanges() {
 function loadPMChangesDefault() {
     $("#PMChangesQuoteStripping").prop('checked', true);
     $("#PMChangesTrackingLinks").prop('checked', true);
+    $("#PMChangesPrettyPMs").prop('checked', true);
 }
 
 function loadPMChanges() {

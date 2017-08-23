@@ -6,7 +6,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
     } else if (details.reason == "update") {
         var thisVersion = chrome.runtime.getManifest().version;
         console.log("Updated from " + details.previousVersion + " to " + thisVersion + "!");
-        var newURL = "https://github.com/xadamxk/HFX/wiki/Recent-Changes";
+        var newURL = "https://github.com/xadamxk/HFX/wiki/Changelog";
         chrome.tabs.create({ url: newURL });
     }
 });
@@ -16,8 +16,9 @@ chrome.runtime.onInstalled.addListener(function (details) {
 chrome.omnibox.onInputChanged.addListener(
   function(text, suggest) {
     suggest([
-      {content: text + "SEARCH", description: "Search HF"},
-      {content: text + "NEWS", description: "Browse the HF News"}
+      {content: text + "S", description: "Search HF"},
+      { content: text + "N", description: "Browse the HF News" },
+      { content: text + "L", description: "Browse the Lounge" }
     ]);
   });
 
