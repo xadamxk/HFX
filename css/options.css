@@ -12,10 +12,11 @@ body{
     width: 110px;
     float: left;
     padding-right: 10px;
+    position: fixed;
 }
 
 .tab-content{
-    float: left;
+    float: right;
 }
 
 .lineBreak{
