@@ -5,7 +5,7 @@
   <img src="https://img.shields.io/chrome-web-store/rating/nimelepbpejjlbmoobocpfnjhihnpked.png" href="https://chrome.google.com/webstore/detail/hf-xtension/hcfofmfmidhgbblcnnipcphhegcmdeeb">   <img src="https://img.shields.io/chrome-web-store/rating-count/nimelepbpejjlbmoobocpfnjhihnpked.png" href="https://chrome.google.com/webstore/detail/hf-xtension/hcfofmfmidhgbblcnnipcphhegcmdeeb">   <img src="https://img.shields.io/chrome-web-store/d/nimelepbpejjlbmoobocpfnjhihnpked.png" href="https://chrome.google.com/webstore/detail/hf-xtension/hcfofmfmidhgbblcnnipcphhegcmdeeb">   <img src="https://img.shields.io/chrome-web-store/v/nimelepbpejjlbmoobocpfnjhihnpked.png" href="https://chrome.google.com/webstore/detail/hf-xtension/hcfofmfmidhgbblcnnipcphhegcmdeeb" >
   <br>
   <img src="https://raw.githubusercontent.com/xadamxk/HFX/master/images/banner-large.png"  width="460" height="340" title="Logo"  />
-  <br />
+  <br /><br />
   <a align="center" href="https://chrome.google.com/webstore/detail/hf-xtension/hcfofmfmidhgbblcnnipcphhegcmdeeb">
     <img src="https://developer.chrome.com/webstore/images/ChromeWebStore_BadgeWBorder_v2_206x58.png" title="Download for Chrome"  />
   </a>
