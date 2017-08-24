@@ -112,7 +112,7 @@ chrome.omnibox.onInputEntered.addListener(
          case 'T':
          case 'TRACK':
              chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
-                 chrome.tabs.update(tab.id, { url: "https://hackforums.net/search.php" });
+                 chrome.tabs.update(tab.id, { url: "https://hackforums.net/private.php?action=tracking" });
              });
              break;
              // Warning Logs
