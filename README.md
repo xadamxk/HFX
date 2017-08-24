@@ -2,7 +2,7 @@
   <h1>
     HFX: Enhance Your HF Experience!
   </h1>
-  [![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/nimelepbpejjlbmoobocpfnjhihnpked.svg)](https://chrome.google.com/webstore/detail/hf-xtension/hcfofmfmidhgbblcnnipcphhegcmdeeb)
+  <img src="https://img.shields.io/chrome-web-store/rating/nimelepbpejjlbmoobocpfnjhihnpked.png" href="https://chrome.google.com/webstore/detail/hf-xtension/hcfofmfmidhgbblcnnipcphhegcmdeeb"><br><br>
   <img src="https://raw.githubusercontent.com/xadamxk/HFX/master/images/banner-large.png"  width="460" height="340" title="Logo"  />
   <br />
   <a align="center" href="https://chrome.google.com/webstore/detail/hf-xtension/hcfofmfmidhgbblcnnipcphhegcmdeeb">
