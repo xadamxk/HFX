@@ -4,6 +4,7 @@ var postOptionsPoTEnable = false;
 var postOptionsPostsEnable = false;
 var postOptionsThreadsEnable = false;
 var pmChangesPMFromPostEnable = false;
+var pmChangesPMFromPostShowQuote = false;
 var annoyanceFixerFullScreenYoutubeEnable = false;
 var annoyanceFixerShowBlockedPostsEnabled = false;
 var annoyanceFixerHideBlockedPostsEnabled = false;
@@ -26,6 +27,8 @@ function getPostOptions() {
                             case "PostOptionsPostsEnable": if (value) { postOptionsPostsEnable = value }
                                 break;
                             case "PMChangesPMFromPostEnable": if (value) { pmChangesPMFromPostEnable = value }
+                                break;
+                            case "PMChangesPMFromPostQuote": if (value) { pmChangesPMFromPostShowQuote = value }
                                 break;
                             case "AnnoyanceFixerFullscreenYoutubeEnable": if (value) { annoyanceFixerFullScreenYoutubeEnable = value }
                                 break;
@@ -139,13 +142,16 @@ function enablePostOptions() {
             var postLink;
             var myPostKey = document.getElementsByTagName('head')[0].innerHTML.split('my_post_key = "')[1].split('";')[0];
             var threadTitle = $(".navigation").find(".active").text();
-
-            // Grab text of post (exclude quotes)
-            var postBody = $(this).find(".post_body").clone();
-            if ($(this).find("blockquote")) {
-                postBody.find("blockquote").remove();
+            // Include quote in message body
+            var pmFromPostQuoteText = "";
+            if (pmChangesPMFromPostShowQuote) {
+                // Grab text of post (exclude quotes)
+                pmFromPostQuoteText = $(this).find(".post_body").clone();
+                if ($(this).find("blockquote")) {
+                    pmFromPostQuoteText.find("blockquote").remove();
+                }
+                pmFromPostQuoteText = '[quote="' + usernameName + '"]' + pmFromPostQuoteText.text().replace(/\t+/g, "").replace(/\n\s*\n/g, '\n') + '[/quote]';
             }
-
             if (threadTitle.length > 50) {
                 threadTitle = threadTitle.substring(0, 50);
             }
@@ -183,7 +189,7 @@ function enablePostOptions() {
                 '<input type="submit" class="button" name="preview" value="Preview" tabindex="11" />';
             var formmessage = '<textarea name="message" rows="7" cols="90" tabindex="3" style="resize:vertical">' +
                 '[size=x-small]Sent from [url=https://www.hackforums.net/' + postLink + ']your post[/url]. [/size]' +
-                '[quote="' + usernameName + '"]' + postBody.text().replace(/\t+/g, "").replace(/\n\s*\n/g, '\n') + '[/quote]' +
+                 pmFromPostQuoteText +
                 '</textarea></div><br />';
             var formchecks = '<div align="center"><input type="checkbox" class="checkbox" name="options[signature]" value="1" tabindex="5" checked="checked" />' +
                 'Signature - <input type="checkbox" class="checkbox" name="options[savecopy]" value="1" tabindex="7" checked="checked" />' +

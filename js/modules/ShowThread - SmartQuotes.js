@@ -1,5 +1,3 @@
-// Quote Body Colors (Entire Quote Block)
-var smartQuoteBackgroundColor = "#adb1a1"; // (Default: #adb1a1)
 var smartQuoteTextColor = "#111111"; // (Default: #111111)
 // Quote Header Colors (Header of Quote Block)
 var smartQuoteHeaderTextColor = "#000000"; // (Default: #000000)
@@ -11,6 +9,8 @@ var smartQuoteHeaderMatchTextColor = "#000000"; // (Default: #000000)
 // Debug
 var debug = false;
 var enableSmartQuote = false;
+// Quote Body Colors (Entire Quote Block)
+var smartQuoteBackgroundColor = "#adb1a1"; // (Default: #adb1a1)
 // Notification Text - Username Quoted (Mention text at top of page)
 var enableSmartQuoteMentionCount = false;
 var smartQuoteHeaderBackgroundColor = "b1d8bf"; // (Default: #b1d8bf)
@@ -28,6 +28,8 @@ function enableSmartQuotes() {
                             case "SmartQuotesEnabled": if (value) { enableSmartQuote = value;}
                                 break;
                             case "SmartQuotesMentionCount": if (value) { enableSmartQuoteMentionCount = value;}
+                                break;
+                            case "SmartQuoteColorBody": smartQuoteBackgroundColor = value;
                                 break;
                             case "SmartQuoteColorQuote": smartQuoteHeaderBackgroundColor = value;
                                 break;
@@ -57,7 +59,7 @@ function injectSmartQuotes() {
                     .css("border-radius", "5px")
                     .css("border", "1px solid black")
                     .css("padding", "1px 4px 1px 4px")
-                    .css("background-color", smartQuoteBackgroundColor)
+                    .css("background-color", "#"+smartQuoteBackgroundColor)
                     .css("color", smartQuoteTextColor);
             });
             // Each Block Quote Header

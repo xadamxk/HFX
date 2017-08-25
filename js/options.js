@@ -171,6 +171,7 @@ function saveSmartQuotes() {
         SmartQuoteChanges:
             [{ 'SmartQuotesEnabled': $("#SmartQuotesEnable").is(':checked') },
             { 'SmartQuotesMentionCount': $("#SmartQuotesMentionCount").is(':checked') },
+            { 'SmartQuoteColorBody': $("#SmartQuoteColorBody").val() },
             { 'SmartQuoteColorQuote': $("#SmartQuoteColorQuote").val() },
             { 'SmartQuoteColorMention': $("#SmartQuoteColorMention").val() }]
     }, function () {
@@ -181,6 +182,9 @@ function saveSmartQuotes() {
 function loadSmartQuotesDefault() {
     $("#SmartQuotesEnable").prop('checked', true);
     $("#SmartQuotesMentionCount").prop('checked', true);
+    // Quote Body
+    $("#SmartQuoteColorBody").val("ADB1A1");
+    update($("#SmartQuoteColorBody"));
     // Standard Quote
     $("#SmartQuoteColorQuote").val("B1D8BF");
     update($("#SmartQuoteColorQuote"));
@@ -199,6 +203,8 @@ function loadSmartQuotes() {
                         case "SmartQuotesEnabled": $("#SmartQuotesEnable").prop('checked', value);
                             break;
                         case "SmartQuotesMentionCount": $("#SmartQuotesMentionCount").prop('checked', value);
+                            break;
+                        case "SmartQuoteColorBody": $("#SmartQuoteColorBody").val(value); update($("#SmartQuoteColorBody"));;
                             break;
                         case "SmartQuoteColorQuote": $("#SmartQuoteColorQuote").val(value); update($("#SmartQuoteColorQuote"));;
                             break;
@@ -495,6 +501,7 @@ function savePostOptions() {
             { 'PostOptionsThreadsEnable': $("#PostOptionsThreads").is(':checked') },
             { 'PostOptionsPostsEnable': $("#PostOptionsPosts").is(':checked') },
             { 'PMChangesPMFromPostEnable': $("#PMChangesPMFromPost").is(':checked') },
+            { 'PMChangesPMFromPostQuote': $("#PMChangesPMFromPostQuote").is(':checked') },
             { 'AnnoyanceFixerFullscreenYoutubeEnable': $("#AnnoyanceFixerFullscreenYoutube").is(':checked') },
             { 'AnnoyanceFixerShowBlockedPostsEnable': $("#AnnoyanceFixerShowBlockedPosts").is(':checked') },
             { 'AnnoyanceFixerHideBlockedPostsEnable': $("#AnnoyanceFixerHideBlockedPosts").is(':checked') }]
@@ -509,6 +516,7 @@ function loadPostOptionsDefault() {
     $("#PostOptionsThreads").prop('checked', true);
     $("#PostOptionsPosts").prop('checked', true);
     $("#PMChangesPMFromPost").prop('checked', true);
+    $("#PMChangesPMFromPostQuote").prop('checked', true);
     $("#AnnoyanceFixerFullscreenYoutube").prop('checked', true);
     $("#AnnoyanceFixerShowBlockedPosts").prop('checked', true);
 }
@@ -529,6 +537,8 @@ function loadPostOptions() {
                         case "PostOptionsPostsEnable": $("#PostOptionsPosts").prop('checked', value);
                             break;
                         case "PMChangesPMFromPostEnable": $("#PMChangesPMFromPost").prop('checked', value);
+                            break;
+                        case "PMChangesPMFromPostQuote": $("#PMChangesPMFromPostQuote").prop('checked', value);
                             break;
                         case "AnnoyanceFixerFullscreenYoutubeEnable": $("#AnnoyanceFixerFullscreenYoutube").prop('checked', value);
                             break;
