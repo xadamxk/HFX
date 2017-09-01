@@ -5,6 +5,7 @@ var postOptionsPostsEnable = false;
 var postOptionsThreadsEnable = false;
 var pmChangesPMFromPostEnable = false;
 var pmChangesPMFromPostShowQuote = false;
+var pmChangesMessageConvo = false;
 var annoyanceFixerFullScreenYoutubeEnable = false;
 var annoyanceFixerShowBlockedPostsEnabled = false;
 var annoyanceFixerHideBlockedPostsEnabled = false;
@@ -137,6 +138,15 @@ function enablePostOptions() {
                 .css({ "cursor": "pointer", "margin-right": "5px" })
                 .addClass("bitButton"));
         }
+        // Message Convo
+        if (pmChangesMessageConvo) {
+            // Append button
+            $(this).find(".author_buttons").append($("<a>")
+                .attr({ "title": "Conversations", "value": usernameName })
+                .text("Conversations")
+                .css({ "cursor": "pointer", "margin-right": "5px" })
+                .addClass("bitButton convoButton"));
+        }
         // PM From Post
         if (pmChangesPMFromPostEnable) {
             var postLink;
@@ -224,4 +234,36 @@ function enablePostOptions() {
             });
         }
     });
+    // Conversation event handler
+    $(".convoButton").click(function () {
+        getPMConvoSearch($(this).attr("value"));
+    });
+}
+
+function getPMConvoSearch(username) {
+    // Get Postkey
+    var postKey = document.getElementsByTagName('head')[0].innerHTML.split('my_post_key = "')[1].split('";')[0];
+    var result = $.ajax({
+        method: "POST",
+        url: "https://hackforums.net/private.php",
+        dataType: "html",
+        data: {
+            "my_post_key": postKey,
+            "action": "do_search",
+            "keywords": "",
+            "subject": "1",
+            "message": "1",
+            "sender": username,
+            "status[new]": "1",
+            "status[replied]": "1",
+            "status[forwarded]": "1",
+            "status[read]": "1",
+            "folder[]": "All Folders",
+            "sort": "dateline",
+            "sortordr": "desc"
+        },
+        success: function (msg, statusText, jqhxr) {
+            document.write(msg);
+        }
+    })
 }
