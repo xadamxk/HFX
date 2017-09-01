@@ -72,9 +72,9 @@ function prettyPMDisplay(finalArray) {
         bubbleList.push('<tr>');
         if (finalArray[i][0] == user) {
             if (finalArray[i][1] == 1) {
-                bubbleList.push('<td></td><td><div class="pm_bubble_right_unread" width="45%" align="right"><b>' + finalArray[i][0] + ' Wrote:</b><br>' + finalArray[i][2].join('\n') + '</div></td>');
+                bubbleList.push('<td></td><td><div class="pm_bubble_right_unread" width="49%" align="right"><b>' + finalArray[i][0] + ' Wrote:</b><br>' + finalArray[i][2].join('\n') + '</div></td>');
             } else {
-                bubbleList.push('<td></td><td><div class="pm_bubble_right_read" width="45%" align="right"><b>' + finalArray[i][0] + ' Wrote:</b><br>' + finalArray[i][2].join('\n') + '</div></td>');
+                bubbleList.push('<td></td><td><div class="pm_bubble_right_read" width="49%" align="right"><b>' + finalArray[i][0] + ' Wrote:</b><br>' + finalArray[i][2].join('\n') + '</div></td>');
             }
         } else {
             if (finalArray[i][1] == 1) {
