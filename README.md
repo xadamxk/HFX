@@ -2,6 +2,7 @@
   <h1>
     HFX: Enhance Your HF Experience!
   </h1>
+  <h3>250+ Chrome Users | 200+ FireFox Users</h3>
   <br>
   <img src="https://raw.githubusercontent.com/xadamxk/HFX/master/images/banner-large.png"  width="460" height="340" title="Logo"  />
   <br /><br />
