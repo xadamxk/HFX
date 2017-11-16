@@ -4,6 +4,8 @@
   </h1>
   <h3>250+ Chrome Users | 200+ FireFox Users</h3>
   <br>
+  <i>This extension has been a blast working on. With over 50 unique features, and counting, I'm sure this will be my greatest extension yet.</i> -xadamxk (Developer)
+  <br>
   <img src="https://raw.githubusercontent.com/xadamxk/HFX/master/images/banner-large.png"  width="460" height="340" title="Logo"  />
   <br /><br />
   <a align="center" href="https://chrome.google.com/webstore/detail/hf-xtension/hcfofmfmidhgbblcnnipcphhegcmdeeb">
