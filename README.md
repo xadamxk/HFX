@@ -103,6 +103,18 @@
 </ul>
 
 <h2>Reviews</h2>
-<ul>
-> It was fun helping out in the alpha phases of this extension, and I'm really happy that it is close to release. HFX has allowed me to completely uninstall Tampermonkey which makes it a win for me. With the wide variety of features here, I think most everyone will be able to find at least one thing they like. -Aerodactyl
-</ul>
+<ul><li><a href="https://chrome.google.com/webstore/detail/hf-xtension/hcfofmfmidhgbblcnnipcphhegcmdeeb/reviews">70+ Google Chrome Reviews</a></li></ul> 
+<i>It was fun helping out in the alpha phases of this extension, and I'm really happy that it is close to release. HFX has allowed me to completely uninstall Tampermonkey which makes it a win for me. With the wide variety of features here, I think most everyone will be able to find at least one thing they like.</i> -Aerodactyl<hr>
+<i>This is an amazing addition. It makes browsing the site so much easier, big fan of the quick links on the top toolbar. The quick rep is also becoming a fast favorite as well. 
+I really look forward to what you do with it in the future. Appreciate the time you put into this.</i> -
+Mr.DoomHead<hr>
+<i>I've been looking forward to this since I heard you were making it. This outshines everything I have used thus far, and I believe you will hold true to keeping it awesome for a long time to come.</i> -Eternal<hr>
+<i>Just a needed plugin if you're using HF, all users should take a look on it, there's a lot of features on it, the developer is highly experienced and seems a long-term project, it makes HF great again.</i> -Glassman<hr>
+<i>This extension is amazing! 
+I used to use HFES and I must say this is 100% better. This makes HF browsing experience so much better! Thank you for all your hard work.</i> -Ruthless<hr>
+<i>Really like how this extension puts all my favourite features in one place without the use of userscripts. Works like a charm(even on Opera!).</i> -Gus Fring<hr>
+<i>Honestly, this extension encompasses a wide variety of features that make using HF a much smoother and enjoyable experience.Having used this developers tools in the past, I am overjoyed to see such effort put into something to easy to use.Everything about the extension is fantastic, from the features itself to the clean and simple customization. There is no doubt that I will be using this extension whenever I am browsing on Desktop.</i> -Pulz<hr>
+<i>Amazing extension. This adds many useful and not only visual but also functional improvements and features onto the site. Many users previously released individual user scripts to add features onto the site which was very tedious to install, its great to see everything and more implemented into just 1 easy to install extension. Overall it's been a pleasant experience discovering some features I didn't know could be implemented. I plan to use this for the foreseeable future.</i> -VmX5<hr>
+<i>I've been using HFES for awhile now and don't usually like alternative forum scripts, but when HFX popped up I knew I had to give it a shot. I'm so glad I did. It brings a convenience to browsing HF that I've never had before. Everything is easily toggle-able and the installation process couldn't be simpler. Now all I need is my star from HFES and I'll be good to go.</i> -Nevieth<hr>
+<i>This extension adds a plethora of useful features that should've already been on HF to begin with. My personal favorite is the reputation pie chart. It fits in seamlessly with the site. I am excited for the developer to add compatibility with the Flat Darkness extension.</i> -Piramyd<hr>
+<i>This extension is the best i have used as of date. As a writer and leader of the Hack forums Wiki. This will make things more enjoyable and easier on Hack Fourms. The install was not a problem with both Chrome and FF. However with FF you will need to disable temper monkey if your using it for it causes some issues with this extension. Other than that this just Works!. Great job buddy and keep up the great work.</i> -Nuworld<hr>
