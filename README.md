@@ -31,7 +31,8 @@
   <img src="https://camo.githubusercontent.com/61d6f601811002d67f333529abf722cf2ad6f7e6/687474703a2f2f692e696d6775722e636f6d2f69666237664e382e706e67" title="Screenshot"/>
   <img src="https://camo.githubusercontent.com/51ae1ff16be9a24c708ab99cc64a4e4d6f9585f9/687474703a2f2f692e696d6775722e636f6d2f6c4e53307a72572e706e67" title="Screenshot"/>
   </details></li>
-  <li><b>Hide Location</b>
+  
+  <li><b>Hide Location: </b>Hides your location from the 'Who's Online List'.
   <details><summary>Screenshots:</summary> 
   
   Before:
