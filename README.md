@@ -19,7 +19,7 @@
 
 <h2>Top Features</h2>
 <ul>
-  <li><b>Intelligent Character Counter: </b>Adds intelligent character counter to replies (color based on character count)/
+  <li><b>Intelligent Character Counter: </b>Adds intelligent character counter to replies (color based on character count).
   <details><summary>Screenshots:</summary> 
   
   Examples:
@@ -61,8 +61,8 @@
   
   <img src="https://camo.githubusercontent.com/00b47451cc8d6c1e6e311d4c46e1f9ee3293bebb/687474703a2f2f692e696d6775722e636f6d2f6f7854686b54312e706e67" title="Screenshot" width=800 />
   </details></li>
-  <li><b>User Tagging: </b></li>Notify a user when you quote(mention) them in a post.
-  <li><b>User Notes</b>
+  <li><b>User Tagging: </b>Notify a user when you quote(mention) them in a post.</li>
+  <li><b>User Notes: </b>Allows custom profile notes for other users (Posts/Profiles).
   <details><summary>Screenshots:</summary> 
   
   Example:
@@ -100,4 +100,9 @@
   <img src="https://camo.githubusercontent.com/576744668bef0183240b0a841f8b6aa1ce8d7146/687474703a2f2f692e696d6775722e636f6d2f4f37576b746e502e706e67" title="Screenshot" />
   </details></li>
   <li><b>and much much more!</b></li>
+</ul>
+
+<h2>Reviews</h2>
+<ul>
+> It was fun helping out in the alpha phases of this extension, and I'm really happy that it is close to release. HFX has allowed me to completely uninstall Tampermonkey which makes it a win for me. With the wide variety of features here, I think most everyone will be able to find at least one thing they like. -Aerodactyl
 </ul>
