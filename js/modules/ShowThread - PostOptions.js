@@ -5,7 +5,7 @@ var postOptionsPostsEnable = false;
 var postOptionsThreadsEnable = false;
 var pmChangesPMFromPostEnable = false;
 var pmChangesPMFromPostShowQuote = false;
-var pmChangesMessageConvo = true;
+var pmChangesMessageConvo = false; // Disabled for production
 var annoyanceFixerFullScreenYoutubeEnable = false;
 var annoyanceFixerShowBlockedPostsEnabled = false;
 var annoyanceFixerHideBlockedPostsEnabled = false;
@@ -50,6 +50,8 @@ function getPostOptions() {
 }
 
 function enablePostOptions() {
+    // Get Postkey
+    var myPostKey = document.getElementsByTagName('head')[0].innerHTML.split('my_post_key = "')[1].split('";')[0];
     // Get Thread ID
     var threadID = "";
     $("input[type=hidden]").each(function () {
@@ -96,18 +98,21 @@ function enablePostOptions() {
         }
     }
     // Remove default posts button
-    $("#posts").find(".bitButton").each(function (index) {
+    $(".post").find(".postbit_find").each(function (index) {
         if ($(this).text() == "Find") {
             $(this).remove();
         }
     });
     // Loop through each post
-    $("#posts > table").each(function (index) {
+    $(".post").each(function (index) {
+        //console.log($(this));
+        // Post ID Selector
+        var postIDSelector = $(this).find(".post_head > .float_right > strong > a:eq(0)");
         // If post collapsed
-        if (!$(this).find(".post_author > strong > span > a").attr('href') > 0)
+        if (!$(this).find(".author_information > strong > span > a").attr('href') > 0)
             return true;
-        var usernameUID = $(this).find(".post_author > strong > span > a").attr('href').replace(/\D/g, '');
-        var usernameName = $(this).find(".post_author > strong > span > a").text();
+        var usernameUID = $(this).find(".author_information > strong > span > a").attr('href').replace(/\D/g, '');
+        var usernameName = $(this).find(".author_information > strong > span > a").text();
         // Posts on Thread
         if (postOptionsPoTEnable) {
             var potLinkConst = "showthread.php?tid=" + threadID + "&mode=single&uid=";
@@ -149,18 +154,23 @@ function enablePostOptions() {
         }
         // PM From Post
         if (pmChangesPMFromPostEnable) {
+            // Check for PM button?
             var postLink;
-            var myPostKey = document.getElementsByTagName('head')[0].innerHTML.split('my_post_key = "')[1].split('";')[0];
             var threadTitle = $(".navigation").find(".active").text();
             // Include quote in message body
             var pmFromPostQuoteText = "";
+            var pmFromPostQuotePID = "";
             if (pmChangesPMFromPostShowQuote) {
+                // Grab PID of post
+                $(postIDSelector).each(function (index) {
+                    pmFromPostQuotePID = $(this).attr("href").substring($(this).attr("href").indexOf('#pid')+4);
+                });
                 // Grab text of post (exclude quotes)
                 pmFromPostQuoteText = $(this).find(".post_body").clone();
                 if ($(this).find("blockquote")) {
                     pmFromPostQuoteText.find("blockquote").remove();
                 }
-                pmFromPostQuoteText = '[quote="' + usernameName + '"]' + pmFromPostQuoteText.text().replace(/\t+/g, "").replace(/\n\s*\n/g, '\n') + '[/quote]';
+                pmFromPostQuoteText = '[quote="' + usernameName + '" pid="' + pmFromPostQuotePID + '"]' + pmFromPostQuoteText.text().replace(/\t+/g, "").replace(/\n\s*\n/g, '\n') + '[/quote]';
             }
             if (threadTitle.length > 50) {
                 threadTitle = threadTitle.substring(0, 50);
@@ -176,10 +186,10 @@ function enablePostOptions() {
                 .css({ "cursor": "pointer"})
                 .addClass("bitButton");
             // Replace PM button
-            $(this).find(".bitButton[title='Send this user a private message']").replaceWith(newPMButton);
-
+            $(this).find(".postbit_pm[title='Send this user a private message']").replaceWith(newPMButton);
+            
             // Get Post Link
-            $(this).find(".smalltext > strong > a:eq(0)").each(function (index) {
+            $(postIDSelector).each(function (index) {
                 postLink = $(this).attr("href");
             });
             // HTML for PM Popup
@@ -218,8 +228,7 @@ function enablePostOptions() {
             // CSS to highlight message popup
             $(".HFXPMFromPostDiv").css({ "background-color": "#3f3e3e" }); // 737272
             // Append to new row
-            $(this).find("tbody:eq(0)").append($("<tr>").attr("id", "pmContainerRow" + index));
-            $("#pmContainerRow" + index).append("<td>").addClass("trow1");
+            $(this).append($("<td>").attr("id", "pmContainerRow" + index));
             $("#pmContainerRow" + index + " > td").append(finalform);
             // Event Listener on send
             $(".sendQuickPM").click(function () {

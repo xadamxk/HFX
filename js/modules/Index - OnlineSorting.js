@@ -105,10 +105,10 @@ function rgb2group(rgb) {
     else if (rgb == "rgb(239, 239, 239)") {
         return "Regular";
     }
-    else if (rgb == "rgb(153, 255, 0)" || rgb == "rgb(153, 255, 0)") {
+    else if (rgb == "rgb(153, 255, 0)" || rgb == "rgb(153, 255, 0)" || rgb == "rgb(255, 204, 0)"){
         return "L33T";
     }
-    else if (rgb == "rgb(0, 170, 255)" || rgb == "rgb(0, 170, 255)") {
+    else if (rgb == "rgb(0, 170, 255)" || rgb == "rgb(0, 170, 255)" || rgb == "rgb(0, 102, 255)") {
         return "UB3R";
     }
     else if (rgb == "rgb(56, 56, 56)" || rgb == "rgb(68, 68, 68)") {

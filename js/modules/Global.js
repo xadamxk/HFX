@@ -497,7 +497,7 @@ function createStickyHeader() {
     var showIconLabels = false;
     // Append Toolbar
     $("#panel").append($("<div>").attr("id", "Sticky")
-                       .css("height", "22px").css("background-color", "#333333")
+                       .css("height", "22px").css("background-color", "#1f1f1f")
                        .css("border-style", "solid").css("border-color", "white").css("border-width", "0px 0px 1px 0px")
                        .css("align-items", "center").css("z-index", "100"));
     // ----------------------------------------- LEFT -----------------------------------------
