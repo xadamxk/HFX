@@ -7,7 +7,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
         var thisVersion = chrome.runtime.getManifest().version;
         console.log("Updated from " + details.previousVersion + " to " + thisVersion + "!");
         var newURL = "https://github.com/xadamxk/HFX/wiki/Changelog";
-        //chrome.tabs.create({ url: newURL });
+        chrome.tabs.create({ url: newURL });
     }
 });
 

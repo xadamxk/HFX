@@ -150,10 +150,9 @@ function injectBadgesProfile(badgeList) {
 }
 
 function injectBadgesThread(badgeList) {
-    var uid;
-    $("#posts > table").each(function (indexPost) {
-        uid = $(this).find(".post_author > strong > span > a").attr('href').match(/\d+/)[0];
-        $(this).find($(".post_author:eq(" + indexPost + ") > .smalltext")
+    $(".post").each(function (indexPost) {
+        var uid = $(this).find(".author_information > strong > span > a").attr('href').match(/\d+/)[0];
+        $(this).find($(".author_information:eq(" + indexPost + ") > .smalltext")
             .after($("<div>").addClass("hfxBadgeContainer")));
         var selectingElement = $(".hfxBadgeContainer:eq(" + indexPost + ")");
         searchBadgeList(badgeList, selectingElement, uid);
@@ -267,8 +266,7 @@ function injectUserNote() {
 }
 
 function threadTagger() {
-    var i, authorPosts, apHolder, tagNameHolder, tagNameKeys, uid;
-    authorPosts = document.getElementsByClassName('post_author');
+    var i, apHolder, tagNameHolder, tagNameKeys, uid;
     // Get List of Keys/Values
     chrome.storage.sync.get("UserNoteStorage", function (data) {
         if (!chrome.runtime.error) {
@@ -290,9 +288,9 @@ function threadTagger() {
                 userNoteInfo = [["1306528", "HFX Developer"], ["1", "Mr. BossMan"]];
             }
             // Append Tag - Loop Through Posts
-            $("#posts > table").each(function (indexPost) {
+            $(".post").each(function (indexPost) {
                 matchFound = false;
-                uid = $(this).find(".post_author > strong > span > a").attr('href').match(/\d+/)[0];
+                uid = $(this).find(".author_information > strong > span > a").attr('href').match(/\d+/)[0];
                 // Loop each saved user note
                 $(userNoteInfo).each(function (index) {
                     //console.log(userNoteInfo[index][0] == uid && userNoteInfo[index][1] != '');
@@ -326,9 +324,9 @@ function injectSFWMode()
 
 function tagEditorThread(indexPost) {
     var newTag = "", tagNameHolder, uid, newNameFound = true;
-    $("#posts > table").each(function (matchingIndex) {
+    $(".post").each(function (matchingIndex) {
         if (indexPost == matchingIndex) {
-            uid = $(this).find(".post_author > strong > span > a").attr('href').match(/\d+/)[0];
+            uid = $(this).find(".author_information > strong > span > a").attr('href').match(/\d+/)[0];
         }
     });
     // Get List of Keys/Values - Loop each saved user note
@@ -343,7 +341,7 @@ function tagEditorThread(indexPost) {
         //$("#profileTag" + indexPost).text("+");
         return;
     }
-    $("#posts > table").each(function (indexPost) {
+    $(".post").each(function (indexPost) {
         // Loop each saved user note
         $(userNoteInfo).each(function (index) {
             if (userNoteInfo[index][0] == uid) {
@@ -396,6 +394,7 @@ function profileTagger() {
                     tag = userNoteInfo[index][1];
                 }
             });
+            // ------------------------------------------- PROFILE NOTE HERE ----------------------------------------------------
             // Append Tag
             $('.largetext strong span')
                 .append("&nbsp;")
@@ -613,7 +612,7 @@ function injectEasyCite() {
     else if (location.href.includes("/member.php?action=profile")) {
         citationDescripion = $(".navigation").find(".active").text().replace("Profile of ", "");
         if (profileColors)
-            citationText = "[color=" + rgb2hex($(".quick_keys").find(".largetext strong span").css("color")) + "]" + citationDescripion + "[/color]";
+            citationText = "[color=" + rgb2hex($("fieldset").find(".largetext strong span").css("color")) + "]" + citationDescripion + "[/color]";
         else
             citationText = +citationDescripion;
     }
