@@ -91,7 +91,7 @@ function enablePostOptions() {
                 // Hide Post
                 this.click();
                 // 'Ignored User' Alert
-                $("a[onclick*='showIgnoredPost']:eq(" + index+")").closest('table').next().next().find(".float_left.smalltext")
+                $("a[onclick*='showIgnoredPost']:eq(" + index + ")").closest('table').next().next().find(".float_left.smalltext")
                     .append($('<span>').text("(IGNORED USER)"));
                 $("a[onclick*='showIgnoredPost']:eq(" + index + ")").closest('table').next().next().find(".tcat").css("background-color", "#c40d23");
             });
@@ -118,7 +118,7 @@ function enablePostOptions() {
             var potLinkConst = "showthread.php?tid=" + threadID + "&mode=single&uid=";
             // Append button
             $(this).find(".author_buttons").append($("<a>")
-                .attr({ "title" : "Posts on Thread" , "href" : potLinkConst + usernameUID })
+                .attr({ "title": "Posts on Thread", "href": potLinkConst + usernameUID })
                 .text("PoT")
                 .css({ "cursor": "pointer", "margin-right": "5px" })
                 .addClass("bitButton"));
@@ -163,7 +163,7 @@ function enablePostOptions() {
             if (pmChangesPMFromPostShowQuote) {
                 // Grab PID of post
                 $(postIDSelector).each(function (index) {
-                    pmFromPostQuotePID = $(this).attr("href").substring($(this).attr("href").indexOf('#pid')+4);
+                    pmFromPostQuotePID = $(this).attr("href").substring($(this).attr("href").indexOf('#pid') + 4);
                 });
                 // Grab text of post (exclude quotes)
                 pmFromPostQuoteText = $(this).find(".post_body").clone();
@@ -178,16 +178,16 @@ function enablePostOptions() {
             var newPMButton = $("<a>")
                 .attr({
                     "title": "PM From Post", "href": "javascript:void(0);",
-                    "onclick": "javascript:document.getElementById('HFXPMFromPost"+index+"').style.display = " +
+                    "onclick": "javascript:document.getElementById('HFXPMFromPost" + index + "').style.display = " +
                         "(document.getElementById('HFXPMFromPost" + index + "').style.display == 'block') ? 'none' : 'block'",
-                    "class" : "HFXPMFromPost"
+                    "class": "HFXPMFromPost"
                 })
                 .text("Quick PM")
-                .css({ "cursor": "pointer"})
+                .css({ "cursor": "pointer" })
                 .addClass("bitButton");
             // Replace PM button
             $(this).find(".postbit_pm[title='Send this user a private message']").replaceWith(newPMButton);
-            
+
             // Get Post Link
             $(postIDSelector).each(function (index) {
                 postLink = $(this).attr("href");
@@ -217,7 +217,7 @@ function enablePostOptions() {
             var formsend = '<div align="center"><input type="submit" class="button PMFromPostButton sendQuickPM" name="submit" value="Send Message" tabindex="9" accesskey="s" />' +
                 '<input type="submit" class="button PMFromPostButton" name="saveasdraft" value="Save as Draft" tabindex="10" />' +
                 '<input type="submit" class="button PMFromPostButton" name="preview" value="Preview" tabindex="11" /></div><br />';
-            var spacing ='<br />';
+            var spacing = '<br />';
             var finalform = formaction + formpmid + formdo + formicon + formmy_post_key + formuid +
                 spacing + formto + formsubject + spacing +
                 formmessage + formchecks + formsend + '</form></div>';
@@ -228,8 +228,9 @@ function enablePostOptions() {
             // CSS to highlight message popup
             $(".HFXPMFromPostDiv").css({ "background-color": "#3f3e3e" }); // 737272
             // Append to new row
-            $(this).append($("<td>").attr("id", "pmContainerRow" + index));
-            $("#pmContainerRow" + index + " > td").append(finalform);
+            $(this).append($("<div>").attr("id", "pmContainerRow" + index));
+            $("#pmContainerRow" + index).append("<div>");
+            $("#pmContainerRow" + index + " > div").append(finalform);
             // Event Listener on send
             $(".sendQuickPM").click(function () {
                 $("#pmContainerRow" + index).hide();
