@@ -516,7 +516,7 @@ function createStickyHeader() {
     // Bottom
     $("#leftSticky").append($("<a>")
         .append($($("<i>").addClass("fa fa-arrow-down")))
-        .attr("href", "#copyright").attr("onClick", ""));
+        .attr("href", "#footer").attr("onClick", ""));
     // New PM
     var shortcut4NewPM = false;
     var shortcut4Text = "PM Inbox";
@@ -629,11 +629,16 @@ function injectEasyCite() {
         citationText = $(".navigation").find(".active").text();
         citationDescripion = citationText;
         // Posts - each post bit on page
-        $(".bitButton[title='Trust Scan']").each(function (index, element) {
-            var tsButton = $(element);
-            var postMessage = tsButton.parents("table.tborder");
+        $(".post").each(function (index, element) {
+            //var tsButton = $(element);
+            //var postMessage = tsButton.parents("table.tborder");
+            var postMessage = $(this);
             // Grab UID & create button
-            tsButton.parent().append($("<a>").text("Cite").attr("id", "citeButton" + index).css("cursor", "pointer").addClass("bitButton").css("margin-right", "5px"));
+            $(element).find(".author_buttons").append($("<a>")
+                .attr({ "title": "Cite Post", "id": "citeButton" + index, "href": "javascript:void(0);" })
+                .text("Cite")
+                .css({ "cursor": "pointer", "margin-right": "5px" })
+                .addClass("bitButton"));
             // temp vars
             var tempcitationDescripion;
             var tempcitationLink;
@@ -642,23 +647,25 @@ function injectEasyCite() {
             $("body").on("click", "#citeButton" + index, function (e) {
                 e.preventDefault();
                 // Foreach a in smalltext in postbit
-                for (i = 0; i < $(postMessage).find(".smalltext strong a").length; i++) {
-                    // If first post
-                    if ($(postMessage).find(".smalltext strong a")[i].text == ("#1")) {
-                        tempcitationLink = "https://hackforums.net/" + $(postMessage).find(".smalltext strong a:eq(" + i + ")").attr('href');
-                        tempcitationDescripion = $(".navigation").find(".active").text() + " by " + $(".post_author:eq(0) strong span a span").text();
-                        tempcitationText = $(".navigation").find(".active").text() + "[/b][/url] by [b][url=" + $(".post_author:eq(0) strong span a").attr("href") + "]" + $(".post_author:eq(0) strong span a span").text();
+               // If first post
+                if ($(".post_head:eq(" + index + ") > .float_right:eq(0) > strong > a").text() == ("#1")) {
+                    tempcitationLink = "https://hackforums.net/" + $(".post_head:eq(" + index + ") > .float_right:eq(0) > strong > a").attr('href');
+                        //console.log(tempcitationLink);
+                    tempcitationDescripion = $(".navigation").find(".active").text() + " by " + $(".author_information:eq(" + index + ") strong span a span").text();
+                        //console.log(tempcitationDescripion);
+                    tempcitationText = $(".navigation").find(".active").text() + "[/b][/url] by [b][url=" + $(".author_information:eq(" + index + ") strong span a").attr("href") + "]" + $(".author_information:eq(" + index + ") strong span a span").text();
+                        //console.log(tempcitationText);
                     }
                         // Every other post
-                    else if ($(postMessage).find(".smalltext strong a")[i].text.includes("#")) {
-                        tempcitationLink = "https://hackforums.net/" + $(postMessage).find(".smalltext strong a:eq(" + i + ")").attr('href');
-                        tempcitationDescripion = $(postMessage).find(".largetext a:eq(0) span").text() + "'s Post";
+                else if ($(".post_head:eq(" + index + ") > .float_right:eq(0) > strong > a").text().includes("#")) {
+                    tempcitationLink = "https://hackforums.net/" + $(".post_head:eq(" + index + ") > .float_right:eq(0) > strong > a").attr('href');
+                    tempcitationDescripion = $(".author_information strong span a span:eq(" + index + ")").text() + "'s Post";
                         // User profile link
                         if (usernameLink)
-                            tempcitationLink = $(postMessage).find(".largetext a:eq(0)").attr('href');
+                            tempcitationLink = $(".author_information:eq(" + index + ") strong span a").attr("href");
                         // post Username Info
-                        var postUsername = $(postMessage).find(".largetext a:eq(0) span").text();
-                        var postUsernameLink = "https://hackforums.net/" + $(postMessage).find(".smalltext strong a:eq(" + i + ")").attr('href');
+                        var postUsername = $(".author_information:eq(" + index + ") strong span a span").text()
+                        var postUsernameLink = "https://hackforums.net/" + $(".author_information:eq(" + index + ") strong span a").attr("href");
                         // User color
                         if (usernameColors) {
                             var userColor = rgb2hex($(postMessage).find(".largetext a:eq(0) span").css('color'));
@@ -679,9 +686,8 @@ function injectEasyCite() {
                                 tempcitationText = postUsername + "'s Post";
                         }
                     }
-                }
-                prompt("Citation: " + tempcitationDescripion, "[url=" + tempcitationLink + "][b]" + tempcitationText + "[/b][/url]");
-            });
+                prompt("Citation: " + tempcitationDescripion, "[b][url=" + tempcitationLink + "]" + tempcitationText + "[/url][/b]");
+            }); // end of posts loop
         });
     }
         // Help Docs /myawards.php?awid=
@@ -707,13 +713,22 @@ function injectEasyCite() {
         // Search Page
     else if (location.href.includes("/search.php") && !location.href.includes("?action=results")) {
         // Append button
-        $(".quick_keys").find("strong:contains(Search in Forum)").append(" ").append($("<a>").text("Cite").addClass("bitButton").attr("id", "citeAllSections"));
+        $("form").find("strong:contains(Search in Forum)").append(" ")
+            .append($("<a>")
+            .attr({ "title": "Cite All Sections", "href": "javascript:void(0);", "id": "citeAllSections" })
+            .text("Cite")
+            .css({ "cursor": "pointer", "margin-right": "5px" })
+            .addClass("bitButton"));
+
         $("#citeAllSections").click(function () {
             // Output
-            var selectTable = $(".quick_keys").find("strong:contains(Hack Forums - Search)").parent().parent().parent().parent();
-            selectTable.after($("<textarea>").val(citeAllSections()).css("width", selectTable.css("width")).attr("id", "citeAllSectionsOutput")).after("<br>");
-            $("#citeAllSectionsOutput").select();
-            //prompt("All Sections:",citeAllSections());
+            console.log($("#citeAllSectionsOutput").length == 0);
+            if ($("#citeAllSectionsOutput").length == 0) {
+                var selectTable = $("form").find("table");
+                $("form").after($("<textarea>").val(citeAllSections()).css("width", selectTable.css("width")).attr("id", "citeAllSectionsOutput")).after("<br>");
+                $("#citeAllSectionsOutput").select();
+                //prompt("All Sections:",citeAllSections());
+            }
         });
     }
     $("#citeButton").click(function (event) {

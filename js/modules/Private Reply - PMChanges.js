@@ -346,7 +346,7 @@ function trackingTableLinks(table) {
 }
 
 function getTrackingTableBody(string) {
-    return $(".quick_keys").find("strong:contains('" + string + "')").parent().parent().parent();
+    return $("#content").find("strong:contains('" + string + "')").parent().parent().parent();
 }
 
 // ------------------------------ Functions ------------------------------

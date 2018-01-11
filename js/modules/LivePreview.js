@@ -106,7 +106,7 @@ function injectCharacterCounterChanges() {
         appendCharCountToMe.after($("<span>").attr("id", "charLabel").text(""));
         appendCharCountToMe.after($("<br />"));
         appendCharCountToMe.after($("<br />"));
-        $('#message_new').bind('input propertychange', function () {
+        $('textarea').bind('input propertychange', function () {
             doCount();
         });
     }
@@ -175,7 +175,7 @@ function doCount() {
     if (window.location.href.includes("hackforums.net/showthread.php?tid=")) {
         textInput = $("#message").val();
     } else {
-        textInput = $("#message_new").val();
+        textInput = $("textarea[dir='ltr']").val();
     }
     // Quotes
     textInput = textInput.replace(/\[\/?quote.*[^\]]*\]/g, '');
