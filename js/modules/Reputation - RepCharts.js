@@ -54,13 +54,23 @@ function injectRepLinks() {
 
 function injectRepCharts() {
     // Append repOptions button
-    $(".quick_keys div:eq(0) a:eq(0)").before($("<button>").attr("id", "repOptionsButton").addClass("button").css({ marginRight: "5px" }));
+    $(".navigation").next().after($("<div>").addClass("float_left").css({ "padding-bottom": "4px" })
+        .append($("<a>").addClass("button").addClass("rate_user_button").attr("href", "javascript:void(0)")
+            .append($("<span>").attr("id", "repOptionsButton"))));
+    var posRepTotal;
+    var neuRepTotal;
+    var negRepTotal;
+    var totRepTotal;
     // Add given button
     if (window.location.href.includes("hackforums.net/reputation.php?uid=")) {
         $("#repOptionsButton").text("Reps Given");
         $('#repOptionsButton').click(function () {
             window.location.href = window.location.href.replace("reputation.php", "repsgiven.php");
         });
+        // Pie Chart
+        posRepTotal = parseInt($("td > span:contains(All Time)").parent().next().find("span").text().replace(/[^\d\.\-]/g, ""));
+        neuRepTotal = parseInt($("td > span:contains(All Time)").parent().next().next().find("span").text().replace(/[^\d\.\-]/g, ""));
+        negRepTotal = parseInt($("td > span:contains(All Time)").parent().next().next().next().find("span").text().replace(/[^\d\.\-]/g, ""));
     }
         // Add received button
     else if (window.location.href.includes("hackforums.net/repsgiven.php?uid=")) {
@@ -68,19 +78,19 @@ function injectRepCharts() {
         $('#repOptionsButton').click(function () {
             window.location.href = window.location.href.replace("repsgiven.php", "reputation.php");
         });
+        // Pie Chart
+        posRepTotal = parseInt($(".smalltext a:eq(1)").text());
+        neuRepTotal = parseInt($(".smalltext a:eq(2)").text());
+        negRepTotal = parseInt($(".smalltext a:eq(3)").text());
     }
     // Grab rep total values
     var username = $(".largetext strong span").text();
-    var posRepTotal = parseInt($("td > span:contains(All Time)").parent().next().find("span").text().replace(/[^\d\.\-]/g, ""));
-    var neuRepTotal = parseInt($("td > span:contains(All Time)").parent().next().next().find("span").text().replace(/[^\d\.\-]/g, ""));
-    var negRepTotal = parseInt($("td > span:contains(All Time)").parent().next().next().next().find("span").text().replace(/[^\d\.\-]/g, ""));
-    var totRepTotal = (posRepTotal + neuRepTotal + negRepTotal);
-    // Total Reputation (in box)
-    var totalRep = parseInt($(".smalltext span").text());
-    var totalPosNegCount = posRepTotal + negRepTotal;
 
-    // Some math im working with
-    //if ((totalRep == (((pos1*1)+(pos2*2)+(pos3*3)) + ((neg1*-1)+(neg2*-2)+(neg3*-3)))) && ((pos1+pos2+pos3).count == posRepTotal) && ((neg1+neg2+neg3).count == negRepTotal))
+    // Total Rep
+    totRepTotal = (posRepTotal + neuRepTotal + negRepTotal);
+    
+    // Total Reputation (in box)
+    //var totalRep = parseInt($(".smalltext span").text());
 
     // Debug info
     if (debug) {
@@ -188,10 +198,6 @@ function injectRepCharts() {
         console.log("Month Vals: " + monthPos + ", " + monthNeu + ", " + monthNeg + ", " + monthTot);
         console.log("Six Month Vals: " + sixmonthPos + ", " + sixmonthNeu + ", " + sixmonthNeg + ", " + sixmonthTot);
     }
-    // Table Row (created new table row above "Comments" - removed
-    //var tableRowlastRep = document.createElement('tr');
-    //tableRowlastRep.id = "insertedTableRowlastRep";
-    //$(".quick_keys tr:eq(2)").after(tableRowlastRep);
 
     // Table D
     var tableDlastRep = document.createElement('td');
