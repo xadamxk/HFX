@@ -169,21 +169,23 @@ function injectSmartQuotes() {
         //$("#smartQuoteMentions").css("color", smartQuoteNotificationColor);
     }
     // Always Quote
-    if ($(".quick_keys").find($("a[title='Thread Closed']")).length > 0) {
+    if ($("#content").find($("span:contains(Thread Closed)")).length > 0) {
         // Append quote buttons
-        $(".quick_keys").find($("a[title='Report this post to a moderator']")).each(function (index) {
-            $(this).before($("<a>").addClass("bitButton closedQuote").text("Quote").css("margin", "5px").attr("id", "closedQuote" + index));
+        $("#content").find($("a[title='Report this post to a moderator']")).each(function (index) {
+            $(this).before($("<a>").addClass("bitButton closedQuote").attr("href", "javascript:void(0)").css("margin", "5px").attr("id", "closedQuote" + index)
+                .append($("<span>").text("Quote")));
         });
         // Quote event listeners
         $(".closedQuote").click(function () {
-            var postBlock = $(this).parent().parent().parent().parent();
+            var postBlock = $(this).parent().parent().parent();
             //console.log(postBlock);
             // Post Link
-            var postLink = postBlock.find("strong a").attr("href").split("&pid=");
+            var postLink = postBlock.find(".post_head .float_right strong a").attr("href").split("&pid=");
+            //console.log(postLink);
             if (postLink[1].includes("#pid")) { postLink[1] = postLink[1].substring(0, postLink[1].indexOf("#pid")); }
             //console.log("Post ID: " + postLink[1]);
             // Username
-            var postUsername = postBlock.children().next().children().eq(0).find(".post_author").find("strong span a span").text();
+            var postUsername = postBlock.find(".author_information").find("strong span a span").text();
             //console.log("Username: "+postUsername);
             // Post Content
             var postContent = $("#pid_" + postLink[1]).text();

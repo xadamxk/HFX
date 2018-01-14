@@ -1,4 +1,5 @@
-﻿var debug = false;
+﻿// Context menu example: https://stackoverflow.com/a/13783536/2694643
+var debug = false;
 var enableHideLocation = false;
 var enableDenyPMReceipt = false;
 var enableEasyCite = false;
@@ -477,12 +478,6 @@ function injectHFTB() {
     stickStickyHeader();
     // Buddy event listener 
     //$("#leftSticky a:eq(1)").click(function () {showBuddyContainer();});
-    // Settings event listener
-    //$("#leftSticky a:eq(4)").click(function () {
-    //    $("#settingsleftSticky").css("color", "#1EF1EA");
-    //    console.log(chrome.extension.getURL("pages/options.html"));
-        // Open Settings
-    //});
     // Append quick links to toolbar
     appendQuickLinks();
     // Add spacers to toolbar
@@ -497,7 +492,7 @@ function createStickyHeader() {
     // Append Toolbar
     $("#panel").append($("<div>").attr("id", "Sticky")
                        .css("height", "22px").css("background-color", "#1f1f1f")
-                       .css("border-style", "solid").css("border-color", "white").css("border-width", "0px 0px 1px 0px")
+                       .css("border-style", "solid").css("border-color", "#f9f9f9").css("border-width", "0px 0px 1px 0px")
                        .css("align-items", "center").css("z-index", "100"));
     // ----------------------------------------- LEFT -----------------------------------------
     $("#Sticky").append($("<div>").attr("id", "leftSticky").addClass("float_left").text("")
@@ -802,17 +797,6 @@ function appendQuickLinks() {
 
 function addSpacersToHeader() {
     var iconLabelSpacer = "-";
-    /* switch (GM_config.get('iconLabelSpacer')) {
-        case "default": iconLabelSpacer = "-";
-            break;
-        case "pipe": iconLabelSpacer = "|";
-            break;
-        case "colon": iconLabelSpacer = ":";
-            break;
-        case "space": iconLabelSpacer = "";
-            break;
-    }
-    */
     // Left
     var numLeftElements = $("#leftSticky a").length;
     $("#leftSticky a").each(function (index) {
