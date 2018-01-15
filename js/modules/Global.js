@@ -164,7 +164,7 @@ function injectBadgesThread(badgeList) {
 }
 
 function searchBadgeList(badgeList, selectingElement, uid) {
-    var testersLink, supportersLink, donatorsLink;
+    var testersLink, supportersLink, donatorsLink, contributorsLink;
     // Loop through badgeList for matches
     $.each(badgeList, function (key1, value1) {
         $.each(value1, function (key2, value2) {
@@ -178,6 +178,8 @@ function searchBadgeList(badgeList, selectingElement, uid) {
                 case "donatorsLink":
                     donatorsLink = value2;
                     break;
+                case "contributorsLink":
+                    contributorsLink = value2;
             }
         });
     });
@@ -211,6 +213,15 @@ function searchBadgeList(badgeList, selectingElement, uid) {
                             {
                                 "src": donatorsLink,
                                 "title": "HFX Donator"
+                            }).css({ "padding-right": "5px" }));
+                    }
+                case "contributors":
+                    if (uid == value2) {
+                        selectingElement
+                            .append($("<img>").attr(
+                            {
+                                "src": contributorsLink,
+                                "title": "HF Contributor"
                             }).css({ "padding-right": "5px" }));
                     }
                     break;
