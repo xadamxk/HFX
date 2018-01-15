@@ -697,7 +697,7 @@ function injectEasyCite() {
     }
         // Reputation Report
     else if (location.href.includes("/reputation.php?uid=") || location.href.includes("/repsgiven.php?uid=")) {
-        citationDescripion = $(".quick_keys").find("strong:contains('Reputation Report for')").text().replace("Reputation Report for ", "") + " 's " + $(".navigation").find(".active").text();
+        citationDescripion = $("#content").find("strong:contains('Reputation Report for')").text().replace("Reputation Report for ", "") + " 's " + $(".navigation").find(".active").text();
         citationText = citationDescripion;
     }
         // Search Page Results

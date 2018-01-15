@@ -84,7 +84,7 @@ function injectRepCharts() {
         negRepTotal = parseInt($(".smalltext a:eq(3)").text());
     }
     // Grab rep total values
-    var username = $(".largetext strong span").text();
+    var username = $(".largetext strong").text();
 
     // Total Rep
     totRepTotal = (posRepTotal + neuRepTotal + negRepTotal);
