@@ -215,13 +215,14 @@ function searchBadgeList(badgeList, selectingElement, uid) {
                                 "title": "HFX Donator"
                             }).css({ "padding-right": "5px" }));
                     }
+                    break;
                 case "contributors":
                     if (uid == value2) {
                         selectingElement
                             .append($("<img>").attr(
                             {
                                 "src": contributorsLink,
-                                "title": "HF Contributor"
+                                "title": "HFX Contributor"
                             }).css({ "padding-right": "5px" }));
                     }
                     break;
