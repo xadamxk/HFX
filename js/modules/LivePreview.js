@@ -231,7 +231,12 @@ function injectLivePreview() {
     // http://www.freeformatter.com/javascript-escape.html
     // Dev: https://rawgit.com/xadamxk/ThreadDesignGenerator/master/CSS/xbbcode.css
     // Prod: https:\/\/cdn.rawgit.com\/xadamxk\/ThreadDesignGenerator\/8c58d68e\/CSS\/xbbcode.css
-    $("head").append('<link ' + "href='https:\/\/cdn.rawgit.com\/xadamxk\/ThreadDesignGenerator\/c598f2e7\/CSS\/xbbcode.css'" + 'rel="stylesheet" type="text/css">');
+    // Files
+    var collapseImg = chrome.extension.getURL("/images/collapse.gif");
+    var collapseCollapsedImg = chrome.extension.getURL("/images/collapse_collapsed.gif");
+    var xbbCodeSrc = chrome.extension.getURL("/css/xbbcode.css");
+
+    $("head").append('<link ' + "href='" + xbbCodeSrc + "'" + 'rel="stylesheet" type="text/css">');
 
     // Quick Reply
     if (window.location.href.includes("hackforums.net/showthread.php?tid=")) {
@@ -240,7 +245,7 @@ function injectLivePreview() {
             $("#quickreply_e tr:eq(1)").after($("<tr>")
                                               .append($("<td>").attr("colspan", "2").addClass("trow1")
                                                       .append($("<div>").addClass("expcolimage")
-                                                              .append("<img id='livePreviewCollapse' alt='[-]' title='[-]' style='cursor: pointer;' src='https://hackforums.net/images/modern_bl/collapse.gif' />"))
+                                                              .append("<img id='livePreviewCollapse' alt='[-]' title='[-]' style='cursor: pointer;' src='" + collapseImg + "' />"))
                                                       .append($("<div>")
                                                               .append($("<strong>").text("Live Preview")).append("<br>").append($("<span>").attr("id", "livePreviewErrors")))));
             $("#quickreply_e tr:eq(2)").after($("<tr>")
@@ -274,13 +279,16 @@ function injectLivePreview() {
              window.location.href.includes("hackforums.net/newthread.php?fid=") ||
              window.location.href.includes("hackforums.net/editpost.php?pid=") ||
              window.location.href.includes("hackforums.net/private.php?action=send")) {
+        // Images
+        var collapseImg = chrome.extension.getURL("/images/collapse.gif");
+        var collapseCollapsedImg = chrome.extension.getURL("/images/collapse_collapsed.gif");
         $("strong:contains(Message:)").parent().parent().after($("<tr>")
                                                                     .append($("<td>").addClass("trow1").css("width", "20%")
                                                                             .append($("<strong>").text("Live Preview:")).append("<br>").append($("<span>").attr("id", "livePreviewErrors")))
                                                                     .append($("<td>").addClass("trow1").append($("<div>").attr("id", "livePreview"))));
         // Collapse Box
         $("strong:contains(Live Preview:)").append($("<div>").addClass("expcolimage")
-            .append("<img id='livePreviewCollapse' alt='[-]' title='[-]' style='cursor: pointer;' src='https://hackforums.net/images/modern_bl/collapse.gif' />"));
+            .append("<img id='livePreviewCollapse' alt='[-]' title='[-]' style='cursor: pointer;' src='" + collapseImg + "' />"));
 
         // Setting to auto collapse - trigger click event here
         if (collapseLivePreviewByDefault) {
@@ -332,10 +340,12 @@ function updatePreview(input, removeTag, outContainer) {
 }
 
 function toggleCollapseAttr() {
+    var collapseImg = chrome.extension.getURL("/images/collapse.gif");
+    var collapseCollapsedImg = chrome.extension.getURL("/images/collapse_collapsed.gif");
     if ($("#livePreview").is(':visible')) {
-        $("#livePreviewCollapse").attr("alt", "[-]").attr("title", "[-]").attr("src", "https://hackforums.net/images/modern_bl/collapse.gif");
+        $("#livePreviewCollapse").attr("alt", "[-]").attr("title", "[-]").attr("src", collapseImg);
     } else {
-        $("#livePreviewCollapse").attr("alt", "[+]").attr("title", "[+]").attr("src", "https://hackforums.net/images/modern_bl/collapse_collapsed.gif");
+        $("#livePreviewCollapse").attr("alt", "[+]").attr("title", "[+]").attr("src", collapseCollapsedImg);
     }
 }
 

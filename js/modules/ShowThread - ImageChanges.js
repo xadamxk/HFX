@@ -2,7 +2,7 @@ var debug = false;
 var maxSizeEnable = false;
 var replaceBrokenEnable = false;
 var forceHTTPSEnable = false;
-var brokenImageURL = "https://github.com/xadamxk/HFX/blob/master/images/icon-128.png?raw=true";
+var brokenImageURL = chrome.extension.getURL("/images/icon128.png");;
 getImageChanges();
 
 // Set vars equal to saved settings

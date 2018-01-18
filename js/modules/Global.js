@@ -165,21 +165,32 @@ function injectBadgesThread(badgeList) {
 
 function searchBadgeList(badgeList, selectingElement, uid) {
     var testersLink, supportersLink, donatorsLink, contributorsLink;
+
+    var testerIcon = chrome.extension.getURL("/images/trophy_testers3.png");
+    var supporterIcon = chrome.extension.getURL("/images/trophy_supporters2.png");
+    var donatorIcon = chrome.extension.getURL("/images/trophy_donators.png");
+    var contributorIcon = chrome.extension.getURL("/images/trophy_contributer.png");
+
     // Loop through badgeList for matches
     $.each(badgeList, function (key1, value1) {
         $.each(value1, function (key2, value2) {
             switch (key1) {
                 case "testersLink":
-                    testersLink = value2;
+                    //testersLink = value2;
+                    testersLink = testerIcon;
                     break;
                 case "supportersLink":
-                    supportersLink = value2;
+                    //supportersLink = value2;
+                    supportersLink = supporterIcon;
                     break;
                 case "donatorsLink":
-                    donatorsLink = value2;
+                    //donatorsLink = value2;
+                    donatorsLink = donatorIcon;
                     break;
                 case "contributorsLink":
-                    contributorsLink = value2;
+                    //contributorsLink = value2;
+                    contributorsLink = contributorIcon;
+                    break;
             }
         });
     });
