@@ -11,7 +11,7 @@
   <a align="center" href="https://chrome.google.com/webstore/detail/hf-xtension/hcfofmfmidhgbblcnnipcphhegcmdeeb">
     <img src="https://developer.chrome.com/webstore/images/ChromeWebStore_BadgeWBorder_v2_206x58.png" title="Download for Chrome"  />
   </a>
-  <a align="center" href="https://github.com/xadamxk/HFX/releases/latest">
+  <a align="center" href="https://addons.mozilla.org/en-US/firefox/addon/hfx/">
     <img src="https://raw.githubusercontent.com/xadamxk/HFX/master/images/FireFoxWebStore01.png" width="165" height="62" title="Download for FireFox"  />
   </a>
   <a align="center" href="https://github.com/xadamxk/HFX/wiki/Installing-HFX-on-Opera-Browser">
