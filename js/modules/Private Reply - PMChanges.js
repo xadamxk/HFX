@@ -86,7 +86,7 @@ function prettyPMDisplay(finalArray) {
         bubbleList.push('</tr>');
     }
     // Append changes
-    document.getElementById('pid_').innerHTML = bubbleList.join('');
+    $("#pid_").append(bubbleList.join(''));
     // PM Bubble CSS
     var pm_bubble_right_unread = {
         "border-radius": "5px",

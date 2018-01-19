@@ -40,11 +40,11 @@ function onlineSorting() {
         groupHeaders[value] = document.createElement("div");
         groupBox[value] = document.createElement("div");
         if (value == "Regular") {
-            groupHeaders[value].innerHTML = "<b>" + value + "</b> ";
-
+            $(groupHeaders[value]).append($("<b>").text(value));
+            
         }
         else {
-            groupHeaders[value].innerHTML = "<br/><b>" + value + "</b> ";
+            $(groupHeaders[value]).append("<br>").append($("<b>").text(value));
         }
         groupBox[value].appendChild(groupHeaders[value]);
     }
@@ -59,8 +59,8 @@ function onlineSorting() {
                 groupContainer = document.createElement("div");
                 name = document.createElement("a");
                 sep = document.createElement("span");
-                sep.innerHTML = ", ";
-                name.innerHTML = members[i].innerHTML;
+                sep.append(", ");
+                name.append(members[i]);
                 //groupBox["Bots (Web Crawlers)"].appendChild(name);
                 //groupBox["Bots (Web Crawlers)"].appendChild(sep);
             }
@@ -71,9 +71,12 @@ function onlineSorting() {
                 groupName = rgb2group(nameColor);
                 name = document.createElement("a");
                 sep = document.createElement("span");
-                sep.innerHTML = ", ";
+                sep.append(", "); //sep.innerHTML = ", ";//
                 name.href = members[i].parentNode.href;
-                name.innerHTML = members[i].innerHTML;
+                //name.innerHTML = members[i].innerHTML;//
+                var tempHTML = members[i].innerHTML;
+                $(name).append(tempHTML);
+
                 if (rgb2group(nameColor) == "Closed") {
                     name.style.color = "#595959";
                 }
@@ -92,10 +95,18 @@ function onlineSorting() {
         }
     }
     for (var value in groups) {
-        groupHeaders[value].innerHTML = groupHeaders[value].innerHTML + "(" + groupBox[value].getElementsByTagName("a").length + ")<br/>";
+        // Loop groups, add labels and totals
+        $(groupHeaders[value]).append(groupHeaders[value]);
+        $(groupHeaders[value]).append("(" + groupBox[value].getElementsByTagName("a").length + ")");
+        $(groupHeaders[value]).append("<br/>");
         groupsContainer.appendChild(groupBox[value]);
     }
-    memberList[0].innerHTML = groupsContainer.innerHTML;
+    // Copy Activity string (users active in the past x minutes)
+    var OnlineStr = $(memberList[0]).text().substr(0, $(memberList[0]).text().indexOf('guests).') + 8);
+    // Clear existing elements
+    $(memberList[0]).empty();
+    // Append new string + list
+    $(memberList[0]).append(OnlineStr).append(groupsContainer);
 }
 
 function rgb2group(rgb) {
