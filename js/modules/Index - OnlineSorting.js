@@ -30,7 +30,7 @@ function onlineSorting() {
     var groupBox = [];
     var groupHeaders = [];
     var groupsContainer = document.createElement("div");
-    var groups = { "Regular": [], "UB3R": [], "L33T": [], "Custom Groups": [], "Banned": [], "Staff": [], "Closed": [], "Other": [] };
+    var groups = { "Regular": [], "L33T": [], "UB3R": [], "Divined": [], "Custom Groups": [], "Banned": [], "Staff": [], "Closed": [], "Other": [] };
     var boardStats = document.getElementById("boardstats_e");
     var memberStats = boardStats.getElementsByTagName("tr");
     var memberList = memberStats[1].getElementsByClassName("smalltext");
@@ -121,6 +121,9 @@ function rgb2group(rgb) {
     }
     else if (rgb == "rgb(0, 170, 255)" || rgb == "rgb(0, 170, 255)" || rgb == "rgb(0, 102, 255)") {
         return "UB3R";
+    }
+    else if (rgb == "rgb(0, 204, 102)") {
+        return "Divined"; // weird green shit
     }
     else if (rgb == "rgb(56, 56, 56)" || rgb == "rgb(68, 68, 68)") {
         return "Closed";

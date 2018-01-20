@@ -244,7 +244,9 @@ function saveGlobalChanges() {
             { 'GlobalChangesHFTBFav7Link': $("#GlobalChangesHFTBFav7Link").val() },
             { 'GlobalChangesUserNotes': $("#GlobalChangesUserNotes").is(':checked') },
             { 'GlobalChangesNewPostLinks': $("#GlobalChangesNewPostLinks").is(':checked') },
-            { 'GlobalChangesSFWMode': $("#GlobalChangesSFWMode").is(':checked') }
+            { 'GlobalChangesSFWMode': $("#GlobalChangesSFWMode").is(':checked') },
+            { 'GlobalRevertGreenStars': $("#RevertGreenStarsEnable").is(':checked') },
+            { 'GlobalRevertPurpleStars': $("#RevertPurpleStarsEnable").is(':checked') }
             ]
         // { '': $("#").val() }
     }, function () {
@@ -319,6 +321,10 @@ function loadGlobalChanges() {
                         case "GlobalChangesNewPostLinks": $("#GlobalChangesNewPostLinks").prop('checked', value);
                             break;
                         case "GlobalChangesSFWMode": $("#GlobalChangesSFWMode").prop('checked', value);
+                            break;
+                        case "GlobalRevertGreenStars": $("#RevertGreenStarsEnable").prop('checked', value);
+                            break;
+                        case "GlobalRevertPurpleStars": $("#RevertPurpleStarsEnable").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }
@@ -504,7 +510,8 @@ function savePostOptions() {
             { 'PMChangesPMFromPostQuote': $("#PMChangesPMFromPostQuote").is(':checked') },
             { 'AnnoyanceFixerFullscreenYoutubeEnable': $("#AnnoyanceFixerFullscreenYoutube").is(':checked') },
             { 'AnnoyanceFixerShowBlockedPostsEnable': $("#AnnoyanceFixerShowBlockedPosts").is(':checked') },
-            { 'AnnoyanceFixerHideBlockedPostsEnable': $("#AnnoyanceFixerHideBlockedPosts").is(':checked') }]
+            { 'AnnoyanceFixerHideBlockedPostsEnable': $("#AnnoyanceFixerHideBlockedPosts").is(':checked') },
+            { 'PostOptionsRevertGreenUsernames': $("#RevertGreenUsernameEnable").is(':checked') }]
     }, function () {
         // Save Confirmation
     });
@@ -545,6 +552,8 @@ function loadPostOptions() {
                         case "AnnoyanceFixerShowBlockedPostsEnable": $("#AnnoyanceFixerShowBlockedPosts").prop('checked', value);
                             break;
                         case "AnnoyanceFixerHideBlockedPostsEnable": $("#AnnoyanceFixerHideBlockedPosts").prop('checked', value);
+                            break;
+                        case "PostOptionsRevertGreenUsernames": $("#RevertGreenUsernameEnable").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }

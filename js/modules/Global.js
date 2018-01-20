@@ -36,6 +36,8 @@ var noteBubbleCSS = {
 var addNewPosts = false;
 var SFWMode = false;
 var injectHFXBadge = true;
+var revertGreenStars = false;
+var revertPurpleStars = false;
 getGlobalSettings();
 
 // Set vars equal to saved settings
@@ -90,6 +92,10 @@ function getGlobalSettings() {
                                 break;
                             case "GlobalChangesSFWMode": if (value) { SFWMode = value; }
                                 break;
+                            case "GlobalRevertGreenStars": if (value) { revertGreenStars = value; }
+                                break;
+                            case "GlobalRevertPurpleStars": if (value) { revertPurpleStars = value; }
+                                break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
                         }
@@ -120,7 +126,6 @@ function injectGlobalChanges() {
     }
     if (enableUserNote) {
         injectUserNote();
-        //setUserNote("");
     }
     if (addNewPosts) {
         injectNewPosts();
@@ -128,6 +133,28 @@ function injectGlobalChanges() {
     if (SFWMode) {
         injectSFWMode();
     }
+    if (revertGreenStars) {
+        injectRevertGreenStars();
+    }
+    if (revertPurpleStars) {
+        injectRevertPurpleStars();
+    }
+}
+
+function injectRevertPurpleStars() {
+    $("img").each(function (index) {
+        if ($(this).attr('src').indexOf('/images/blackreign/ub3rstar.gif') != -1) {
+            $(this).attr('src', 'https://hackforums.net/images/blackreign/star.gif');
+        }
+    });
+}
+
+function injectRevertGreenStars() {
+    $("img").each(function (index) {
+        if ($(this).attr('src').indexOf('/images/blackreign/star-d2.png') != -1) {
+            $(this).attr('src', 'https://hackforums.net/images/blackreign/star.gif');
+        }
+    });
 }
 
 function injectHFXBadges() {

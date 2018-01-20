@@ -9,6 +9,7 @@ var pmChangesMessageConvo = false; // Disabled for production
 var annoyanceFixerFullScreenYoutubeEnable = false;
 var annoyanceFixerShowBlockedPostsEnabled = false;
 var annoyanceFixerHideBlockedPostsEnabled = false;
+var revertGreenUsernamesEnable = false;
 getPostOptions();
 
 // Set vars equal to saved settings
@@ -37,6 +38,8 @@ function getPostOptions() {
                                 break;
                             case "AnnoyanceFixerHideBlockedPostsEnable": if (value) { annoyanceFixerHideBlockedPostsEnabled = value }
                                 break;
+                            case "PostOptionsRevertGreenUsernames": if (value) { revertGreenUsernamesEnable = value }
+                                break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
                         }
@@ -50,6 +53,11 @@ function getPostOptions() {
 }
 
 function enablePostOptions() {
+    if (revertGreenUsernamesEnable) {
+        $(".group23").each(function () {
+            $(this).css("color", "#f9f9f9");
+        });
+    }
     // Get Postkey
     var myPostKey = document.getElementsByTagName('head')[0].innerHTML.split('my_post_key = "')[1].split('";')[0];
     // Get Thread ID
