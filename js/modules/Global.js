@@ -38,6 +38,7 @@ var SFWMode = false;
 var injectHFXBadge = true;
 var revertGreenStars = false;
 var revertPurpleStars = false;
+var hfxAlerts = true;
 getGlobalSettings();
 
 // Set vars equal to saved settings
@@ -139,6 +140,36 @@ function injectGlobalChanges() {
     if (revertPurpleStars) {
         injectRevertPurpleStars();
     }
+    if (hfxAlerts) {
+        injectHFXAlerts();
+    }
+}
+
+function injectHFXAlerts() {
+    // Get saved key (date)
+    chrome.storage.sync.get("HFXAlert", function (data) {
+        if (!chrome.runtime.error) {
+            $.each(data, function (index, data1) {
+                $.each(data1, function (index1, data2) {
+                    $.each(data2, function (key, value) {
+                        switch (key) {
+                            case "HFXAlertKey": if (value) { revertGreenStars = value; }
+                                break;
+                            case "HFXAlertValue": if (value) { revertPurpleStars = value; }
+                                break;
+                            default: //console.log("ERROR: Key not found.");
+                                break;
+                        }
+                    })
+                })
+                // Code to run
+                // Get Alert.json
+                $.get('https://raw.githubusercontent.com/xadamxk/HFX/master/Alert.json' + "?nc=" + Math.random(), function (responseText) {
+                    
+                }, "json");
+            });
+        }
+    });
 }
 
 function injectRevertPurpleStars() {
