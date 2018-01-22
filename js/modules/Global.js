@@ -38,7 +38,7 @@ var SFWMode = false;
 var injectHFXBadge = true;
 var revertGreenStars = false;
 var revertPurpleStars = false;
-var hfxAlerts = true;
+var hfxAlerts = false;
 getGlobalSettings();
 
 // Set vars equal to saved settings

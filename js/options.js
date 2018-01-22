@@ -227,7 +227,6 @@ function saveGlobalChanges() {
             { 'GlobalChangesEasyCiteEnabled': $("#GlobalChangesEasyCite").is(':checked') },
             { 'GlobalChangesHFTBEnabled': $("#GlobalChangesHFTBEnabled").is(':checked') },
             { 'GlobalChangesHFTBStickyEnabled': $("#GlobalChangesHFTBStickyEnabled").is(':checked') },
-            // Fav Text/Links
             { 'GlobalChangesHFTBFav1Text': $("#GlobalChangesHFTBFav1Text").val() },
             { 'GlobalChangesHFTBFav1Link': $("#GlobalChangesHFTBFav1Link").val() },
             { 'GlobalChangesHFTBFav2Text': $("#GlobalChangesHFTBFav2Text").val() },
@@ -246,7 +245,8 @@ function saveGlobalChanges() {
             { 'GlobalChangesNewPostLinks': $("#GlobalChangesNewPostLinks").is(':checked') },
             { 'GlobalChangesSFWMode': $("#GlobalChangesSFWMode").is(':checked') },
             { 'GlobalRevertGreenStars': $("#RevertGreenStarsEnable").is(':checked') },
-            { 'GlobalRevertPurpleStars': $("#RevertPurpleStarsEnable").is(':checked') }
+            { 'GlobalRevertPurpleStars': $("#RevertPurpleStarsEnable").is(':checked') },
+            { 'GlobalHFXAlerts': $("#HFXAlertsEnable").is(':checked') }
             ]
         // { '': $("#").val() }
     }, function () {
@@ -269,6 +269,7 @@ function loadGlobalChangesDefault() {
     $("#GlobalChangesHFTBFav3Link").val("https://hackforums.net/forumdisplay.php?fid=53");
     $("#GlobalChangesHFTBFav4Text").val("PM Tracking");
     $("#GlobalChangesHFTBFav4Link").val("https://hackforums.net/private.php?action=tracking");
+    $("#HFXAlertsEnable").prop('checked', true);
 }
 
 function loadGlobalChanges() {
@@ -325,6 +326,8 @@ function loadGlobalChanges() {
                         case "GlobalRevertGreenStars": $("#RevertGreenStarsEnable").prop('checked', value);
                             break;
                         case "GlobalRevertPurpleStars": $("#RevertPurpleStarsEnable").prop('checked', value);
+                            break;
+                        case "GlobalHFXAlerts": $("#HFXAlertsEnable").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }
