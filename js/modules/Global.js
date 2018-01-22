@@ -183,7 +183,7 @@ function injectHFXAlerts(savedAlertKey) {
                 .append($("<div>").addClass("float_right").attr("id", "DismissHFXAlert")
                     .append($("<a>").attr("href", "javascript:void(0);")
                         .append($("<img>").attr("src", chrome.extension.getURL("/images/dismiss_notice.png")).attr("title", "Dismiss HFX Alert"))))
-                .append($("<div>").append($("<b>").text(loadedAlertValue)))
+                .append($("<div>").append($("<b>").append(loadedAlertValue)))
                 );
             // Alert CSS
             $("#HFXAlert").css({
