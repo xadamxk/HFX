@@ -97,6 +97,8 @@ function getGlobalSettings() {
                                 break;
                             case "GlobalRevertPurpleStars": if (value) { revertPurpleStars = value; }
                                 break;
+                            case "GlobalHFXAlerts": if (value) { hfxAlerts = value; }
+                                break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
                         }
@@ -141,59 +143,74 @@ function injectGlobalChanges() {
         injectRevertPurpleStars();
     }
     if (hfxAlerts) {
-        injectHFXAlerts();
+        var savedAlertKey = "...";
+        chrome.storage.sync.get("HFXAlert", function (data) {
+            if (!chrome.runtime.error) {
+                $.each(data, function (index, data1) {
+                    $.each(data1, function (index1, data2) {
+                        $.each(data2, function (key, value) {
+                            switch (key) {
+                                case "HFXAlertKey": if (value) { savedAlertKey = value; }
+                                    break;
+                                default: //console.log("ERROR: Key not found.");
+                                    break;
+                            }
+                        })
+                    })
+                });
+                injectHFXAlerts(savedAlertKey);
+            }
+        });
     }
 }
 
-function injectHFXAlerts() {
+function injectHFXAlerts(savedAlertKey) {
     // Get saved key (date)
-    var savedAlertKey;
     var loadedAlertKey;
     var loadedAlertValue;
-    chrome.storage.sync.get("HFXAlert", function (data) {
-        if (!chrome.runtime.error) {
-            $.each(data, function (index, data1) {
-                $.each(data1, function (index1, data2) {
-                    $.each(data2, function (key, value) {
-                        switch (key) {
-                            case "HFXAlertKey": if (value) { savedAlertKey = value; }
-                                break;
-                            default: //console.log("ERROR: Key not found.");
-                                break;
-                        }
-                    })
-                })
-                // Code to run
-                // Get Alert.json
-                $.get('https://raw.githubusercontent.com/xadamxk/HFX/master/Alert.json' + "?nc=" + Math.random(), function (responseText) {
-                    $.each(responseText, function (key1, value1) {
-                        $.each(value1, function (key2, value2) {
-                            console.log(value1);
-                            if (key1 == "AlertKey") {
-                                //
-                                loadedAlertKey = value1;
-                            } else if(key1 == "AlertValue"){
-                                loadedAlertValue = value2;
-                            }
-                        });
-                    });
-                    // Display alert
-                    if (savedAlertKey !== loadedAlertKey) {
-                        $("#content").after($("<div>").addClass("HFXAlert").attr("id","HFXAlert")
-                            .append($("<div>").addClass("float_right")
-                                .append($("<a>").attr("href", "javascript:void(0);")
-                                    .append($("<img>").src(chrome.extension.getURL("/images/dismiss_notice.png")).attr("title", "Dismiss HFX Alert"))))
-                                    .append($("div").text())
-                            );
-                        console.log("Not equal");
-                    } else {
-                        console.log("Equal");
-                    }
-                    // Event to save Key
-                }, "json"); // End get
+    $.get('https://raw.githubusercontent.com/xadamxk/HFX/master/Alert.json' + "?nc=" + Math.random(), function (responseText) {
+        $.each(responseText, function (key1, value1) {
+                if (key1 == "AlertKey") {
+                    //
+                    loadedAlertKey = value1;
+                } else if(key1 == "AlertValue"){
+                    loadedAlertValue = value1;
+                }
+        });
+        // Display alert
+        if (savedAlertKey !== loadedAlertKey) {
+            $("#content").prepend($("<div>").addClass("HFXAlert").attr("id", "HFXAlert")
+                .append($("<div>").addClass("float_right").attr("id", "DismissHFXAlert")
+                    .append($("<a>").attr("href", "javascript:void(0);")
+                        .append($("<img>").attr("src", chrome.extension.getURL("/images/dismiss_notice.png")).attr("title", "Dismiss HFX Alert"))))
+                .append($("<div>").append($("<b>").text(loadedAlertValue)))
+                );
+            // Alert CSS
+            $("#HFXAlert").css({
+                "background": "#333333",
+                "border": "2px solid #f4d639",
+                "text-align": "center",
+                "padding": "7px 20px",
+                "margin-bottom": "15px",
+                "font-size": "13px"
             });
+            // Event to save key
+            $("#DismissHFXAlert").click(function () {
+                // Fadeout
+                $("#HFXAlert").fadeOut("slow", function () {
+                });
+                // Save close
+                chrome.storage.sync.set({
+                    HFXAlert: [{ 'HFXAlertKey': loadedAlertKey }]
+                }, function () {
+                    // Save Confirmation
+                });
+            });
+        } else {
+            // Same key, don't display alert
+            //console.log("Same key - no alert");
         }
-    });
+    }, "json"); // End get
 }
 
 function injectRevertPurpleStars() {
