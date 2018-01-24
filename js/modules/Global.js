@@ -170,10 +170,10 @@ function injectHFXAlerts(savedAlertKey) {
     var loadedAlertValue;
     $.get('https://raw.githubusercontent.com/xadamxk/HFX/master/Alert.json' + "?nc=" + Math.random(), function (responseText) {
         $.each(responseText, function (key1, value1) {
-                if (key1 == "AlertKey") {
+                if (key1 == "AlertKey"){
                     //
                     loadedAlertKey = value1;
-                } else if(key1 == "AlertValue"){
+                } else if (key1 == "AlertValue"){
                     loadedAlertValue = value1;
                 }
         });
