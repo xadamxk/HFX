@@ -246,7 +246,8 @@ function saveGlobalChanges() {
             { 'GlobalChangesSFWMode': $("#GlobalChangesSFWMode").is(':checked') },
             { 'GlobalRevertGreenStars': $("#RevertGreenStarsEnable").is(':checked') },
             { 'GlobalRevertPurpleStars': $("#RevertPurpleStarsEnable").is(':checked') },
-            { 'GlobalHFXAlerts': $("#HFXAlertsEnable").is(':checked') }
+            { 'GlobalHFXAlerts': $("#HFXAlertsEnable").is(':checked') },
+            { 'GlobalUnreadBadgeCount': $("#UnreadBadgeCountEnable").is(':checked') }
             ]
         // { '': $("#").val() }
     }, function () {
@@ -270,6 +271,7 @@ function loadGlobalChangesDefault() {
     $("#GlobalChangesHFTBFav4Text").val("PM Tracking");
     $("#GlobalChangesHFTBFav4Link").val("https://hackforums.net/private.php?action=tracking");
     $("#HFXAlertsEnable").prop('checked', true);
+    $("#UnreadBadgeCountEnable").prop('checked', true);
 }
 
 function loadGlobalChanges() {
@@ -328,6 +330,8 @@ function loadGlobalChanges() {
                         case "GlobalRevertPurpleStars": $("#RevertPurpleStarsEnable").prop('checked', value);
                             break;
                         case "GlobalHFXAlerts": $("#HFXAlertsEnable").prop('checked', value);
+                            break;
+                        case "GlobalUnreadBadgeCount": $("#UnreadBadgeCountEnable").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }

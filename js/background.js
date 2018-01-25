@@ -11,6 +11,21 @@ chrome.runtime.onInstalled.addListener(function (details) {
     }
 });
 
+// Receive message from content script (Global.js)
+chrome.runtime.onMessage.addListener(
+  function (request, sender, sendResponse) {
+      // Set badge 
+      chrome.browserAction.setBadgeText({ text: request.greeting }); 
+      // Set badge color
+      // Dark Red: #C90404
+      // Best Purple: #7100B3
+      // Light Blue: #3385ff
+      // Light Orange: #D9800B
+      chrome.browserAction.setBadgeBackgroundColor({ color: "#3385ff" });
+      // Send response message
+      sendResponse({ farewell: "badge set" });
+  });
+
 // This event is fired each time the user updates the text in the omnibox,
 // as long as the extension's keyword mode is still active.
 chrome.omnibox.onInputChanged.addListener(

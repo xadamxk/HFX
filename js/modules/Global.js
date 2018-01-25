@@ -39,6 +39,7 @@ var injectHFXBadge = true;
 var revertGreenStars = false;
 var revertPurpleStars = false;
 var hfxAlerts = false;
+var enablePMBadges = false;
 getGlobalSettings();
 
 // Set vars equal to saved settings
@@ -99,6 +100,8 @@ function getGlobalSettings() {
                                 break;
                             case "GlobalHFXAlerts": if (value) { hfxAlerts = value; }
                                 break;
+                            case "GlobalUnreadBadgeCount": if (value) { enablePMBadges = value; }
+                                break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
                         }
@@ -142,6 +145,9 @@ function injectGlobalChanges() {
     if (revertPurpleStars) {
         injectRevertPurpleStars();
     }
+    if (enablePMBadges) {
+        injectPMBadges();
+    }
     if (hfxAlerts) {
         var savedAlertKey = "...";
         chrome.storage.sync.get("HFXAlert", function (data) {
@@ -162,6 +168,67 @@ function injectGlobalChanges() {
             }
         });
     }
+}
+
+function injectPMBadges() {
+    // Check, log title?, then check again in 5 mins
+    var numPMs = 0;
+    if ($("#pm_notice").length > 0) {
+        var pmAlert = $("#pm_notice");
+        var hasNumber = /\d/;
+        var numStr = hasNumber.test(pmAlert.find("strong").text());
+        if (numStr)
+            numPMs = parseInt(pmAlert.find("strong").text().replace(/[^0-9\.]/g, ''));
+        else
+            numPMs = 1;
+        //
+        updateHFXBadge(numPMs);
+    }
+    // Function to check PM's in background
+    var interval = 1000 * 60 * 5; // 1000 milli * 60 secs * x = minutes (No lower than 5 or timeout!)
+    setInterval(function () {
+        var pmCount = updateBadgeCount();
+        updateHFXBadge(pmCount);
+    }, interval);
+    
+}
+
+function updateHFXBadge(newBadge) {
+    chrome.runtime.sendMessage({ greeting: newBadge.toString() }, function (response) {
+        //console.log(response.farewell);
+    });
+}
+
+function updateBadgeCount() {
+    // Update this?
+    var numPMs = 0;
+    var notificationBodyText;
+    var notificationBodyLink;
+    var titleString;
+    $.ajax({
+        url: "https://hackforums.net/usercp.php",
+        cache: false,
+        async: false,
+        success: function (response) {
+            var pmAlert = $(response).find("#pm_notice");
+            var hasNumber = /\d/;
+            var numStr = hasNumber.test(pmAlert.find("strong").text());
+            if (numStr)
+                numPMs = parseInt(pmAlert.find("strong").text().replace(/[^0-9\.]/g, ''));
+            else if (pmAlert.find("strong").text().includes("one"))
+                numPMs = 1;
+            notificationBodyText = $(pmAlert).find("div:eq(1) a:eq(1)").text() + " from " + $(pmAlert).find("div:eq(1) a:eq(0)").text();
+            notificationBodyLink = $(pmAlert).find("div:eq(1) a:eq(1)").attr("href");
+            titleString = numPMs + " Unread Message";
+            if (numPMs > 1) { titleString = titleString + "s"; }
+        }
+    });
+    // Desktop Notifications
+    if (false && numPMs > 0) {
+        notifyMe(titleString, notificationBodyText, notificationBodyLink);
+    }
+    //console.log("Number of unread PM's: "+numPMs);
+    return numPMs;
 }
 
 function injectHFXAlerts(savedAlertKey) {
@@ -957,6 +1024,32 @@ function checkforCurrentPage() {
     });
     if (window.location.href == (hftbHomeLink))
         $("#homeLeftSticky").css("color", "#F4B94F");
+}
+
+// Desktop notifications
+function notifyMe(Title, Comment, Link) {
+    if (Notification.permission !== "granted") {
+        Notification.requestPermission().then(function () {
+            if (Notification.permission !== "granted") {
+                window.alert("HFX Extension: Please allow desktop notifications!");
+            } else {
+                notififyMe("", Comment, Link);
+            }
+        });
+    }
+    else {
+        var notification = new Notification(Title, {
+            icon: 'https://raw.githubusercontent.com/xadamxk/HF-Userscripts/master/Quick%20Rep/NotificationIcon.png',
+            requireInteraction: true,
+            body: Comment,
+        });
+
+        notification.onclick = function () {
+            window.location.href = Link;
+            notification.close();
+        };
+        //setTimeout(function() { notification.close(); });
+    }
 }
 
 // Credit: https://jsfiddle.net/mushigh/myoskaos/
