@@ -87,6 +87,10 @@ $(document).ready(function () {
     $(".nav li").click(function() {
         $("body").scrollTop(0);
     });
+    // Reset HFX Alerts
+    $("#resetHFXAlerts").click(function () {
+        resetHFXAlerts();
+    });
 });
 
 function loadSettings() {
@@ -729,4 +733,13 @@ function loadPostbitHide() {
 function update(element) {
     // 'jscolor' instance can be used as a string
     $(element).css("background-color", "#" + $(element).val());
+}
+
+function resetHFXAlerts() {
+    var resetValue = "";
+    chrome.storage.sync.set({
+        HFXAlert: [{ 'HFXAlertKey': resetValue }]
+    }, function () {
+        // Save Confirmation
+    });
 }

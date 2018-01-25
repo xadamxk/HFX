@@ -184,12 +184,16 @@ function injectPMBadges() {
         //
         updateHFXBadge(numPMs);
     }
+    
     // Function to check PM's in background
     var interval = 1000 * 60 * 5; // 1000 milli * 60 secs * x = minutes (No lower than 5 or timeout!)
     setInterval(function () {
         var pmCount = updateBadgeCount();
-        updateHFXBadge(pmCount);
+        if (pmCount > 0) {
+            updateHFXBadge(pmCount);
+        }
     }, interval);
+    
     
 }
 
