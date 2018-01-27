@@ -7,7 +7,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
         var thisVersion = chrome.runtime.getManifest().version;
         console.log("Updated from " + details.previousVersion + " to " + thisVersion + "!");
         var newURL = "https://github.com/xadamxk/HFX/wiki/Changelog";
-        chrome.tabs.create({ url: newURL });
+        //chrome.tabs.create({ url: newURL });
     }
 });
 
@@ -21,7 +21,7 @@ chrome.runtime.onMessage.addListener(
       // Best Purple: #7100B3
       // Light Blue: #3385ff
       // Light Orange: #D9800B
-      chrome.browserAction.setBadgeBackgroundColor({ color: "#3385ff" });
+      chrome.browserAction.setBadgeBackgroundColor({ color: "#C90404" });
       // Send response message
       sendResponse({ farewell: "badge set" });
   });

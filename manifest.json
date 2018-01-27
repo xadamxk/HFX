@@ -136,7 +136,6 @@
   ],
   "permissions": [
     "storage",
-    "tabs",
     "https://raw.githubusercontent.com/xadamxk/HFX/master/Badges.json?nc=*",
     "https://raw.githubusercontent.com/xadamxk/HFX/master/Alert.json?nc=*"
   ],

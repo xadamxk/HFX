@@ -183,6 +183,8 @@ function injectPMBadges() {
             numPMs = 1;
         //
         updateHFXBadge(numPMs);
+    } else {
+        updateHFXBadge("");
     }
     
     // Function to check PM's in background
@@ -191,6 +193,8 @@ function injectPMBadges() {
         var pmCount = updateBadgeCount();
         if (pmCount > 0) {
             updateHFXBadge(pmCount);
+        } else {
+            updateHFXBadge("");
         }
     }, interval);
     
