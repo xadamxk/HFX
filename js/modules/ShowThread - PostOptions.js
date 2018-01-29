@@ -88,20 +88,27 @@ function enablePostOptions() {
         if ($("a[onclick*='showIgnoredPost']").length >= 1) {
             $("a[onclick*='showIgnoredPost']").each(function () {
                 // Remove Ignore Table
-                $(this).parent().closest('table').remove();
+                $(this).parent().closest('.ignored_post').remove();
             });
         }
     }
     // Show Blocked Posts
     if (annoyanceFixerShowBlockedPostsEnabled) {
         if ($("a[onclick*='showIgnoredPost']").length >= 1) {
+            // Load posts
+            var posts = $("#posts");
             $("a[onclick*='showIgnoredPost']").each(function (index) {
                 // Hide Post
                 this.click();
+
+                // Post ID
+                var postID = $($("a[onclick*='showIgnoredPost']")[index]).attr("onclick").match(/\((.*)\)/)[1];
+                
+                // Get ignored users post
+                var ignored_post = $(posts).find(`#post_${postID}`);
+                
                 // 'Ignored User' Alert
-                $("a[onclick*='showIgnoredPost']:eq(" + index + ")").closest('table').next().next().find(".float_left.smalltext")
-                    .append($('<span>').text("(IGNORED USER)"));
-                $("a[onclick*='showIgnoredPost']:eq(" + index + ")").closest('table').next().next().find(".tcat").css("background-color", "#c40d23");
+                ignored_post.find('.post_date').append("(IGNORED USER)").css("background-color", "#c40d23");
             });
         }
     }
