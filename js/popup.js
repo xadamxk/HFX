@@ -1,4 +1,3 @@
-console.log("Trigger lint pull..");
 /**
  * Get the current URL.
  *

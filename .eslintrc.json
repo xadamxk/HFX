@@ -2,5 +2,9 @@
     "extends": "standard",
     "rules": {
         "semi": ["error", "always"]
+    },
+    "globals": {
+        "$": true,
+        "chrome": true
     }
 }
