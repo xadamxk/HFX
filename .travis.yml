@@ -2,3 +2,7 @@ language: node_js
 
 script:
   - npm run lint
+
+branches:
+  only:
+    - standard*
