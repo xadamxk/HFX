@@ -15,7 +15,7 @@
     "eslint-plugin-standard": "^3.0.1"
   },
   "scripts": {
-    "lint": "./node_modules/.bin/eslint ./js/*",
+    "lint": "./node_modules/.bin/eslint ./js/**",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
