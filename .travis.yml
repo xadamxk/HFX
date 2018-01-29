@@ -7,4 +7,4 @@ script:
 
 branches:
   only:
-    - standard-*
+    - standard-add
