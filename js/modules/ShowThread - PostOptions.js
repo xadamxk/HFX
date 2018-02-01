@@ -10,6 +10,7 @@ var annoyanceFixerFullScreenYoutubeEnable = false;
 var annoyanceFixerShowBlockedPostsEnabled = false;
 var annoyanceFixerHideBlockedPostsEnabled = false;
 var revertGreenUsernamesEnable = false;
+var annoyanceFixerCollapseRelatedThreads = false;
 getPostOptions();
 
 // Set vars equal to saved settings
@@ -40,6 +41,8 @@ function getPostOptions() {
                                 break;
                             case "PostOptionsRevertGreenUsernames": if (value) { revertGreenUsernamesEnable = value }
                                 break;
+                            case "AnnoyanceFixerCollapseRelatedThreads": if (value) { annoyanceFixerCollapseRelatedThreads = value }
+                                break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
                         }
@@ -47,9 +50,44 @@ function getPostOptions() {
                 })
 
             });
-            enablePostOptions();
+            injectPostOptions();
         }
     });
+}
+
+function injectPostOptions(){
+    // Check Post Options while looping
+    enablePostOptions();
+    // Collapse Related Threads
+    if(annoyanceFixerCollapseRelatedThreads){
+        enableCollapseRelatedThreads();
+    }
+}
+
+function enableCollapseRelatedThreads(){
+    // PRT = Possibly Related Threads
+    // Assets
+    var collapseImg = chrome.extension.getURL("/images/collapse.gif");
+    var collapseCollapsedImg = chrome.extension.getURL("/images/collapse_collapsed.gif");
+    // PRT Table Title
+    var prtTitle = $("strong:contains(Possibly Related Threads...)");
+    // If Table exists
+    if(prtTitle.length > 0){
+        // PRT Table Rows
+        var prtTableRows = prtTitle.parent().parent().siblings();
+        // Hide by default
+        prtTableRows.toggle();
+        // Append Collapse Button
+        prtTitle.parent().append($("<div>").addClass("expcolimage")
+            .append("<img id='relatedThreadsCollapse' alt='[+]' title='[+]' style='cursor: pointer;' src='" + collapseCollapsedImg + "' />"));
+        // Event Listener - Show/Hide
+        $("#relatedThreadsCollapse").on("click", function () {
+            // Toggle Table Content (Rows)
+            prtTableRows.toggle();
+            // Swap images
+            togglePRTCollapseAttr(prtTableRows);
+        });
+    }
 }
 
 function enablePostOptions() {
@@ -291,4 +329,15 @@ function getPMConvoSearch(username) {
             document.write(msg);
         }
     })
+}
+
+function togglePRTCollapseAttr(prtTableRows) {
+    var collapseImg = chrome.extension.getURL("/images/collapse.gif");
+    var collapseCollapsedImg = chrome.extension.getURL("/images/collapse_collapsed.gif");
+    // Not visible
+    if (!prtTableRows.is(':visible')) {
+        $("#relatedThreadsCollapse").attr("alt", "[-]").attr("title", "[-]").attr("src", collapseImg);
+    } else {
+        $("#relatedThreadsCollapse").attr("alt", "[+]").attr("title", "[+]").attr("src", collapseCollapsedImg);
+    }
 }

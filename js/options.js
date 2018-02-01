@@ -522,7 +522,8 @@ function savePostOptions() {
             { 'AnnoyanceFixerFullscreenYoutubeEnable': $("#AnnoyanceFixerFullscreenYoutube").is(':checked') },
             { 'AnnoyanceFixerShowBlockedPostsEnable': $("#AnnoyanceFixerShowBlockedPosts").is(':checked') },
             { 'AnnoyanceFixerHideBlockedPostsEnable': $("#AnnoyanceFixerHideBlockedPosts").is(':checked') },
-            { 'PostOptionsRevertGreenUsernames': $("#RevertGreenUsernameEnable").is(':checked') }]
+            { 'PostOptionsRevertGreenUsernames': $("#RevertGreenUsernameEnable").is(':checked') },
+            { 'AnnoyanceFixerCollapseRelatedThreads': $("#CollapseRelatedThreadsEnable").is(':checked') }]
     }, function () {
         // Save Confirmation
     });
@@ -537,6 +538,7 @@ function loadPostOptionsDefault() {
     $("#PMChangesPMFromPostQuote").prop('checked', true);
     $("#AnnoyanceFixerFullscreenYoutube").prop('checked', true);
     $("#AnnoyanceFixerShowBlockedPosts").prop('checked', true);
+    $("#CollapseRelatedThreadsEnable").prop('checked', true);
 }
 
 function loadPostOptions() {
@@ -565,6 +567,8 @@ function loadPostOptions() {
                         case "AnnoyanceFixerHideBlockedPostsEnable": $("#AnnoyanceFixerHideBlockedPosts").prop('checked', value);
                             break;
                         case "PostOptionsRevertGreenUsernames": $("#RevertGreenUsernameEnable").prop('checked', value);
+                            break;
+                        case "AnnoyanceFixerCollapseRelatedThreads": $("#CollapseRelatedThreadsEnable").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }
