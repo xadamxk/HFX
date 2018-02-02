@@ -1,0 +1,20 @@
+{
+    "extends": "standard",
+    "rules": {
+        "semi": ["error", "always"],
+        "one-var": 0,
+        "quotes": 0,
+        "camelcase": 0,
+        "no-useless-escape": 0
+    },
+    "globals": {
+        "$": true,
+        "chrome": true,
+        "location": true,
+        "Notification": true,
+        "prompt": true,
+        "XBBCODE": true,
+        "Chart": true,
+        "MyBB": true
+    }
+}
