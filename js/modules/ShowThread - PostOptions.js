@@ -9,40 +9,90 @@ var annoyanceFixerFullScreenYoutubeEnable = false;
 var annoyanceFixerShowBlockedPostsEnabled = false;
 var annoyanceFixerHideBlockedPostsEnabled = false;
 var revertGreenUsernamesEnable = false;
+var annoyanceFixerCollapseRelatedThreads = false;
 getPostOptions();
 
 // Set vars equal to saved settings
-function getPostOptions () {
-  chrome.storage.sync.get('PostOptions', function (data) {
-    if (!chrome.runtime.error) {
-      $.each(data, function (index, data1) {
-        $.each(data1, function (index1, data2) {
-          $.each(data2, function (key, value) {
-            switch (key) {
-              case 'PostOptionsThreadRatingEnable': if (value) { postOptionsThreadRatingEnable = value; }
-                break;
-              case 'PostOptionsPoTEnable': if (value) { postOptionsPoTEnable = value; }
-                break;
-              case 'PostOptionsThreadsEnable': if (value) { postOptionsThreadsEnable = value; }
-                break;
-              case 'PostOptionsPostsEnable': if (value) { postOptionsPostsEnable = value; }
-                break;
-              case 'PMChangesPMFromPostEnable': if (value) { pmChangesPMFromPostEnable = value; }
-                break;
-              case 'PMChangesPMFromPostQuote': if (value) { pmChangesPMFromPostShowQuote = value; }
-                break;
-              case 'AnnoyanceFixerFullscreenYoutubeEnable': if (value) { annoyanceFixerFullScreenYoutubeEnable = value; }
-                break;
-              case 'AnnoyanceFixerShowBlockedPostsEnable': if (value) { annoyanceFixerShowBlockedPostsEnabled = value; }
-                break;
-              case 'AnnoyanceFixerHideBlockedPostsEnable': if (value) { annoyanceFixerHideBlockedPostsEnabled = value; }
-                break;
-              case 'PostOptionsRevertGreenUsernames': if (value) { revertGreenUsernamesEnable = value; }
-                break;
-              default: // console.log("ERROR: Key not found.");
-                break;
-            }
-          });
+function getPostOptions() {
+    chrome.storage.sync.get("PostOptions", function (data) {
+        if (!chrome.runtime.error) {
+            $.each(data, function (index, data1) {
+                $.each(data1, function (index1, data2) {
+                    $.each(data2, function (key, value) {
+                        switch (key) {
+                            case "PostOptionsThreadRatingEnable": if (value) { postOptionsThreadRatingEnable = value }
+                                break;
+                            case "PostOptionsPoTEnable": if (value) { postOptionsPoTEnable = value }
+                                break;
+                            case "PostOptionsThreadsEnable": if (value) { postOptionsThreadsEnable = value }
+                                break;
+                            case "PostOptionsPostsEnable": if (value) { postOptionsPostsEnable = value }
+                                break;
+                            case "PMChangesPMFromPostEnable": if (value) { pmChangesPMFromPostEnable = value }
+                                break;
+                            case "PMChangesPMFromPostQuote": if (value) { pmChangesPMFromPostShowQuote = value }
+                                break;
+                            case "AnnoyanceFixerFullscreenYoutubeEnable": if (value) { annoyanceFixerFullScreenYoutubeEnable = value }
+                                break;
+                            case "AnnoyanceFixerShowBlockedPostsEnable": if (value) { annoyanceFixerShowBlockedPostsEnabled = value }
+                                break;
+                            case "AnnoyanceFixerHideBlockedPostsEnable": if (value) { annoyanceFixerHideBlockedPostsEnabled = value }
+                                break;
+                            case "PostOptionsRevertGreenUsernames": if (value) { revertGreenUsernamesEnable = value }
+                                break;
+                            case "AnnoyanceFixerCollapseRelatedThreads": if (value) { annoyanceFixerCollapseRelatedThreads = value }
+                                break;
+                            default: //console.log("ERROR: Key not found.");
+                                break;
+                        }
+                    })
+                })
+
+            });
+            injectPostOptions();
+        }
+    });
+}
+
+function injectPostOptions(){
+    // Check Post Options while looping
+    enablePostOptions();
+    // Collapse Related Threads
+    if(annoyanceFixerCollapseRelatedThreads){
+        enableCollapseRelatedThreads();
+    }
+}
+
+function enableCollapseRelatedThreads(){
+    // PRT = Possibly Related Threads
+    // Assets
+    var collapseImg = chrome.extension.getURL("/images/collapse.gif");
+    var collapseCollapsedImg = chrome.extension.getURL("/images/collapse_collapsed.gif");
+    // PRT Table Title
+    var prtTitle = $("strong:contains(Possibly Related Threads...)");
+    // If Table exists
+    if(prtTitle.length > 0){
+        // PRT Table Rows
+        var prtTableRows = prtTitle.parent().parent().siblings();
+        // Hide by default
+        prtTableRows.toggle();
+        // Append Collapse Button
+        prtTitle.parent().append($("<div>").addClass("expcolimage")
+            .append("<img id='relatedThreadsCollapse' alt='[+]' title='[+]' style='cursor: pointer;' src='" + collapseCollapsedImg + "' />"));
+        // Event Listener - Show/Hide
+        $("#relatedThreadsCollapse").on("click", function () {
+            // Toggle Table Content (Rows)
+            prtTableRows.toggle();
+            // Swap images
+            togglePRTCollapseAttr(prtTableRows);
+        });
+    }
+}
+
+function enablePostOptions() {
+    if (revertGreenUsernamesEnable) {
+        $(".group23").each(function () {
+            $(this).css("color", "#f9f9f9");
         });
       });
       enablePostOptions();
@@ -259,30 +309,41 @@ function enablePostOptions () {
   });
 }
 
-function getPMConvoSearch (username) {
-  // Get Postkey
-  var postKey = document.getElementsByTagName('head')[0].innerHTML.split('my_post_key = "')[1].split('";')[0];
-  var result = $.ajax({ // eslint-disable-line
-    method: 'POST',
-    url: 'https://hackforums.net/private.php',
-    dataType: 'html',
-    data: {
-      'my_post_key': postKey,
-      'action': 'do_search',
-      'keywords': '',
-      'subject': '1',
-      'message': '1',
-      'sender': username,
-      'status[new]': '1',
-      'status[replied]': '1',
-      'status[forwarded]': '1',
-      'status[read]': '1',
-      'folder[]': 'All Folders',
-      'sort': 'dateline',
-      'sortordr': 'desc'
-    },
-    success: function (msg, statusText, jqhxr) {
-      document.write(msg);
+function getPMConvoSearch(username) {
+    // Get Postkey
+    var postKey = document.getElementsByTagName('head')[0].innerHTML.split('my_post_key = "')[1].split('";')[0];
+    var result = $.ajax({
+        method: "POST",
+        url: "https://hackforums.net/private.php",
+        dataType: "html",
+        data: {
+            "my_post_key": postKey,
+            "action": "do_search",
+            "keywords": "",
+            "subject": "1",
+            "message": "1",
+            "sender": username,
+            "status[new]": "1",
+            "status[replied]": "1",
+            "status[forwarded]": "1",
+            "status[read]": "1",
+            "folder[]": "All Folders",
+            "sort": "dateline",
+            "sortordr": "desc"
+        },
+        success: function (msg, statusText, jqhxr) {
+            document.write(msg);
+        }
+    })
+}
+
+function togglePRTCollapseAttr(prtTableRows) {
+    var collapseImg = chrome.extension.getURL("/images/collapse.gif");
+    var collapseCollapsedImg = chrome.extension.getURL("/images/collapse_collapsed.gif");
+    // Not visible
+    if (!prtTableRows.is(':visible')) {
+        $("#relatedThreadsCollapse").attr("alt", "[-]").attr("title", "[-]").attr("src", collapseImg);
+    } else {
+        $("#relatedThreadsCollapse").attr("alt", "[+]").attr("title", "[+]").attr("src", collapseCollapsedImg);
     }
-  });
 }

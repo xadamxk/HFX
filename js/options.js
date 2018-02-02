@@ -499,69 +499,73 @@ function loadImageChanges () {
             default: console.log('ERROR: Key not found.');
           }
         });
-      });
+        saveImageChanges();
     });
-    saveImageChanges();
-  });
 }
 
-function savePostOptions () {
-  chrome.storage.sync.set({
-    PostOptions: [{ 'PostOptionsThreadRatingEnable': $('#PostOptionsThreadRating').is(':checked') },
-      { 'PostOptionsPoTEnable': $('#PostOptionsPoT').is(':checked') },
-      { 'PostOptionsThreadsEnable': $('#PostOptionsThreads').is(':checked') },
-      { 'PostOptionsPostsEnable': $('#PostOptionsPosts').is(':checked') },
-      { 'PMChangesPMFromPostEnable': $('#PMChangesPMFromPost').is(':checked') },
-      { 'PMChangesPMFromPostQuote': $('#PMChangesPMFromPostQuote').is(':checked') },
-      { 'AnnoyanceFixerFullscreenYoutubeEnable': $('#AnnoyanceFixerFullscreenYoutube').is(':checked') },
-      { 'AnnoyanceFixerShowBlockedPostsEnable': $('#AnnoyanceFixerShowBlockedPosts').is(':checked') },
-      { 'AnnoyanceFixerHideBlockedPostsEnable': $('#AnnoyanceFixerHideBlockedPosts').is(':checked') },
-      { 'PostOptionsRevertGreenUsernames': $('#RevertGreenUsernameEnable').is(':checked') }]
-  }, function () {
-    // Save Confirmation
-  });
+function savePostOptions() {
+    chrome.storage.sync.set({
+        PostOptions: [{ 'PostOptionsThreadRatingEnable': $("#PostOptionsThreadRating").is(':checked') },
+            { 'PostOptionsPoTEnable': $("#PostOptionsPoT").is(':checked') },
+            { 'PostOptionsThreadsEnable': $("#PostOptionsThreads").is(':checked') },
+            { 'PostOptionsPostsEnable': $("#PostOptionsPosts").is(':checked') },
+            { 'PMChangesPMFromPostEnable': $("#PMChangesPMFromPost").is(':checked') },
+            { 'PMChangesPMFromPostQuote': $("#PMChangesPMFromPostQuote").is(':checked') },
+            { 'AnnoyanceFixerFullscreenYoutubeEnable': $("#AnnoyanceFixerFullscreenYoutube").is(':checked') },
+            { 'AnnoyanceFixerShowBlockedPostsEnable': $("#AnnoyanceFixerShowBlockedPosts").is(':checked') },
+            { 'AnnoyanceFixerHideBlockedPostsEnable': $("#AnnoyanceFixerHideBlockedPosts").is(':checked') },
+            { 'PostOptionsRevertGreenUsernames': $("#RevertGreenUsernameEnable").is(':checked') },
+            { 'AnnoyanceFixerCollapseRelatedThreads': $("#CollapseRelatedThreadsEnable").is(':checked') }]
+    }, function () {
+        // Save Confirmation
+    });
 }
 
-function loadPostOptionsDefault () {
-  $('#PostOptionsThreadRating').prop('checked', true);
-  $('#PostOptionsPoT').prop('checked', true);
-  $('#PostOptionsThreads').prop('checked', true);
-  $('#PostOptionsPosts').prop('checked', true);
-  $('#PMChangesPMFromPost').prop('checked', true);
-  $('#PMChangesPMFromPostQuote').prop('checked', true);
-  $('#AnnoyanceFixerFullscreenYoutube').prop('checked', true);
-  $('#AnnoyanceFixerShowBlockedPosts').prop('checked', true);
+function loadPostOptionsDefault() {
+    $("#PostOptionsThreadRating").prop('checked', true);
+    $("#PostOptionsPoT").prop('checked', true);
+    $("#PostOptionsThreads").prop('checked', true);
+    $("#PostOptionsPosts").prop('checked', true);
+    $("#PMChangesPMFromPost").prop('checked', true);
+    $("#PMChangesPMFromPostQuote").prop('checked', true);
+    $("#AnnoyanceFixerFullscreenYoutube").prop('checked', true);
+    $("#AnnoyanceFixerShowBlockedPosts").prop('checked', true);
+    $("#CollapseRelatedThreadsEnable").prop('checked', true);
 }
 
-function loadPostOptions () {
-  // savePostOptions();
-  chrome.storage.sync.get('PostOptions', function (data) {
-    $.each(data, function (index, data) {
-      $.each(data, function (index, data) {
-        $.each(data, function (key, value) {
-          switch (key) {
-            case 'PostOptionsThreadRatingEnable': $('#PostOptionsThreadRating').prop('checked', value);
-              break;
-            case 'PostOptionsPoTEnable': $('#PostOptionsPoT').prop('checked', value);
-              break;
-            case 'PostOptionsThreadsEnable': $('#PostOptionsThreads').prop('checked', value);
-              break;
-            case 'PostOptionsPostsEnable': $('#PostOptionsPosts').prop('checked', value);
-              break;
-            case 'PMChangesPMFromPostEnable': $('#PMChangesPMFromPost').prop('checked', value);
-              break;
-            case 'PMChangesPMFromPostQuote': $('#PMChangesPMFromPostQuote').prop('checked', value);
-              break;
-            case 'AnnoyanceFixerFullscreenYoutubeEnable': $('#AnnoyanceFixerFullscreenYoutube').prop('checked', value);
-              break;
-            case 'AnnoyanceFixerShowBlockedPostsEnable': $('#AnnoyanceFixerShowBlockedPosts').prop('checked', value);
-              break;
-            case 'AnnoyanceFixerHideBlockedPostsEnable': $('#AnnoyanceFixerHideBlockedPosts').prop('checked', value);
-              break;
-            case 'PostOptionsRevertGreenUsernames': $('#RevertGreenUsernameEnable').prop('checked', value);
-              break;
-            default: console.log('ERROR: Key not found.');
-          }
+function loadPostOptions() {
+    //savePostOptions();
+    chrome.storage.sync.get("PostOptions", function (data) {
+        $.each(data, function (index, data) {
+            $.each(data, function (index, data) {
+                $.each(data, function (key, value) {
+                    switch (key) {
+                        case "PostOptionsThreadRatingEnable": $("#PostOptionsThreadRating").prop('checked', value);
+                            break;
+                        case "PostOptionsPoTEnable": $("#PostOptionsPoT").prop('checked', value);
+                            break;
+                        case "PostOptionsThreadsEnable": $("#PostOptionsThreads").prop('checked', value);
+                            break;
+                        case "PostOptionsPostsEnable": $("#PostOptionsPosts").prop('checked', value);
+                            break;
+                        case "PMChangesPMFromPostEnable": $("#PMChangesPMFromPost").prop('checked', value);
+                            break;
+                        case "PMChangesPMFromPostQuote": $("#PMChangesPMFromPostQuote").prop('checked', value);
+                            break;
+                        case "AnnoyanceFixerFullscreenYoutubeEnable": $("#AnnoyanceFixerFullscreenYoutube").prop('checked', value);
+                            break;
+                        case "AnnoyanceFixerShowBlockedPostsEnable": $("#AnnoyanceFixerShowBlockedPosts").prop('checked', value);
+                            break;
+                        case "AnnoyanceFixerHideBlockedPostsEnable": $("#AnnoyanceFixerHideBlockedPosts").prop('checked', value);
+                            break;
+                        case "PostOptionsRevertGreenUsernames": $("#RevertGreenUsernameEnable").prop('checked', value);
+                            break;
+                        case "AnnoyanceFixerCollapseRelatedThreads": $("#CollapseRelatedThreadsEnable").prop('checked', value);
+                            break;
+                        default: console.log("ERROR: Key not found.");
+                    }
+                })
+            })
         });
       });
     });

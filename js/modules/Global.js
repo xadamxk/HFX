@@ -38,7 +38,7 @@ var SFWMode = false;
 var injectHFXBadge = true;
 var revertGreenStars = false;
 var revertPurpleStars = false;
-var hfxAlerts = false;
+var hfxAlerts = true;
 var enablePMBadges = false;
 getGlobalSettings();
 

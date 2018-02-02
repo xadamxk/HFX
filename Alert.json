@@ -1,4 +1,4 @@
 {
-  "AlertKey": "1/23/2018",
-  "AlertValue": "<u>HFX Alerts</u><br>Just a reminder about HFX Trophies:<br><img src='https://raw.githubusercontent.com/xadamxk/HFX/master/images/trophy_supporters2.png' alt='HFX Supporter'><br><a href='https://hackforums.net/showthread.php?tid=5786858'>Leave a review in Chrome/Firefox Web Store for HFX (include UID).</a><hr><img src='https://raw.githubusercontent.com/xadamxk/HFX/master/images/trophy_donators.png' alt='HFX Donator'><br><a href='https://hackforums.net/showthread.php?tid=5698088'>Donate 10$ or more for the future development of HFX.</a><hr><img src='https://raw.githubusercontent.com/xadamxk/HFX/master/images/trophy_contributer.png' alt='Contributor'><br><a href='https://hackforums.net/showthread.php?tid=5786868'>Provide 3 HF contributions</a>"
+  "AlertKey": "1/31/2018",
+  "AlertValue": "<a href='https://hackforums.net/showthread.php?tid=5786858'><u>HFX Alerts</u></a><br>HFX Version 0.2.1.1 has been pushed to Chrome & Firefox users!<br>Changes include:<br>• Unread Badge Count<br>• Auto Collapse Related Threads<br>• Fixed Show Blocked Posts (thanks Anxuein)<br><a href='https://github.com/xadamxk/HFX/wiki/Changelog'><u>Full HFX Changelog</u></a>"
 }
