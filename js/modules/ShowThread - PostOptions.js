@@ -11,6 +11,7 @@ var annoyanceFixerShowBlockedPostsEnabled = true;
 var annoyanceFixerHideBlockedPostsEnabled = false;
 var revertGreenUsernamesEnable = false;
 var annoyanceFixerCollapseRelatedThreads = false;
+var enableInfiniScrollThreads = false;
 getPostOptions();
 
 // Set vars equal to saved settings
@@ -43,6 +44,8 @@ function getPostOptions() {
                                 break;
                             case "AnnoyanceFixerCollapseRelatedThreads": if (value) { annoyanceFixerCollapseRelatedThreads = value }
                                 break;
+                            case "PostOptionsInfiniscrollThreadEnable": if (value) { enableInfiniScrollThreads = value }
+                                break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
                         }
@@ -59,9 +62,80 @@ function injectPostOptions(){
     // Check Post Options while looping
     enablePostOptions();
     // Collapse Related Threads
-    if(annoyanceFixerCollapseRelatedThreads){
+    if (annoyanceFixerCollapseRelatedThreads){
         enableCollapseRelatedThreads();
     }
+    // Infiniscroll Threads
+    if (enableInfiniScrollThreads){
+        injectInfiniScrollThreads();
+    }
+    
+}
+
+function injectInfiniScrollThreads(){
+    // Get current URL
+  var currentURL = location.href;
+  var pageStr = "&page=";
+  if (currentURL.includes(pageStr)){
+      var strIndex = currentURL.indexOf(pageStr) + pageStr.length;
+      currentURL = currentURL.slice(0,strIndex);
+  } else {
+      currentURL = currentURL + pageStr;
+  }
+
+  //$('.go_page').after($('<button>').addClass('view-more-button'));
+  var appendBody = $('#posts');
+  var appendCount = 0;
+  var warnUser = false;
+
+  appendBody.infiniteScroll({
+    // options: https://infinite-scroll.com/options.html
+    path: '.pagination_next', // .pagination_next
+    append: '.post', // .inline_row
+    checkLastPage: true, // true
+    prefill: false, // false
+    responseType: 'document',
+    outlayer: false, // false
+    scrollThreshold: 200, // 200
+    elementScroll: false, // false
+    loadOnScroll: true, // true
+    history: 'push', // push
+    historyTitle: true, // true
+    hideNav: false, // .pagination
+    status: '.page-load-status', // ?
+    onInit: 
+    function() {
+       this.on( 'append', function() {
+        // Incr Counts
+        appendCount++;
+        // Debug
+        //console.log("Loop count: "+appendCount);
+       });
+     },
+    debug: false, // false
+  });
+  var refreshId = setInterval(function() {
+    // Debug
+    //console.log("checking loaded pages..." + appendCount);
+    // Warn
+    if(appendCount > 1 && !warnUser){
+      appendCount = 0;
+      warnUser = true;
+      window.alert("HFX Infiniscroll\n\n"+
+        "Please refrain from infiniscrolling so fast.\n"+
+        "If you continue to scroll faster than 2 pages every 5 seconds, this feature will automatically disable!");
+    } 
+    // Kill
+    else if(appendCount > 1 && warnUser){
+      appendCount = 0;
+      window.alert("HFX Infiniscroll\n\n"+
+        "You were warned... Killing Infiniscroll.\n"+
+        "You left off on: "+ location.href);
+        appendBody.infiniteScroll('destroy');
+    }
+    appendCount = 0;
+  }, 5000);
+
 }
 
 function enableCollapseRelatedThreads(){

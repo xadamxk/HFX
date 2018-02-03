@@ -526,7 +526,8 @@ function savePostOptions() {
             { 'AnnoyanceFixerShowBlockedPostsEnable': $("#AnnoyanceFixerShowBlockedPosts").is(':checked') },
             { 'AnnoyanceFixerHideBlockedPostsEnable': $("#AnnoyanceFixerHideBlockedPosts").is(':checked') },
             { 'PostOptionsRevertGreenUsernames': $("#RevertGreenUsernameEnable").is(':checked') },
-            { 'AnnoyanceFixerCollapseRelatedThreads': $("#CollapseRelatedThreadsEnable").is(':checked') }]
+            { 'AnnoyanceFixerCollapseRelatedThreads': $("#CollapseRelatedThreadsEnable").is(':checked') },
+            { 'PostOptionsInfiniscrollThreadEnable': $("#PostOptionsInfiniscrollThread").is(':checked') }]
     }, function () {
         // Save Confirmation
     });
@@ -572,6 +573,8 @@ function loadPostOptions() {
                         case "PostOptionsRevertGreenUsernames": $("#RevertGreenUsernameEnable").prop('checked', value);
                             break;
                         case "AnnoyanceFixerCollapseRelatedThreads": $("#CollapseRelatedThreadsEnable").prop('checked', value);
+                            break;
+                        case "PostOptionsInfiniscrollThreadEnable": $("#PostOptionsInfiniscrollThread").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }
