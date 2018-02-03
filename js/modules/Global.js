@@ -223,8 +223,9 @@ function updateBadgeCount () {
     }
   });
   // Desktop Notifications
-  var disableNotifications = true;
+  var disableNotifications = false;
   if (disableNotifications && numPMs > 0) {
+    // Log something to it only sends once
     notifyMe(titleString, notificationBodyText, notificationBodyLink);
   }
   // console.log("Number of unread PM's: "+numPMs);
