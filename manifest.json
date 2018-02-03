@@ -91,6 +91,7 @@
       ],
       "js": [
         "js/dependencies/jquery-3.2.1.js",
+        "js/dependencies/infinite-scroll.pkgd.min.js",
         "js/modules/ForumDisplay.js"
       ]
     },
