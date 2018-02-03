@@ -385,7 +385,8 @@ function saveForumChanges() {
             [{ 'ForumChangesForumRatingEnabled': $("#ForumChangesForumRating").is(':checked') },
             { 'ForumChangesEnhancedSYTEnabled': $("#ForumChangesEnhancedSYT").is(':checked') },
             { 'ForumChangesHideClosedEnabled': $("#ForumChangesHideClosed").is(':checked') },
-            { 'ForumChangesHideForumRatingsEnabled': $("#ForumChangesHideForumRatings").is(':checked') }]
+            { 'ForumChangesHideForumRatingsEnabled': $("#ForumChangesHideForumRatings").is(':checked') },
+            { 'ForumChangesInfiniscrollForumsEnabled': $("#ForumChangesInfiniscrollForums").is(':checked') }]
     }, function () {
         // Save Confirmation
     });
@@ -410,6 +411,8 @@ function loadForumChanges() {
                         case "ForumChangesHideClosedEnabled": $("#ForumChangesHideClosed").prop('checked', value);
                             break;
                         case "ForumChangesHideForumRatingsEnabled": $("#ForumChangesHideForumRatings").prop('checked', value);
+                            break;
+                        case "ForumChangesInfiniscrollForumsEnabled": $("#ForumChangesInfiniscrollForums").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }

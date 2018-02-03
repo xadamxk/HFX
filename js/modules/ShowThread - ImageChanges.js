@@ -1,5 +1,5 @@
 var debug = false;
-var maxSizeEnable = false;
+var maxSizeEnable = true;
 var replaceBrokenEnable = false;
 var forceHTTPSEnable = false;
 var brokenImageURL = chrome.extension.getURL("/images/icon128.png");;

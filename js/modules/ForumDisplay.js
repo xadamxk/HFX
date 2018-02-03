@@ -1,8 +1,8 @@
-var enableForumRating = false;
+var enableForumRating = true;
 var enableEnhancedSYT = false;
 var enableHideClosed = false;
 var enableHideForumRatings = false;
-var enableInfiniScrollForums = true;
+var enableInfiniScrollForums = false;
 getForumRating();
 
 // Set vars equal to saved settings
@@ -20,6 +20,8 @@ function getForumRating () {
               case 'ForumChangesHideClosedEnabled': if (value) { enableHideClosed = value; }
                 break;
               case 'ForumChangesHideForumRatingsEnabled': if (value) { enableHideForumRatings = value; }
+                break;
+              case 'ForumChangesInfiniscrollForumsEnabled': if (value) { enableInfiniScrollForums = value; }
                 break;
               default: // console.log("ERROR: Key not found.");
                 break;
@@ -60,82 +62,59 @@ function injectInfiniScrollForums(){
   } else {
       currentURL = currentURL + pageStr;
   }
-  console.log(currentURL);
 
-  var infScroll = new InfiniteScroll( '#content > div > table.tborder.clear > tbody', {
-      // defaults listed
+  //$('.go_page').after($('<button>').addClass('view-more-button'));
+  var appendBody = $('#content > div > table.tborder.clear > tbody');
+  var appendCount = 0;
+  var warnUser = false;
 
-      path: '.pagination_next',
-      // REQUIRED. Determines the URL for the next page
-      // Set to selector string to use the href of the next page's link
-      // path: '.pagination__next'
-      // Or set with {{#}} in place of the page number in the url
-      // path: '/blog/page/{{#}}'
-      // or set with function
-      // path: function() {
-      //   return return '/articles/P' + ( ( this.loadCount + 1 ) * 10 );
-      //
-
-      append: 'tr.inline_row',
-      // REQUIRED for appending content
-      // Appends selected elements from loaded page to the container
-
-      checkLastPage: '.pagination__next',
-      // Checks if page has path selector element
-      // Set to string if path is not set as selector string:
-      //   checkLastPage: '.pagination__next'
-
-      prefill: false,
-      // Loads and appends pages on intialization until scroll requirement is met.
-
-      responseType: 'document',
-      // Sets the type of response returned by the page request.
-      // Set to 'text' to return flat text for loading JSON.
-
-      outlayer: false,
-      // Integrates Masonry, Isotope or Packery
-      // Appended items will be added to the layout
-
-      scrollThreshold: 400,
-      // Sets the distance between the viewport to scroll area
-      // for scrollThreshold event to be triggered.
-
-      elementScroll: false,
-      // Sets scroller to an element for overflow element scrolling
-
-      loadOnScroll: true,
-      // Loads next page when scroll crosses over scrollThreshold
-
-      history: 'replace',
-      // Changes the browser history and URL.
-      // Set to 'push' to use history.pushState()
-      //    to create new history entries for each page change.
-
-      historyTitle: true,
-      // Updates the window title. Requires history enabled.
-
-      hideNav: true,
-      // Hides navigation element
-
-      status: undefined,
-      // Displays status elements indicating state of page loading:
-      // .infinite-scroll-request, .infinite-scroll-load, .infinite-scroll-error
-      // status: '.page-load-status'
-
-      button: undefined,
-      // Enables a button to load pages on click
-      // button: '.load-next-button'
-
-      onInit: undefined,
-      // called on initialization
-      // useful for binding events on init
-      // onInit: function() {
-      //   this.on( 'append', function() {...})
-      // }
-
-      debug: false,
-      // Logs events and state changes to the console.
-    });
+  appendBody.infiniteScroll({
+    // options: https://infinite-scroll.com/options.html
+    path: '.pagination_next', // .pagination_next
+    append: '.inline_row', // .inline_row
+    checkLastPage: true, // true
+    prefill: false, // false
+    responseType: 'document',
+    outlayer: false, // false
+    scrollThreshold: 200, // 200
+    elementScroll: false, // false
+    loadOnScroll: true, // true
+    history: 'push', // push
+    historyTitle: true, // true
+    hideNav: false, // .pagination
+    status: '.page-load-status', // ?
+    onInit: 
+    function() {
+       this.on( 'append', function() {
+        // Incr Counts
+        appendCount++;
+        // Debug
+        //console.log("Loop count: "+appendCount);
+       });
+     },
+    debug: false, // false
+  });
+  var refreshId = setInterval(function() {
+    // Debug
+    //console.log("checking loaded pages..." + appendCount);
+    // Warn
+    if(appendCount > 1 && !warnUser){
+      appendCount = 0;
+      warnUser = true;
+      window.alert("HFX Infiniscroll\n\n"+
+        "Please refrain from infiniscrolling so fast.\n"+
+        "If you continue to scroll faster than 2 pages every 5 seconds, this feature will automatically disable!");
+    } 
+    // Kill
+    else if(appendCount > 1 && warnUser){
+      appendCount = 0;
+      window.alert("HFX Infiniscroll\n\n"+
+        "You were warned... Killing Infiniscroll.\n"+
+        "You left off on: "+ location.href);
+        appendBody.infiniteScroll('destroy');
+    }
+    appendCount = 0;
+  }, 5000);
 }
 
 function injectForumRating () {

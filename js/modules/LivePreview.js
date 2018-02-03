@@ -1,7 +1,7 @@
 var debug = false;
-var enableLivePreview = false;
-var collapseLivePreviewByDefault = false;
-var characterCounterEnabled = false;
+var enableLivePreview = true;
+var collapseLivePreviewByDefault = true;
+var characterCounterEnabled = true;
 var enableLeaveWarning = false;
 getLivePreview();
 

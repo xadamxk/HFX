@@ -1,5 +1,5 @@
 var debug = false;
-var enableOnlineSorting = false;
+var enableOnlineSorting = true;
 getOnlineSorting();
 
 // Set vars equal to saved settings

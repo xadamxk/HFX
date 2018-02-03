@@ -5,7 +5,7 @@ var signatureEnable = false;
 var signatureText = "";
 var salutationEnable = false;
 var salutationText = "";
-var trackingLinks = false;
+var trackingLinks = true;
 getPMChanges();
 
 // Set vars equal to saved settings

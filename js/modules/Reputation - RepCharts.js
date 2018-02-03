@@ -3,7 +3,7 @@ var debug = false;
 var posRepColor = "#32CD32"; // Default: ##32CD32
 var neuRepColor = "#666666"; // Default: #666666
 var negRepColor = "#CC3333"; // Default: #CC3333
-var enableRepChart = false;
+var enableRepChart = true;
 var enableRepLinks = false;
 enableRepCharts();
 
