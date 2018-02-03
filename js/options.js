@@ -10,86 +10,85 @@
 
 $(document).ready(function () {
   // Load version string
-  $('#HFXVersion').text(chrome.runtime.getManifest().version);
+  $("#HFXVersion").text(chrome.runtime.getManifest().version);
   // Load Default/Saved Settings
   loadSettings();
 
-  $('.PostbitHide').change(function () {
+  $(".PostbitHide").change(function () {
     savePostbitHide();
-    console.log('PostbitHide Settings Changed!');
+    console.log("PostbitHide Settings Changed!");
   });
 
-  $('.RepCharts').change(function () {
+  $(".RepCharts").change(function () {
     saveRepCharts();
-    console.log('RepCharts Settings Changed!');
+    console.log("RepCharts Settings Changed!");
   });
 
-  $('.OnlineSorting').change(function () {
+  $(".OnlineSorting").change(function () {
     saveOnlineSorting();
-    console.log('OnlineSorting Settings Changed!');
+    console.log("OnlineSorting Settings Changed!");
   });
 
-  $('.UserTag').change(function () {
+  $(".UserTag").change(function () {
     saveUserTag();
-    console.log('UserTag Settings Changed!');
+    console.log("UserTag Settings Changed!");
   });
 
-  $('.PostOptions').change(function () {
+  $(".PostOptions").change(function () {
     savePostOptions();
-    console.log('PostOptions Settings Changed!');
+    console.log("PostOptions Settings Changed!");
   });
 
-  $('.ImageChanges').change(function () {
+  $(".ImageChanges").change(function () {
     saveImageChanges();
-    console.log('ImageChanges Settings Changed!');
+    console.log("ImageChanges Settings Changed!");
   });
 
-  $('.PMChanges').change(function () {
+  $(".PMChanges").change(function () {
     savePMChanges();
-    console.log('PMChanges Settings Changed!');
+    console.log("PMChanges Settings Changed!");
   });
 
-  $('.ForumChanges').change(function () {
+  $(".ForumChanges").change(function () {
     saveForumChanges();
-    console.log('ForumChanges Settings Changed!');
+    console.log("ForumChanges Settings Changed!");
   });
 
-  $('.QuickRepChanges').change(function () {
+  $(".QuickRepChanges").change(function () {
     saveQuickRepChanges();
-    console.log('QuickRepChanges Settings Changed!');
+    console.log("QuickRepChanges Settings Changed!");
   });
 
-  $('.GlobalChanges').change(function () {
+  $(".GlobalChanges").change(function () {
     saveGlobalChanges();
-    console.log('GlobalChanges Settings Changed!');
+    console.log("GlobalChanges Settings Changed!");
   });
 
-  $('.SmartQuotes').change(function () {
+  $(".SmartQuotes").change(function () {
     saveSmartQuotes();
-    console.log('SmartQuotes Settings Changed!');
+    console.log("SmartQuotes Settings Changed!");
   });
 
-  $('.LivePreview').change(function () {
+  $(".LivePreview").change(function () {
     saveLivePreview();
-    console.log('LivePreview Settings Changed!');
+    console.log("LivePreview Settings Changed!");
   });
 
   // Color Pickers
-  $('.jscolor').change(function () {
+  $(".jscolor").change(function () {
     update($(this));
     saveSmartQuotes();
   });
 
-  $('#SFWMode').change(function () {
-    // there's no functon for this?
+  $("#SFWMode").change(function () {
     // saveSFWMode();
   });
 
-  $('.nav li').click(function () {
-    $('body').scrollTop(0);
+  $(".nav li").click(function () {
+    $("body").scrollTop(0);
   });
   // Reset HFX Alerts
-  $('#resetHFXAlerts').click(function () {
+  $("#resetHFXAlerts").click(function () {
     resetHFXAlerts();
   });
 });
@@ -129,38 +128,38 @@ function loadDefaults () {
 function saveLivePreview () {
   chrome.storage.sync.set({
     LivePreviewChanges:
-            [{ 'LivePreviewChangesEnabled': $('#LivePreviewChangesEnable').is(':checked') },
-              { 'LivePreviewChangesCollapsed': $('#LivePreviewChangesCollapse').is(':checked') },
-              { 'GlobalChangesCharacterCounterEnabled': $('#GlobalChangesCharacterCounter').is(':checked') },
-              { 'GlobalChangesLeaveWarning': $('#GlobalChangesLeaveWarning').is(':checked') }]
+          [{ 'LivePreviewChangesEnabled': $("#LivePreviewChangesEnable").is(':checked') },
+            { 'LivePreviewChangesCollapsed': $("#LivePreviewChangesCollapse").is(':checked') },
+            { 'GlobalChangesCharacterCounterEnabled': $("#GlobalChangesCharacterCounter").is(':checked') },
+            { 'GlobalChangesLeaveWarning': $("#GlobalChangesLeaveWarning").is(':checked') }]
   }, function () {
     // Save Confirmation
   });
 }
 
 function loadLivePreviewDefault () {
-  $('#LivePreviewChangesEnable').prop('checked', true);
-  $('#LivePreviewChangesCollapse').prop('checked', true);
-  $('#GlobalChangesCharacterCounter').prop('checked', true);
-  $('#GlobalChangesLeaveWarning').prop('checked', true);
+  $("#LivePreviewChangesEnable").prop('checked', true);
+  $("#LivePreviewChangesCollapse").prop('checked', true);
+  $("#GlobalChangesCharacterCounter").prop('checked', true);
+  $("#GlobalChangesLeaveWarning").prop('checked', true);
 }
 
 function loadLivePreview () {
   // saveLivePreview();
-  chrome.storage.sync.get('LivePreviewChanges', function (data) {
+  chrome.storage.sync.get("LivePreviewChanges", function (data) {
     $.each(data, function (index, data) {
       $.each(data, function (index, data) {
         $.each(data, function (key, value) {
           switch (key) {
-            case 'LivePreviewChangesEnabled': $('#LivePreviewChangesEnable').prop('checked', value);
+            case "LivePreviewChangesEnabled": $("#LivePreviewChangesEnable").prop('checked', value);
               break;
-            case 'LivePreviewChangesCollapsed': $('#LivePreviewChangesCollapse').prop('checked', value);
+            case "LivePreviewChangesCollapsed": $("#LivePreviewChangesCollapse").prop('checked', value);
               break;
-            case 'GlobalChangesCharacterCounterEnabled': $('#GlobalChangesCharacterCounter').prop('checked', value);
+            case "GlobalChangesCharacterCounterEnabled": $("#GlobalChangesCharacterCounter").prop('checked', value);
               break;
-            case 'GlobalChangesLeaveWarning': $('#GlobalChangesLeaveWarning').prop('checked', value);
+            case "GlobalChangesLeaveWarning": $("#GlobalChangesLeaveWarning").prop('checked', value);
               break;
-            default: console.log('ERROR: Key not found.');
+            default: console.log("ERROR: Key not found.");
           }
         });
       });
@@ -172,48 +171,48 @@ function loadLivePreview () {
 function saveSmartQuotes () {
   chrome.storage.sync.set({
     SmartQuoteChanges:
-            [{ 'SmartQuotesEnabled': $('#SmartQuotesEnable').is(':checked') },
-              { 'SmartQuotesMentionCount': $('#SmartQuotesMentionCount').is(':checked') },
-              { 'SmartQuoteColorBody': $('#SmartQuoteColorBody').val() },
-              { 'SmartQuoteColorQuote': $('#SmartQuoteColorQuote').val() },
-              { 'SmartQuoteColorMention': $('#SmartQuoteColorMention').val() }]
+          [{ 'SmartQuotesEnabled': $("#SmartQuotesEnable").is(':checked') },
+            { 'SmartQuotesMentionCount': $("#SmartQuotesMentionCount").is(':checked') },
+            { 'SmartQuoteColorBody': $("#SmartQuoteColorBody").val() },
+            { 'SmartQuoteColorQuote': $("#SmartQuoteColorQuote").val() },
+            { 'SmartQuoteColorMention': $("#SmartQuoteColorMention").val() }]
   }, function () {
     // Save Confirmation
   });
 }
 
 function loadSmartQuotesDefault () {
-  $('#SmartQuotesEnable').prop('checked', true);
-  $('#SmartQuotesMentionCount').prop('checked', true);
+  $("#SmartQuotesEnable").prop('checked', true);
+  $("#SmartQuotesMentionCount").prop('checked', true);
   // Quote Body
-  $('#SmartQuoteColorBody').val('ADB1A1');
-  update($('#SmartQuoteColorBody'));
+  $("#SmartQuoteColorBody").val("ADB1A1");
+  update($("#SmartQuoteColorBody"));
   // Standard Quote
-  $('#SmartQuoteColorQuote').val('B1D8BF');
-  update($('#SmartQuoteColorQuote'));
+  $("#SmartQuoteColorQuote").val("B1D8BF");
+  update($("#SmartQuoteColorQuote"));
   // Mention Quote
-  $('#SmartQuoteColorMention').val('CC3636');
-  update($('#SmartQuoteColorMention'));
+  $("#SmartQuoteColorMention").val("CC3636");
+  update($("#SmartQuoteColorMention"));
 }
 
 function loadSmartQuotes () {
   // saveSmartQuotes();
-  chrome.storage.sync.get('SmartQuoteChanges', function (data) {
+  chrome.storage.sync.get("SmartQuoteChanges", function (data) {
     $.each(data, function (index, data) {
       $.each(data, function (index, data) {
         $.each(data, function (key, value) {
           switch (key) {
-            case 'SmartQuotesEnabled': $('#SmartQuotesEnable').prop('checked', value);
+            case "SmartQuotesEnabled": $("#SmartQuotesEnable").prop('checked', value);
               break;
-            case 'SmartQuotesMentionCount': $('#SmartQuotesMentionCount').prop('checked', value);
+            case "SmartQuotesMentionCount": $("#SmartQuotesMentionCount").prop('checked', value);
               break;
-            case 'SmartQuoteColorBody': $('#SmartQuoteColorBody').val(value); update($('#SmartQuoteColorBody')); ;
+            case "SmartQuoteColorBody": $("#SmartQuoteColorBody").val(value); update($("#SmartQuoteColorBody")); ;
               break;
-            case 'SmartQuoteColorQuote': $('#SmartQuoteColorQuote').val(value); update($('#SmartQuoteColorQuote')); ;
+            case "SmartQuoteColorQuote": $("#SmartQuoteColorQuote").val(value); update($("#SmartQuoteColorQuote")); ;
               break;
-            case 'SmartQuoteColorMention': $('#SmartQuoteColorMention').val(value); update($('#SmartQuoteColorMention'));
+            case "SmartQuoteColorMention": $("#SmartQuoteColorMention").val(value); update($("#SmartQuoteColorMention"));
               break;
-            default: console.log('ERROR: Key not found.');
+            default: console.log("ERROR: Key not found.");
           }
         });
       });
@@ -225,33 +224,33 @@ function loadSmartQuotes () {
 function saveGlobalChanges () {
   chrome.storage.sync.set({
     GlobalChanges:
-            [{ 'GlobalChangesHideLocationEnabled': $('#HideLocation').is(':checked') },
-              { 'GlobalChangesDenyPMReceiptEnabled': $('#PMChangesDenyPMReceipt').is(':checked') },
-              { 'GlobalChangesEasyCiteEnabled': $('#GlobalChangesEasyCite').is(':checked') },
-              { 'GlobalChangesHFTBEnabled': $('#GlobalChangesHFTBEnabled').is(':checked') },
-              { 'GlobalChangesHFTBStickyEnabled': $('#GlobalChangesHFTBStickyEnabled').is(':checked') },
-              { 'GlobalChangesHFTBFav1Text': $('#GlobalChangesHFTBFav1Text').val() },
-              { 'GlobalChangesHFTBFav1Link': $('#GlobalChangesHFTBFav1Link').val() },
-              { 'GlobalChangesHFTBFav2Text': $('#GlobalChangesHFTBFav2Text').val() },
-              { 'GlobalChangesHFTBFav2Link': $('#GlobalChangesHFTBFav2Link').val() },
-              { 'GlobalChangesHFTBFav3Text': $('#GlobalChangesHFTBFav3Text').val() },
-              { 'GlobalChangesHFTBFav3Link': $('#GlobalChangesHFTBFav3Link').val() },
-              { 'GlobalChangesHFTBFav4Text': $('#GlobalChangesHFTBFav4Text').val() },
-              { 'GlobalChangesHFTBFav4Link': $('#GlobalChangesHFTBFav4Link').val() },
-              { 'GlobalChangesHFTBFav5Text': $('#GlobalChangesHFTBFav5Text').val() },
-              { 'GlobalChangesHFTBFav5Link': $('#GlobalChangesHFTBFav5Link').val() },
-              { 'GlobalChangesHFTBFav6Text': $('#GlobalChangesHFTBFav6Text').val() },
-              { 'GlobalChangesHFTBFav6Link': $('#GlobalChangesHFTBFav6Link').val() },
-              { 'GlobalChangesHFTBFav7Text': $('#GlobalChangesHFTBFav7Text').val() },
-              { 'GlobalChangesHFTBFav7Link': $('#GlobalChangesHFTBFav7Link').val() },
-              { 'GlobalChangesUserNotes': $('#GlobalChangesUserNotes').is(':checked') },
-              { 'GlobalChangesNewPostLinks': $('#GlobalChangesNewPostLinks').is(':checked') },
-              { 'GlobalChangesSFWMode': $('#GlobalChangesSFWMode').is(':checked') },
-              { 'GlobalRevertGreenStars': $('#RevertGreenStarsEnable').is(':checked') },
-              { 'GlobalRevertPurpleStars': $('#RevertPurpleStarsEnable').is(':checked') },
-              { 'GlobalHFXAlerts': $('#HFXAlertsEnable').is(':checked') },
-              { 'GlobalUnreadBadgeCount': $('#UnreadBadgeCountEnable').is(':checked') }
-            ]
+          [{ 'GlobalChangesHideLocationEnabled': $("#HideLocation").is(':checked') },
+            { 'GlobalChangesDenyPMReceiptEnabled': $("#PMChangesDenyPMReceipt").is(':checked') },
+            { 'GlobalChangesEasyCiteEnabled': $("#GlobalChangesEasyCite").is(':checked') },
+            { 'GlobalChangesHFTBEnabled': $("#GlobalChangesHFTBEnabled").is(':checked') },
+            { 'GlobalChangesHFTBStickyEnabled': $("#GlobalChangesHFTBStickyEnabled").is(':checked') },
+            { 'GlobalChangesHFTBFav1Text': $("#GlobalChangesHFTBFav1Text").val() },
+            { 'GlobalChangesHFTBFav1Link': $("#GlobalChangesHFTBFav1Link").val() },
+            { 'GlobalChangesHFTBFav2Text': $("#GlobalChangesHFTBFav2Text").val() },
+            { 'GlobalChangesHFTBFav2Link': $("#GlobalChangesHFTBFav2Link").val() },
+            { 'GlobalChangesHFTBFav3Text': $("#GlobalChangesHFTBFav3Text").val() },
+            { 'GlobalChangesHFTBFav3Link': $("#GlobalChangesHFTBFav3Link").val() },
+            { 'GlobalChangesHFTBFav4Text': $("#GlobalChangesHFTBFav4Text").val() },
+            { 'GlobalChangesHFTBFav4Link': $("#GlobalChangesHFTBFav4Link").val() },
+            { 'GlobalChangesHFTBFav5Text': $("#GlobalChangesHFTBFav5Text").val() },
+            { 'GlobalChangesHFTBFav5Link': $("#GlobalChangesHFTBFav5Link").val() },
+            { 'GlobalChangesHFTBFav6Text': $("#GlobalChangesHFTBFav6Text").val() },
+            { 'GlobalChangesHFTBFav6Link': $("#GlobalChangesHFTBFav6Link").val() },
+            { 'GlobalChangesHFTBFav7Text': $("#GlobalChangesHFTBFav7Text").val() },
+            { 'GlobalChangesHFTBFav7Link': $("#GlobalChangesHFTBFav7Link").val() },
+            { 'GlobalChangesUserNotes': $("#GlobalChangesUserNotes").is(':checked') },
+            { 'GlobalChangesNewPostLinks': $("#GlobalChangesNewPostLinks").is(':checked') },
+            { 'GlobalChangesSFWMode': $("#GlobalChangesSFWMode").is(':checked') },
+            { 'GlobalRevertGreenStars': $("#RevertGreenStarsEnable").is(':checked') },
+            { 'GlobalRevertPurpleStars': $("#RevertPurpleStarsEnable").is(':checked') },
+            { 'GlobalHFXAlerts': $("#HFXAlertsEnable").is(':checked') },
+            { 'GlobalUnreadBadgeCount': $("#UnreadBadgeCountEnable").is(':checked') }
+          ]
     // { '': $("#").val() }
   }, function () {
     // Save Confirmation
@@ -259,84 +258,84 @@ function saveGlobalChanges () {
 }
 
 function loadGlobalChangesDefault () {
-  $('#HideLocation').prop('checked', true);
-  $('#GlobalChangesEasyCite').prop('checked', true);
-  $('#GlobalChangesHFTBEnabled').prop('checked', true);
-  $('#GlobalChangesHFTBStickyEnabled').prop('checked', true);
-  $('#GlobalChangesUserNotes').prop('checked', true);
-  $('#GlobalChangesNewPostLinks').prop('checked', true);
-  $('#GlobalChangesHFTBFav1Text').val('Lounge');
-  $('#GlobalChangesHFTBFav1Link').val('https://hackforums.net/forumdisplay.php?fid=25');
-  $('#GlobalChangesHFTBFav2Text').val('RANF');
-  $('#GlobalChangesHFTBFav2Link').val('https://hackforums.net/forumdisplay.php?fid=2');
-  $('#GlobalChangesHFTBFav3Text').val('Groups');
-  $('#GlobalChangesHFTBFav3Link').val('https://hackforums.net/forumdisplay.php?fid=53');
-  $('#GlobalChangesHFTBFav4Text').val('PM Tracking');
-  $('#GlobalChangesHFTBFav4Link').val('https://hackforums.net/private.php?action=tracking');
-  $('#HFXAlertsEnable').prop('checked', true);
-  $('#UnreadBadgeCountEnable').prop('checked', true);
+  $("#HideLocation").prop('checked', true);
+  $("#GlobalChangesEasyCite").prop('checked', true);
+  $("#GlobalChangesHFTBEnabled").prop('checked', true);
+  $("#GlobalChangesHFTBStickyEnabled").prop('checked', true);
+  $("#GlobalChangesUserNotes").prop('checked', true);
+  $("#GlobalChangesNewPostLinks").prop('checked', true);
+  $("#GlobalChangesHFTBFav1Text").val("Lounge");
+  $("#GlobalChangesHFTBFav1Link").val("https://hackforums.net/forumdisplay.php?fid=25");
+  $("#GlobalChangesHFTBFav2Text").val("RANF");
+  $("#GlobalChangesHFTBFav2Link").val("https://hackforums.net/forumdisplay.php?fid=2");
+  $("#GlobalChangesHFTBFav3Text").val("Groups");
+  $("#GlobalChangesHFTBFav3Link").val("https://hackforums.net/forumdisplay.php?fid=53");
+  $("#GlobalChangesHFTBFav4Text").val("PM Tracking");
+  $("#GlobalChangesHFTBFav4Link").val("https://hackforums.net/private.php?action=tracking");
+  $("#HFXAlertsEnable").prop('checked', true);
+  $("#UnreadBadgeCountEnable").prop('checked', true);
 }
 
 function loadGlobalChanges () {
   // saveGlobalChanges();
-  chrome.storage.sync.get('GlobalChanges', function (data) {
+  chrome.storage.sync.get("GlobalChanges", function (data) {
     $.each(data, function (index, data) {
       $.each(data, function (index, data) {
         $.each(data, function (key, value) {
           switch (key) {
-            case 'GlobalChangesHideLocationEnabled': $('#HideLocation').prop('checked', value);
+            case "GlobalChangesHideLocationEnabled": $("#HideLocation").prop('checked', value);
               break;
-            case 'GlobalChangesDenyPMReceiptEnabled': $('#PMChangesDenyPMReceipt').prop('checked', value);
+            case "GlobalChangesDenyPMReceiptEnabled": $("#PMChangesDenyPMReceipt").prop('checked', value);
               break;
-            case 'GlobalChangesEasyCiteEnabled': $('#GlobalChangesEasyCite').prop('checked', value);
+            case "GlobalChangesEasyCiteEnabled": $("#GlobalChangesEasyCite").prop('checked', value);
               break;
-            case 'GlobalChangesHFTBEnabled': $('#GlobalChangesHFTBEnabled').prop('checked', value);
+            case "GlobalChangesHFTBEnabled": $("#GlobalChangesHFTBEnabled").prop('checked', value);
               break;
-            case 'GlobalChangesHFTBStickyEnabled': $('#GlobalChangesHFTBStickyEnabled').prop('checked', value);
+            case "GlobalChangesHFTBStickyEnabled": $("#GlobalChangesHFTBStickyEnabled").prop('checked', value);
               break;
-            case 'GlobalChangesHFTBFav1Text': $('#GlobalChangesHFTBFav1Text').val(value);
+            case "GlobalChangesHFTBFav1Text": $("#GlobalChangesHFTBFav1Text").val(value);
               break;
-            case 'GlobalChangesHFTBFav1Link': $('#GlobalChangesHFTBFav1Link').val(value);
+            case "GlobalChangesHFTBFav1Link": $("#GlobalChangesHFTBFav1Link").val(value);
               break;
-            case 'GlobalChangesHFTBFav2Text': $('#GlobalChangesHFTBFav2Text').val(value);
+            case "GlobalChangesHFTBFav2Text": $("#GlobalChangesHFTBFav2Text").val(value);
               break;
-            case 'GlobalChangesHFTBFav2Link': $('#GlobalChangesHFTBFav2Link').val(value);
+            case "GlobalChangesHFTBFav2Link": $("#GlobalChangesHFTBFav2Link").val(value);
               break;
-            case 'GlobalChangesHFTBFav3Text': $('#GlobalChangesHFTBFav3Text').val(value);
+            case "GlobalChangesHFTBFav3Text": $("#GlobalChangesHFTBFav3Text").val(value);
               break;
-            case 'GlobalChangesHFTBFav3Link': $('#GlobalChangesHFTBFav3Link').val(value);
+            case "GlobalChangesHFTBFav3Link": $("#GlobalChangesHFTBFav3Link").val(value);
               break;
-            case 'GlobalChangesHFTBFav4Text': $('#GlobalChangesHFTBFav4Text').val(value);
+            case "GlobalChangesHFTBFav4Text": $("#GlobalChangesHFTBFav4Text").val(value);
               break;
-            case 'GlobalChangesHFTBFav4Link': $('#GlobalChangesHFTBFav4Link').val(value);
+            case "GlobalChangesHFTBFav4Link": $("#GlobalChangesHFTBFav4Link").val(value);
               break;
-            case 'GlobalChangesHFTBFav5Text': $('#GlobalChangesHFTBFav5Text').val(value);
+            case "GlobalChangesHFTBFav5Text": $("#GlobalChangesHFTBFav5Text").val(value);
               break;
-            case 'GlobalChangesHFTBFav5Link': $('#GlobalChangesHFTBFav5Link').val(value);
+            case "GlobalChangesHFTBFav5Link": $("#GlobalChangesHFTBFav5Link").val(value);
               break;
-            case 'GlobalChangesHFTBFav6Text': $('#GlobalChangesHFTBFav6Text').val(value);
+            case "GlobalChangesHFTBFav6Text": $("#GlobalChangesHFTBFav6Text").val(value);
               break;
-            case 'GlobalChangesHFTBFav6Link': $('#GlobalChangesHFTBFav6Link').val(value);
+            case "GlobalChangesHFTBFav6Link": $("#GlobalChangesHFTBFav6Link").val(value);
               break;
-            case 'GlobalChangesHFTBFav7Text': $('#GlobalChangesHFTBFav7Text').val(value);
+            case "GlobalChangesHFTBFav7Text": $("#GlobalChangesHFTBFav7Text").val(value);
               break;
-            case 'GlobalChangesHFTBFav7Link': $('#GlobalChangesHFTBFav7Link').val(value);
+            case "GlobalChangesHFTBFav7Link": $("#GlobalChangesHFTBFav7Link").val(value);
               break;
-            case 'GlobalChangesUserNotes': $('#GlobalChangesUserNotes').prop('checked', value);
+            case "GlobalChangesUserNotes": $("#GlobalChangesUserNotes").prop('checked', value);
               break;
-            case 'GlobalChangesNewPostLinks': $('#GlobalChangesNewPostLinks').prop('checked', value);
+            case "GlobalChangesNewPostLinks": $("#GlobalChangesNewPostLinks").prop('checked', value);
               break;
-            case 'GlobalChangesSFWMode': $('#GlobalChangesSFWMode').prop('checked', value);
+            case "GlobalChangesSFWMode": $("#GlobalChangesSFWMode").prop('checked', value);
               break;
-            case 'GlobalRevertGreenStars': $('#RevertGreenStarsEnable').prop('checked', value);
+            case "GlobalRevertGreenStars": $("#RevertGreenStarsEnable").prop('checked', value);
               break;
-            case 'GlobalRevertPurpleStars': $('#RevertPurpleStarsEnable').prop('checked', value);
+            case "GlobalRevertPurpleStars": $("#RevertPurpleStarsEnable").prop('checked', value);
               break;
-            case 'GlobalHFXAlerts': $('#HFXAlertsEnable').prop('checked', value);
+            case "GlobalHFXAlerts": $("#HFXAlertsEnable").prop('checked', value);
               break;
-            case 'GlobalUnreadBadgeCount': $('#UnreadBadgeCountEnable').prop('checked', value);
+            case "GlobalUnreadBadgeCount": $("#UnreadBadgeCountEnable").prop('checked', value);
               break;
-            default: console.log('ERROR: Key not found.');
+            default: console.log("ERROR: Key not found.");
           }
         });
       });
@@ -348,26 +347,26 @@ function loadGlobalChanges () {
 function saveQuickRepChanges () {
   chrome.storage.sync.set({
     QuickRepChanges:
-            [{ 'QuickRepEnabled': $('#QuickRep').is(':checked') }]
+          [{ 'QuickRepEnabled': $("#QuickRep").is(':checked') }]
   }, function () {
     // Save Confirmation
   });
 }
 
 function loadQuickRepChangesDefault () {
-  $('#QuickRep').prop('checked', true);
+  $("#QuickRep").prop('checked', true);
 }
 
 function loadQuickRepChanges () {
   // saveQuickRepChanges();
-  chrome.storage.sync.get('QuickRepChanges', function (data) {
+  chrome.storage.sync.get("QuickRepChanges", function (data) {
     $.each(data, function (index, data) {
       $.each(data, function (index, data) {
         $.each(data, function (key, value) {
           switch (key) {
-            case 'QuickRepEnabled': $('#QuickRep').prop('checked', value);
+            case "QuickRepEnabled": $("#QuickRep").prop('checked', value);
               break;
-            default: console.log('ERROR: Key not found.');
+            default: console.log("ERROR: Key not found.");
           }
         });
       });
@@ -379,36 +378,36 @@ function loadQuickRepChanges () {
 function saveForumChanges () {
   chrome.storage.sync.set({
     ForumChanges:
-            [{ 'ForumChangesForumRatingEnabled': $('#ForumChangesForumRating').is(':checked') },
-              { 'ForumChangesEnhancedSYTEnabled': $('#ForumChangesEnhancedSYT').is(':checked') },
-              { 'ForumChangesHideClosedEnabled': $('#ForumChangesHideClosed').is(':checked') },
-              { 'ForumChangesHideForumRatingsEnabled': $('#ForumChangesHideForumRatings').is(':checked') }]
+          [{ 'ForumChangesForumRatingEnabled': $("#ForumChangesForumRating").is(':checked') },
+            { 'ForumChangesEnhancedSYTEnabled': $("#ForumChangesEnhancedSYT").is(':checked') },
+            { 'ForumChangesHideClosedEnabled': $("#ForumChangesHideClosed").is(':checked') },
+            { 'ForumChangesHideForumRatingsEnabled': $("#ForumChangesHideForumRatings").is(':checked') }]
   }, function () {
     // Save Confirmation
   });
 }
 
 function loadForumChangesDefault () {
-  $('#ForumChangesForumRating').prop('checked', true);
-  $('#ForumChangesEnhancedSYT').prop('checked', true);
+  $("#ForumChangesForumRating").prop('checked', true);
+  $("#ForumChangesEnhancedSYT").prop('checked', true);
 }
 
 function loadForumChanges () {
   // saveForumChanges();
-  chrome.storage.sync.get('ForumChanges', function (data) {
+  chrome.storage.sync.get("ForumChanges", function (data) {
     $.each(data, function (index, data) {
       $.each(data, function (index, data) {
         $.each(data, function (key, value) {
           switch (key) {
-            case 'ForumChangesForumRatingEnabled': $('#ForumChangesForumRating').prop('checked', value);
+            case "ForumChangesForumRatingEnabled": $("#ForumChangesForumRating").prop('checked', value);
               break;
-            case 'ForumChangesEnhancedSYTEnabled': $('#ForumChangesEnhancedSYT').prop('checked', value);
+            case "ForumChangesEnhancedSYTEnabled": $("#ForumChangesEnhancedSYT").prop('checked', value);
               break;
-            case 'ForumChangesHideClosedEnabled': $('#ForumChangesHideClosed').prop('checked', value);
+            case "ForumChangesHideClosedEnabled": $("#ForumChangesHideClosed").prop('checked', value);
               break;
-            case 'ForumChangesHideForumRatingsEnabled': $('#ForumChangesHideForumRatings').prop('checked', value);
+            case "ForumChangesHideForumRatingsEnabled": $("#ForumChangesHideForumRatings").prop('checked', value);
               break;
-            default: console.log('ERROR: Key not found.');
+            default: console.log("ERROR: Key not found.");
           }
         });
       });
@@ -420,46 +419,46 @@ function loadForumChanges () {
 function savePMChanges () {
   chrome.storage.sync.set({
     PMChanges:
-            [{ 'PMChangesQuoteStripping': $('#PMChangesQuoteStripping').is(':checked') },
-              { 'PMChangesPrettyPMs': $('#PMChangesPrettyPMs').is(':checked') },
-              { 'PMChangesSalutationEnable': $('#PMChangesSalutation').is(':checked') },
-              { 'PMChangesSalutationText': $('#PMChangesSalutationText').val() + '\n\n' },
-              { 'PMChangesSignatureEnable': $('#PMChangesSignature').is(':checked') },
-              { 'PMChangesSignatureText': $('#PMChangesSignatureText').val() },
-              { 'PMChangesTrackingLinksEnable': $('#PMChangesTrackingLinks').is(':checked') }]
+          [{ 'PMChangesQuoteStripping': $("#PMChangesQuoteStripping").is(':checked') },
+            { 'PMChangesPrettyPMs': $("#PMChangesPrettyPMs").is(':checked') },
+            { 'PMChangesSalutationEnable': $("#PMChangesSalutation").is(':checked') },
+            { 'PMChangesSalutationText': $("#PMChangesSalutationText").val() + "\n\n" },
+            { 'PMChangesSignatureEnable': $("#PMChangesSignature").is(':checked') },
+            { 'PMChangesSignatureText': $("#PMChangesSignatureText").val() },
+            { 'PMChangesTrackingLinksEnable': $("#PMChangesTrackingLinks").is(':checked') }]
   }, function () {
     // Save Confirmation
   });
 }
 
 function loadPMChangesDefault () {
-  $('#PMChangesQuoteStripping').prop('checked', true);
-  $('#PMChangesTrackingLinks').prop('checked', true);
-  $('#PMChangesPrettyPMs').prop('checked', true);
+  $("#PMChangesQuoteStripping").prop('checked', true);
+  $("#PMChangesTrackingLinks").prop('checked', true);
+  $("#PMChangesPrettyPMs").prop('checked', true);
 }
 
 function loadPMChanges () {
   // savePMChanges();
-  chrome.storage.sync.get('PMChanges', function (data) {
+  chrome.storage.sync.get("PMChanges", function (data) {
     $.each(data, function (index, data) {
       $.each(data, function (index, data) {
         $.each(data, function (key, value) {
           switch (key) {
-            case 'PMChangesQuoteStripping': $('#PMChangesQuoteStripping').prop('checked', value);
+            case "PMChangesQuoteStripping": $("#PMChangesQuoteStripping").prop('checked', value);
               break;
-            case 'PMChangesPrettyPMs': $('#PMChangesPrettyPMs').prop('checked', value);
+            case "PMChangesPrettyPMs": $("#PMChangesPrettyPMs").prop('checked', value);
               break;
-            case 'PMChangesSalutationEnable': $('#PMChangesSalutation').prop('checked', value);
+            case "PMChangesSalutationEnable": $("#PMChangesSalutation").prop('checked', value);
               break;
-            case 'PMChangesSalutationText': $('#PMChangesSalutationText').val(value);
+            case "PMChangesSalutationText": $("#PMChangesSalutationText").val(value);
               break;
-            case 'PMChangesSignatureEnable': $('#PMChangesSignature').prop('checked', value);
+            case "PMChangesSignatureEnable": $("#PMChangesSignature").prop('checked', value);
               break;
-            case 'PMChangesSignatureText': $('#PMChangesSignatureText').val(value);
+            case "PMChangesSignatureText": $("#PMChangesSignatureText").val(value);
               break;
-            case 'PMChangesTrackingLinksEnable': $('#PMChangesTrackingLinks').prop('checked', value);
+            case "PMChangesTrackingLinksEnable": $("#PMChangesTrackingLinks").prop('checked', value);
               break;
-            default: console.log('ERROR: Key not found.');
+            default: console.log("ERROR: Key not found.");
           }
         });
       });
@@ -471,101 +470,101 @@ function loadPMChanges () {
 function saveImageChanges () {
   chrome.storage.sync.set({
     ImageChanges:
-            [{ 'ImageChangesMaxSizeEnable': $('#ImageChangesMaxSize').is(':checked') },
-              { 'ImageChangesReplaceBrokenEnable': $('#ImageChangesReplaceBroken').is(':checked') },
-              { 'ImageChangesForceHTTPSEnable': $('#ImageChangesForceHTTPS').is(':checked') }]
+          [{ 'ImageChangesMaxSizeEnable': $("#ImageChangesMaxSize").is(':checked') },
+            { 'ImageChangesReplaceBrokenEnable': $("#ImageChangesReplaceBroken").is(':checked') },
+            { 'ImageChangesForceHTTPSEnable': $("#ImageChangesForceHTTPS").is(':checked') }]
   }, function () {
     // Save Confirmation
   });
 }
 
 function loadImageChangesDefault () {
-  $('#ImageChangesMaxSize').prop('checked', true);
+  $("#ImageChangesMaxSize").prop('checked', true);
 }
 
 function loadImageChanges () {
   // saveImageChanges();
-  chrome.storage.sync.get('ImageChanges', function (data) {
+  chrome.storage.sync.get("ImageChanges", function (data) {
     $.each(data, function (index, data) {
       $.each(data, function (index, data) {
         $.each(data, function (key, value) {
           switch (key) {
-            case 'ImageChangesMaxSizeEnable': $('#ImageChangesMaxSize').prop('checked', value);
+            case "ImageChangesMaxSizeEnable": $("#ImageChangesMaxSize").prop('checked', value);
               break;
-            case 'ImageChangesReplaceBrokenEnable': $('#ImageChangesReplaceBroken').prop('checked', value);
+            case "ImageChangesReplaceBrokenEnable": $("#ImageChangesReplaceBroken").prop('checked', value);
               break;
-            case 'ImageChangesForceHTTPSEnable': $('#ImageChangesForceHTTPS').prop('checked', value);
+            case "ImageChangesForceHTTPSEnable": $("#ImageChangesForceHTTPS").prop('checked', value);
               break;
-            default: console.log('ERROR: Key not found.');
+            default: console.log("ERROR: Key not found.");
           }
         });
-        saveImageChanges();
+      });
     });
+    saveImageChanges();
+  });
 }
 
-function savePostOptions() {
-    chrome.storage.sync.set({
-        PostOptions: [{ 'PostOptionsThreadRatingEnable': $("#PostOptionsThreadRating").is(':checked') },
-            { 'PostOptionsPoTEnable': $("#PostOptionsPoT").is(':checked') },
-            { 'PostOptionsThreadsEnable': $("#PostOptionsThreads").is(':checked') },
-            { 'PostOptionsPostsEnable': $("#PostOptionsPosts").is(':checked') },
-            { 'PMChangesPMFromPostEnable': $("#PMChangesPMFromPost").is(':checked') },
-            { 'PMChangesPMFromPostQuote': $("#PMChangesPMFromPostQuote").is(':checked') },
-            { 'AnnoyanceFixerFullscreenYoutubeEnable': $("#AnnoyanceFixerFullscreenYoutube").is(':checked') },
-            { 'AnnoyanceFixerShowBlockedPostsEnable': $("#AnnoyanceFixerShowBlockedPosts").is(':checked') },
-            { 'AnnoyanceFixerHideBlockedPostsEnable': $("#AnnoyanceFixerHideBlockedPosts").is(':checked') },
-            { 'PostOptionsRevertGreenUsernames': $("#RevertGreenUsernameEnable").is(':checked') },
-            { 'AnnoyanceFixerCollapseRelatedThreads': $("#CollapseRelatedThreadsEnable").is(':checked') }]
-    }, function () {
-        // Save Confirmation
-    });
+function savePostOptions () {
+  chrome.storage.sync.set({
+    PostOptions: [{ 'PostOptionsThreadRatingEnable': $("#PostOptionsThreadRating").is(':checked') },
+      { 'PostOptionsPoTEnable': $("#PostOptionsPoT").is(':checked') },
+      { 'PostOptionsThreadsEnable': $("#PostOptionsThreads").is(':checked') },
+      { 'PostOptionsPostsEnable': $("#PostOptionsPosts").is(':checked') },
+      { 'PMChangesPMFromPostEnable': $("#PMChangesPMFromPost").is(':checked') },
+      { 'PMChangesPMFromPostQuote': $("#PMChangesPMFromPostQuote").is(':checked') },
+      { 'AnnoyanceFixerFullscreenYoutubeEnable': $("#AnnoyanceFixerFullscreenYoutube").is(':checked') },
+      { 'AnnoyanceFixerShowBlockedPostsEnable': $("#AnnoyanceFixerShowBlockedPosts").is(':checked') },
+      { 'AnnoyanceFixerHideBlockedPostsEnable': $("#AnnoyanceFixerHideBlockedPosts").is(':checked') },
+      { 'PostOptionsRevertGreenUsernames': $("#RevertGreenUsernameEnable").is(':checked') },
+      { 'AnnoyanceFixerCollapseRelatedThreads': $("#CollapseRelatedThreadsEnable").is(':checked') }]
+  }, function () {
+    // Save Confirmation
+  });
 }
 
-function loadPostOptionsDefault() {
-    $("#PostOptionsThreadRating").prop('checked', true);
-    $("#PostOptionsPoT").prop('checked', true);
-    $("#PostOptionsThreads").prop('checked', true);
-    $("#PostOptionsPosts").prop('checked', true);
-    $("#PMChangesPMFromPost").prop('checked', true);
-    $("#PMChangesPMFromPostQuote").prop('checked', true);
-    $("#AnnoyanceFixerFullscreenYoutube").prop('checked', true);
-    $("#AnnoyanceFixerShowBlockedPosts").prop('checked', true);
-    $("#CollapseRelatedThreadsEnable").prop('checked', true);
+function loadPostOptionsDefault () {
+  $("#PostOptionsThreadRating").prop('checked', true);
+  $("#PostOptionsPoT").prop('checked', true);
+  $("#PostOptionsThreads").prop('checked', true);
+  $("#PostOptionsPosts").prop('checked', true);
+  $("#PMChangesPMFromPost").prop('checked', true);
+  $("#PMChangesPMFromPostQuote").prop('checked', true);
+  $("#AnnoyanceFixerFullscreenYoutube").prop('checked', true);
+  $("#AnnoyanceFixerShowBlockedPosts").prop('checked', true);
+  $("#CollapseRelatedThreadsEnable").prop('checked', true);
 }
 
-function loadPostOptions() {
-    //savePostOptions();
-    chrome.storage.sync.get("PostOptions", function (data) {
-        $.each(data, function (index, data) {
-            $.each(data, function (index, data) {
-                $.each(data, function (key, value) {
-                    switch (key) {
-                        case "PostOptionsThreadRatingEnable": $("#PostOptionsThreadRating").prop('checked', value);
-                            break;
-                        case "PostOptionsPoTEnable": $("#PostOptionsPoT").prop('checked', value);
-                            break;
-                        case "PostOptionsThreadsEnable": $("#PostOptionsThreads").prop('checked', value);
-                            break;
-                        case "PostOptionsPostsEnable": $("#PostOptionsPosts").prop('checked', value);
-                            break;
-                        case "PMChangesPMFromPostEnable": $("#PMChangesPMFromPost").prop('checked', value);
-                            break;
-                        case "PMChangesPMFromPostQuote": $("#PMChangesPMFromPostQuote").prop('checked', value);
-                            break;
-                        case "AnnoyanceFixerFullscreenYoutubeEnable": $("#AnnoyanceFixerFullscreenYoutube").prop('checked', value);
-                            break;
-                        case "AnnoyanceFixerShowBlockedPostsEnable": $("#AnnoyanceFixerShowBlockedPosts").prop('checked', value);
-                            break;
-                        case "AnnoyanceFixerHideBlockedPostsEnable": $("#AnnoyanceFixerHideBlockedPosts").prop('checked', value);
-                            break;
-                        case "PostOptionsRevertGreenUsernames": $("#RevertGreenUsernameEnable").prop('checked', value);
-                            break;
-                        case "AnnoyanceFixerCollapseRelatedThreads": $("#CollapseRelatedThreadsEnable").prop('checked', value);
-                            break;
-                        default: console.log("ERROR: Key not found.");
-                    }
-                })
-            })
+function loadPostOptions () {
+  // savePostOptions();
+  chrome.storage.sync.get("PostOptions", function (data) {
+    $.each(data, function (index, data) {
+      $.each(data, function (index, data) {
+        $.each(data, function (key, value) {
+          switch (key) {
+            case "PostOptionsThreadRatingEnable": $("#PostOptionsThreadRating").prop('checked', value);
+              break;
+            case "PostOptionsPoTEnable": $("#PostOptionsPoT").prop('checked', value);
+              break;
+            case "PostOptionsThreadsEnable": $("#PostOptionsThreads").prop('checked', value);
+              break;
+            case "PostOptionsPostsEnable": $("#PostOptionsPosts").prop('checked', value);
+              break;
+            case "PMChangesPMFromPostEnable": $("#PMChangesPMFromPost").prop('checked', value);
+              break;
+            case "PMChangesPMFromPostQuote": $("#PMChangesPMFromPostQuote").prop('checked', value);
+              break;
+            case "AnnoyanceFixerFullscreenYoutubeEnable": $("#AnnoyanceFixerFullscreenYoutube").prop('checked', value);
+              break;
+            case "AnnoyanceFixerShowBlockedPostsEnable": $("#AnnoyanceFixerShowBlockedPosts").prop('checked', value);
+              break;
+            case "AnnoyanceFixerHideBlockedPostsEnable": $("#AnnoyanceFixerHideBlockedPosts").prop('checked', value);
+              break;
+            case "PostOptionsRevertGreenUsernames": $("#RevertGreenUsernameEnable").prop('checked', value);
+              break;
+            case "AnnoyanceFixerCollapseRelatedThreads": $("#CollapseRelatedThreadsEnable").prop('checked', value);
+              break;
+            default: console.log("ERROR: Key not found.");
+          }
         });
       });
     });
@@ -576,21 +575,21 @@ function loadPostOptions() {
 function saveUserTag () {
   chrome.storage.sync.set({
     UserTag:
-            [{ 'UserTagEnable': $('#UserTagEnable').is(':checked') }]
+          [{ 'UserTagEnable': $("#UserTagEnable").is(':checked') }]
   }, function () {
     // Save Confirmation
   });
 }
 
 function loadUserTag () {
-  chrome.storage.sync.get('UserTag', function (data) {
+  chrome.storage.sync.get("UserTag", function (data) {
     $.each(data, function (index, data) {
       $.each(data, function (index, data) {
         $.each(data, function (key, value) {
           switch (key) {
-            case 'UserTagEnable': $('#UserTagEnable').prop('checked', value);
+            case "UserTagEnable": $("#UserTagEnable").prop('checked', value);
               break;
-            default: console.log('ERROR: Key not found.');
+            default: console.log("ERROR: Key not found.");
           }
         });
       });
@@ -600,19 +599,19 @@ function loadUserTag () {
 }
 
 function loadOnlineSortingDefault () {
-  $('#OnlineSortingEnable').prop('checked', true);
+  $("#OnlineSortingEnable").prop('checked', true);
 }
 
 function loadOnlineSorting () {
   // saveOnlineSorting();
-  chrome.storage.sync.get('OnlineSorting', function (data) {
+  chrome.storage.sync.get("OnlineSorting", function (data) {
     $.each(data, function (index, data) {
       $.each(data, function (index, data) {
         $.each(data, function (key, value) {
           switch (key) {
-            case 'OnlineSortingEnable': $('#OnlineSortingEnable').prop('checked', value);
+            case "OnlineSortingEnable": $("#OnlineSortingEnable").prop('checked', value);
               break;
-            default: console.log('ERROR: Key not found.');
+            default: console.log("ERROR: Key not found.");
           }
         });
       });
@@ -624,29 +623,29 @@ function loadOnlineSorting () {
 function saveOnlineSorting () {
   chrome.storage.sync.set({
     OnlineSorting:
-            [{ 'OnlineSortingEnable': $('#OnlineSortingEnable').is(':checked') }]
+          [{ 'OnlineSortingEnable': $("#OnlineSortingEnable").is(':checked') }]
   }, function () {
     // Save Confirmation
   });
 }
 
 function loadRepChartsDefault () {
-  $('#RepChartsEnable').prop('checked', true);
-  $('#RepChartsLinksEnable').prop('checked', true);
+  $("#RepChartsEnable").prop('checked', true);
+  $("#RepChartsLinksEnable").prop('checked', true);
 }
 
 function loadRepCharts () {
   // saveRepCharts();
-  chrome.storage.sync.get('RepCharts', function (data) {
+  chrome.storage.sync.get("RepCharts", function (data) {
     $.each(data, function (index, data) {
       $.each(data, function (index, data) {
         $.each(data, function (key, value) {
           switch (key) {
-            case 'RepChartsEnable': $('#RepChartsEnable').prop('checked', value);
+            case "RepChartsEnable": $("#RepChartsEnable").prop('checked', value);
               break;
-            case 'RepChartsLinksEnable': $('#RepChartsLinksEnable').prop('checked', value);
+            case "RepChartsLinksEnable": $("#RepChartsLinksEnable").prop('checked', value);
               break;
-            default: console.log('ERROR: Key not found.');
+            default: console.log("ERROR: Key not found.");
           }
         });
       });
@@ -657,8 +656,8 @@ function loadRepCharts () {
 
 function saveRepCharts () {
   chrome.storage.sync.set({RepCharts:
-            [{ 'RepChartsEnable': $('#RepChartsEnable').is(':checked') },
-              { 'RepChartsLinksEnable': $('#RepChartsLinksEnable').is(':checked') }]
+          [{ 'RepChartsEnable': $("#RepChartsEnable").is(':checked') },
+            { 'RepChartsLinksEnable': $("#RepChartsLinksEnable").is(':checked') }]
   }, function () {
     // Save Confirmation
   });
@@ -666,17 +665,17 @@ function saveRepCharts () {
 
 function savePostbitHide () {
   chrome.storage.sync.set({PostbitHide:
-        [{'PostbitHideAvatar': $('#PostbitHideAvatar').is(':checked')},
-          { 'PostbitHideUsertitle': $('#PostbitHideUsertitle').is(':checked') },
-          { 'PostbitHideUserStar': $('#PostbitHideUserStar').is(':checked') },
-          { 'PostbitHideUserBar': $('#PostbitHideUserBar').is(':checked') },
-          {'PostbitHidePrestige': $('#PostbitHidePrestige').is(':checked')},
-          {'PostbitHidePostCount': $('#PostbitHidePostCount').is(':checked')},
-          {'PostbitHideJoinDate': $('#PostbitHideJoinDate').is(':checked')},
-          {'PostbitHideReputation': $('#PostbitHideReputation').is(':checked')},
-          {'PostbitHideWarningLevel': $('#PostbitHideWarningLevel').is(':checked')},
-          {'PostbitHideAwards': $('#PostbitHideAwards').is(':checked')},
-          {'PostbitHideSignature': $('#PostbitHideSignature').is(':checked')}]
+      [{'PostbitHideAvatar': $("#PostbitHideAvatar").is(':checked')},
+        { 'PostbitHideUsertitle': $("#PostbitHideUsertitle").is(':checked') },
+        { 'PostbitHideUserStar': $("#PostbitHideUserStar").is(':checked') },
+        { 'PostbitHideUserBar': $("#PostbitHideUserBar").is(':checked') },
+        {'PostbitHidePrestige': $("#PostbitHidePrestige").is(':checked')},
+        {'PostbitHidePostCount': $("#PostbitHidePostCount").is(':checked')},
+        {'PostbitHideJoinDate': $("#PostbitHideJoinDate").is(':checked')},
+        {'PostbitHideReputation': $("#PostbitHideReputation").is(':checked')},
+        {'PostbitHideWarningLevel': $("#PostbitHideWarningLevel").is(':checked')},
+        {'PostbitHideAwards': $("#PostbitHideAwards").is(':checked')},
+        {'PostbitHideSignature': $("#PostbitHideSignature").is(':checked')}]
   }, function () {
     // Save Confirmation
   });
@@ -687,36 +686,36 @@ function loadPostbitHideDefault () {
 }
 
 function loadPostbitHide () {
-  chrome.storage.sync.get('PostbitHide', function (data) {
+  chrome.storage.sync.get("PostbitHide", function (data) {
     $.each(data, function (index, data) {
       $.each(data, function (index, data) {
         // console.log("1: " + $(this));
         $.each(data, function (key, value) {
           // console.log("2: " + data);
           switch (key) {
-            case 'PostbitHideAvatar': $('#PostbitHideAvatar').prop('checked', value);
+            case "PostbitHideAvatar": $("#PostbitHideAvatar").prop('checked', value);
               break;
-            case 'PostbitHideUsertitle': $('#PostbitHideUsertitle').prop('checked', value);
+            case "PostbitHideUsertitle": $("#PostbitHideUsertitle").prop('checked', value);
               break;
-            case 'PostbitHideUserStar': $('#PostbitHideUserStar').prop('checked', value);
+            case "PostbitHideUserStar": $("#PostbitHideUserStar").prop('checked', value);
               break;
-            case 'PostbitHideUserBar': $('#PostbitHideUserBar').prop('checked', value);
+            case "PostbitHideUserBar": $("#PostbitHideUserBar").prop('checked', value);
               break;
-            case 'PostbitHidePrestige': $('#PostbitHidePrestige').prop('checked', value);
+            case "PostbitHidePrestige": $("#PostbitHidePrestige").prop('checked', value);
               break;
-            case 'PostbitHidePostCount': $('#PostbitHidePostCount').prop('checked', value);
+            case "PostbitHidePostCount": $("#PostbitHidePostCount").prop('checked', value);
               break;
-            case 'PostbitHideJoinDate': $('#PostbitHideJoinDate').prop('checked', value);
+            case "PostbitHideJoinDate": $("#PostbitHideJoinDate").prop('checked', value);
               break;
-            case 'PostbitHideReputation': $('#PostbitHideReputation').prop('checked', value);
+            case "PostbitHideReputation": $("#PostbitHideReputation").prop('checked', value);
               break;
-            case 'PostbitHideWarningLevel': $('#PostbitHideWarningLevel').prop('checked', value);
+            case "PostbitHideWarningLevel": $("#PostbitHideWarningLevel").prop('checked', value);
               break;
-            case 'PostbitHideAwards': $('#PostbitHideAwards').prop('checked', value);
+            case "PostbitHideAwards": $("#PostbitHideAwards").prop('checked', value);
               break;
-            case 'PostbitHideSignature': $('#PostbitHideSignature').prop('checked', value);
+            case "PostbitHideSignature": $("#PostbitHideSignature").prop('checked', value);
               break;
-            default: console.log('ERROR: Key not found.');
+            default: console.log("ERROR: Key not found.");
           }
         });
       });
@@ -727,11 +726,11 @@ function loadPostbitHide () {
 
 function update (element) {
   // 'jscolor' instance can be used as a string
-  $(element).css('background-color', '#' + $(element).val());
+  $(element).css("background-color", "#" + $(element).val());
 }
 
 function resetHFXAlerts () {
-  var resetValue = '';
+  var resetValue = "";
   chrome.storage.sync.set({
     HFXAlert: [{ 'HFXAlertKey': resetValue }]
   }, function () {
