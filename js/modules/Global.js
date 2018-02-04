@@ -330,6 +330,7 @@ function injectBadgesThread (badgeList) {
 }
 
 function searchBadgeList (badgeList, selectingElement, uid) {
+  uid = parseInt(uid); // black magic?
   var testersLink, supportersLink, donatorsLink, contributorsLink;
 
   var testerIcon = chrome.extension.getURL('/images/trophy_testers3.png');
