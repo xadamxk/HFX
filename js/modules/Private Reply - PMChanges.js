@@ -63,6 +63,7 @@ function injectPrettyPMs() {
 }
 
 function prettyPMDisplay(finalArray) {
+    $("#pid_").empty();
     var tempHTML, bubbleList = [], i, user;
     user = getUser();
     bubbleList.push('<table class="fixed" border="0" width=95% align="center" cellpadding="3">');
@@ -198,7 +199,7 @@ function parsePMPretty() {
             tempvar = tempArray.pop();
             authorList.pop();
             finalArray.push(tempvar);
-        } else if (docSplit[i] != "" && docSplit[i].indexOf("<blockquote>") != 0 && docSplit[i].indexOf("<cite>") != 0 && docSplit[i].indexOf("<br>") != 0) {
+        } else if (docSplit[i] != "" && docSplit[i].indexOf("<blockquote") != 0 && docSplit[i].indexOf("<cite>") != 0 && docSplit[i].indexOf("<br>") != 0) {
             if (i >= 1) {
                 if (docSplit[i - 1].indexOf("<span") != 0 || docSplit[i - 1].indexOf('style=') != -1) {
                     tempArray[tempArray.length - 1][2].push(docSplit[i]);
