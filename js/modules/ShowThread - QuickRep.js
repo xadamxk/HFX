@@ -75,7 +75,7 @@ function injectQuickRep() {
                     return;
                 }
                 // ajax call on button click
-                console.log(`UID: ${uid}`);
+                //console.log(`UID: ${uid}`);
                 $.ajax({
                     url: "https://hackforums.net/reputation.php?action=add&uid=" + uid,
                     cache: false,
@@ -136,7 +136,7 @@ function injectQuickRep() {
                         if (!errorFound) {
                             // Rep Row Doesn't Exist
                             if ($("#repContainer").length < 1) {
-                                console.log("...");
+                                //console.log("...");
                                 // Append Rep Container
                                 $(postMessage).append("<div class=\"post_content\" id=\"repContainer\">");
                                 // Append rep reasoning textbox

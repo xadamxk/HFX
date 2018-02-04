@@ -304,8 +304,8 @@ function injectLivePreview() {
         });
 
         // Event Listener - LivePreview 
-        $(".messageEditor, .smilie").on("click input onpropertychange", function () {
-            updatePreview($("#message_new").val(), false, "#livePreview");
+        $("textarea[dir='ltr']").on("click input onpropertychange", function () {
+            updatePreview($("textarea[dir='ltr']").val(), false, "#livePreview");
         });
     }
 }
