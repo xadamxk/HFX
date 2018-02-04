@@ -37,41 +37,47 @@ function injectQuickRep() {
     // Auto Trigger Rep Queue - otherwise only triggers when out of reps
     var queueRep = false; // (Default: false)
     // Global Vars
-    var uidArray = [];
     var ajaxSuccess = false;
     var errorFound = false;
     var my_key, my_uid, my_pid, my_rid, my_repOptions, my_comments, repIndex;
     var repComment, repLink, recipientUsername, recipientUID;
     var queuedUID, queuedAmt, queuedReason;
 
-    const repLimit = "You have already given as many reputation ratings as you are allowed to for today";
-    const repSelf = "You cannot add to your own reputation";
-    const repSelfResp = "You can't rep yourself dumb dumb :P";
+    var queryStrings = {
+        'limit': "You have already given as many reputation ratings as you are allowed to for today",
+        'self': 'You cannot add to your own reputation',
+        'selfresp': "You can't rep yourself, dumb dumb"
+    };
 
-    $(".bitButton[title='Trust Scan']").each(function (index, element) {
+    $(".post").each(function (index, element) {
         //errorFound = false;
-        var tsButton = $(element);
-        var postMessage = tsButton.parents("table.tborder");
+        var jElement = $(element);
+        var buttons = jElement.find(".postbit_buttons");
+        var postMessage = element;
+
         // Grab UID & create button
-        uidArray[index] = parseInt(tsButton.attr("href").split("uid=")[1]);
-        tsButton.parent().append($("<a>").text(repButtonLabel).attr("id", "repButton" + index).css("margin-right","5px").attr("href", "#").addClass("bitButton"));
+        var uid = $(jElement.find(".author_information").find("a")).attr("href").split("uid=")[1];
+
+        buttons.append($("<a>").text(repButtonLabel).attr("id", "repButton" + index).css("margin-right","5px").attr("href", "#").addClass("bitButton"));
 
 
         // Standard Quick Rep
         if (basicQuickRep)
-            $("body").on("click", "#repButton" + index, function () { MyBB.reputation(uidArray[index]); });
+            // needs looking into
+            $("body").on("click", "#repButton" + index, function () { MyBB.reputation(uid); });
             // Integrated Quick Rep
         else {
             $("body").on("click", "#repButton" + index, function (e) {
                 e.preventDefault();
                 // Rep Row Exists
-                if (!$("#repContainerRow").length < 1) {
-                    $("#repContainerRow").remove();
+                if (!$("#repContainer").length < 1) {
+                    $("#repContainer").remove();
                     return;
                 }
                 // ajax call on button click
+                console.log(`UID: ${uid}`);
                 $.ajax({
-                    url: "https://hackforums.net/reputation.php?action=add&uid=" + uidArray[index],
+                    url: "https://hackforums.net/reputation.php?action=add&uid=" + uid,
                     cache: false,
                     success: function (response) {
                         // Check for errors
@@ -79,37 +85,24 @@ function injectQuickRep() {
                         var errorBlock = $(response).find("blockquote").html();
                         var permError = "Permission Error: ";
                         if (errorBlock === undefined) {
-                            if (debug)
+                            if (debug) {
                                 console.log("No permission errors!");
+                            }
+                        } else {
+                            if (errorBlock.includes(queryStrings.self)) {
+                                errorFound = true;
+                                window.alert(permError + queryStrings.selfresp);
+                                return;
+                            } else if (!errorBlock.includes(queryStrings.limit)) {
+                                // Require Upgrade, Rep Disabled, Other?
+                                errorFound = true;
+                                window.alert(permError + errorBlock);
+                                return;
+                            } else if (errorBlock.includes(queryStrings.limit)) {
+                                queueRep = true;
+                            }
                         }
-                            // Rep Limit
-                        else if (errorBlock.includes(repLimit)) {
-                            // Rep Queue logic
-                            my_key = $(response).find('[name=my_post_key]').val();
-                            // UID
-                            my_uid = $(response).find('[name=uid]').val();
-                            // PID
-                            my_pid = $(response).find('[name=pid]').val();
-                            // RID
-                            my_rid = $(response).find('[name=rid]').val();
-                            // Select vals
-                            my_repOptions = $(response).find('[name=reputation]').children();
-                            // Comments
-                            my_comments = $(response).find('[name=comments]').val();
-                            queueRep = true;
-                        }
-                            // Self rep
-                        else if (errorBlock.includes(repSelf)) {
-                            errorFound = true;
-                            window.alert(permError + repSelfResp);
-                            return;
-                        }
-                            // Require Upgrade, Rep Disabled, Other?
-                        else {
-                            errorFound = true;
-                            window.alert(permError + errorBlock);
-                            return;
-                        }
+
                         // No Rep Permission Errors
                         if (!errorFound) {
                             // Grab rep index
@@ -127,6 +120,7 @@ function injectQuickRep() {
                             my_repOptions = $(response).find('[name=reputation]').children();
                             // Comments
                             my_comments = $(response).find('[name=comments]').val();
+                            
                             if (debug) {
                                 console.log("my_key: " + my_key);
                                 console.log("my_uid: " + my_uid);
@@ -141,12 +135,12 @@ function injectQuickRep() {
                         // Shouldn't run if error, but just incase...
                         if (!errorFound) {
                             // Rep Row Doesn't Exist
-                            if ($("#repContainerRow").length < 1) {
+                            if ($("#repContainer").length < 1) {
+                                console.log("...");
                                 // Append Rep Container
-                                $(postMessage).find("#repButton" + index).parent().parent().parent().after($("<tr>").attr("id", "repContainerRow"));
-                                $("#repContainerRow").append("<td>").addClass("trow1");
+                                $(postMessage).append("<div class=\"post_content\" id=\"repContainer\">");
                                 // Append rep reasoning textbox
-                                $("#repContainerRow > td").append($("<input type='text'>").attr("id", "repComment" + index).val(my_comments)
+                                $("#repContainer").append($("<input type='text'>").attr("id", "repComment" + index).val(my_comments)
                                                                               .css("padding", "3px 6px")
                                                                               .css("text-shadow", "1px 1px 0px #000;")
                                                                               .css("background-color", "#072948")
@@ -162,7 +156,7 @@ function injectQuickRep() {
                                                                              ); //.css("", "")
                                 // Selectbox
                                 // Append Rep selection
-                                $("#repContainerRow > td").append($("<select>").attr("id", "repSelect" + index).css("margin-right", "5px").addClass("button"));
+                                $("#repContainer").append($("<select>").attr("id", "repSelect" + index).css("margin-right", "5px").addClass("button"));
                                 // Out of reps - rep queue
                                 if (queueRep) {
                                     // Append rep options based on primary usergroup
@@ -213,7 +207,7 @@ function injectQuickRep() {
                                 var repUserStr = "Rep User";
                                 if (queueRep)
                                     repUserStr = "Queue Rep";
-                                $("#repContainerRow > td").append($("<button>").text(repUserStr).attr("id", "repPost" + index).addClass("button"));
+                                $("#repContainer").append($("<button>").text(repUserStr).attr("id", "repPost" + index).addClass("button"));
                                 // Click event for button
                                 $("body").on("click", "#repPost" + index, function () {
                                     // Check if PM or thread
@@ -259,7 +253,7 @@ function injectQuickRep() {
                                         }
                                         // Remove rep elements
                                         //hideRepElements(postMessage, index);
-                                        $("#repContainerRow").remove();
+                                        $("#repContainer").remove();
                                     }
                                         // Custom comment but too short
                                     else if ($("#repComment" + index).val().length < 11 && $("#repComment" + index).val().length > 0)
@@ -296,7 +290,7 @@ function injectQuickRep() {
                                         }
                                         // Remove rep elements
                                         //hideRepElements(postMessage, index);
-                                        $("#repContainerRow").remove();
+                                        $("#repContainer").remove();
                                     }
                                 });
                             }
@@ -307,6 +301,7 @@ function injectQuickRep() {
         } // else
     }); // each post
 }
+
 // $.Post Reputation call
 function giveRep(index, loc, selectTxt, selectVal, reason, my_key, my_uid, my_pid, my_rid) {
     //window.alert(loc +','+selectTxt+','+selectVal+','+reason);
@@ -393,14 +388,14 @@ function submitRepQuest(index) {
                     console.log("No permission errors!");
             }
                 // Rep Limit
-            else if (errorBlock.includes(repLimit)) {
+            else if (errorBlock.includes(queryStrings.limit)) {
                 errorFound = true;
-                window.alert(permError + repLimit);
+                window.alert(permError + queryStrings.limit);
             }
                 // Self rep
-            else if (errorBlock.includes(repSelf)) {
+            else if (errorBlock.includes(queryStrings.self)) {
                 errorFound = true;
-                window.alert(permError + repSelfResp);
+                window.alert(permError + queryStrings.selfresp);
             }
                 // Require Upgrade, Rep Disabled, Other?
             else {
