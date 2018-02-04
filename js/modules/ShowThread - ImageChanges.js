@@ -44,9 +44,9 @@ function injectImageChanges() {
         }
         // Replace Broken
         if (replaceBrokenEnable) {
-            if($(this).complete && $(this).naturalNeight !== 0){
-                this.src = brokenImageURL;
-            }
+            $("img").on("error", function() {
+                $(this).attr("src", brokenImageURL);
+            });
         }
     });
     
