@@ -58,7 +58,7 @@ class Remind {
         var body = `[b]From:[/b] ${this.author_info.name} ${this.author_info.href} |
 [b]Date/time of message received:[/b] ${this.post_date} |
 [b]PM URL:[/b] ${this.href} |
-[b]PM TItle:[/b] ${this.title}
+[b]PM Ttle:[/b] ${this.title} |
 -----
 ${this.body}`;
         return body;
