@@ -49,16 +49,17 @@ function getGlobalSettings () {
       $.each(data, function (index, data1) {
         $.each(data1, function (index1, data2) {
           $.each(data2, function (key, value) {
+            if (typeof key === undefined || typeof value === undefined) { return; }
             switch (key) {
-              case 'GlobalChangesHideLocationEnabled': if (value) { enableHideLocation = value; }
+              case 'GlobalChangesHideLocationEnabled': enableHideLocation = value;
                 break;
-              case 'GlobalChangesDenyPMReceiptEnabled': if (value) { enableDenyPMReceipt = value; }
+              case 'GlobalChangesDenyPMReceiptEnabled': enableDenyPMReceipt = value;
                 break;
-              case 'GlobalChangesEasyCiteEnabled': if (value) { enableEasyCite = value; }
+              case 'GlobalChangesEasyCiteEnabled': enableEasyCite = value;
                 break;
-              case 'GlobalChangesHFTBEnabled': if (value) { enableHFTB = value; }
+              case 'GlobalChangesHFTBEnabled': enableHFTB = value;
                 break;
-              case 'GlobalChangesHFTBStickyEnabled': if (value) { stickToolbar = value; }
+              case 'GlobalChangesHFTBStickyEnabled': stickToolbar = value;
                 break;
               case 'GlobalChangesHFTBFav1Text': hftbFav1Text = value;
                 break;
@@ -88,21 +89,22 @@ function getGlobalSettings () {
                 break;
               case 'GlobalChangesHFTBFav7Link': hftbFav7Link = value;
                 break;
-              case 'GlobalChangesUserNotes': if (value) { enableUserNote = value; }
+              case 'GlobalChangesUserNotes': enableUserNote = value;
                 break;
-              case 'GlobalChangesNewPostLinks': if (value) { addNewPosts = value; }
+              case 'GlobalChangesNewPostLinks': addNewPosts = value;
                 break;
-              case 'GlobalChangesSFWMode': if (value) { SFWMode = value; }
+              case 'GlobalChangesSFWMode': SFWMode = value;
                 break;
-              case 'GlobalRevertGreenStars': if (value) { revertGreenStars = value; }
+              case 'GlobalRevertGreenStars': revertGreenStars = value;
                 break;
-              case 'GlobalRevertPurpleStars': if (value) { revertPurpleStars = value; }
+              case 'GlobalRevertPurpleStars': revertPurpleStars = value;
                 break;
-              case 'GlobalHFXAlerts': if (value) { hfxAlerts = value; }
+              case 'GlobalHFXAlerts': hfxAlerts = value;
                 break;
-              case 'GlobalUnreadBadgeCount': if (value) { enablePMBadges = value; }
+              case 'GlobalUnreadBadgeCount': enablePMBadges = value;
                 break;
               default: // console.log("ERROR: Key not found.");
+                console.log(key);
                 break;
             }
           });
@@ -154,8 +156,9 @@ function injectGlobalChanges () {
         $.each(data, function (index, data1) {
           $.each(data1, function (index1, data2) {
             $.each(data2, function (key, value) {
+              if (typeof key === undefined || typeof value === undefined) { return; }
               switch (key) {
-                case 'HFXAlertKey': if (value) { savedAlertKey = value; }
+                case 'HFXAlertKey': savedAlertKey = value;
                   break;
                 default: // console.log("ERROR: Key not found.");
                   break;
