@@ -50,7 +50,7 @@ class Remind {
             "pmid": 0,
             "do": "",
             "message": this.getMessageBody(),
-            "to": "Anxuein",
+            "to": $(".welcome strong a").text(),
         };
     }
 
