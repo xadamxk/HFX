@@ -4,7 +4,7 @@ class Remind {
     }
 
     injectRemindButton() {
-        $(".postbit_buttons").append($("<a>").html("<span>Remind Me</span>").attr("id", "remindMe").css("margin-right","5px").attr("href", "#").addClass("remindMeButton"));
+        $($(".postbit_buttons")[0]).append($("<a>").html("<span>Remind Me</span>").attr("id", "remindMe").css("margin-right","5px").attr("href", "#").addClass("remindMeButton"));
     }
 
     getPMAuthorInfo() {
