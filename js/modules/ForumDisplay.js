@@ -12,16 +12,17 @@ function getForumRating () {
       $.each(data, function (index, data1) {
         $.each(data1, function (index1, data2) {
           $.each(data2, function (key, value) {
+            if (typeof key === undefined || typeof value === undefined) { return; }
             switch (key) {
-              case 'ForumChangesForumRatingEnabled': if (value) { enableForumRating = value; }
+              case 'ForumChangesForumRatingEnabled': enableForumRating = value;
                 break;
-              case 'ForumChangesEnhancedSYTEnabled': if (value) { enableEnhancedSYT = value; }
+              case 'ForumChangesEnhancedSYTEnabled': enableEnhancedSYT = value;
                 break;
-              case 'ForumChangesHideClosedEnabled': if (value) { enableHideClosed = value; }
+              case 'ForumChangesHideClosedEnabled': enableHideClosed = value;
                 break;
-              case 'ForumChangesHideForumRatingsEnabled': if (value) { enableHideForumRatings = value; }
+              case 'ForumChangesHideForumRatingsEnabled': enableHideForumRatings = value;
                 break;
-              case 'ForumChangesInfiniscrollForumsEnabled': if (value) { enableInfiniScrollForums = value; }
+              case 'ForumChangesInfiniscrollForumsEnabled': enableInfiniScrollForums = value;
                 break;
               default: // console.log("ERROR: Key not found.");
                 break;

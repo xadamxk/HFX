@@ -20,28 +20,29 @@ function getPostbitHide(){
             $.each(data, function (index, data1) {
                 $.each(data1, function (index1, data2) {
                     $.each(data2, function (key, value) {
+                        if (typeof key === undefined || typeof value === undefined) { return; }
                         switch (key) {
-                            case "PostbitHideAvatar": if (value) { hideAvatar = value }
+                            case "PostbitHideAvatar": hideAvatar = value;
                                 break;
-                            case "PostbitHideUsertitle": if (value) { hideUserTitle = value }
+                            case "PostbitHideUsertitle": hideUserTitle = value;
                                 break;
-                            case "PostbitHideUserStar": if (value) { hideUserStar = value }
+                            case "PostbitHideUserStar": hideUserStar = value;
                                 break;
-                            case "PostbitHideUserBar": if (value) { hideUserBar = value }
+                            case "PostbitHideUserBar": hideUserBar = value;
                                 break;
-                            case "PostbitHidePrestige": if (value) { hidePrestige = value }
+                            case "PostbitHidePrestige": hidePrestige = value;
                                 break;
-                            case "PostbitHidePostCount": if (value) { hidePostCount = value }
+                            case "PostbitHidePostCount": hidePostCount = value;
                                 break;
-                            case "PostbitHideJoinDate": if (value) { hideJoinDate = value }
+                            case "PostbitHideJoinDate": hideJoinDate = value;
                                 break;
-                            case "PostbitHideReputation": if (value) { hideReputation = value }
+                            case "PostbitHideReputation": hideReputation = value;
                                 break;
-                            case "PostbitHideWarningLevel": if (value) { hideWarningLevel = value }
+                            case "PostbitHideWarningLevel": hideWarningLevel = value;
                                 break;
-                            case "PostbitHideAwards": if (value) { hideAwards = value }
+                            case "PostbitHideAwards": hideAwards = value;
                                 break;
-                            case "PostbitHideSignature": if (value) { hideSignature = value }
+                            case "PostbitHideSignature": hideSignature = value;
                                 break;
                             default: //console.log("ERROR: Key not found.");
                                 break;

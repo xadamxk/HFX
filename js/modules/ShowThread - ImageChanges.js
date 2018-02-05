@@ -12,12 +12,13 @@ function getImageChanges() {
             $.each(data, function (index, data1) {
                 $.each(data1, function (index1, data2) {
                     $.each(data2, function (key, value) {
+                        if (typeof key === undefined || typeof value === undefined) { return; }
                         switch (key) {
-                            case "ImageChangesMaxSizeEnable": if (value) { maxSizeEnable = value }
+                            case "ImageChangesMaxSizeEnable": maxSizeEnable = value;
                                 break;
-                            case "ImageChangesReplaceBrokenEnable": if (value) { replaceBrokenEnable = value }
+                            case "ImageChangesReplaceBrokenEnable": replaceBrokenEnable = value;
                                 break;
-                            case "ImageChangesForceHTTPSEnable": if (value) { forceHTTPSEnable = value }
+                            case "ImageChangesForceHTTPSEnable": forceHTTPSEnable = value;
                                 break;
                             default: //console.log("ERROR: Key not found.");
                                 break;

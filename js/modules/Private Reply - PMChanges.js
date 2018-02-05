@@ -15,20 +15,21 @@ function getPMChanges() {
             $.each(data, function (index, data1) {
                 $.each(data1, function (index1, data2) {
                     $.each(data2, function (key, value) {
+                        if (typeof key === undefined || typeof value === undefined) { return; }
                         switch (key) {
-                            case "PMChangesQuoteStripping": if (value) { quoteStripping = value }
+                            case "PMChangesQuoteStripping":  quoteStripping = value
                                 break;
-                            case "PMChangesPrettyPMs": if (value) { prettyPMs = value }
+                            case "PMChangesPrettyPMs":  prettyPMs = value
                                 break;
-                            case "PMChangesSalutationEnable": if (value) { salutationEnable = value }
+                            case "PMChangesSalutationEnable":  salutationEnable = value
                                 break;
-                            case "PMChangesSalutationText": if (salutationEnable) { salutationText = value }
+                            case "PMChangesSalutationText": salutationText = value
                                 break;
-                            case "PMChangesSignatureEnable": if (value) { signatureEnable = value }
+                            case "PMChangesSignatureEnable":  signatureEnable = value
                                 break;
-                            case "PMChangesSignatureText": if (signatureEnable) { signatureText = value }
+                            case "PMChangesSignatureText": signatureText = value
                                 break;
-                            case "PMChangesTrackingLinksEnable": if (value) { trackingLinks = value }
+                            case "PMChangesTrackingLinksEnable": trackingLinks = value
                                 break;
                             default: //console.log("ERROR: Key not found.");
                                 break;

@@ -8,8 +8,9 @@ function enableUserTag() {
             $.each(data, function (index, data1) {
                 $.each(data1, function (index1, data2) {
                     $.each(data2, function (key, value) {
+                        if (typeof key === undefined || typeof value === undefined) { return; }
                         switch (key) {
-                            case "UserTagEnable": if (value) { enableUserTags = value }
+                            case "UserTagEnable": enableUserTags = value
                                 break;
                             default: //console.log("ERROR: Key not found.");
                                 break;

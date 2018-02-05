@@ -21,30 +21,31 @@ function getPostOptions() {
             $.each(data, function (index, data1) {
                 $.each(data1, function (index1, data2) {
                     $.each(data2, function (key, value) {
+                        if (typeof key === undefined || typeof value === undefined) { return; }
                         switch (key) {
-                            case "PostOptionsThreadRatingEnable": if (value) { postOptionsThreadRatingEnable = value }
+                            case "PostOptionsThreadRatingEnable": postOptionsThreadRatingEnable = value;
                                 break;
-                            case "PostOptionsPoTEnable": if (value) { postOptionsPoTEnable = value }
+                            case "PostOptionsPoTEnable": postOptionsPoTEnable = value;
                                 break;
-                            case "PostOptionsThreadsEnable": if (value) { postOptionsThreadsEnable = value }
+                            case "PostOptionsThreadsEnable": postOptionsThreadsEnable = value;
                                 break;
-                            case "PostOptionsPostsEnable": if (value) { postOptionsPostsEnable = value }
+                            case "PostOptionsPostsEnable": postOptionsPostsEnable = value;
                                 break;
-                            case "PMChangesPMFromPostEnable": if (value) { pmChangesPMFromPostEnable = value }
+                            case "PMChangesPMFromPostEnable": pmChangesPMFromPostEnable = value;
                                 break;
-                            case "PMChangesPMFromPostQuote": if (value) { pmChangesPMFromPostShowQuote = value }
+                            case "PMChangesPMFromPostQuote": pmChangesPMFromPostShowQuote = value;
                                 break;
-                            case "AnnoyanceFixerFullscreenYoutubeEnable": if (value) { annoyanceFixerFullScreenYoutubeEnable = value }
+                            case "AnnoyanceFixerFullscreenYoutubeEnable": annoyanceFixerFullScreenYoutubeEnable = value;
                                 break;
-                            case "AnnoyanceFixerShowBlockedPostsEnable": if (value) { annoyanceFixerShowBlockedPostsEnabled = value }
+                            case "AnnoyanceFixerShowBlockedPostsEnable": annoyanceFixerShowBlockedPostsEnabled = value;
                                 break;
-                            case "AnnoyanceFixerHideBlockedPostsEnable": if (value) { annoyanceFixerHideBlockedPostsEnabled = value }
+                            case "AnnoyanceFixerHideBlockedPostsEnable": annoyanceFixerHideBlockedPostsEnabled = value;
                                 break;
-                            case "PostOptionsRevertGreenUsernames": if (value) { revertGreenUsernamesEnable = value }
+                            case "PostOptionsRevertGreenUsernames": revertGreenUsernamesEnable = value;
                                 break;
-                            case "AnnoyanceFixerCollapseRelatedThreads": if (value) { annoyanceFixerCollapseRelatedThreads = value }
+                            case "AnnoyanceFixerCollapseRelatedThreads": annoyanceFixerCollapseRelatedThreads = value;
                                 break;
-                            case "PostOptionsInfiniscrollThreadEnable": if (value) { enableInfiniScrollThreads = value }
+                            case "PostOptionsInfiniscrollThreadEnable": enableInfiniScrollThreads = value;
                                 break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
