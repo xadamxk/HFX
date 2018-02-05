@@ -21,7 +21,7 @@ var hftbFav6Text = '';
 var hftbFav6Link = '';
 var hftbFav7Text = '';
 var hftbFav7Link = '';
-var userNoteInfo;
+var userNoteInfo = [];
 var noteBubbleCSS = {
   'border-radius': '5px',
   'border': '1px solid 888',
@@ -583,6 +583,7 @@ function profileTagger () {
       });
       // ------------------------------------------- PROFILE NOTE HERE ----------------------------------------------------
       // Append Tag
+      console.log(tag);
       $('.largetext strong span')
         .append('&nbsp;')
         .append($('<span>').text(tag).attr('id', 'profileTag')
