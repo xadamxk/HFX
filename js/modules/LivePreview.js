@@ -12,14 +12,15 @@ function getLivePreview() {
             $.each(data, function (index, data1) {
                 $.each(data1, function (index1, data2) {
                     $.each(data2, function (key, value) {
+                        if (typeof key === undefined || typeof value === undefined) { return; }
                         switch (key) {
-                            case "LivePreviewChangesEnabled": if (value) { enableLivePreview = value; }
+                            case "LivePreviewChangesEnabled": enableLivePreview = value;
                                 break;
-                            case "LivePreviewChangesCollapsed": if (value) { collapseLivePreviewByDefault = value; }
+                            case "LivePreviewChangesCollapsed": collapseLivePreviewByDefault = value;
                                 break;
-                            case "GlobalChangesCharacterCounterEnabled": if (value) { characterCounterEnabled = value; }
+                            case "GlobalChangesCharacterCounterEnabled": characterCounterEnabled = value;
                                 break;
-                            case "GlobalChangesLeaveWarning": if (value) { enableLeaveWarning = value; }
+                            case "GlobalChangesLeaveWarning": enableLeaveWarning = value;
                                 break;
                             default: //console.log("ERROR: Key not found.");
                                 break;

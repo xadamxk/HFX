@@ -8,8 +8,9 @@ function enableQuickRep() {
             $.each(data, function (index, data1) {
                 $.each(data1, function (index1, data2) {
                     $.each(data2, function (key, value) {
+                        if (typeof key === undefined || typeof value === undefined) { return; }
                         switch (key) {
-                            case "QuickRepEnabled": if (value) { enableQuickReps = value }
+                            case "QuickRepEnabled": enableQuickReps = value;
                                 break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
