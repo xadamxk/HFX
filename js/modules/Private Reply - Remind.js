@@ -32,7 +32,7 @@ class Remind {
 
     post() {
         $.post("/private.php", this.getPostParams(), function(data, success) {
-            alert("PM sent");
+            this.success();
         });
     }
 
@@ -74,7 +74,7 @@ ${this.body}`;
     }
 
     success() {
-        alert("oioi");
+        alert("PM sent");
     }
 }
 
