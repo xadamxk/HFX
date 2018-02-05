@@ -251,7 +251,8 @@ function saveGlobalChanges() {
             { 'GlobalRevertGreenStars': $("#RevertGreenStarsEnable").is(':checked') },
             { 'GlobalRevertPurpleStars': $("#RevertPurpleStarsEnable").is(':checked') },
             { 'GlobalHFXAlerts': $("#HFXAlertsEnable").is(':checked') },
-            { 'GlobalUnreadBadgeCount': $("#UnreadBadgeCountEnable").is(':checked') }
+            { 'GlobalUnreadBadgeCount': $("#UnreadBadgeCountEnable").is(':checked') },
+            { 'ClosedAccountsRecolor': $("#ClosedAccountsRecolor").is(':checked') }
             ]
         // { '': $("#").val() }
     }, function () {
@@ -276,6 +277,7 @@ function loadGlobalChangesDefault() {
     $("#GlobalChangesHFTBFav4Link").val("https://hackforums.net/private.php?action=tracking");
     $("#HFXAlertsEnable").prop('checked', true);
     $("#UnreadBadgeCountEnable").prop('checked', true);
+    $("#ClosedAccountsRecolor").prop('checked', false);
 }
 
 function loadGlobalChanges() {
@@ -284,6 +286,7 @@ function loadGlobalChanges() {
         $.each(data, function (index, data) {
             $.each(data, function (index, data) {
                 $.each(data, function (key, value) {
+                    console.log(`key: ${key} value: ${value}`);
                     switch (key) {
                         case "GlobalChangesHideLocationEnabled": $("#HideLocation").prop('checked', value);
                             break;
@@ -336,6 +339,8 @@ function loadGlobalChanges() {
                         case "GlobalHFXAlerts": $("#HFXAlertsEnable").prop('checked', value);
                             break;
                         case "GlobalUnreadBadgeCount": $("#UnreadBadgeCountEnable").prop('checked', value);
+                            break;
+                        case "ClosedAccountsRecolor": $("#ClosedAccountsRecolor").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }

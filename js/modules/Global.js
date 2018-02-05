@@ -40,6 +40,8 @@ var revertGreenStars = false;
 var revertPurpleStars = false;
 var hfxAlerts = true;
 var enablePMBadges = false;
+var closedColor = false;
+
 getGlobalSettings();
 
 // Set vars equal to saved settings
@@ -102,6 +104,8 @@ function getGlobalSettings () {
                 break;
               case 'GlobalUnreadBadgeCount': if (value) { enablePMBadges = value; }
                 break;
+              case 'ClosedAccountsRecolor': 
+                closedColor = value;
               default: // console.log("ERROR: Key not found.");
                 break;
             }
@@ -146,6 +150,9 @@ function injectGlobalChanges () {
   }
   if (enablePMBadges) {
     injectPMBadges();
+  }
+  if (closedColor) {
+    processClosedColor();
   }
   if (hfxAlerts) {
     var savedAlertKey = '...';
@@ -1007,6 +1014,14 @@ function notifyMe (Title, Comment, Link) {
     };
     // setTimeout(function() { notification.close(); });
   }
+}
+
+function processClosedColor() {
+  $(".largetext span").each(function() {
+    if ($(this).css("color") === "rgb(56, 56, 56)") {
+      $(this).css("color", "#8a4747");
+    }
+  });
 }
 
 // Credit: https://jsfiddle.net/mushigh/myoskaos/
