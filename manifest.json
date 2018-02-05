@@ -134,6 +134,15 @@
         "js/dependencies/xbbcode.js",
         "js/modules/LivePreview.js"
       ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://hackforums.net/private.php?action=read&pmid=*"
+      ],
+      "js": [
+        "js/modules/Private Reply - Remind.js"
+      ]
     }
   ],
   "permissions": [

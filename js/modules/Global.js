@@ -1025,3 +1025,17 @@ function getType (p) {
   else return 'other';
 }
 */
+
+function isFeatureEnabled(cat, option, cb) {
+  let newstr;
+  chrome.storage.sync.get(cat, function (data) {
+    if (Object.keys(data).length > 0 && typeof data[cat] !== undefined) {
+      for (let key in data[cat]) {
+        if (data[cat][key].hasOwnProperty(option)) {
+          return cb(data[cat][key][option]);
+        }
+      };
+    }
+    return cb(null);
+  });
+}
