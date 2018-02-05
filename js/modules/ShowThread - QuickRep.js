@@ -58,7 +58,7 @@ function injectQuickRep() {
         // Grab UID & create button
         var uid = $(jElement.find(".author_information").find("a")).attr("href").split("uid=")[1];
 
-        buttons.append($("<a>").text(repButtonLabel).attr("id", "repButton" + index).css("margin-right","5px").attr("href", "#").addClass("bitButton"));
+        buttons.append($("<a>").html(`<span>${repButtonLabel}</span>`).attr("id", "repButton" + index).css("margin-right","5px").attr("href", "#").addClass("bitButton"));
 
 
         // Standard Quick Rep

@@ -123,7 +123,6 @@ function loadDefaults() {
     loadOnlineSortingDefault();
     loadRepChartsDefault();
     loadPostbitHideDefault();
-    
 }
 
 function saveLivePreview() {
@@ -438,7 +437,8 @@ function savePMChanges() {
             { 'PMChangesSalutationText': $("#PMChangesSalutationText").val()+"\n\n" },
             { 'PMChangesSignatureEnable': $("#PMChangesSignature").is(':checked') },
             { 'PMChangesSignatureText': $("#PMChangesSignatureText").val() },
-            { 'PMChangesTrackingLinksEnable': $("#PMChangesTrackingLinks").is(':checked') }]
+            { 'PMChangesTrackingLinksEnable': $("#PMChangesTrackingLinks").is(':checked') },
+            { 'PMChangesRemind': $("#PMChangesRemind").is(':checked') }]
     }, function () {
         // Save Confirmation
     });
@@ -448,6 +448,7 @@ function loadPMChangesDefault() {
     $("#PMChangesQuoteStripping").prop('checked', true);
     $("#PMChangesTrackingLinks").prop('checked', true);
     $("#PMChangesPrettyPMs").prop('checked', true);
+    $("#PMChangesRemind").prop('checked', true);
 }
 
 function loadPMChanges() {
@@ -470,6 +471,8 @@ function loadPMChanges() {
                         case "PMChangesSignatureText": $("#PMChangesSignatureText").val(value);
                             break;
                         case "PMChangesTrackingLinksEnable": $("#PMChangesTrackingLinks").prop('checked', value);
+                            break;
+                        case "PMChangesRemind": $("#PMChangesRemind").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }
