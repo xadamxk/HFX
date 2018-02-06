@@ -39,7 +39,7 @@ class Remind {
     getPostParams() {
         return {
             "my_post_key": $('[name="my_post_key"]').attr("value"),
-            "subject": `HFX[Remind Me] ${this.title}`,
+            "subject": `HFX[Remind Me] ${this.title} - ${this.post_date}`,
             "options": {
                 "signature": $('[name="options[signature]"]').attr("value"),
                 "disablesmilies": $('[name="options[disablesmilies]"]').attr("value"),
@@ -55,12 +55,19 @@ class Remind {
     }
 
     getMessageBody() {
-        var body = `[b]From:[/b] ${this.author_info.name} ${this.author_info.href} |
-[b]Date/time of message received:[/b] ${this.post_date} |
-[b]PM URL:[/b] ${this.href} |
-[b]PM Ttle:[/b] ${this.title} |
------
-${this.body}`;
+        // Selectors
+        var authorName = this.author_info.name;
+        var authorLink = this.author_info.href;
+        var messageDate = this.post_date;
+        var pmLink = this.href;
+        var pmTitle = this.title.replace(/^\s+|\s+$/g, ''); // Remove linebreaks
+        var pmBody = this.body;
+
+        // Final Message
+        var body = '[b]From: [/b][url=' + authorLink  + ']' + authorName + '[/url]\n' +
+                '[b]Received: [/b]' + messageDate + '\n' + 
+                '[b]Original PM:[/b] [url=' + pmLink + ']' + pmTitle + '[/url]\n' + 
+                '[hr]' + pmBody;
         return body;
     }
 

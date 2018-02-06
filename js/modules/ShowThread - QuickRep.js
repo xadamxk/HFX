@@ -1,5 +1,5 @@
 var debug = false;
-var enableQuickReps = false;
+var enableQuickReps = true;
 enableQuickRep();
 
 function enableQuickRep() {
@@ -53,7 +53,7 @@ function injectQuickRep() {
     $(".post").each(function (index, element) {
         //errorFound = false;
         var jElement = $(element);
-        var buttons = jElement.find(".postbit_buttons");
+        var buttons = $(jElement.find(".postbit_buttons")[0]);
         var postMessage = element;
 
         // Grab UID & create button

@@ -108,7 +108,7 @@ function getGlobalSettings () {
               case 'ClosedAccountsRecolor': 
                 closedColor = value;
               default: // console.log("ERROR: Key not found.");
-                console.log(key);
+                //console.log(key);
                 break;
             }
           });
