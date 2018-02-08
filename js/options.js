@@ -16,7 +16,7 @@ $(document).ready(function () {
     
     $(".PostbitHide").change(function () {
         savePostbitHide();
-        console.log("PostbitHide Settings Changed!");
+        console.log("PostbitPostOptionsSettings Changed!");
     });
 
     $(".RepCharts").change(function () {
@@ -527,7 +527,9 @@ function savePostOptions() {
             { 'AnnoyanceFixerHideBlockedPostsEnable': $("#AnnoyanceFixerHideBlockedPosts").is(':checked') },
             { 'PostOptionsRevertGreenUsernames': $("#RevertGreenUsernameEnable").is(':checked') },
             { 'AnnoyanceFixerCollapseRelatedThreads': $("#CollapseRelatedThreadsEnable").is(':checked') },
-            { 'PostOptionsInfiniscrollThreadEnable': $("#PostOptionsInfiniscrollThread").is(':checked') }]
+            { 'PostOptionsInfiniscrollThreadEnable': $("#PostOptionsInfiniscrollThread").is(':checked') },
+            { 'AnnoyanceFixerUsersBrowsingToTop': $("#AnnoyanceFixerUsersBrowsingToTop").is(':checked') }
+        ]
     }, function () {
         // Save Confirmation
     });
@@ -543,6 +545,7 @@ function loadPostOptionsDefault() {
     $("#AnnoyanceFixerFullscreenYoutube").prop('checked', true);
     $("#AnnoyanceFixerShowBlockedPosts").prop('checked', true);
     $("#CollapseRelatedThreadsEnable").prop('checked', true);
+    $("#AnnoyanceFixerUsersBrowsingToTop").prop('checked', false);
 }
 
 function loadPostOptions() {
@@ -575,6 +578,8 @@ function loadPostOptions() {
                         case "AnnoyanceFixerCollapseRelatedThreads": $("#CollapseRelatedThreadsEnable").prop('checked', value);
                             break;
                         case "PostOptionsInfiniscrollThreadEnable": $("#PostOptionsInfiniscrollThread").prop('checked', value);
+                            break;
+                        case "AnnoyanceFixerUsersBrowsingToTop": $("#AnnoyanceFixerUsersBrowsingToTop").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }

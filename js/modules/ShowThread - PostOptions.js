@@ -12,6 +12,7 @@ var annoyanceFixerHideBlockedPostsEnabled = false;
 var revertGreenUsernamesEnable = false;
 var annoyanceFixerCollapseRelatedThreads = false;
 var enableInfiniScrollThreads = false;
+var annoyanceFixerUsersBrowsingToTop = false;
 getPostOptions();
 
 // Set vars equal to saved settings
@@ -46,6 +47,8 @@ function getPostOptions() {
                                 break;
                             case "PostOptionsInfiniscrollThreadEnable": if (value) { enableInfiniScrollThreads = value }
                                 break;
+                            case "AnnoyanceFixerUsersBrowsingToTop": if (value) { annoyanceFixerUsersBrowsingToTop = value }
+                                break;
                             default: //console.log("ERROR: Key not found.");
                                 break;
                         }
@@ -68,6 +71,10 @@ function injectPostOptions(){
     // Infiniscroll Threads
     if (enableInfiniScrollThreads){
         injectInfiniScrollThreads();
+    }
+
+    if (annoyanceFixerUsersBrowsingToTop) {
+        usersBrowsingToTop();
     }
     
 }
@@ -414,4 +421,13 @@ function togglePRTCollapseAttr(prtTableRows) {
     } else {
         $("#relatedThreadsCollapse").attr("alt", "[+]").attr("title", "[+]").attr("src", collapseCollapsedImg);
     }
+}
+
+function usersBrowsingToTop() {
+    $(".smalltext").each(function() {
+        if($(this).text().includes("Users browsing")) {
+            $(this).clone().insertBefore($("#posts").closest("table"));
+            $(this).remove();
+        }
+    });
 }
