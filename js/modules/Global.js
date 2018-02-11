@@ -105,8 +105,7 @@ function getGlobalSettings () {
                 break;
               case 'GlobalUnreadBadgeCount': enablePMBadges = value;
                 break;
-              case 'ClosedAccountsRecolor': 
-                closedColor = value;
+              case 'ClosedAccountsRecolor': closedColor = value;
               default: // console.log("ERROR: Key not found.");
                 //console.log(key);
                 break;
@@ -781,7 +780,18 @@ function injectEasyCite () {
   var citationDescripion = $('.navigation').find('.active').text();
   var citationText = citationDescripion;
   // Append Cite Button
-  $('.navigation').append($('<a>').text('Cite').addClass('bitButton').css('cursor', 'pointer').attr('id', 'citeButton')); // .css("background","#333333")
+  var citeButtonCSS = {
+    'display': 'inline-block',
+    'font-size': '14px',
+    'background': '#424242',
+    'color': '#efefef',
+    'padding': '3px 8px',
+    'border-radius': '3px',
+    'border-top': '1px solid rgba(255,255,255,.1)',
+    'margin': '5px 0',
+    'cursor': 'pointer'
+  }
+  $('.navigation').append($('<a>').css(citeButtonCSS).attr('id', 'citeButton').append($("<span>").text('Cite'))); // .css("background","#333333")
   // Profile Awards
   if (location.href.includes('/myawards.php?uid=')) {
     citationDescripion = $('.quick_keys').find("strong:contains('My Awards : ') a").text() + "'s " + $('.navigation').find('.active').text();
@@ -874,11 +884,10 @@ function injectEasyCite () {
   } else if (location.href.includes('/search.php') && !location.href.includes('?action=results')) { // Search Page
     // Append button
     $('form').find('strong:contains(Search in Forum)').append(' ')
-      .append($('<a>')
+      .append($('<a>').css(citeButtonCSS,{'margin-right': '5px' })
+      .append($("<span>")
         .attr({ 'title': 'Cite All Sections', 'href': 'javascript:void(0);', 'id': 'citeAllSections' })
-        .text('Cite')
-        .css({ 'cursor': 'pointer', 'margin-right': '5px' })
-        .addClass('bitButton'));
+        .text('Cite')));
 
     $('#citeAllSections').click(function () {
       // Output
