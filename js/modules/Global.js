@@ -681,7 +681,7 @@ function createStickyHeader () {
   // Append Toolbar
   $('#panel').append($('<div>').attr('id', 'Sticky')
     .css('height', '22px').css('background-color', '#1f1f1f')
-    .css('border-style', 'solid').css('border-color', '#f9f9f9').css('border-width', '0px 0px 1px 0px')
+    .css('border-style', 'solid').css('border-color', '#7b7b7b').css('border-width', '0px 0px 1px 0px')
     .css('align-items', 'center').css('z-index', '100'));
   // ----------------------------------------- LEFT -----------------------------------------
   $('#Sticky').append($('<div>').attr('id', 'leftSticky').addClass('float_left').text('')
@@ -891,7 +891,7 @@ function injectEasyCite () {
 
     $('#citeAllSections').click(function () {
       // Output
-      console.log($('#citeAllSectionsOutput').length === 0);
+      //console.log($('#citeAllSectionsOutput').length === 0);
       if ($('#citeAllSectionsOutput').length === 0) {
         var selectTable = $('form').find('table');
         $('form').after($('<textarea>').val(citeAllSections()).css('width', selectTable.css('width')).attr('id', 'citeAllSectionsOutput')).after('<br>');
@@ -902,7 +902,7 @@ function injectEasyCite () {
   }
   $('#citeButton').click(function (event) {
     var target = $(event.target);
-    if (target.is('a')) {
+    if (target.is('a') || target.is('span')) {
       prompt('Citation: ' + citationDescripion, '[url=' + citationLink + '][b]' + citationText + '[/b][/url]');
     }
   });
