@@ -47,11 +47,15 @@ function injectXMPP(){
 
   // Instantiate Converse
   converse.initialize({
-    bosh_service_url: 'https://conversejs.org/http-bind/', // Please use this connection manager only for testing purposes
-    show_controlbox_by_default: false,
-    auto_reconnect: true,
+    authentication: "login",
+    auto_list_rooms: true,
     auto_join_rooms: [{'jid':'hackforums@im.hacker.im'}],
-    default_domain: "im.hacker.im"
+    //auto_login: true,
+    auto_reconnect: true,
+    bosh_service_url: 'https://conversejs.org/http-bind/', // Please use this connection manager only for testing purposes
+    default_domain: "hacker.im",
+    show_controlbox_by_default: false,
+    muc_nickname_from_jid: true
   });
   
 }
