@@ -41,7 +41,7 @@ function injectXMPP(){
   $('head').append('<link ' + "href='https:\/\/cdn.conversejs.org\/css\/converse.min.css'" + 'rel="stylesheet" type="text/css">');
 
 
-  $("#conversejs, #controlbox, .controlbox-head").css({
+  $(".controlbox-head").css({
     'background-color': '#333 !important'
   });
 
@@ -52,10 +52,11 @@ function injectXMPP(){
     auto_join_rooms: [{'jid':'hackforums@im.hacker.im'}],
     //auto_login: true,
     auto_reconnect: true,
-    bosh_service_url: 'https://conversejs.org/http-bind/', // Please use this connection manager only for testing purposes
+    //bosh_service_url: 'https://conversejs.org/http-bind/', // Please use this connection manager only for testing purposes
     default_domain: "hacker.im",
     show_controlbox_by_default: false,
-    muc_nickname_from_jid: true
+    muc_nickname_from_jid: true,
+    websocket_url: 'https://hacker.im/xmpp-websocket'
   });
   
 }

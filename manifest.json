@@ -117,7 +117,7 @@
         "js/dependencies/jquery-3.2.1.js",
         "js/dependencies/jquery.sticky.js",
         "js/dependencies/jquery.tinybox.js",
-        "js/dependencies/converse.min.js",
+        "js/dependencies/converse.js",
         "js/modules/Global.js",
         "js/modules/CronJob.js",
         "js/modules/XMPP.js"
@@ -151,7 +151,8 @@
   "permissions": [
     "storage",
     "https://raw.githubusercontent.com/xadamxk/HFX/master/Badges.json?nc=*",
-    "https://raw.githubusercontent.com/xadamxk/HFX/master/Alert.json?nc=*"
+    "https://raw.githubusercontent.com/xadamxk/HFX/master/Alert.json?nc=*",
+    "https://hacker.im/xmpp-websocket/*"
   ],
   "omnibox": {
     "keyword": "HF"
