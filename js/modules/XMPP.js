@@ -54,6 +54,7 @@ function injectXMPP(){
     auto_reconnect: true,
     //bosh_service_url: 'https://conversejs.org/http-bind/', // Please use this connection manager only for testing purposes
     default_domain: "hacker.im",
+    debug: true,
     show_controlbox_by_default: false,
     muc_nickname_from_jid: true,
     websocket_url: 'https://hacker.im/xmpp-websocket'
