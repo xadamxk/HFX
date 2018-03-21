@@ -117,7 +117,6 @@
         "js/dependencies/jquery-3.2.1.js",
         "js/dependencies/jquery.sticky.js",
         "js/dependencies/jquery.tinybox.js",
-        "js/dependencies/converse.min.js",
         "js/modules/Global.js",
         "js/modules/CronJob.js",
         "js/modules/XMPP.js"

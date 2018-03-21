@@ -1,5 +1,5 @@
 var debug = false;
-var enableXMPP = true;
+var enableXMPP = false;
 
 getXMPPSettings();
 
@@ -28,7 +28,7 @@ function getXMPPSettings () {
 }
 
 function injectXMPPChanges () {
-  if (enableXMPP || true) {
+  if (enableXMPP) {
     injectXMPP();
   }
 }
