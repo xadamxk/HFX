@@ -225,7 +225,8 @@ function loadSmartQuotes() {
 function saveGlobalChanges() {
     chrome.storage.sync.set({
         GlobalChanges:
-            [{ 'GlobalChangesHideLocationEnabled': $("#HideLocation").is(':checked') },
+            [{ 'GlobalChangesAlertMenuEnabled': $("#GlobalChangesAlertMenu").is(':checked') },
+            { 'GlobalChangesHideLocationEnabled': $("#HideLocation").is(':checked') },
             { 'GlobalChangesDenyPMReceiptEnabled': $("#PMChangesDenyPMReceipt").is(':checked') },
             { 'GlobalChangesEasyCiteEnabled': $("#GlobalChangesEasyCite").is(':checked') },
             { 'GlobalChangesHFTBEnabled': $("#GlobalChangesHFTBEnabled").is(':checked') },
@@ -260,6 +261,7 @@ function saveGlobalChanges() {
 }
 
 function loadGlobalChangesDefault() {
+    $("#GlobalChangesAlertMenu").prop('checked', true);
     $("#HideLocation").prop('checked', true);
     $("#GlobalChangesEasyCite").prop('checked', true);
     $("#GlobalChangesHFTBEnabled").prop('checked', true);
@@ -287,6 +289,8 @@ function loadGlobalChanges() {
                 $.each(data, function (key, value) {
                     console.log(`key: ${key} value: ${value}`);
                     switch (key) {
+                        case "GlobalChangesAlertMenuEnabled": $("#GlobalChangesAlertMenu").prop('checked', value);
+                            break;
                         case "GlobalChangesHideLocationEnabled": $("#HideLocation").prop('checked', value);
                             break;
                         case "GlobalChangesDenyPMReceiptEnabled": $("#PMChangesDenyPMReceipt").prop('checked', value);

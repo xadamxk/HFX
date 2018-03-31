@@ -1,5 +1,5 @@
 // Context menu example: https://stackoverflow.com/a/13783536/2694643
-var debug = false;
+var globalDebug = false;
 var enableHideLocation = false;
 var enableDenyPMReceipt = false;
 var enableEasyCite = true;
@@ -41,11 +41,12 @@ var revertPurpleStars = false;
 var hfxAlerts = true;
 var enablePMBadges = false;
 var closedColor = false;
+var alertMenu = true;
 
 getGlobalSettings();
 
 // Set vars equal to saved settings
-function getGlobalSettings () {
+function getGlobalSettings() {
   chrome.storage.sync.get('GlobalChanges', function (data) {
     if (!chrome.runtime.error) {
       $.each(data, function (index, data1) {
@@ -53,6 +54,8 @@ function getGlobalSettings () {
           $.each(data2, function (key, value) {
             if (typeof key === undefined || typeof value === undefined) { return; }
             switch (key) {
+              case 'GlobalChangesAlertMenuEnabled': alertMenu = value;
+                break;
               case 'GlobalChangesHideLocationEnabled': enableHideLocation = value;
                 break;
               case 'GlobalChangesDenyPMReceiptEnabled': enableDenyPMReceipt = value;
@@ -118,12 +121,15 @@ function getGlobalSettings () {
   });
 }
 
-function injectGlobalChanges () {
+function injectGlobalChanges() {
   if (injectHFXBadge) {
     injectHFXBadges();
   }
   if (enableHideLocation) {
     injectHideLocation();
+  }
+  if (alertMenu) {
+    injectAlertMenu();
   }
   if (enableDenyPMReceipt) {
     injectDenyPMReceipt();
@@ -178,7 +184,7 @@ function injectGlobalChanges () {
   }
 }
 
-function injectPMBadges () {
+function injectPMBadges() {
   // Check, log title?, then check again in 5 mins
   var numPMs = 0;
   if ($('#pm_notice').length > 0) {
@@ -204,13 +210,13 @@ function injectPMBadges () {
   }, interval);
 }
 
-function updateHFXBadge (newBadge) {
+function updateHFXBadge(newBadge) {
   chrome.runtime.sendMessage({ greeting: newBadge.toString() }, function (response) {
     // console.log(response.farewell);
   });
 }
 
-function updateBadgeCount () {
+function updateBadgeCount() {
   // Update this?
   var numPMs = 0;
   var notificationBodyText;
@@ -241,7 +247,7 @@ function updateBadgeCount () {
   return numPMs;
 }
 
-function injectHFXAlerts (savedAlertKey) {
+function injectHFXAlerts(savedAlertKey) {
   // Get saved key (date)
   var loadedAlertKey;
   var loadedAlertValue;
@@ -290,7 +296,7 @@ function injectHFXAlerts (savedAlertKey) {
   }, 'json'); // End get
 }
 
-function injectRevertPurpleStars () {
+function injectRevertPurpleStars() {
   $('img').each(function (index) {
     if ($(this).attr('src').indexOf('/images/blackreign/ub3rstar.gif') !== -1) {
       $(this).attr('src', 'https://hackforums.net/images/blackreign/star.gif');
@@ -298,7 +304,7 @@ function injectRevertPurpleStars () {
   });
 }
 
-function injectRevertGreenStars () {
+function injectRevertGreenStars() {
   $('img').each(function (index) {
     if ($(this).attr('src').indexOf('/images/blackreign/star-d2.png') !== -1) {
       $(this).attr('src', 'https://hackforums.net/images/blackreign/star.gif');
@@ -306,15 +312,15 @@ function injectRevertGreenStars () {
   });
 }
 
-function injectHFXBadges () {
+function injectHFXBadges() {
   if (location.href.includes('/member.php?action=profile&uid=') ||
-        location.href.includes('/showthread.php?tid=') |
-        location.href.includes('/showthread.php?pid=')) {
+    location.href.includes('/showthread.php?tid=') |
+    location.href.includes('/showthread.php?pid=')) {
     readBadgeList();
   }
 }
 
-function injectBadgesProfile (badgeList) {
+function injectBadgesProfile(badgeList) {
   var uid = document.URL.split('uid=')[1];
   // Append HFX Badges row
   $('strong:contains(Awards:)').parent().parent()
@@ -326,7 +332,7 @@ function injectBadgesProfile (badgeList) {
   searchBadgeList(badgeList, selectingElement, uid);
 }
 
-function injectBadgesThread (badgeList) {
+function injectBadgesThread(badgeList) {
   $('.post').each(function (indexPost) {
     var uid = $(this).find('.author_information > strong > span > a').attr('href').match(/\d+/)[0];
     $(this).find($('.author_information:eq(' + indexPost + ') > .smalltext')
@@ -338,7 +344,7 @@ function injectBadgesThread (badgeList) {
   });
 }
 
-function searchBadgeList (badgeList, selectingElement, uid) {
+function searchBadgeList(badgeList, selectingElement, uid) {
   uid = parseInt(uid); // black magic?
   var testersLink, supportersLink, donatorsLink, contributorsLink;
 
@@ -418,7 +424,7 @@ function searchBadgeList (badgeList, selectingElement, uid) {
   });
 }
 
-function readBadgeList () {
+function readBadgeList() {
   // Credit to Emylbus for no cache method
   $.get('https://raw.githubusercontent.com/xadamxk/HFX/master/Badges.json' + '?nc=' + Math.random(), function (responseText) {
     if (location.href.includes('/member.php?action=profile&uid=')) {
@@ -431,7 +437,7 @@ function readBadgeList () {
   }, 'json');
 }
 
-function injectNewPosts () {
+function injectNewPosts() {
   // Search
   if (location.href.includes('/search.php')) {
     if ($("td span strong a:contains('Post')").html().length === 4) {
@@ -439,18 +445,18 @@ function injectNewPosts () {
       $("img[src*='folder'][src*='new']").each(function (i) {
         var $current = $(this).parent().next().next().children().first();
         $current.prepend('<a href="showthread.php?tid=' + $current.html().match(/tid\=(\d*)/)[1] +
-                    '&amp;action=newpost" title="Go to first unread post" class="quick_jump">&#9658;</a>');
+          '&amp;action=newpost" title="Go to first unread post" class="quick_jump">&#9658;</a>');
       });
     }
   } else if (location.href.includes('/index.php') || document.title === 'Hack Forums') { // Main Page
     $("a[href*='action=lastpost']").each(function (i) {
       $(this).before('<a href="showthread.php?tid=' + $(this).attr('href').match(/tid\=(\d*)/)[1] +
-                '&amp;action=newpost" title="Go to first unread post" class="quick_jump">&#9658;</a>&nbsp;');
+        '&amp;action=newpost" title="Go to first unread post" class="quick_jump">&#9658;</a>&nbsp;');
     });
   }
 }
 
-function injectUserNote () {
+function injectUserNote() {
   if (location.href.includes('/member.php?action=profile&uid=')) {
     //
     profileTagger();
@@ -460,7 +466,7 @@ function injectUserNote () {
   }
 }
 
-function threadTagger () {
+function threadTagger() {
   var uid, tag;
   // Get List of Keys/Values
   chrome.storage.sync.get('UserNoteStorage', function (data) {
@@ -510,11 +516,11 @@ function threadTagger () {
   });
 }
 
-function injectSFWMode () {
+function injectSFWMode() {
   $('img').hide();
 }
 
-function tagEditorThread (indexPost) {
+function tagEditorThread(indexPost) {
   var newTag = '', uid, newNameFound = true;
   $('.post').each(function (matchingIndex) {
     if (indexPost === matchingIndex) {
@@ -556,7 +562,7 @@ function tagEditorThread (indexPost) {
   }
 }
 
-function profileTagger () {
+function profileTagger() {
   var tag = 'Click to Add Note', uid;
   uid = document.URL.split('uid=')[1];
   // Get List of Keys/Values
@@ -598,7 +604,7 @@ function profileTagger () {
   });
 }
 
-function tagEditorProfile () {
+function tagEditorProfile() {
   var newTag, uid, newNameFound = true;
   uid = document.URL.split('uid=')[1];
   // Get List of Keys/Values - Loop each saved user note
@@ -632,10 +638,10 @@ function tagEditorProfile () {
   }
 }
 
-function setUserNote (userNoteInfo) {
+function setUserNote(userNoteInfo) {
   var indexesToRemove = [];
   var count = 0;
-  if (debug) { console.log(userNoteInfo); }
+  if (globalDebug) { console.log(userNoteInfo); }
   // Remove empty notes - find indexes
   $(userNoteInfo).each(function (index) {
     if (userNoteInfo[index][1] === '') {
@@ -650,14 +656,14 @@ function setUserNote (userNoteInfo) {
   // Save changes
   chrome.storage.sync.set({
     UserNoteStorage:
-            [{ 'UserNote': userNoteInfo }]
+      [{ 'UserNote': userNoteInfo }]
   }, function () {
     // Save Confirmation
     // console.log(userNoteInfo);
   });
 }
 
-function injectHFTB () {
+function injectHFTB() {
   // Inject font-awesome.css (Thank you: http://www.freeformatter.com/javascript-escape.html)
   $('head').append('<link ' + "href='https:\/\/cdnjs.cloudflare.com\/ajax\/libs\/font-awesome\/4.7.0\/css\/font-awesome.css'" + 'rel="stylesheet" type="text/css">');
   $('head').append('<link ' + "href='https:\/\/cdn.rawgit.com\/xadamxk\/HF-Userscripts\/9bf86deb\/JS%20Libraries\/tinybox.css'" + 'rel="stylesheet" type="text/css">');
@@ -675,7 +681,7 @@ function injectHFTB () {
   checkforCurrentPage();
 }
 
-function createStickyHeader () {
+function createStickyHeader() {
   var headerHeight = '18px';
   var showIconLabels = false;
   // Append Toolbar
@@ -741,7 +747,7 @@ function createStickyHeader () {
   }
 }
 
-function stickStickyHeader () {
+function stickStickyHeader() {
   $(document).ready(function () {
     if (stickToolbar) {
       $('#Sticky').sticky();
@@ -749,7 +755,7 @@ function stickStickyHeader () {
   });
 }
 
-function injectHideLocation () {
+function injectHideLocation() {
   // Credit: Emlybus
   if (document.URL.indexOf('www.') !== -1) {
     $.get('https://www.hackforums.net/misc.php', function () { });
@@ -758,7 +764,7 @@ function injectHideLocation () {
   }
 }
 
-function injectDenyPMReceipt () {
+function injectDenyPMReceipt() {
   if ($('#pm_notice').length > 0) {
     $('#pm_notice div:eq(1)')
       .append($('<a>')
@@ -767,7 +773,7 @@ function injectDenyPMReceipt () {
   }
 }
 
-function injectEasyCite () {
+function injectEasyCite() {
   // Add's color to the username (based on the user's group) when citing a user's profile.
   var profileColors = true; // (Default: true)
   // Add's color to the username (based on the user's group) when citing a user's post.
@@ -884,10 +890,10 @@ function injectEasyCite () {
   } else if (location.href.includes('/search.php') && !location.href.includes('?action=results')) { // Search Page
     // Append button
     $('form').find('strong:contains(Search in Forum)').append(' ')
-      .append($('<a>').css(citeButtonCSS,{'margin-right': '5px' })
-      .append($("<span>")
-        .attr({ 'title': 'Cite All Sections', 'href': 'javascript:void(0);', 'id': 'citeAllSections' })
-        .text('Cite')));
+      .append($('<a>').css(citeButtonCSS, { 'margin-right': '5px' })
+        .append($("<span>")
+          .attr({ 'title': 'Cite All Sections', 'href': 'javascript:void(0);', 'id': 'citeAllSections' })
+          .text('Cite')));
 
     $('#citeAllSections').click(function () {
       // Output
@@ -908,7 +914,7 @@ function injectEasyCite () {
   });
 }
 // Grab all section values function
-function citeAllSections () {
+function citeAllSections() {
   var baseStr = '';
   // Grab values
   $("select[name='forums[]'] option").each(function (index) {
@@ -917,7 +923,7 @@ function citeAllSections () {
   return baseStr;
 }
 
-function getUID () {
+function getUID() {
   var profileLink = '';
   if ($('#panel a:eq(0)').length > 0) { profileLink = $('#panel a:eq(0)').attr('href'); }
   if (profileLink.includes('hackforums.net/member.php?action=profile&uid=')) { profileLink = profileLink.replace(/\D/g, ''); }
@@ -934,7 +940,7 @@ function showBuddyContainer () {
 }
 */
 
-function appendQuickLinks () {
+function appendQuickLinks() {
   if ($('#Sticky').length > 0) {
     // Fav 1
     if (hftbFav1Text && hftbFav1Link) {
@@ -967,7 +973,7 @@ function appendQuickLinks () {
   }
 }
 
-function addSpacersToHeader () {
+function addSpacersToHeader() {
   var iconLabelSpacer = '-';
   // Left
   var numLeftElements = $('#leftSticky a').length;
@@ -994,7 +1000,7 @@ function addSpacersToHeader () {
 }
 
 // Each Quick Link
-function checkforCurrentPage () {
+function checkforCurrentPage() {
   $('.currentLink').each(function (index) {
     if ($(this).attr('href') === window.location.href) {
       $(this).css('color', '#F4B94F');
@@ -1005,7 +1011,7 @@ function checkforCurrentPage () {
 }
 
 // Desktop notifications
-function notifyMe (Title, Comment, Link) {
+function notifyMe(Title, Comment, Link) {
   if (Notification.permission !== 'granted') {
     Notification.requestPermission().then(function () {
       if (Notification.permission !== 'granted') {
@@ -1030,20 +1036,134 @@ function notifyMe (Title, Comment, Link) {
 }
 
 function processClosedColor() {
-  $(".largetext span").each(function() {
+  $(".largetext span").each(function () {
     if ($(this).css("color") === "rgb(56, 56, 56)") {
       $(this).css("color", "#8a4747");
     }
   });
 }
 
+function injectAlertMenu() {
+  if (($(".alerts--new").length > 0) || globalDebug) {
+    var resultTable;
+    // Get Alerts
+    $.ajax({
+      method: "GET",
+      url: "https://hackforums.net/alerts.php"
+    })
+      .done(function (msg) {
+        // Turn result into DOM element rather than array of elements
+        var searchResult = $('<div>').append(msg);
+        // Grab table from results
+        resultTable = $(searchResult).find("#latestAlertsListing").parent().parent().attr('id', 'alertTable');
+        // Append AlertTable to DOM
+        $("#footer").after(resultTable);
+        // Hide appended AlertTable
+        $("#alertTable").hide();
+        // Instanciate Tooltip
+        tippy(".alerts", {
+          // Available v2.3+ - If true, HTML can be injected in the title attribute
+          allowTitleHTML: true,
+          // If true, the tooltip's background fill will be animated (material effect)
+          animateFill: false,
+          // The type of animation to use
+          animation: 'fade', // 'shift-toward', 'fade', 'scale', 'perspective'
+          // Which element to append the tooltip to
+          appendTo: document.body, // Element or Function that returns an element
+          // Whether to display the arrow. Disables the animateFill option
+          arrow: true,
+          // Transforms the arrow element to make it larger, wider, skinnier, offset, etc.
+          arrowTransform: '', // CSS syntax: 'scaleX(0.5)', 'scale(2)', 'translateX(5px)' etc.
+          // The type of arrow. 'sharp' is a triangle and 'round' is an SVG shape
+          arrowType: 'sharp', // 'round'
+          // The tooltip's Popper instance is not created until it is shown for the first
+          // time by default to increase performance
+          createPopperInstanceOnInit: false,
+          // Delays showing/hiding a tooltip after a trigger event was fired, in ms
+          delay: 0, // Number or Array [show, hide] e.g. [100, 500]
+          // How far the tooltip is from its reference element in pixels
+          distance: 10,
+          // The transition duration
+          duration: [350, 300], // Number or Array [show, hide]
+          // If true, whenever the title attribute on the reference changes, the tooltip
+          // will automatically be updated
+          dynamicTitle: false,
+          // If true, the tooltip will flip (change its placement) if there is not enough
+          // room in the viewport to display it
+          flip: false,
+          // The behavior of flipping. Use an array of placement strings, such as
+          // ['right', 'bottom'] for the tooltip to flip to the bottom from the right
+          // if there is not enough room
+          flipBehavior: 'flip', // 'clockwise', 'counterclockwise', Array
+          // Whether to follow the user's mouse cursor or not
+          // followCursor: 'persistent',
+          // Upon clicking the reference element, the tooltip will hide.
+          // Disable this if you are using it on an input for a focus trigger
+          // Use 'persistent' to prevent the tooltip from closing on body OR reference
+          // click
+          hideOnClick: 'persistent', // false, 'persistent'
+          // Specifies that the tooltip should have HTML content injected into it.
+          // A selector string indicates that a template should be cloned, whereas
+          // a DOM element indicates it should be directly appended to the tooltip
+          html: '#alertTable', // 'selector', DOM Element
+          // Adds an inertial slingshot effect to the animation. TIP! Use a show duration
+          // that is twice as long as hide, such as `duration: [600, 300]`
+          inertia: false,
+          // If true, the tooltip becomes interactive and won't close when hovered over
+          // or clicked
+          interactive: true,
+          // Specifies the size in pixels of the invisible border around an interactive
+          // tooltip that prevents it from closing. Useful to prevent the tooltip
+          // from closing from clumsy mouse movements
+          interactiveBorder: 2,
+          // Available v2.2+ - If false, the tooltip won't update its position (or flip)
+          // when scrolling
+          livePlacement: true,
+          // The maximum width of the tooltip. Add units such as px or rem
+          // Avoid exceeding 300px due to mobile devices, or don't specify it at all
+          maxWidth: '500px',
+          // If true, multiple tooltips can be on the page when triggered by clicks
+          multiple: false,
+          // Offsets the tooltip popper in 2 dimensions. Similar to the distance option,
+          // but applies to the parent popper element instead of the tooltip
+          offset: 0, // '50, 20' = 50px x-axis offset, 20px y-axis offset
+          // Callback invoked when the tooltip fully transitions out
+          onHidden(instance) { },
+          // Callback invoked when the tooltip begins to transition out
+          onHide(instance) { },
+          // Callback invoked when the tooltip begins to transition in
+          onShow(instance) { },
+          // Callback invoked when the tooltip has fully transitioned in
+          onShown(instance) { },
+          // The placement of the tooltip in relation to its reference
+          placement: 'bottom', // 'bottom', 'left', 'right', 'top-start', 'top-end', etc.
+          // Popper.js options. Allows more control over tooltip positioning and behavior
+          popperOptions: {},
+          // The size of the tooltip
+          size: 'regular', // 'small', 'large'
+          // If true, the tooltip's position will be updated on each animation frame so
+          // the tooltip will stick to its reference element if it moves
+          sticky: true,
+          // The theme, which is applied to the tooltip element as a class name, i.e.
+          // 'dark-theme'. Add multiple themes by separating each by a space, such as
+          // 'dark custom'
+          theme: 'dark',
+          // The events on the reference element which cause the tooltip to show
+          trigger: 'mouseenter focus', // 'click', 'manual'
+          // The z-index of the popper
+          zIndex: 9999
+        });
+      });
+  }
+}
+
 // Credit: https://jsfiddle.net/mushigh/myoskaos/
-function rgb2hex (rgb) {
+function rgb2hex(rgb) {
   rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
   return (rgb && rgb.length === 4) ? '#' +
-        ('0' + parseInt(rgb[1], 10).toString(16)).slice(-2) +
-        ('0' + parseInt(rgb[2], 10).toString(16)).slice(-2) +
-        ('0' + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
+    ('0' + parseInt(rgb[1], 10).toString(16)).slice(-2) +
+    ('0' + parseInt(rgb[2], 10).toString(16)).slice(-2) +
+    ('0' + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
 }
 /*
 function getType (p) {

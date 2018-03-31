@@ -129,10 +129,10 @@ function rgb2group(rgb) {
     else if (rgb == "rgb(56, 56, 56)" || rgb == "rgb(68, 68, 68)") {
         return "Closed";
     }
-    else if (rgb == "rgb(255, 102, 255)" || rgb == "rgb(255, 62, 171) " || rgb == "rgb(153,153,255)") {
+    else if (rgb == "rgb(255, 102, 255)" || rgb == "rgb(255, 62, 171) " || rgb == "rgb(153,153,255)" || rgb == "rgb(77, 208, 252)") {
         return "Staff"; // admins
     }
-    else if (rgb == "rgb(153, 153, 255)" || rgb == "rgb(191, 80, 255)" || rgb == "rgb(153, 204, 255)") {
+    else if (rgb == "rgb(153, 153, 255)" || rgb == "rgb(191, 80, 255)" || rgb == "rgb(153, 204, 255)" || rgb == "rgb(0, 255, 0)") {
         return "Staff"; // staff
     }
     else {

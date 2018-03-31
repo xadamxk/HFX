@@ -11,8 +11,38 @@ var banCSSBubble = {
   'cursor': 'pointer',
   'text-shadow': 'none'
 };
+if (debug){
+  chrome.storage.sync.set({
+    CronChanges: [{ 'ShsowTrollBan': true }]
+  }, function () {
+    // Save Confirmation
+  });
+}
+getCronSettings();
+function getCronSettings () {
+  chrome.storage.sync.get('CronChanges', function (data) {
+    if (!chrome.runtime.error) {
+      $.each(data, function (index, data1) {
+        $.each(data1, function (index1, data2) {
+          $.each(data2, function (key, value) {
+            if (typeof key === undefined || typeof value === undefined) { return; }
+            switch (key) {
+              case 'ShowTrollBan': enableBanAlert = value;
+              default: // console.log("ERROR: Key not found.");
+                //console.log(key);
+                break;
+            }
+          });
+        });
+        
+      });
+    }
+    injectCronChanges();
+  });
+  
+}
 
-injectCronChanges();
+
 
 
 function injectCronChanges() {
@@ -24,11 +54,28 @@ function injectCronChanges() {
 function injectBanAlert() {
   //
   if (getTrollDate()) {
-    $("#content > .wrapper").prepend($("<div>").addClass("red_alert")
+    $("#content > .wrapper").prepend($("<div>").addClass("red_alert").addClass("HFXBanAlert")
+    .append($("<div>").addClass("float_right")
+    .append($("<a>").addClass("HFXBanAlertDismiss")
+    .append($("<img>").attr('src', chrome.extension.getURL('/images/dismiss_notice.png')))))
       .append($("<strong>").text("Your forum account is currently banned."))
       .append(" Ban Reason: Sharing Accounts")
       .append("<br>")
-      .append("Ban will be lifted: NEVER"));
+      .append("Ban will be lifted: NEVER")
+      .append("<br>")
+      .append($("<a>").append($("<u>").text("For more information, please visit this page"))
+          .attr("href","https://hackforums.net/showthread.php?tid=5817079")));
+      $('.HFXBanAlertDismiss').click(function () {
+        // Fadeout
+        $('.HFXBanAlert').fadeOut('slow', function () {
+        });
+        // Save close
+        chrome.storage.sync.set({
+          CronChanges: [{ 'ShowTrollBan': false }]
+        }, function () {
+          // Save Confirmation
+        });
+      });
   }
 }
 
@@ -77,5 +124,19 @@ function doSelfBan(){
       success: function (msg, statusText, jqhxr) {
           document.write(msg);
       }
+  });
+}
+
+function isFeatureEnabled(cat, option, cb) {
+  let newstr;
+  chrome.storage.sync.get(cat, function (data) {
+    if (Object.keys(data).length > 0 && typeof data[cat] !== undefined) {
+      for (let key in data[cat]) {
+        if (data[cat][key].hasOwnProperty(option)) {
+          return cb(data[cat][key][option]);
+        }
+      };
+    }
+    return cb(null);
   });
 }
