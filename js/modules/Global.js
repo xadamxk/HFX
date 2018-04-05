@@ -1049,15 +1049,32 @@ function injectAlertMenu() {
     // Get Alerts
     $.ajax({
       method: "GET",
-      url: "https://hackforums.net/alerts.php"
+      url: "https://hackforums.net/alerts.php?action=modal&ret_link=" + document.URL
     })
       .done(function (msg) {
         // Turn result into DOM element rather than array of elements
         var searchResult = $('<div>').append(msg);
         // Grab table from results
-        resultTable = $(searchResult).find("#latestAlertsListing").parent().parent().attr('id', 'alertTable');
+        resultTable = $(searchResult).find("#myalerts_alerts_modal").attr('id', 'alertTable');
         // Append AlertTable to DOM
         $("#footer").after(resultTable);
+        // Remove Read Class
+        // $(".alert--read").each(function () {
+        //   $(this).remove();
+        // });
+        // Color Read Class
+        $(".alert--read").children().each(function () {
+          //
+          if ($(this).hasClass("trow1")){
+            //$(this).removeClass("trow1");
+            $(this).css("background","#1F1F1F");
+          }
+          if ($(this).hasClass("trow2")){
+            //$(this).removeClass("trow2");
+            $(this).css("background","#1F1F1F");
+          }
+          $(this).css("background","#1F1F1F");
+        });
         // Hide appended AlertTable
         $("#alertTable").hide();
         // Instanciate Tooltip
