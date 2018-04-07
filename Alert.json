@@ -1,4 +1,4 @@
 ﻿{
-  "AlertKey": "3/31/2018",
-  "AlertValue": "<a href='https://hackforums.net/showthread.php?tid=5817072'><u>HFX Alerts</u></a><br>HFX Version 0.2.2.0 has been pushed to Chrome & Firefox users!<br>Changes include:<br>• Updated OnlineSorting (new staff colors)<br>• Added 'Alert Menu' for the new MyAlerts<br>• When you get an alert, hover over Alerts() to see it in action!<br><a href='https://github.com/xadamxk/HFX/wiki/Changelog'><u>Full HFX Changelog</u></a>"
+  "AlertKey": "4/07/2018",
+  "AlertValue": "<a href='https://hackforums.net/showthread.php?tid=5817072'><u>HFX Alerts</u></a><br>HFX Version 0.2.3.0 has been pushed to Chrome & Firefox users!<br>Changes include:<br>• Updated Alert Menu (no longer dismisses alerts by default)<br>• Added TrustScan Graphs to visualize data on TrustScans.<br>• Remember guys, your ideas keep HFX fresh - keep em coming!<br><a href='https://github.com/xadamxk/HFX/wiki/Changelog'><u>Full HFX Changelog</u></a>"
 }
