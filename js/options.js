@@ -74,6 +74,11 @@ $(document).ready(function () {
         console.log("LivePreview Settings Changed!");
     });
 
+    $(".TrustScan").change(function () {
+        saveTrustScan();
+        console.log("TrustScan Settings Changed!");
+    });
+
     // Color Pickers
     $(".jscolor").change(function () {
         update($(this));
@@ -109,6 +114,7 @@ function loadSettings() {
     loadGlobalChanges();
     loadSmartQuotes();
     loadLivePreview();
+    loadTrustScan();
 }
 
 function loadDefaults() {
@@ -123,6 +129,7 @@ function loadDefaults() {
     loadOnlineSortingDefault();
     loadRepChartsDefault();
     loadPostbitHideDefault();
+    loadTrustScanDefault();
 }
 
 function saveLivePreview() {
@@ -169,9 +176,41 @@ function loadLivePreview() {
     });
 }
 
+function saveTrustScan() {
+    chrome.storage.sync.set({
+        TrustScanChanges:
+            [{ 'TSChartsEnable': $("#TrustScanGraphsEnable").is(':checked') }]
+    }, function () {
+        // Save Confirmation
+    });
+}
+
+function loadTrustScanDefault() {
+    $("#LivePreviewChangesEnable").prop('checked', true);
+}
+
+function loadTrustScan() {
+    //saveLivePreview();
+    chrome.storage.sync.get("TrustScanChanges", function (data) {
+        $.each(data, function (index, data) {
+            $.each(data, function (index, data) {
+                $.each(data, function (key, value) {
+                    switch (key) {
+                        case "TSChartsEnable": $("#TrustScanGraphsEnable").prop('checked', value);
+                            break;
+                        default: console.log("ERROR: Key not found.");
+                    }
+                })
+            })
+
+        });
+        saveTrustScan();
+    });
+}
+
 function saveSmartQuotes() {
     chrome.storage.sync.set({
-        SmartQuoteChanges:
+        TrustScanChanges:
             [{ 'SmartQuotesEnabled': $("#SmartQuotesEnable").is(':checked') },
             { 'SmartQuotesMentionCount': $("#SmartQuotesMentionCount").is(':checked') },
             { 'SmartQuoteColorBody': $("#SmartQuoteColorBody").val() },
