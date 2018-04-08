@@ -440,7 +440,8 @@ function readBadgeList() {
 function injectNewPosts() {
   // Search
   if (location.href.includes('/search.php')) {
-    if ($("td span strong a:contains('Post')").html().length === 4) {
+    var posthtml = $("td span strong a:contains('Post')").html()
+    if (typeof posthtml !== 'undefined' && posthtml.length === 4) {
       // Add New Post Links
       $("img[src*='folder'][src*='new']").each(function (i) {
         var $current = $(this).parent().next().next().children().first();
@@ -797,7 +798,7 @@ function injectEasyCite() {
     'margin': '5px 0',
     'cursor': 'pointer'
   }
-  $('.navigation').append($('<a>').css(citeButtonCSS).attr('id', 'citeButton').append($("<span>").text('Cite'))); // .css("background","#333333")
+  $('.navigation').append($('<a>').css(citeButtonCSS).attr({'id': 'citeButton', title: 'Copied'}).append($("<span>").text('Cite'))); // .css("background","#333333")
   // Profile Awards
   if (location.href.includes('/myawards.php?uid=')) {
     citationDescripion = $('.quick_keys').find("strong:contains('My Awards : ') a").text() + "'s " + $('.navigation').find('.active').text();
@@ -826,10 +827,11 @@ function injectEasyCite() {
       var postMessage = $(this);
       // Grab UID & create button
       $(element).find('.author_buttons').append($('<a>')
-        .attr({ 'title': 'Cite Post', 'id': 'citeButton' + index, 'href': 'javascript:void(0);' })
+        .attr({ 'title': 'Copied', 'id': 'citeButton' + index, 'href': 'javascript:void(0);' })
         .text('Cite')
         .css({ 'cursor': 'pointer', 'margin-right': '5px' })
         .addClass('bitButton'));
+        tippy(`#citeButton${index}`, { 'trigger': 'click' });
       // temp vars
       var tempcitationDescripion;
       var tempcitationLink;
@@ -872,7 +874,7 @@ function injectEasyCite() {
             }
           }
         }
-        prompt('Citation: ' + tempcitationDescripion, '[b][url=' + tempcitationLink + ']' + tempcitationText + '[/url][/b]');
+        copyToClipboard(`[b][url=${tempcitationLink}]${tempcitationText}[/url][/b]`);
       }); // end of posts loop
     });
   } else if (location.href.includes('/misc.php?action=help')) { // Help Docs /myawards.php?awid=
@@ -892,26 +894,25 @@ function injectEasyCite() {
     $('form').find('strong:contains(Search in Forum)').append(' ')
       .append($('<a>').css(citeButtonCSS, { 'margin-right': '5px' })
         .append($("<span>")
-          .attr({ 'title': 'Cite All Sections', 'href': 'javascript:void(0);', 'id': 'citeAllSections' })
+          .attr({ 'title': 'Copied', 'href': 'javascript:void(0);', 'id': 'citeAllSections' })
           .text('Cite')));
 
     $('#citeAllSections').click(function () {
       // Output
       //console.log($('#citeAllSectionsOutput').length === 0);
       if ($('#citeAllSectionsOutput').length === 0) {
-        var selectTable = $('form').find('table');
-        $('form').after($('<textarea>').val(citeAllSections()).css('width', selectTable.css('width')).attr('id', 'citeAllSectionsOutput')).after('<br>');
-        $('#citeAllSectionsOutput').select();
-        // prompt("All Sections:",citeAllSections());
+        copyToClipboard(citeAllSections());
       }
     });
   }
   $('#citeButton').click(function (event) {
     var target = $(event.target);
     if (target.is('a') || target.is('span')) {
-      prompt('Citation: ' + citationDescripion, '[url=' + citationLink + '][b]' + citationText + '[/b][/url]');
+      copyToClipboard(`[url=${citationLink}]${citationText}[/url]`);
     }
   });
+  tippy('#citeButton', { 'trigger': 'click' });
+  tippy('#citeAllSections', { 'trigger': 'click' });
 }
 // Grab all section values function
 function citeAllSections() {
@@ -1203,4 +1204,13 @@ function isFeatureEnabled(cat, option, cb) {
     }
     return cb(null);
   });
+}
+
+function copyToClipboard(text) {
+  var textarea = $('<textarea/>');
+  textarea.text(text);
+  $("body").append(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
 }
