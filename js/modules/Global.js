@@ -42,7 +42,6 @@ var hfxAlerts = true;
 var enablePMBadges = false;
 var closedColor = false;
 var alertMenu = true;
-var hideHFXAwards = false;
 
 getGlobalSettings();
 
@@ -110,9 +109,6 @@ function getGlobalSettings() {
               case 'GlobalUnreadBadgeCount': enablePMBadges = value;
                 break;
               case 'ClosedAccountsRecolor': closedColor = value;
-                break;
-              case 'HideHFXAwards': hideHFXAwards = value;
-                break;
               default: // console.log("ERROR: Key not found.");
                 //console.log(key);
                 break;
@@ -165,10 +161,6 @@ function injectGlobalChanges() {
   if (closedColor) {
     processClosedColor();
   }
-  if (hideHFXAwards) {
-    
-  }
-
   if (hfxAlerts) {
     var savedAlertKey = '...';
     chrome.storage.sync.get('HFXAlert', function (data) {
@@ -321,9 +313,6 @@ function injectRevertGreenStars() {
 }
 
 function injectHFXBadges() {
-  if (hideHFXAwards) {
-    return;
-  }
   if (location.href.includes('/member.php?action=profile&uid=') ||
     location.href.includes('/showthread.php?tid=') |
     location.href.includes('/showthread.php?pid=')) {

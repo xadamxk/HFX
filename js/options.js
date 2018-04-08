@@ -291,8 +291,7 @@ function saveGlobalChanges() {
             { 'GlobalRevertPurpleStars': $("#RevertPurpleStarsEnable").is(':checked') },
             { 'GlobalHFXAlerts': $("#HFXAlertsEnable").is(':checked') },
             { 'GlobalUnreadBadgeCount': $("#UnreadBadgeCountEnable").is(':checked') },
-            { 'ClosedAccountsRecolor': $("#ClosedAccountsRecolor").is(':checked') },
-            { 'HideHFXAwards': $("#HideHFXAwards").is(':checked') }
+            { 'ClosedAccountsRecolor': $("#ClosedAccountsRecolor").is(':checked') }
             ]
         // { '': $("#").val() }
     }, function () {
@@ -319,7 +318,6 @@ function loadGlobalChangesDefault() {
     $("#HFXAlertsEnable").prop('checked', true);
     $("#UnreadBadgeCountEnable").prop('checked', true);
     $("#ClosedAccountsRecolor").prop('checked', false);
-    $("#HideHFXAwards").prop('checked', false);
 }
 
 function loadGlobalChanges() {
@@ -385,8 +383,6 @@ function loadGlobalChanges() {
                         case "GlobalUnreadBadgeCount": $("#UnreadBadgeCountEnable").prop('checked', value);
                             break;
                         case "ClosedAccountsRecolor": $("#ClosedAccountsRecolor").prop('checked', value);
-                            break;
-                        case "HideHFXAwards": $("#HideHFXAwards").prop('checked', value);
                             break;
                         default: console.log("ERROR: Key not found.");
                     }
