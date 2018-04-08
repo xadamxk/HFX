@@ -210,7 +210,7 @@ function injectTSCharts() {
     // Canvas instance
     var hfxTSCanvas = document.getElementById('hfxTSCanvasSummary').getContext('2d');
     // Total rep pie chart
-    var hfxTSChart = new Chart(hfxTSCanvasSummary, {
+    var hfxTSChart = new Chart(hfxTSCanvas, {
         type: 'pie',
         data: {
             labels: ["Weaknesses (" + trustScanListStats.countRed + ")",
