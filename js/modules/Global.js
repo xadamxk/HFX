@@ -582,7 +582,10 @@ function profileTagger() {
         });
       });
       if (userNoteInfo === null || userNoteInfo === '') {
-        userNoteInfo = [['1306528', 'HFX Developer'], ['1', 'Mr. BossMan']];
+        userNoteInfo = [
+          ['1306528', 'HFX Developer'], 
+          ['1', 'Mr. BossMan']
+        ];
       }
       // Loop each saved user note
       $(userNoteInfo).each(function (index) {
@@ -908,7 +911,7 @@ function injectEasyCite() {
   $('#citeButton').click(function (event) {
     var target = $(event.target);
     if (target.is('a') || target.is('span')) {
-      copyToClipboard(`[url=${citationLink}]${citationText}[/url]`);
+      copyToClipboard(`[url=${citationLink}][b]${citationText}[/b][/url]`);
     }
   });
   tippy('#citeButton', { 'trigger': 'click' });
