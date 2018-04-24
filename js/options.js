@@ -13,6 +13,7 @@ $(document).ready(function () {
     $("#HFXVersion").text(chrome.runtime.getManifest().version);
     // Load Default/Saved Settings
     loadSettings();
+    $("#HFXAlertsEnable").prop("checked");
     
     $(".PostbitHide").change(function () {
         savePostbitHide();
@@ -326,7 +327,6 @@ function loadGlobalChanges() {
         $.each(data, function (index, data) {
             $.each(data, function (index, data) {
                 $.each(data, function (key, value) {
-                    console.log(`key: ${key} value: ${value}`);
                     switch (key) {
                         case "GlobalChangesAlertMenuEnabled": $("#GlobalChangesAlertMenu").prop('checked', value);
                             break;

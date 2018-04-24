@@ -161,7 +161,8 @@ function injectGlobalChanges() {
   if (closedColor) {
     processClosedColor();
   }
-  if (hfxAlerts) {
+  // if (hfxAlerts) {
+  if (true) {
     var savedAlertKey = '...';
     chrome.storage.sync.get('HFXAlert', function (data) {
       if (!chrome.runtime.error) {
@@ -583,7 +584,7 @@ function profileTagger() {
       });
       if (userNoteInfo === null || userNoteInfo === '') {
         userNoteInfo = [
-          ['1306528', 'HFX Developer'], 
+          ['1306528', 'HFX Developer'],
           ['1', 'Mr. BossMan']
         ];
       }
@@ -761,11 +762,14 @@ function stickStickyHeader() {
 
 function injectHideLocation() {
   // Credit: Emlybus
-  if (document.URL.indexOf('www.') !== -1) {
-    $.get('https://www.hackforums.net/misc.php', function () { });
-  } else {
-    $.get('https://hackforums.net/misc.php', function () { });
-  }
+  var delayInMilliseconds = 500; //1 second
+  setTimeout(function () {
+    if (document.URL.indexOf('www.') !== -1) {
+      $.get('https://www.hackforums.net/misc.php', function () { });
+    } else {
+      $.get('https://hackforums.net/misc.php', function () { });
+    }
+  }, delayInMilliseconds);
 }
 
 function injectDenyPMReceipt() {
@@ -801,7 +805,7 @@ function injectEasyCite() {
     'margin': '5px 0',
     'cursor': 'pointer'
   }
-  $('.navigation').append($('<a>').css(citeButtonCSS).attr({'id': 'citeButton', title: 'Copied'}).append($("<span>").text('Cite'))); // .css("background","#333333")
+  $('.navigation').append($('<a>').css(citeButtonCSS).attr({ 'id': 'citeButton', title: 'Copied' }).append($("<span>").text('Cite'))); // .css("background","#333333")
   // Profile Awards
   if (location.href.includes('/myawards.php?uid=')) {
     citationDescripion = $('.quick_keys').find("strong:contains('My Awards : ') a").text() + "'s " + $('.navigation').find('.active').text();
@@ -834,7 +838,7 @@ function injectEasyCite() {
         .text('Cite')
         .css({ 'cursor': 'pointer', 'margin-right': '5px' })
         .addClass('bitButton'));
-        tippy(`#citeButton${index}`, { 'trigger': 'click' });
+      tippy(`#citeButton${index}`, { 'trigger': 'click' });
       // temp vars
       var tempcitationDescripion;
       var tempcitationLink;
@@ -1048,7 +1052,7 @@ function processClosedColor() {
 }
 
 function injectAlertMenu() {
-  if (($(".alerts--new").length > 0) || globalDebug) {
+  if (($(".alerts--new").length > 0) || true) {
     var resultTable;
     // Get Alerts
     $.ajax({
@@ -1059,7 +1063,8 @@ function injectAlertMenu() {
         // Turn result into DOM element rather than array of elements
         var searchResult = $('<div>').append(msg);
         // Grab table from results
-        resultTable = $(searchResult).find("#myalerts_alerts_modal").attr('id', 'alertTable');
+        resultTable = $(searchResult).find("#latestAlertsListing").parent().parent().attr('id', 'alertTable');
+        //$("#alertTable").css("border","1px solid black");
         // Append AlertTable to DOM
         $("#footer").after(resultTable);
         // Remove Read Class
@@ -1067,22 +1072,20 @@ function injectAlertMenu() {
         //   $(this).remove();
         // });
         // Color Read Class
-        $(".alert--read").children().each(function () {
-          //
-          if ($(this).hasClass("trow1")){
-            //$(this).removeClass("trow1");
-            $(this).css("background","#1F1F1F");
-          }
-          if ($(this).hasClass("trow2")){
-            //$(this).removeClass("trow2");
-            $(this).css("background","#1F1F1F");
-          }
-          $(this).css("background","#1F1F1F");
-        });
+        // $(".alert--read").children().each(function () {
+        //   //
+        //   if ($(this).hasClass("trow1")){
+        //     $(this).css("background","#1F1F1F");
+        //   }
+        //   if ($(this).hasClass("trow2")){
+        //     $(this).css("background","#1F1F1F");
+        //   }
+        //   $(this).css("background","#1F1F1F");
+        // });
         // Hide appended AlertTable
         $("#alertTable").hide();
         // Instanciate Tooltip
-        tippy(".alerts", {
+        tippy(".myalerts", {
           // Available v2.3+ - If true, HTML can be injected in the title attribute
           allowTitleHTML: true,
           // If true, the tooltip's background fill will be animated (material effect)

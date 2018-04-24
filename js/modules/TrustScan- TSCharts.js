@@ -194,7 +194,7 @@ function injectTSCharts() {
 
     //console.log(trustScanListStats);
     var finalStatsString = "Weaknesses: " + trustScanListStats.countRed;
-    finalStatsString += "\nWarnings: " + trustScanListStats.countYellow;
+    finalStatsString += "\nNotices: " + trustScanListStats.countYellow;
     finalStatsString += "\nStrengths: " + trustScanListStats.countGreen;
     finalStatsString += "\n\nWeighted Points: " + trustScanListStats.totalActual + "/" + trustScanListStats.totalOverall;
     finalStatsString += "\nWeighted Grade: " + parseFloat(Math.round(((trustScanListStats.totalActual / trustScanListStats.totalOverall) * 100) * 100) / 100).toFixed(2) + "%";
@@ -214,7 +214,7 @@ function injectTSCharts() {
         type: 'pie',
         data: {
             labels: ["Weaknesses (" + trustScanListStats.countRed + ")",
-            "Warnings (" + trustScanListStats.countYellow + ")",
+            "Notices (" + trustScanListStats.countYellow + ")",
             "Strengths (" + trustScanListStats.countGreen + ")"],
             datasets: [{
                 backgroundColor: [
