@@ -31,7 +31,7 @@ function onlineSorting() {
     var groupBox = [];
     var groupHeaders = [];
     var groupsContainer = document.createElement("div");
-    var groups = { "Regular": [], "L33T": [], "UB3R": [], "Divined": [], "Custom Groups": [], "Banned": [], "Staff": [], "Closed": [], "Other": [] };
+    var groups = { "Regular": [], "L33T": [], "UB3R": [], "Sociopaths": [], "Divined": [], "Custom Groups": [], "Banned": [], "Staff": [], "Closed": [], "Other": [] };
     var boardStats = document.getElementById("boardstats_e");
     var memberStats = boardStats.getElementsByTagName("tr");
     var memberList = memberStats[1].getElementsByClassName("smalltext");
@@ -125,6 +125,9 @@ function rgb2group(rgb) {
     }
     else if (rgb == "rgb(0, 204, 102)") {
         return "Divined"; // weird green shit
+    }
+    else if (rgb == "rgb(237, 28, 36)") {
+        return "Sociopaths"; // weird red shit
     }
     else if (rgb == "rgb(56, 56, 56)" || rgb == "rgb(68, 68, 68)") {
         return "Closed";
