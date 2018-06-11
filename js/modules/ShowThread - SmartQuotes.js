@@ -8,7 +8,7 @@ var smartQuoteHeaderMatchTextColor = "#000000"; // (Default: #000000)
 
 // Debug
 var debug = false;
-var enableSmartQuote = true;
+var enableSmartQuote = false;
 // Quote Body Colors (Entire Quote Block)
 var smartQuoteBackgroundColor = "#adb1a1"; // (Default: #adb1a1)
 // Notification Text - Username Quoted (Mention text at top of page)
