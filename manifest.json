@@ -42,7 +42,6 @@
         "js/dependencies/jquery-3.2.1.js",
         "js/dependencies/infinite-scroll.pkgd.min.js",
         "js/modules/ShowThread - PostbitHide.js",
-        "js/modules/ShowThread - UserTag.js",
         "js/modules/ShowThread - SmartQuotes.js",
         "js/modules/ShowThread - PostOptions.js",
         "js/modules/ShowThread - ImageChanges.js"
