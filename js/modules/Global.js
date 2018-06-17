@@ -1052,7 +1052,7 @@ function processClosedColor() {
 }
 
 function injectAlertMenu() {
-  if (($(".alerts--new").length > 0) || true) {
+  if (($(".alerts--new").length > 0)) {
     var resultTable;
     // Get Alerts
     $.ajax({

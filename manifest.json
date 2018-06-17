@@ -129,7 +129,9 @@
         "js/dependencies/jquery.tinybox.js",
         "js/dependencies/tippy.all.min.js",
         "js/modules/Global.js",
-        "js/modules/CronJob.js"
+        "js/modules/CronJob.js",
+        "js/dependencies/converse.min.js",
+        "js/modules/XMPP.js"
       ]
     },
     {
