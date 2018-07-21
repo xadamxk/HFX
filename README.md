@@ -106,7 +106,7 @@
 </ul>
 
 <h2>Reviews</h2>
-<ul><li><a href="https://chrome.google.com/webstore/detail/hf-xtension/hcfofmfmidhgbblcnnipcphhegcmdeeb/reviews">70+ Google Chrome Reviews</a></li></ul> 
+<ul><li><a href="https://chrome.google.com/webstore/detail/hf-xtension/hcfofmfmidhgbblcnnipcphhegcmdeeb/reviews">100+ Google Chrome Reviews</a></li></ul> 
 <i>It was fun helping out in the alpha phases of this extension, and I'm really happy that it is close to release. HFX has allowed me to completely uninstall Tampermonkey which makes it a win for me. With the wide variety of features here, I think most everyone will be able to find at least one thing they like.</i> -Aerodactyl<hr>
 <i>This is an amazing addition. It makes browsing the site so much easier, big fan of the quick links on the top toolbar. The quick rep is also becoming a fast favorite as well. 
 I really look forward to what you do with it in the future. Appreciate the time you put into this.</i> -
