@@ -31,7 +31,7 @@ function onlineSorting() {
     var groupBox = [];
     var groupHeaders = [];
     var groupsContainer = document.createElement("div");
-    var groups = { "Regular": [], "L33T": [], "UB3R": [], "Sociopaths": [], "Divined": [], "Custom Groups": [], "Banned": [], "Staff": [], "Closed": [], "Other": [] };
+    var groups = { "Regular": [], "L33T": [], "UB3R": [], "R00T": [], "Sociopaths": [], "Divined": [], "Custom Groups": [], "Banned": [], "Staff": [], "Closed": [], "Other": [] };
     var boardStats = document.getElementById("boardstats_e");
     var memberStats = boardStats.getElementsByTagName("tr");
     var memberList = memberStats[1].getElementsByClassName("smalltext");
@@ -117,11 +117,14 @@ function rgb2group(rgb) {
     else if (rgb == "rgb(239, 239, 239)") {
         return "Regular";
     }
-    else if (rgb == "rgb(153, 255, 0)" || rgb == "rgb(153, 255, 0)" || rgb == "rgb(255, 204, 0)"){
+    else if (rgb == "rgb(153, 255, 0)" || rgb == "rgb(255, 204, 0)"){
         return "L33T";
     }
-    else if (rgb == "rgb(0, 170, 255)" || rgb == "rgb(0, 170, 255)" || rgb == "rgb(0, 102, 255)") {
+    else if (rgb == "rgb(0, 170, 255)" || rgb == "rgb(0, 102, 255)") {
         return "UB3R";
+    }
+    else if (rgb == "rgb(175, 170, 170)") {
+        return "R00T";
     }
     else if (rgb == "rgb(0, 204, 102)") {
         return "Divined"; // weird green shit
