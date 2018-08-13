@@ -8,7 +8,7 @@ var enableRepLinks = false;
 enableRepCharts();
 
 // Set vars equal to saved settings
-function enableRepCharts(){
+function enableRepCharts() {
     chrome.storage.sync.get("RepCharts", function (data) {
         if (!chrome.runtime.error) {
             $.each(data, function (index, data1) {
@@ -49,13 +49,19 @@ function injectRepLinks() {
         // Replace plain text links by hyperlinks
         var replaced_text = $(this).find("span:eq(1)").html().replace(regex, "<a href='$1' target='_blank'>$1</a>");
         $(this).find("span:eq(1)").html(replaced_text);
-        
+
     });
 }
 
 function injectRepCharts() {
+    var selector;
+    if ($(".pagination:eq(0)").length > 0) {
+        selector = $(".pagination:eq(0)").prev();
+    } else {
+        selector = $("#content > div").find(".float_right");
+    }
     // Append repOptions button
-    $(".navigation").next().after($("<div>").addClass("float_left").css({ "padding-bottom": "4px" })
+    selector.before($("<div>").addClass("float_left").css({ "padding-bottom": "4px" })
         .append($("<a>").addClass("button").addClass("rate_user_button").attr("href", "javascript:void(0)")
             .append($("<span>").attr("id", "repOptionsButton"))));
     var posRepTotal;
@@ -73,7 +79,7 @@ function injectRepCharts() {
         neuRepTotal = parseInt($("td > span:contains(All Time)").parent().next().next().find("span").text().replace(/[^\d\.\-]/g, ""));
         negRepTotal = parseInt($("td > span:contains(All Time)").parent().next().next().next().find("span").text().replace(/[^\d\.\-]/g, ""));
     }
-        // Add received button
+    // Add received button
     else if (window.location.href.includes("hackforums.net/repsgiven.php?uid=")) {
         $("#repOptionsButton").text("Reps Received");
         $('#repOptionsButton').click(function () {
@@ -89,7 +95,7 @@ function injectRepCharts() {
 
     // Total Rep
     totRepTotal = (posRepTotal + neuRepTotal + negRepTotal);
-    
+
     // Total Reputation (in box)
     //var totalRep = parseInt($(".smalltext span").text());
 
@@ -124,8 +130,8 @@ function injectRepCharts() {
         type: 'pie',
         data: {
             labels: ["Positives (" + ((posRepTotal / totRepTotal) * 100).toFixed(1) + "%)",
-                     "Neutrals (" + ((neuRepTotal / totRepTotal) * 100).toFixed(1) + "%)",
-                     "Negatives (" + ((negRepTotal / totRepTotal) * 100).toFixed(1) + "%)"],
+            "Neutrals (" + ((neuRepTotal / totRepTotal) * 100).toFixed(1) + "%)",
+            "Negatives (" + ((negRepTotal / totRepTotal) * 100).toFixed(1) + "%)"],
             datasets: [{
                 backgroundColor: [
                     posRepColor,
