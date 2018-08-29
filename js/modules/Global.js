@@ -693,7 +693,8 @@ function createStickyHeader() {
   $('#panel').append($('<div>').attr('id', 'Sticky')
     .css('height', '22px').css('background-color', '#1f1f1f')
     .css('border-style', 'solid').css('border-color', '#7b7b7b').css('border-width', '0px 0px 1px 0px')
-    .css('align-items', 'center').css('z-index', '100'));
+    .css('align-items', 'center').css('z-index', '100')
+    .css('padding-left','20px').css('padding-right','20px'));
   // ----------------------------------------- LEFT -----------------------------------------
   $('#Sticky').append($('<div>').attr('id', 'leftSticky').addClass('float_left').text('')
     .css('padding-left', '5px').css('display', 'block').css('height', headerHeight));
