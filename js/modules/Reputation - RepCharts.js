@@ -75,9 +75,9 @@ function injectRepCharts() {
             window.location.href = window.location.href.replace("reputation.php", "repsgiven.php");
         });
         // Pie Chart
-        posRepTotal = parseInt($("td > span:contains(All Time)").parent().next().find("span").text().replace(/[^\d\.\-]/g, ""));
-        neuRepTotal = parseInt($("td > span:contains(All Time)").parent().next().next().find("span").text().replace(/[^\d\.\-]/g, ""));
-        negRepTotal = parseInt($("td > span:contains(All Time)").parent().next().next().next().find("span").text().replace(/[^\d\.\-]/g, ""));
+        posRepTotal = parseInt($("td > span:contains(All Time):eq(0)").parent().next().find("span").text().replace(/[^\d\.\-]/g, ""));
+        neuRepTotal = parseInt($("td > span:contains(All Time):eq(0)").parent().next().next().find("span").text().replace(/[^\d\.\-]/g, ""));
+        negRepTotal = parseInt($("td > span:contains(All Time):eq(0)").parent().next().next().next().find("span").text().replace(/[^\d\.\-]/g, ""));
     }
     // Add received button
     else if (window.location.href.includes("hackforums.net/repsgiven.php?uid=")) {
@@ -188,19 +188,19 @@ function injectRepCharts() {
 
     // lastRep Pie Chart
     //var weekPos = parseInt($(".tborder tbody tr:eq(2) td table tbody tr td:eq(2) table tbody tr:eq(1) td:eq(1) span").text());
-    var weekPos = parseInt($("td > span:contains(Last week)").parent().next().find("span").text());
-    var weekNeu = parseInt($("td > span:contains(Last week)").parent().next().next().find("span").text());
-    var weekNeg = parseInt($("td > span:contains(Last week)").parent().next().next().next().find("span").text());
+    var weekPos = parseInt($("td > span:contains(Last week):eq(0)").parent().next().find("span").text());
+    var weekNeu = parseInt($("td > span:contains(Last week):eq(0)").parent().next().next().find("span").text());
+    var weekNeg = parseInt($("td > span:contains(Last week):eq(0)").parent().next().next().next().find("span").text());
     var weekTot = (weekPos + weekNeu + weekNeg);
-    var monthPos = parseInt($("td > span:contains(Last month)").parent().next().find("span").text());
-    var monthNeu = parseInt($("td > span:contains(Last month)").parent().next().next().find("span").text());
-    var monthNeg = parseInt($("td > span:contains(Last month)").parent().next().next().next().find("span").text());
+    var monthPos = parseInt($("td > span:contains(Last month):eq(0)").parent().next().find("span").text());
+    var monthNeu = parseInt($("td > span:contains(Last month):eq(0)").parent().next().next().find("span").text());
+    var monthNeg = parseInt($("td > span:contains(Last month):eq(0)").parent().next().next().next().find("span").text());
     var monthTot = (monthPos + monthNeu + monthNeg);
-    var sixmonthPos = parseInt($("td > span:contains(Last 6 months)").parent().next().find("span").text());
-    var sixmonthNeu = parseInt($("td > span:contains(Last 6 months)").parent().next().next().find("span").text());
-    var sixmonthNeg = parseInt($("td > span:contains(Last 6 months)").parent().next().next().next().find("span").text());
+    var sixmonthPos = parseInt($("td > span:contains(Last 6 months):eq(0)").parent().next().find("span").text());
+    var sixmonthNeu = parseInt($("td > span:contains(Last 6 months):eq(0)").parent().next().next().find("span").text());
+    var sixmonthNeg = parseInt($("td > span:contains(Last 6 months):eq(0)").parent().next().next().next().find("span").text());
     var sixmonthTot = (sixmonthPos + sixmonthNeu + sixmonthNeg);
-    if (debug) {
+    if (true) {
         console.log("Week Vals: " + weekPos + ", " + weekNeu + ", " + weekNeg + ", " + weekTot);
         console.log("Month Vals: " + monthPos + ", " + monthNeu + ", " + monthNeg + ", " + monthTot);
         console.log("Six Month Vals: " + sixmonthPos + ", " + sixmonthNeu + ", " + sixmonthNeg + ", " + sixmonthTot);
