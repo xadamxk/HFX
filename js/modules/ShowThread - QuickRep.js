@@ -42,7 +42,7 @@ function injectQuickRep() {
     var errorFound = false;
     var my_key, my_uid, my_pid, my_rid, my_repOptions, my_comments, repIndex;
     var repComment, repLink, recipientUsername, recipientUID;
-    var queuedUID, queuedAmt, queuedReason;
+ //   var queuedUID, queuedAmt, queuedReason;
 
     var queryStrings = {
         'limit': "You have already given as many reputation ratings as you are allowed to for today",
@@ -59,7 +59,7 @@ function injectQuickRep() {
         // Grab UID & create button
         var uid = $(jElement.find(".author_information").find("a")).attr("href").split("uid=")[1];
 
-        buttons.append($("<a>").html(`<span>${repButtonLabel}</span>`).attr("id", "repButton" + index).css("margin-right","5px").attr("href", "#").addClass("bitButton"));
+        buttons.append($("<a>").text(repButtonLabel).attr("id", "repButton" + index).css("margin-right","5px").attr("href", "#").addClass("bitButton"));
 
 
         // Standard Quick Rep

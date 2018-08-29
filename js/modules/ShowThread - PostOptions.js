@@ -291,7 +291,7 @@ function enablePostOptions() {
         if (pmChangesPMFromPostEnable) {
             // Check for PM button?
             var postLink;
-            var threadTitle = $(".navigation").find(".active").text();
+            var threadTitle = $('.breadcrumb').find('a').last().text();
             // Include quote in message body
             var pmFromPostQuoteText = "";
             var pmFromPostQuotePID = "";
