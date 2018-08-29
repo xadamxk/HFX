@@ -791,30 +791,33 @@ function injectEasyCite() {
   // ------------------------------ ON PAGE LOAD ------------------------------
   // Default
   var citationLink = location.href;
-  var citationDescripion = $('.navigation').find('.active').text();
+  var citationDescripion = $('.breadcrumb').find('a').last().text();
   var citationText = citationDescripion;
   // Append Cite Button
   var citeButtonCSS = {
-    'display': 'inline-block',
-    'font-size': '14px',
-    'background': '#424242',
-    'color': '#efefef',
-    'padding': '3px 8px',
-    'border-radius': '3px',
-    'border-top': '1px solid rgba(255,255,255,.1)',
-    'margin': '5px 0',
-    'cursor': 'pointer'
+    // 'display': 'inline-block',
+    // 'font-size': '14px',
+    // 'background': '#424242',
+    // 'color': '#efefef',
+    // 'padding': '3px 8px',
+    // 'border-radius': '3px',
+    // 'border-top': '1px solid rgba(255,255,255,.1)',
+    // 'margin': '5px 0',
+    // 'cursor': 'pointer'
   }
-  $('.navigation').append($('<a>').css(citeButtonCSS).attr({ 'id': 'citeButton', title: 'Copied' }).append($("<span>").text('Cite'))); // .css("background","#333333")
+  $('.breadcrumb').find("a").last().attr({ 'id': 'citeButton', title: 'Copied', 'href': 'javascript:void()' }); // .css("background","#333333")
   // Profile Awards
   if (location.href.includes('/myawards.php?uid=')) {
-    citationDescripion = $('.quick_keys').find("strong:contains('My Awards : ') a").text() + "'s " + $('.navigation').find('.active').text();
+    citationDescripion = $('#content').find("strong:contains('My Awards : ') a").text() + "'s " + citationDescripion;
     citationText = citationDescripion;
-  } else if (location.href.includes('/forumdisplay.php?fid=')) { // Sections
-    citationDescripion = $('.navigation').find('.active').text() + ' Section';
+  } else if (location.href.includes('/trustscan.php?uid=')) {
+    citationDescripion = $('#content').find("strong:contains('Trust Scan of ') a").text() + "'s " + citationDescripion;
+    citationText = citationDescripion;
+  }else if (location.href.includes('/forumdisplay.php?fid=')) { // Sections
+    citationDescripion = citationDescripion + ' Section';
     citationText = citationDescripion;
   } else if (location.href.includes('/member.php?action=profile')) { // Profiles
-    citationDescripion = $('.navigation').find('.active').text().replace('Profile of ', '');
+    citationDescripion = citationDescripion.replace('Profile of ', '');
     if (profileColors) { citationText = '[color=' + rgb2hex($('fieldset').find('.largetext strong span').css('color')) + ']' + citationDescripion + '[/color]'; } else { citationText = +citationDescripion; }
   } else if (location.href.includes('/showthread.php?tid=') | location.href.includes('/showthread.php?pid=')) { // Threads
     // Thread - not first post
@@ -825,7 +828,7 @@ function injectEasyCite() {
     if (location.href.includes('&page=')) { // Thread - not first page
       citationLink = location.href.substring(0, location.href.indexOf('&page='));
     }
-    citationText = $('.navigation').find('.active').text();
+    citationText = citationDescripion;
     citationDescripion = citationText;
     // Posts - each post bit on page
     $('.post').each(function (index, element) {
@@ -850,10 +853,10 @@ function injectEasyCite() {
         // If first post
         if ($('.post_head:eq(' + index + ') > .float_right:eq(0) > strong > a').text() === ('#1')) {
           tempcitationLink = 'https://hackforums.net/' + $('.post_head:eq(' + index + ') > .float_right:eq(0) > strong > a').attr('href');
-          // console.log(tempcitationLink);
-          tempcitationDescripion = $('.navigation').find('.active').text() + ' by ' + $('.author_information:eq(' + index + ') strong span a span').text();
+           console.log(tempcitationLink);
+          tempcitationDescripion = $('.breadcrumb').find('a').last().text() + ' by ' + $('.author_information:eq(' + index + ') strong span a span').text();
           // console.log(tempcitationDescripion);
-          tempcitationText = $('.navigation').find('.active').text() + '[/b][/url] by [b][url=' + $('.author_information:eq(' + index + ') strong span a').attr('href') + ']' + $('.author_information:eq(' + index + ') strong span a span').text();
+          tempcitationText = $('.breadcrumb').find('a').last().text() + '[/b][/url] by [b][url=' + $('.author_information:eq(' + index + ') strong span a').attr('href') + ']' + $('.author_information:eq(' + index + ') strong span a span').text();
           // console.log(tempcitationText);
         } else if ($('.post_head:eq(' + index + ') > .float_right:eq(0) > strong > a').text().includes('#')) { // Every other post
           tempcitationLink = 'https://hackforums.net/' + $('.post_head:eq(' + index + ') > .float_right:eq(0) > strong > a').attr('href');
@@ -885,16 +888,16 @@ function injectEasyCite() {
       }); // end of posts loop
     });
   } else if (location.href.includes('/misc.php?action=help')) { // Help Docs /myawards.php?awid=
-    citationDescripion = 'Help Documents - ' + $('.navigation').find('.active').text();
+    citationDescripion = 'Help Documents - ' + citationText;
     citationText = citationDescripion;
   } else if (location.href.includes('/disputedb.php')) { // Deal Dispute
-    citationDescripion = 'Deal Dispute - ' + $('.navigation').find('.active').text();
+    citationDescripion = 'Deal Dispute - ' + citationText;
     citationText = citationDescripion;
   } else if (location.href.includes('/reputation.php?uid=') || location.href.includes('/repsgiven.php?uid=')) { // Reputation Report
-    citationDescripion = $('#content').find("strong:contains('Reputation Report for')").text().replace('Reputation Report for ', '') + " 's " + $('.navigation').find('.active').text();
+    citationDescripion = $('#content').find("strong:contains('Reputation Report for')").text().replace('Reputation Report for ', '') + " 's " + citationText;
     citationText = citationDescripion;
   } else if (location.href.includes('/search.php?action=results')) { // Search Page Results
-    citationDescripion = '' + $('.navigation').find('.active').text();
+    citationDescripion = '' + citationText;
     citationText = citationDescripion;
   } else if (location.href.includes('/search.php') && !location.href.includes('?action=results')) { // Search Page
     // Append button
