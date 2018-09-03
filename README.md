@@ -12,10 +12,10 @@
     <img src="https://github.com/xadamxk/HF-Userscripts/blob/master/Avatars-Signatures/browser%20icons/chrome.png?raw=true" title="Download for Chrome"  />
   </a>
   <a align="center" href="https://addons.mozilla.org/en-US/firefox/addon/hfx/">
-    <img src="https://github.com/xadamxk/HF-Userscripts/blob/master/Avatars-Signatures/browser%20icons/firefox.png?raw=true" width="165" height="62" title="Download for FireFox"  />
+    <img src="https://github.com/xadamxk/HF-Userscripts/blob/master/Avatars-Signatures/browser%20icons/firefox.png?raw=true" title="Download for FireFox"  />
   </a>
   <a align="center" href="https://github.com/xadamxk/HFX/wiki/Installing-HFX-on-Opera-Browser">
-    <img src="https://github.com/xadamxk/HF-Userscripts/blob/master/Avatars-Signatures/browser%20icons/opera.png?raw=true" width="206" height="62" title="Download for Opera"  />
+    <img src="https://github.com/xadamxk/HF-Userscripts/blob/master/Avatars-Signatures/browser%20icons/opera.png?raw=true" title="Download for Opera"  />
   </a>
   <br>
 </div>
