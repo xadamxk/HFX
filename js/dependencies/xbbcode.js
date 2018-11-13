@@ -21,6 +21,9 @@ THE SOFTWARE.
 */
 
 /*
+    Source: https://github.com/patorjk/Extendible-BBCode-Parser
+    Edited by: Adam Koewler
+    
     Extendible BBCode Parser v1.0.0
     By Patrick Gillespie (patorjk@gmail.com)
     Website: http://patorjk.com/
