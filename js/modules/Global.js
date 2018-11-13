@@ -244,7 +244,6 @@ function updateBadgeCount() {
     // Log something to it only sends once
     notifyMe(titleString, notificationBodyText, notificationBodyLink);
   }
-  // console.log("Number of unread PM's: "+numPMs);
   return numPMs;
 }
 
@@ -261,13 +260,15 @@ function injectHFXAlerts(savedAlertKey) {
         loadedAlertValue = value1;
       }
     });
+    // Sanitize alert html
+    var cleanLoadedAlertValue = DOMPurify.sanitize(loadedAlertValue, { SAFE_FOR_JQUERY: true });
     // Display alert
     if (savedAlertKey !== loadedAlertKey) {
       $('#content').prepend($('<div>').addClass('HFXAlert').attr('id', 'HFXAlert')
         .append($('<div>').addClass('float_right').attr('id', 'DismissHFXAlert')
           .append($('<a>').attr('href', 'javascript:void(0);')
             .append($('<img>').attr('src', chrome.extension.getURL('/images/dismiss_notice.png')).attr('title', 'Dismiss HFX Alert'))))
-        .append($('<div>').append($('<b>').append(loadedAlertValue)))
+        .append($('<div>').append($('<b>').append(cleanLoadedAlertValue)))
       );
       // Alert CSS
       $('#HFXAlert').css({
@@ -1068,24 +1069,6 @@ function injectAlertMenu() {
         var searchResult = $('<div>').append(msg);
         // Grab table from results
         resultTable = $(searchResult).find("#latestAlertsListing").parent().parent().attr('id', 'alertTable');
-        //$("#alertTable").css("border","1px solid black");
-        // Append AlertTable to DOM
-        $("#footer").after(resultTable);
-        // Remove Read Class
-        // $(".alert--read").each(function () {
-        //   $(this).remove();
-        // });
-        // Color Read Class
-        // $(".alert--read").children().each(function () {
-        //   //
-        //   if ($(this).hasClass("trow1")){
-        //     $(this).css("background","#1F1F1F");
-        //   }
-        //   if ($(this).hasClass("trow2")){
-        //     $(this).css("background","#1F1F1F");
-        //   }
-        //   $(this).css("background","#1F1F1F");
-        // });
         // Hide appended AlertTable
         $("#alertTable").hide();
         // Instanciate Tooltip
@@ -1193,14 +1176,6 @@ function rgb2hex(rgb) {
     ('0' + parseInt(rgb[2], 10).toString(16)).slice(-2) +
     ('0' + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
 }
-/*
-function getType (p) {
-  if (Array.isArray(p)) return 'array';
-  else if (typeof p === 'string') return 'string';
-  else if (p != null && typeof p === 'object') return 'object';
-  else return 'other';
-}
-*/
 
 function isFeatureEnabled(cat, option, cb) {
   let newstr;

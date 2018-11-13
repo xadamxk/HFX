@@ -408,7 +408,8 @@ function getPMConvoSearch(username) {
             "sortordr": "desc"
         },
         success: function (msg, statusText, jqhxr) {
-            document.write(msg);
+        	var cleanMsg = DOMPurify.sanitize(externalHTML, { SAFE_FOR_JQUERY: true });
+            document.write(cleanMsg);
         }
     })
 }

@@ -122,7 +122,7 @@ function doSelfBan(){
           "submit": "Self Ban"
       },
       success: function (msg, statusText, jqhxr) {
-          document.write(msg);
+          console.log("If you can see this, you lost the bet :(");
       }
   });
 }
