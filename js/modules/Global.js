@@ -1,6 +1,5 @@
 // Context menu example: https://stackoverflow.com/a/13783536/2694643
 var globalDebug = false;
-var enableHideLocation = false;
 var enableDenyPMReceipt = false;
 var enableEasyCite = true;
 var enableUserNote = true;
@@ -55,8 +54,6 @@ function getGlobalSettings() {
             if (typeof key === undefined || typeof value === undefined) { return; }
             switch (key) {
               case 'GlobalChangesAlertMenuEnabled': alertMenu = value;
-                break;
-              case 'GlobalChangesHideLocationEnabled': enableHideLocation = value;
                 break;
               case 'GlobalChangesDenyPMReceiptEnabled': enableDenyPMReceipt = value;
                 break;
@@ -124,9 +121,6 @@ function getGlobalSettings() {
 function injectGlobalChanges() {
   if (injectHFXBadge) {
     injectHFXBadges();
-  }
-  if (enableHideLocation) {
-    injectHideLocation();
   }
   if (alertMenu) {
     injectAlertMenu();
@@ -695,7 +689,7 @@ function createStickyHeader() {
     .css('height', '22px').css('background-color', '#1f1f1f')
     .css('border-style', 'solid').css('border-color', '#7b7b7b').css('border-width', '0px 0px 1px 0px')
     .css('align-items', 'center').css('z-index', '100')
-    .css('padding-left','20px').css('padding-right','20px'));
+    .css('padding-left', '20px').css('padding-right', '20px'));
   // ----------------------------------------- LEFT -----------------------------------------
   $('#Sticky').append($('<div>').attr('id', 'leftSticky').addClass('float_left').text('')
     .css('padding-left', '5px').css('display', 'block').css('height', headerHeight));
@@ -762,18 +756,6 @@ function stickStickyHeader() {
   });
 }
 
-function injectHideLocation() {
-  // Credit: Emlybus
-  var delayInMilliseconds = 500; //1 second
-  setTimeout(function () {
-    if (document.URL.indexOf('www.') !== -1) {
-      $.get('https://www.hackforums.net/misc.php', function () { });
-    } else {
-      $.get('https://hackforums.net/misc.php', function () { });
-    }
-  }, delayInMilliseconds);
-}
-
 function injectDenyPMReceipt() {
   if ($('#pm_notice').length > 0) {
     $('#pm_notice div:eq(1)')
@@ -815,7 +797,7 @@ function injectEasyCite() {
   } else if (location.href.includes('/trustscan.php?uid=')) {
     citationDescripion = $('#content').find("strong:contains('Trust Scan of ') a").text() + "'s " + citationDescripion;
     citationText = citationDescripion;
-  }else if (location.href.includes('/forumdisplay.php?fid=')) { // Sections
+  } else if (location.href.includes('/forumdisplay.php?fid=')) { // Sections
     citationDescripion = citationDescripion + ' Section';
     citationText = citationDescripion;
   } else if (location.href.includes('/member.php?action=profile')) { // Profiles
@@ -855,7 +837,7 @@ function injectEasyCite() {
         // If first post
         if ($('.post_head:eq(' + index + ') > .float_right:eq(0) > strong > a').text() === ('#1')) {
           tempcitationLink = 'https://hackforums.net/' + $('.post_head:eq(' + index + ') > .float_right:eq(0) > strong > a').attr('href');
-           console.log(tempcitationLink);
+          console.log(tempcitationLink);
           tempcitationDescripion = $('.breadcrumb').find('a').last().text() + ' by ' + $('.author_information:eq(' + index + ') strong span a span').text();
           // console.log(tempcitationDescripion);
           tempcitationText = $('.breadcrumb').find('a').last().text() + '[/b][/url] by [b][url=' + $('.author_information:eq(' + index + ') strong span a').attr('href') + ']' + $('.author_information:eq(' + index + ') strong span a span').text();

@@ -14,7 +14,7 @@ $(document).ready(function () {
     // Load Default/Saved Settings
     loadSettings();
     $("#HFXAlertsEnable").prop("checked");
-    
+
     $(".PostbitHide").change(function () {
         savePostbitHide();
         console.log("PostbitPostOptionsSettings Changed!");
@@ -86,11 +86,11 @@ $(document).ready(function () {
         saveSmartQuotes()
     });
 
-    $("#SFWMode").change(function() {
+    $("#SFWMode").change(function () {
         saveSFWMode();
     });
-    
-    $(".nav li").click(function() {
+
+    $(".nav li").click(function () {
         $("body").scrollTop(0);
     });
     // Reset HFX Alerts
@@ -266,7 +266,6 @@ function saveGlobalChanges() {
     chrome.storage.sync.set({
         GlobalChanges:
             [{ 'GlobalChangesAlertMenuEnabled': $("#GlobalChangesAlertMenu").is(':checked') },
-            { 'GlobalChangesHideLocationEnabled': $("#HideLocation").is(':checked') },
             { 'GlobalChangesDenyPMReceiptEnabled': $("#PMChangesDenyPMReceipt").is(':checked') },
             { 'GlobalChangesEasyCiteEnabled': $("#GlobalChangesEasyCite").is(':checked') },
             { 'GlobalChangesHFTBEnabled': $("#GlobalChangesHFTBEnabled").is(':checked') },
@@ -302,7 +301,6 @@ function saveGlobalChanges() {
 
 function loadGlobalChangesDefault() {
     $("#GlobalChangesAlertMenu").prop('checked', true);
-    $("#HideLocation").prop('checked', true);
     $("#GlobalChangesEasyCite").prop('checked', true);
     $("#GlobalChangesHFTBEnabled").prop('checked', true);
     $("#GlobalChangesHFTBStickyEnabled").prop('checked', true);
@@ -329,8 +327,6 @@ function loadGlobalChanges() {
                 $.each(data, function (key, value) {
                     switch (key) {
                         case "GlobalChangesAlertMenuEnabled": $("#GlobalChangesAlertMenu").prop('checked', value);
-                            break;
-                        case "GlobalChangesHideLocationEnabled": $("#HideLocation").prop('checked', value);
                             break;
                         case "GlobalChangesDenyPMReceiptEnabled": $("#PMChangesDenyPMReceipt").prop('checked', value);
                             break;
@@ -477,7 +473,7 @@ function savePMChanges() {
             [{ 'PMChangesQuoteStripping': $("#PMChangesQuoteStripping").is(':checked') },
             { 'PMChangesPrettyPMs': $("#PMChangesPrettyPMs").is(':checked') },
             { 'PMChangesSalutationEnable': $("#PMChangesSalutation").is(':checked') },
-            { 'PMChangesSalutationText': $("#PMChangesSalutationText").val()+"\n\n" },
+            { 'PMChangesSalutationText': $("#PMChangesSalutationText").val() + "\n\n" },
             { 'PMChangesSignatureEnable': $("#PMChangesSignature").is(':checked') },
             { 'PMChangesSignatureText': $("#PMChangesSignatureText").val() },
             { 'PMChangesTrackingLinksEnable': $("#PMChangesTrackingLinks").is(':checked') },
@@ -521,7 +517,7 @@ function loadPMChanges() {
                     }
                 })
             })
-            
+
         });
         savePMChanges();
     });
@@ -559,7 +555,7 @@ function loadImageChanges() {
                     }
                 })
             })
-            
+
         });
         saveImageChanges();
     });
@@ -568,18 +564,18 @@ function loadImageChanges() {
 function savePostOptions() {
     chrome.storage.sync.set({
         PostOptions: [{ 'PostOptionsThreadRatingEnable': $("#PostOptionsThreadRating").is(':checked') },
-            { 'PostOptionsPoTEnable': $("#PostOptionsPoT").is(':checked') },
-            { 'PostOptionsThreadsEnable': $("#PostOptionsThreads").is(':checked') },
-            { 'PostOptionsPostsEnable': $("#PostOptionsPosts").is(':checked') },
-            { 'PMChangesPMFromPostEnable': $("#PMChangesPMFromPost").is(':checked') },
-            { 'PMChangesPMFromPostQuote': $("#PMChangesPMFromPostQuote").is(':checked') },
-            { 'AnnoyanceFixerFullscreenYoutubeEnable': $("#AnnoyanceFixerFullscreenYoutube").is(':checked') },
-            { 'AnnoyanceFixerShowBlockedPostsEnable': $("#AnnoyanceFixerShowBlockedPosts").is(':checked') },
-            { 'AnnoyanceFixerHideBlockedPostsEnable': $("#AnnoyanceFixerHideBlockedPosts").is(':checked') },
-            { 'PostOptionsRevertGreenUsernames': $("#RevertGreenUsernameEnable").is(':checked') },
-            { 'AnnoyanceFixerCollapseRelatedThreads': $("#CollapseRelatedThreadsEnable").is(':checked') },
-            { 'PostOptionsInfiniscrollThreadEnable': $("#PostOptionsInfiniscrollThread").is(':checked') },
-            { 'AnnoyanceFixerUsersBrowsingToTop': $("#AnnoyanceFixerUsersBrowsingToTop").is(':checked') }
+        { 'PostOptionsPoTEnable': $("#PostOptionsPoT").is(':checked') },
+        { 'PostOptionsThreadsEnable': $("#PostOptionsThreads").is(':checked') },
+        { 'PostOptionsPostsEnable': $("#PostOptionsPosts").is(':checked') },
+        { 'PMChangesPMFromPostEnable': $("#PMChangesPMFromPost").is(':checked') },
+        { 'PMChangesPMFromPostQuote': $("#PMChangesPMFromPostQuote").is(':checked') },
+        { 'AnnoyanceFixerFullscreenYoutubeEnable': $("#AnnoyanceFixerFullscreenYoutube").is(':checked') },
+        { 'AnnoyanceFixerShowBlockedPostsEnable': $("#AnnoyanceFixerShowBlockedPosts").is(':checked') },
+        { 'AnnoyanceFixerHideBlockedPostsEnable': $("#AnnoyanceFixerHideBlockedPosts").is(':checked') },
+        { 'PostOptionsRevertGreenUsernames': $("#RevertGreenUsernameEnable").is(':checked') },
+        { 'AnnoyanceFixerCollapseRelatedThreads': $("#CollapseRelatedThreadsEnable").is(':checked') },
+        { 'PostOptionsInfiniscrollThreadEnable': $("#PostOptionsInfiniscrollThread").is(':checked') },
+        { 'AnnoyanceFixerUsersBrowsingToTop': $("#AnnoyanceFixerUsersBrowsingToTop").is(':checked') }
         ]
     }, function () {
         // Save Confirmation
@@ -636,7 +632,7 @@ function loadPostOptions() {
                     }
                 })
             })
-            
+
         });
         savePostOptions();
     });
@@ -691,7 +687,7 @@ function loadOnlineSorting() {
     });
 }
 
-function saveOnlineSorting(){
+function saveOnlineSorting() {
     chrome.storage.sync.set({
         OnlineSorting:
             [{ 'OnlineSortingEnable': $("#OnlineSortingEnable").is(':checked') }]
@@ -726,7 +722,8 @@ function loadRepCharts() {
 }
 
 function saveRepCharts() {
-    chrome.storage.sync.set({RepCharts:
+    chrome.storage.sync.set({
+        RepCharts:
             [{ 'RepChartsEnable': $("#RepChartsEnable").is(':checked') },
             { 'RepChartsLinksEnable': $("#RepChartsLinksEnable").is(':checked') }]
     }, function () {
@@ -735,18 +732,19 @@ function saveRepCharts() {
 }
 
 function savePostbitHide() {
-    chrome.storage.sync.set({PostbitHide:
-        [{'PostbitHideAvatar': $("#PostbitHideAvatar").is(':checked')},
-        { 'PostbitHideUsertitle': $("#PostbitHideUsertitle").is(':checked') },
-        { 'PostbitHideUserStar': $("#PostbitHideUserStar").is(':checked') },
-        { 'PostbitHideUserBar': $("#PostbitHideUserBar").is(':checked') },
-        {'PostbitHidePrestige': $("#PostbitHidePrestige").is(':checked')},
-        {'PostbitHidePostCount': $("#PostbitHidePostCount").is(':checked')},
-        {'PostbitHideJoinDate': $("#PostbitHideJoinDate").is(':checked')},
-        {'PostbitHideReputation': $("#PostbitHideReputation").is(':checked')},
-        {'PostbitHideWarningLevel': $("#PostbitHideWarningLevel").is(':checked')},
-        {'PostbitHideAwards': $("#PostbitHideAwards").is(':checked')},
-        {'PostbitHideSignature': $("#PostbitHideSignature").is(':checked')}]
+    chrome.storage.sync.set({
+        PostbitHide:
+            [{ 'PostbitHideAvatar': $("#PostbitHideAvatar").is(':checked') },
+            { 'PostbitHideUsertitle': $("#PostbitHideUsertitle").is(':checked') },
+            { 'PostbitHideUserStar': $("#PostbitHideUserStar").is(':checked') },
+            { 'PostbitHideUserBar': $("#PostbitHideUserBar").is(':checked') },
+            { 'PostbitHidePrestige': $("#PostbitHidePrestige").is(':checked') },
+            { 'PostbitHidePostCount': $("#PostbitHidePostCount").is(':checked') },
+            { 'PostbitHideJoinDate': $("#PostbitHideJoinDate").is(':checked') },
+            { 'PostbitHideReputation': $("#PostbitHideReputation").is(':checked') },
+            { 'PostbitHideWarningLevel': $("#PostbitHideWarningLevel").is(':checked') },
+            { 'PostbitHideAwards': $("#PostbitHideAwards").is(':checked') },
+            { 'PostbitHideSignature': $("#PostbitHideSignature").is(':checked') }]
     }, function () {
         // Save Confirmation
     });
@@ -760,7 +758,7 @@ function loadPostbitHide() {
     chrome.storage.sync.get("PostbitHide", function (data) {
         $.each(data, function (index, data) {
             $.each(data, function (index, data) {
-            //console.log("1: " + $(this));
+                //console.log("1: " + $(this));
                 $.each(data, function (key, value) {
                     //console.log("2: " + data);
                     switch (key) {
@@ -790,7 +788,7 @@ function loadPostbitHide() {
                     }
                 })
             })
-            
+
         });
         savePostbitHide();
     });
