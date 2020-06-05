@@ -794,10 +794,14 @@ function injectEasyCite() {
   if (location.href.includes('/myawards.php?uid=')) {
     citationDescripion = $('#content').find("strong:contains('My Awards : ') a").text() + "'s " + citationDescripion;
     citationText = citationDescripion;
+  } else if (location.href.includes('/myawards.php?awid=')) {
+    citationDescripion = $('#content').find(".award_sprite:eq(0)").attr("title") + " Award";
+    citationText = citationDescripion;
   } else if (location.href.includes('/trustscan.php?uid=')) {
     citationDescripion = $('#content').find("strong:contains('Trust Scan of ') a").text() + "'s " + citationDescripion;
     citationText = citationDescripion;
-  } else if (location.href.includes('/forumdisplay.php?fid=')) { // Sections
+  }
+  else if (location.href.includes('/forumdisplay.php?fid=')) { // Sections
     citationDescripion = citationDescripion + ' Section';
     citationText = citationDescripion;
   } else if (location.href.includes('/member.php?action=profile')) { // Profiles
